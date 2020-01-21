@@ -5,11 +5,20 @@
  </div>
 </template>
 
+
 <script>
 export default {
 }
+
 </script>
 
 <style scoped>
+
+#header {
+    background-color : #999999;
+    position : absolute;
+    
+
+}
 
 </style>
