@@ -3,6 +3,9 @@ import requests
 from pprint import pprint
 from decouple import config
 
+
+# ++ 날짜 형식은 YYYY-MM-DD 형식응로 바꾸기
+
 YOUTUBER = '피지컬갤러리'
 
 PATH = '{}.json'.format(YOUTUBER)
