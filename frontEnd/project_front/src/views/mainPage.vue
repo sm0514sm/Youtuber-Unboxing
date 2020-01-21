@@ -3,7 +3,8 @@
   https://vuetifyjs.com/ko/components/api-explorer
   -->
   <div>
-    tmpPage1
+    <header-component></header-component>
+  
     <v-btn large color="error" type="button" @click="tmpFunction()">
       back에 no 3으로 testID값 얻기 위해 GET요청 보내기
     </v-btn>
@@ -16,17 +17,18 @@
       @click="tmpMove()"
     />
     <br />
-    <tmp-component></tmp-component>
+    <footer-Component></footer-Component>
   </div>
 </template>
 
 <script>
 import Constant from "../vuex/Constant";
-import tmpComponent from "../components/tmpComponent";
+import headerComponent from "../components/headerComponent";
+import footerComponent from "../components/footerComponent";
 
 export default {
-  components: { tmpComponent },
-  name: "tmpPage1",
+  components: {  headerComponent , footerComponent},
+  name: "mainPage",
 
   created() {},
   methods: {
@@ -36,7 +38,7 @@ export default {
       });
     },
     tmpMove() {
-      this.$router.push("/tmpPage2");
+      this.$router.push("/categoryPage");
     }
   },
   computed: {

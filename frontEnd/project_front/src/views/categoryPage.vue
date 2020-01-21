@@ -2,15 +2,20 @@
   <!-- vuetify를 참고하여 작성하기
   https://vuetifyjs.com/ko/components/api-explorer
   -->
-  <div><v-btn large color="primary">Primary</v-btn></div>
+  <div>categoryPage</div>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    snackbar: false,
-    text: "Hello, I'm a snackbar"
-  })
+  components: {},
+  name: "categoryPage",
+
+  created() {},
+  methods: {},
+  computed: {},
+  data() {
+    return {};
+  }
 };
 </script>
 
