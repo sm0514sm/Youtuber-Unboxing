@@ -10,41 +10,39 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.model.dto.Test;
-import com.ssafy.model.service.TestService;
+import com.ssafy.model.dto.Category;
+import com.ssafy.model.dto.Youtuber;
+import com.ssafy.model.service.CategoryService;
 
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 @RestController
-public class MainRestController {
+public class CategoryRestController {
 	@Autowired
-	private TestService testService;
+	private CategoryService categoryService;
 	
 	@ExceptionHandler
 	public ResponseEntity<Map<String, Object>> handle(Exception e){
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-	
-	@ApiOperation("test 등록")
-	@PostMapping("/test")
-	public ResponseEntity<Map<String, Object>> insert_board(@RequestBody Test test){
-		testService.insert(test);
-		return handleSuccess("test 등록 완료");
-	}
-	
-	@ApiOperation("전체 test 조회")
-	@GetMapping("/test")
-	public ResponseEntity<Map<String, Object>> search_board_all(){
-		List<Test> list = testService.search_all(); 
+	@ApiOperation("category에 속한 유투버 검색")
+	@GetMapping("/category/{cano}")
+	public ResponseEntity<Map<String, Object>> search(@PathVariable int cano){
+		List<Youtuber> list = categoryService.search(cano); 
 		return handleSuccess(list);
 	}
 	
+	@ApiOperation("전체 category 검색")
+	@GetMapping("/category/all")
+	public ResponseEntity<Map<String, Object>> searchAll(){
+		List<Category> list = categoryService.searchAll(); 
+		return handleSuccess(list);
+	}
 	
 	// Exception Handle
 	public ResponseEntity<Map<String, Object>> handleFail(Object data, HttpStatus state){
@@ -59,5 +57,4 @@ public class MainRestController {
 		resultMap.put("data", data);
 		return new ResponseEntity<Map<String,Object>>(resultMap, HttpStatus.OK);
 	}
-	
 }
