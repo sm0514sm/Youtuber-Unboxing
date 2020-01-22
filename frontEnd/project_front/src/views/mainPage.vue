@@ -12,18 +12,30 @@
         xs12
         md4
         class="pa-3"
+        
         >
-      <v-btn 
-        block class="ma-5" 
-        :to="{ name: 'categoryPage', params: { cate: category.nameEng }}">
-      <h1 > {{category.nameEng}} </h1>
+        <v-responsive :aspect-ratio="1/1">
+        <v-btn 
+        block 
+        :aspect-ratio="1/1"
+        :to= "{ name: 'categoryPage', params: { cate: category.nameEng }}"
+        height="100%"
+        >
+        <v-img
+          :src="require('@/assets/logo.png')"
+        >
+        <h1> {{category.nameEng}} </h1>
+
+        </v-img>
       </v-btn>
+      </v-responsive>
+      
       </v-flex>
 
     </v-layout>
     
     <h1 v-for=" a in  tmp" :key="a">
-      back에 no 3으로 testID값 얻기 위해 GET요청 보내기
+      아 진짜 하기 싫다
     </h1>
 
   </v-container>
