@@ -3,9 +3,9 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.ssafy.model.dto.Test"	alias="test"/>	
+		<typeAlias type="com.ssafy.model.dto.Youtuber"	alias="youtuber"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="mapper/Test_query.xml"/>
+		<mapper resource="mapper/Youtuber_query.xml"/>
 	</mappers>
 </configuration>
