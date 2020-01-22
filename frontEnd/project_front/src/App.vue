@@ -1,7 +1,14 @@
 <template>
   <v-app id="app">
-    <header-component></header-component>
-    <router-view />
+    
+    <v-app-bar app fixed flat>
+      <header-component></header-component>
+    </v-app-bar>
+
+    <v-content>
+      <router-view />
+    </v-content>
+
     <footer-component></footer-component>
   </v-app>
 </template>

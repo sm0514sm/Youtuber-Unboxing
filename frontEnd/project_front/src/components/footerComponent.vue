@@ -10,14 +10,14 @@
             <h1> 김주희, 김태민, 박진홍, 이상민, 홍기환 </h1>
         </v-flex>
         <v-spacer />
-        <base-btn
+        <v-btn
           class="mr-0"
           square
-          title="Go to top"
+          
           @click="$vuetify.goTo(0)"
         >
           <v-icon>mdi-chevron-up</v-icon>
-        </base-btn>
+        </v-btn>
       </v-layout>
     </v-container>
   </v-footer>

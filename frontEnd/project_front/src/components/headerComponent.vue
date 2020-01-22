@@ -1,5 +1,6 @@
 <template>
-<v-app-bar fixed flat > 
+
+<div>
     <v-layout>
         <v-img
           :src="require('@/assets/logo.png')"
@@ -14,7 +15,7 @@
         <v-btn
           v-for="(link, i) in links"
           :key="i"
-          :to="link.to"
+          :to="{ name: link.name, params: { cate: 123 }}"
           @click="onClick($event, link)"
           text
           large
@@ -30,7 +31,7 @@
           style="max-width: 300px;"
         />
       </v-layout>
-</v-app-bar>
+</div>
 
 </template>
 

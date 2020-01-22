@@ -6,20 +6,61 @@ import mutations from "./mutations";
 Vue.use(Vuex);
 
 const state = {
-    testID: "",
     items: [{
             text: 'Home',
-            to: '/'
+            to: '/',
+            name: "mainPage"
         },
         {
             text: 'Top5',
-            to: '/categoryPage'
+            to: '/categoryPage',
+            name: "categoryPage"
         }
+    ],
+    category: [{
+            nameEng: "game",
+            nameKor: "게임"
+        },
+        {
+            nameEng: "entertainment",
+            nameKor: "엔터"
+        },
+        {
+            nameEng: "beauty",
+            nameKor: "뷰티"
+        },
+        {
+            nameEng: "sports",
+            nameKor: "운동"
+        },
+        {
+            nameEng: "mukbang",
+            nameKor: "먹방"
+        },
+        {
+            nameEng: "kids",
+            nameKor: "키즈"
+        },
+        {
+            nameEng: "animals",
+            nameKor: "동물"
+        },
+        {
+            nameEng: "life",
+            nameKor: "일상"
+        },
+        {
+            nameEng: "it",
+            nameKor: "IT"
+        },
     ]
 };
 
 const getters = {
+    categories: state => {
 
+        return state.category;
+    },
     links: state => {
         return state.items
     }
