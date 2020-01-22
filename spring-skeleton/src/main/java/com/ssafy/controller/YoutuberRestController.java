@@ -60,6 +60,13 @@ public class YoutuberRestController {
 		return handleSuccess(list);
 	}
 	
+	@ApiOperation("검색 조건에 따른 youtuber 랭킹 조회")
+	@GetMapping("/youtuber/detail/{yno}")
+	public ResponseEntity<Map<String, Object>> searchDetail(@PathVariable int yno){
+//		List<Youtuber> list = youtuberService.searchRanking(map);
+		return handleSuccess(null);
+	}
+	
 //	@ApiOperation("youtuber 등록")
 //	@PostMapping("/youtuber")
 //	public ResponseEntity<Map<String, Object>> insert_youtuber(@RequestBody Youtuber youtuber){
