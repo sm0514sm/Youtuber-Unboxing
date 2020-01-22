@@ -6,11 +6,32 @@ import mutations from "./mutations";
 Vue.use(Vuex);
 
 const state = {
-  testID: ""
+    testID: "",
+    items: [{
+            text: 'Home',
+            to: '/'
+        },
+        {
+            text: 'Top5',
+            to: '/categoryPage'
+        }
+    ]
 };
 
+const getters = {
+
+    links: state => {
+        return state.items
+    }
+
+}
+
 export default new Vuex.Store({
-  state,
-  mutations,
-  actions
+    state,
+    getters,
+    mutations,
+    actions
 });
+
+
+Vue.use(Vuex)

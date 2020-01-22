@@ -3,7 +3,7 @@
     app
     flat
   >
-    <v-toolbar-side-icon
+    <v-toolbar-sede-icon
       class="hidden-md-and-up"
       @click="toggleDrawer"
     />
