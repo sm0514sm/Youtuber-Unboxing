@@ -76,6 +76,3 @@ videos = {
     'bad': '',
     'regDate': '', 
 }
-
-
-print(len(category)) 

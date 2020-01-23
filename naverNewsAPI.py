@@ -3,8 +3,7 @@ import requests
 from pprint import pprint
 from decouple import config
 
-
-# ++ 날짜 형식은 YYYY-MM-DD 형식응로 바꾸기
+# ++ 날짜 형식은 YYYY-MM-DD 형식으로 바꾸기
 
 YOUTUBER = '피지컬갤러리'
 
@@ -37,6 +36,10 @@ headers = {  # 헤더 정보
 # 요청 결과
 response = requests.get(URL, params=params, headers=headers).text # type str
 result = json.loads(response)   # type dict
+
+
+
+### 여기에 필터를 추가할 것
 
 # DATA와 result를 합친다.
 for key, value in result.items():
