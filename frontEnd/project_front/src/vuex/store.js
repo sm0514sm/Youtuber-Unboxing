@@ -19,15 +19,17 @@ const state = {
     ],
     category: [{
             nameEng: "game",
-            nameKor: "게임"
+            nameKor: "게임",
+            cano: 1,
         },
         {
             nameEng: "entertainment",
-            nameKor: "엔터"
+            nameKor: "엔터",
+            cano: 3,
         },
         {
             nameEng: "beauty",
-            nameKor: "뷰티"
+            nameKor: "뷰티",
         },
         {
             nameEng: "sports",
@@ -47,22 +49,28 @@ const state = {
         },
         {
             nameEng: "life",
-            nameKor: "일상"
+            nameKor: "일상",
+            cano: 2,
         },
         {
             nameEng: "it",
             nameKor: "IT"
         },
-    ]
+    ],
+    youtubersPerCategory: [],
+    isCategoryLoading: false
 };
 
 const getters = {
     categories: state => {
 
-        return state.category;
+        return state.category
     },
     links: state => {
         return state.items
+    },
+    youtubersPerCategory: state => {
+        return state.youtubersPerCategory
     }
 
 }

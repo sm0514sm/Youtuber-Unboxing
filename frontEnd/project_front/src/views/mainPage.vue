@@ -9,7 +9,7 @@
       <v-flex 
         v-for="(category,i) in categories"
         :key = i
-        xs12
+        xs6
         md4
         class="pa-3"
         
