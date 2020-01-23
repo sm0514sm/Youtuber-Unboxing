@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.model.dto.News;
+import com.ssafy.model.dto.Video;
 import com.ssafy.model.dto.Youtuber;
 import com.ssafy.model.service.YoutuberService;
 
@@ -60,11 +62,25 @@ public class YoutuberRestController {
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("검색 조건에 따른 youtuber 랭킹 조회")
-	@GetMapping("/youtuber/detail/{yno}")
-	public ResponseEntity<Map<String, Object>> searchDetail(@PathVariable int yno){
-//		List<Youtuber> list = youtuberService.searchRanking(map);
-		return handleSuccess(null);
+	@ApiOperation("youtuber 관련 뉴스 조회")
+	@GetMapping("/youtuber/detail/news/{yno}")
+	public ResponseEntity<Map<String, Object>> searchNews(@PathVariable int yno){
+		List<News> list = youtuberService.searchNews(yno);
+		return handleSuccess(list);
+	}
+	
+	@ApiOperation("youtuber 관련 영상 조회")
+	@GetMapping("/youtuber/detail/video/{yno}")
+	public ResponseEntity<Map<String, Object>> searchVideo(@PathVariable int yno){
+		List<Video> list = youtuberService.searchVideo(yno);
+		return handleSuccess(list);
+	}
+	
+	@ApiOperation("youtuber 관련 커뮤니티 조회")
+	@GetMapping("/youtuber/detail/community/{yno}")
+	public ResponseEntity<Map<String, Object>> searchCommunity(@PathVariable int yno){
+		List<Video> list = youtuberService.searchCommunity(yno);
+		return handleSuccess(list);
 	}
 	
 //	@ApiOperation("youtuber 등록")

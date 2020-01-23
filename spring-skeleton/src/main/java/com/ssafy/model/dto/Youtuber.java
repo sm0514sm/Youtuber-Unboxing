@@ -7,9 +7,7 @@ public class Youtuber {
 	private String channelName;
 	private String youtuberName;
 	private String channelDescription;
-	private String namuwiki;
-	private String instagram;
-	private String facebook;
+	private String channelLink;
 	private String thumbnails;
 	private Date publishedDate;
 	private int subscriber;
@@ -24,6 +22,11 @@ public class Youtuber {
 	private int clickCount;
 	private Date updateDate;
 	private Date regDate;
+	private String otherLink1;
+	private String otherLink2;
+	private String otherLink3;
+	private String otherLink4;
+	
 	public int getYno() {
 		return yno;
 	}
@@ -48,23 +51,11 @@ public class Youtuber {
 	public void setChannelDescription(String channelDescription) {
 		this.channelDescription = channelDescription;
 	}
-	public String getNamuwiki() {
-		return namuwiki;
+	public String getChannelLink() {
+		return channelLink;
 	}
-	public void setNamuwiki(String namuwiki) {
-		this.namuwiki = namuwiki;
-	}
-	public String getInstagram() {
-		return instagram;
-	}
-	public void setInstagram(String instagram) {
-		this.instagram = instagram;
-	}
-	public String getFacebook() {
-		return facebook;
-	}
-	public void setFacebook(String facebook) {
-		this.facebook = facebook;
+	public void setChannelLink(String channelLink) {
+		this.channelLink = channelLink;
 	}
 	public String getThumbnails() {
 		return thumbnails;
@@ -149,5 +140,29 @@ public class Youtuber {
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	public String getOtherLink1() {
+		return otherLink1;
+	}
+	public void setOtherLink1(String otherLink1) {
+		this.otherLink1 = otherLink1;
+	}
+	public String getOtherLink2() {
+		return otherLink2;
+	}
+	public void setOtherLink2(String otherLink2) {
+		this.otherLink2 = otherLink2;
+	}
+	public String getOtherLink3() {
+		return otherLink3;
+	}
+	public void setOtherLink3(String otherLink3) {
+		this.otherLink3 = otherLink3;
+	}
+	public String getOtherLink4() {
+		return otherLink4;
+	}
+	public void setOtherLink4(String otherLink4) {
+		this.otherLink4 = otherLink4;
 	}
 }
