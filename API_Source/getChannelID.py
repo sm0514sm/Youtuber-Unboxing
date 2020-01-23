@@ -22,7 +22,7 @@ youtubeID = ff[0].get('data-channel-external-id')
 print(youtubeID)
 # print(soup)
 ff = soup.find_all("li", attrs={'class': "channel-links-item"})
-print(ff)
+# print(ff)
 # for f in ff:
 #     print(f)
 

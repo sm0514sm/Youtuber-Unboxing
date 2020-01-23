@@ -2,7 +2,7 @@ import urllib.request
 import json
 from decouple import config
 
-idn = "UClSuqiIAACDUJrH3gb4JcLQ"
+idn = "UCdtRAcd3L_UpV4tMXCw63NQ"
 key = config('GOOGLEAPIKEY')
 base_url = "https://www.googleapis.com/youtube/v3/channels"
 part = "id,snippet,brandingSettings,contentDetails,invideoPromotion,statistics,topicDetails"
