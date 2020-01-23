@@ -11,9 +11,9 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 video = 'YPMARa8Ex58'
 URL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&id={}&key={}'.format(video, config('GOOGLEAPIKEY'))
-res1 = urlopen(URL).read().decode('utf8')
+res1 = urlopen(URL).read().decode('unicode')
 print(type(res1))
-print(res1)
+# print(res1)
 # response = urlopen(URL).read().decode('utf8')
 # # response_to_json = json.loads(urlopen(URL).read().decode('utf8'))
 # print(type(response))
