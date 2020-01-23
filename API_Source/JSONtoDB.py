@@ -1,8 +1,9 @@
-youtuber = {
+ youtuber = {
     'yno': '',
     'channelName': '',
     'youtubeName': '',
     'channelDescription': '',
+    'bannerImageLink': '',
     'namuwiki': '',
     'instagram': '',
     'facebook': '',
@@ -20,7 +21,6 @@ youtuber = {
     'clickCount': '',
     'updateDate': '',
     'regDate': '',
-    'bannerLink': '', 
 }
 
 categoryToYoutuber = {
