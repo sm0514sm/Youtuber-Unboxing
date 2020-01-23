@@ -25,10 +25,8 @@ def get_latest_videos_using_channelID(channelID):
     KEY = config('GOOGLEAPIKEY')
     URL = 'https://www.googleapis.com/youtube/v3/search?key={}&channelId={}&part=snippet,id&order=date&maxResults={}'.format(KEY, channelID, maxResult)
     response = urlopen(URL).read().decode('utf8')
+    
     # response에 str 타입으로 자료가 넘어옴
-
-# response = requests.get(URL).text
-
-
-print(type(response))
-print(response)
+    # response = requests.get(URL).text
+    print(type(response))
+    print(response)

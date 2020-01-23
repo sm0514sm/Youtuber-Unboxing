@@ -521,3 +521,57 @@ play_list_url = 'https://www.youtube.com/watch?v=jEA3p1ekzSw&list=PLHqqPM2t7weIM
   }
  ]
 }
+
+
+### 영상별 상세 정보: videos API
+{
+	"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/a1fYLUKXsAwsVga8ihCpHLL21Vs\"",
+	"kind": "youtube#videoListResponse",
+	"pageInfo": {
+		"totalResults": 1,
+		"resultsPerPage": 1
+	},
+	"items": [
+		{
+			"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/YgbAFtE-uNsYlQ1pa03C-OIzoLE\"",
+			"id": "YPMARa8Ex58",
+			"kind": "youtube#video",
+			"snippet": {
+				"channelId": "UCUpJs89fSBXNolQGOYKn0YQ",
+				"tags": [
+					"코딩",
+					"프로그래밍"
+				],
+				"categoryId": "27",
+				"description": "약 2만명의 자바스크립트 개발자를 인터뷰하여 정리한 자료 모음!\n자바스크립트 연말정산 State of JavaScript!\nhttps://2019.stateofjs.com 을 함께 보고 분석해봤습니다. ;)\n1. JS Flavors\n2. Front-end Frameworks \n3. Data Layer \n4. Back-end Frameworks\n5. Mobile & Desktop\n6. Opinions\n참고로. 작년 영상은 요기 있어요 👇🏼\nhttps://youtu.be/lvgEdrDZUgY\n-\n무료JS 강의는 요기 있어요 👇🏼\nhttps://academy.nomadcoders.co/p/javascript-basics-for-absolute-beginners-kr\n.\nYoutube 구독은 사랑입니다 ❤️\n니콜라스와 코딩 공부하기 👉🏻https://academy.nomadcoders.co 👈🏻",
+				"channelTitle": "노마드 코더 Nomad Coders",
+				"publishedAt": "2020-01-20T09:45:40.000Z",
+				"defaultAudioLanguage": "en",
+				"defaultLanguage": "ko",
+				"title": "2020 자바스크립트 트렌드는 어떻게 될까?",
+				"thumbnails": {
+					"medium": {
+						"url": "https://i.ytimg.com/vi/YPMARa8Ex58/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"default": {
+						"url": "https://i.ytimg.com/vi/YPMARa8Ex58/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/YPMARa8Ex58/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"localized": {
+					"description": "약 2만명의 자바스크립트 개발자를 인터뷰하여 정리한 자료 모음!\n자바스크립트 연말정산 State of JavaScript!\nhttps://2019.stateofjs.com 을 함께 보고 분석해봤습니다. ;)\n1. JS Flavors\n2. Front-end Frameworks \n3. Data Layer \n4. Back-end Frameworks\n5. Mobile & Desktop\n6. Opinions\n참고로. 작년 영상은 요기 있어요 👇🏼\nhttps://youtu.be/lvgEdrDZUgY\n-\n무료JS 강의는 요기 있어요 👇🏼\nhttps://academy.nomadcoders.co/p/javascript-basics-for-absolute-beginners-kr\n.\nYoutube 구독은 사랑입니다 ❤️\n니콜라스와 코딩 공부하기 👉🏻https://academy.nomadcoders.co 👈🏻",
+					"title": "2020 자바스크립트 트렌드는 어떻게 될까?"
+				},
+				"liveBroadcastContent": "none"
+			}
+		}
+	]
+}
