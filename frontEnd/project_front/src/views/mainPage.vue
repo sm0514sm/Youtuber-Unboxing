@@ -35,7 +35,7 @@
     </v-layout>
     
     <h1 v-for=" a in  tmp" :key="a">
-      아 진짜 하기 싫다
+      스크롤을 위한 글 넣기
     </h1>
 
   </v-container>
