@@ -5,9 +5,13 @@
 	<typeAliases>
 		<typeAlias type="com.ssafy.model.dto.Youtuber"	alias="youtuber"/>
 		<typeAlias type="com.ssafy.model.dto.Category"	alias="category"/>
+		<typeAlias type="com.ssafy.model.dto.Community"	alias="community"/>
+		<typeAlias type="com.ssafy.model.dto.News"	alias="news"/>
+		<typeAlias type="com.ssafy.model.dto.Video"	alias="video"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/Youtuber_query.xml"/>
 		<mapper resource="mapper/Category_query.xml"/>
+		<mapper resource="mapper/Community_query.xml"/>
 	</mappers>
 </configuration>

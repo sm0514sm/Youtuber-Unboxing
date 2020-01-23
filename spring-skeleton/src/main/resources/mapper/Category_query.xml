@@ -6,9 +6,9 @@
 	<!-- category에 속한 유투버 검색 -->
 	<select id="search" parameterType="int" resultType="youtuber">
 		select *
-		from youtuber y inner join category_youtube_relation c 
+		from youtuber y inner join category_youtube_relation care
 		using (yno)
-		where c.cano = #{cano};
+		where care.cano = #{cano};
 	</select>
 
 	<!-- 전체 category 검색 -->

@@ -4,6 +4,7 @@ public class Category {
 	private int cano;
 	private String name;
 	private int clickCount;
+	private String imageLink;
 	
 	public int getCano() {
 		return cano;
@@ -22,5 +23,11 @@ public class Category {
 	}
 	public void setClickCount(int clickCount) {
 		this.clickCount = clickCount;
+	}
+	public String getImageLink() {
+		return imageLink;
+	}
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
 	}
 }
