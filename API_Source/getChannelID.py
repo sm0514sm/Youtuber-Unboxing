@@ -10,14 +10,19 @@ from bs4 import BeautifulSoup as BS
 # sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
 # sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
-input_URL = 'https://www.youtube.com/channel/UCwx6n_4OcLgzAGdty0RWCoA'
+input_URL = 'https://www.youtube.com/user/officialpsy'
 URL = input_URL
 
 html = urlopen(URL).read()
 soup = BS(html, "html.parser", from_encoding='utf-8')
-ff = soup.find_all("button", attrs={'class':"yt-uix-button yt-uix-button-size-default yt-uix-button-subscribe-branded yt-uix-button-has-icon no-icon-markup yt-uix-subscription-button yt-can-buffer"})
+ff = soup.find_all("button", attrs={'class': "yt-uix-button yt-uix-button-size-default "
+                                             "yt-uix-button-subscribe-branded yt-uix-button-has-icon "
+                                             "no-icon-markup yt-uix-subscription-button yt-can-buffer"})
 youtubeID = ff[0].get('data-channel-external-id')
 print(youtubeID)
+# print(soup)
+ff = soup.find_all("li", attrs={'class': "channel-links-item"})
+print(ff)
 # for f in ff:
 #     print(f)
 
