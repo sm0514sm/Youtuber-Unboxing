@@ -1,16 +1,8 @@
-from urllib.request import Request, urlopen
-import requests
-import sys
-import io
+from urllib.request import urlopen, unquote
 from bs4 import BeautifulSoup as BS
 
-# 이건 됐다.
 
-
-# sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding = 'utf-8')
-# sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
-
-input_URL = 'https://www.youtube.com/user/officialpsy'
+input_URL = 'https://www.youtube.com/channel/UC-Zedn7a_RJyb5hUQ-aGZog'
 URL = input_URL
 
 html = urlopen(URL).read()
@@ -20,24 +12,11 @@ ff = soup.find_all("button", attrs={'class': "yt-uix-button yt-uix-button-size-d
                                              "no-icon-markup yt-uix-subscription-button yt-can-buffer"})
 youtubeID = ff[0].get('data-channel-external-id')
 print(youtubeID)
-# print(soup)
-ff = soup.find_all("li", attrs={'class': "channel-links-item"})
-# print(ff)
-# for f in ff:
-#     print(f)
 
-# print(soup)
-
-
-# print(type(html))
-# print(html)
-# # URL = 'https://www.naver.com/'
-
-# response = requests.get(URL)
-# print(type(response))
-# # print(dir(response))
-# print(type(response))
-# with open('test.json', 'w', encoding='utf-8') as file:
-#     file.write(response)
-
-# print(bs)
+li_tags = soup.find_all("li", attrs={'class': "channel-links-item"})
+for li_tag in li_tags:
+    before_link = li_tag.find('a').get('href')
+    link = unquote(before_link[before_link.find('http'):])
+    if '&' in link:
+        link = link[:link.find('&')]
+    print(link)
