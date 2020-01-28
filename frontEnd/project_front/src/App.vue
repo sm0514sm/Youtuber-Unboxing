@@ -1,26 +1,27 @@
 <template>
   <v-app id="app">
     
-    <v-app-bar app fixed flat>
-      <header-component></header-component>
-    </v-app-bar>
+    <header-component></header-component>
 
     <v-content>
       <router-view />
     </v-content>
 
     <footer-component></footer-component>
+    
+      <compare-component />
   </v-app>
 </template>
 
 <script>
 import headerComponent from "./components/headerComponent";
 import footerComponent from "./components/footerComponent";
+import compareComponent from "./components/compareComponent";
 
 export default {
   name: "app",
   components: {
-    headerComponent, footerComponent,
+    headerComponent, footerComponent, compareComponent,
   },
     data () {
       return {

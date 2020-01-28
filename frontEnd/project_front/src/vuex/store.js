@@ -58,7 +58,10 @@ const state = {
         },
     ],
     youtubersPerCategory: [],
-    isCategoryLoading: false
+    isCategoryLoading: false,
+    currentCategory: "life",
+    youtuber: {},
+    searchyoutuber: []
 };
 
 const getters = {
@@ -71,8 +74,13 @@ const getters = {
     },
     youtubersPerCategory: state => {
         return state.youtubersPerCategory
-    }
-
+    },
+    youtuber: state => {
+        return state.youtuber
+    },
+    searchyoutuber: state => {
+        return state.searchyoutuber
+    },
 }
 
 export default new Vuex.Store({

@@ -3,7 +3,16 @@
   https://vuetifyjs.com/ko/components/api-explorer
   -->
   <div>
-    <banner />
+    
+
+  
+    <v-img :src="require('@/assets/coolcat.png')">
+
+    </v-img>
+ <banner /> 
+
+    
+
   <v-container >
     <v-layout wrap>
       <v-flex 
@@ -18,7 +27,7 @@
         <v-btn 
         block 
         :aspect-ratio="1/1"
-        :to= "{ name: 'categoryPage', params: { cate: category.nameEng }}"
+        @click="onCategoryButtonClicked(i)"
         height="100%"
         >
         <v-img
@@ -52,16 +61,23 @@ import {
 export default {
   components: { banner },
   name: "mainPage",
-  methods: { },
+  methods: { 
+    onCategoryButtonClicked(i){
+      this.$store.state.currentCategory = i;
+      this.$router.push("/categoryPage");
+      
+    },
+  },
   computed: {
-    ...mapGetters(['categories'])
+    ...mapGetters(['categories']),
+    ...mapGetters(['youtubersPerCategory']),
   },
   data() {
     return {
       tmp : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
       layout: [2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 3]
     };
-  }
+  },
 };
 </script>
 

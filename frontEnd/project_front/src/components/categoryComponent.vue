@@ -1,15 +1,17 @@
 <template>
+<div>
     <v-container wrap style="background : gray">
-      <h1> hello {{selectedCategory}} </h1>
+      <h1> hello {{currentCategory}}</h1>
       <v-card v-for="(item,i) in youtubersPerCategory" :key=i class="ma-5" >
         <v-container>
-          <v-row>
+          <v-row> 
           <v-col justify="space-between">
             <v-col width>
-              <v-img
-                height="200"
-                width="200"
+              <v-card
+                height="1000"
+                width="1000"
                 :src="item.thumbnails"
+                :to= "{ name: 'youtuberPage', params: { yno : item.yno }}"
               />
             </v-col>
           </v-col>
@@ -29,7 +31,8 @@
 <script>
   import Constant from"../vuex/Constant";
   import {
-    mapGetters
+    mapGetters,
+    mapState
 }from 'vuex'
 
   export default {
@@ -38,32 +41,32 @@
         
       }
     },
+    created(){
+        console.log("categoryComponent_created : "+this.currentCategory);
+        
+        this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
+          category : this.findCano()
+        })
+  },
     watch :{
-      
-      selectedCategory : function() {
-        console.log("categoryComponent_watch"+this.selectedCategory);
+      currentCategory : function() {
+        console.log("categoryComponent_watch : "+ this.currentCategory);
         
         this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
           category : this.findCano()
         })
       }
     },
-    props : {
-      selectedCategory : {default:"game"},  
-    },
     computed : {
       ...mapGetters(['categories']),
       ...mapGetters(['youtubersPerCategory']),
+      ...mapState({
+        currentCategory : 'currentCategory'
+      })
+
     },
     methods : {
-      findCano : function() {
-        for (var value of this.categories) {
-          if(value.nameEng === this.selectedCategory){
-            return value.cano
-          }
-        }
-        return 1;
-      }
+      
     }
   }
 </script>
