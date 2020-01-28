@@ -18,5 +18,4 @@ public interface YoutuberDao {
 	public List<News> searchNews(int yno);
 	public List<Video> searchVideo(int yno);
 	public List<Video> searchCommunity(int yno);
-	public void insert(Youtuber youtuber);
 }

@@ -12,6 +12,7 @@
 	<mappers>
 		<mapper resource="mapper/Youtuber_query.xml"/>
 		<mapper resource="mapper/Category_query.xml"/>
-		<mapper resource="mapper/Community_query.xml"/>
+		<mapper resource="mapper/News_query.xml"/>
+		<mapper resource="mapper/Video_query.xml"/>
 	</mappers>
 </configuration>

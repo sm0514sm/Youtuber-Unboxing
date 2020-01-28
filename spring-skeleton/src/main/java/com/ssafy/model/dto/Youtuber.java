@@ -4,9 +4,11 @@ import java.sql.Date;
 
 public class Youtuber {
 	private int yno;
+	private String channelID;
 	private String channelName;
 	private String youtuberName;
 	private String channelDescription;
+	private String bannerImageLink;
 	private String channelLink;
 	private String thumbnails;
 	private Date publishedDate;
@@ -26,12 +28,19 @@ public class Youtuber {
 	private String otherLink2;
 	private String otherLink3;
 	private String otherLink4;
+	private String otherLink5;
 	
 	public int getYno() {
 		return yno;
 	}
 	public void setYno(int yno) {
 		this.yno = yno;
+	}
+	public String getChannelID() {
+		return channelID;
+	}
+	public void setChannelID(String channelID) {
+		this.channelID = channelID;
 	}
 	public String getChannelName() {
 		return channelName;
@@ -50,6 +59,12 @@ public class Youtuber {
 	}
 	public void setChannelDescription(String channelDescription) {
 		this.channelDescription = channelDescription;
+	}
+	public String getBannerImageLink() {
+		return bannerImageLink;
+	}
+	public void setBannerImageLink(String bannerImageLink) {
+		this.bannerImageLink = bannerImageLink;
 	}
 	public String getChannelLink() {
 		return channelLink;
@@ -164,5 +179,11 @@ public class Youtuber {
 	}
 	public void setOtherLink4(String otherLink4) {
 		this.otherLink4 = otherLink4;
+	}
+	public String getOtherLink5() {
+		return otherLink5;
+	}
+	public void setOtherLink5(String otherLink5) {
+		this.otherLink5 = otherLink5;
 	}
 }

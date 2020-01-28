@@ -86,14 +86,4 @@ public class YoutuberServiceImpl implements YoutuberService {
 			throw new RuntimeException("youtuber 관련 카테고리 조회 중 에러가 발생했습니다.");
 		}
 	}
-	
-	@Override
-	public void insert(Youtuber youtuber) {
-		try {
-			dao.insert(youtuber);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("youtuber 등록 중 에러 발생");
-		}
-	}
 }

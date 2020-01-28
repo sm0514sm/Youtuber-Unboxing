@@ -1,10 +1,12 @@
 package com.ssafy.model.dto;
 
 public class Category {
+	//category 테이블 + category_youtuber_relation 테이블의 컬럼을 합쳐놓은 DTO
 	private int cano;
 	private String name;
 	private int clickCount;
 	private String imageLink;
+	private int yno;			//category_youtuber_relation 테이블의 컬럼
 	
 	public int getCano() {
 		return cano;
@@ -29,5 +31,11 @@ public class Category {
 	}
 	public void setImageLink(String imageLink) {
 		this.imageLink = imageLink;
+	}
+	public int getYno() {
+		return yno;
+	}
+	public void setYno(int yno) {
+		this.yno = yno;
 	}
 }

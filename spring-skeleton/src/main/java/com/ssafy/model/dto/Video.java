@@ -12,6 +12,10 @@ public class Video {
 	private int good;
 	private int bad;
 	private Date retDate;
+	private int ycano;
+	private String tags;
+	private String thumbnail;
+	private String topic;
 	
 	public int getVno() {
 		return vno;
@@ -66,5 +70,29 @@ public class Video {
 	}
 	public void setRetDate(Date retDate) {
 		this.retDate = retDate;
+	}
+	public int getYcano() {
+		return ycano;
+	}
+	public void setYcano(int ycano) {
+		this.ycano = ycano;
+	}
+	public String getTags() {
+		return tags;
+	}
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public String getTopic() {
+		return topic;
+	}
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 }
