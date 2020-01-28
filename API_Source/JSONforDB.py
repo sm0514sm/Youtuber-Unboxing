@@ -78,4 +78,7 @@ videos = {
     'good': '',
     'bad': '',
     'regDate': '', 
+    'youtubeCategory': '',
+    'tags': '',
+    'thumbnail': '',
 }

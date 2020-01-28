@@ -575,3 +575,133 @@ play_list_url = 'https://www.youtube.com/watch?v=jEA3p1ekzSw&list=PLHqqPM2t7weIM
 		}
 	]
 }
+
+
+# video statistics
+
+{
+	"items": [
+		{
+			"statistics": {
+				"favoriteCount": "0",
+				"dislikeCount": "812",
+				"viewCount": "2425948",
+				"likeCount": "74599",
+				"commentCount": "5713"
+			},
+			"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/XJMNjXCEOMRzDleTqIWhClwHbwM\"",
+			"id": "rOCVOr130X8",
+			"kind": "youtube#video"
+		}
+	],
+	"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/BtcUIPbAJbutlvKEVDW4g_yhuJM\"",
+	"kind": "youtube#videoListResponse",
+	"pageInfo": {
+		"totalResults": 1,
+		"resultsPerPage": 1
+	}
+}
+
+# video topic detail
+{
+	"kind": "youtube#videoListResponse",
+	"pageInfo": {
+		"resultsPerPage": 1,
+		"totalResults": 1
+	},
+	"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/mM5wtt8AtXJLKW_4wZzWHZK4N-0\"",
+	"items": [
+		{
+			"topicDetails": {
+				"topicIds": [
+					"/m/019_rr"
+				],
+				"topicCategories": [
+					"https://en.wikipedia.org/wiki/Technology",
+					"https://en.wikipedia.org/wiki/Lifestyle_(sociology)"
+				],
+				"relevantTopicIds": [
+					"/m/07c1v",
+					"/m/019_rr",
+					"/m/07c1v"
+				]
+			},
+			"kind": "youtube#video",
+			"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/7uTth0pQbMmgi0OdN1tiXFbwNTk\"",
+			"id": "wpUiN5hBnyc"
+		}
+	]
+}
+
+# video snippet
+{
+	"items": [
+		{
+			"id": "IZXgjR9INsA",
+			"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/jdqZVL1UGLok9YksigKBg66xCC0\"",
+			"snippet": {
+				"liveBroadcastContent": "none",
+				"publishedAt": "2020-01-15T18:00:52.000Z",
+				"defaultLanguage": "en-US",
+				"channelTitle": "PewDiePie",
+				"thumbnails": {
+					"default": {
+						"height": 90,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/default.jpg",
+						"width": 120
+					},
+					"medium": {
+						"height": 180,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/mqdefault.jpg",
+						"width": 320
+					},
+					"standard": {
+						"height": 480,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/sddefault.jpg",
+						"width": 640
+					},
+					"maxres": {
+						"height": 720,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/maxresdefault.jpg",
+						"width": 1280
+					},
+					"high": {
+						"height": 360,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/hqdefault.jpg",
+						"width": 480
+					}
+				},
+				"categoryId": "24",
+				"channelId": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
+				"localized": {
+					"description": "Goodbye, See you soon.\n\nNerd City: https://www.youtube.com/watch?v=gtyyvMKTCuA\n\n100 CLUB MERCH OUT NOW! https://represent.com/store/pewdiepie (Thank you)\n\nPewdiepie's Pixelings DOWNLOAD:\niOS: https://buff.ly/2pNG0aT\nAndroid: https://buff.ly/34C68nZ\n#pewdiepie #pixelings\n\nMinecraft Playlist:\nhttps://www.youtube.com/watch?v=mhgS6...\n\nMy Stores:\nTSUKI:\nhttps://tsuki.market/\nMerch:\nhttps://represent.com/store/pewdiepie\n\nI drink GFUEL (affiliate link):\nhttps://gfuel.ly/31Kargr\n\nMy Setup (affiliate links):\nChair: https://clutchchairz.com/pewdiepie/\nOfficial Razer hardware:\nRazer Nari Ultimate headset: http://rzr.to/pdp-razer-nari \nRazer Customs phone cases: http://rzr.to/pdp-razer-case\n\nNordVPN DOWNLOAD (affiliate link):\nGo to https://NordVPN.com/pewdiepie or use code PEWDIEPIE for a special holiday deal. Get a 3-year plan with 81% off plus two amazing gifts: 4 extra months + NordPass password manager app (worth $194.61)\n\nI stream on DLive (ad):\nhttps://go.dlive.tv/pewdiepie",
+					"title": "It's been real, but I'm out!"
+				},
+				"tags": [
+					"SATIRE",
+					"pewdiepie break",
+					"pewdiepie break from youtube",
+					"taking a break",
+					"pewdiepie lwiay",
+					"lwiay",
+					"pewds",
+					"pewdie",
+					"pdp",
+					"It's been real",
+					"but I'm out!",
+					"im out"
+				],
+				"title": "It's been real, but I'm out!",
+				"description": "Goodbye, See you soon.\n\nNerd City: https://www.youtube.com/watch?v=gtyyvMKTCuA\n\n100 CLUB MERCH OUT NOW! https://represent.com/store/pewdiepie (Thank you)\n\nPewdiepie's Pixelings DOWNLOAD:\niOS: https://buff.ly/2pNG0aT\nAndroid: https://buff.ly/34C68nZ\n#pewdiepie #pixelings\n\nMinecraft Playlist:\nhttps://www.youtube.com/watch?v=mhgS6...\n\nMy Stores:\nTSUKI:\nhttps://tsuki.market/\nMerch:\nhttps://represent.com/store/pewdiepie\n\nI drink GFUEL (affiliate link):\nhttps://gfuel.ly/31Kargr\n\nMy Setup (affiliate links):\nChair: https://clutchchairz.com/pewdiepie/\nOfficial Razer hardware:\nRazer Nari Ultimate headset: http://rzr.to/pdp-razer-nari \nRazer Customs phone cases: http://rzr.to/pdp-razer-case\n\nNordVPN DOWNLOAD (affiliate link):\nGo to https://NordVPN.com/pewdiepie or use code PEWDIEPIE for a special holiday deal. Get a 3-year plan with 81% off plus two amazing gifts: 4 extra months + NordPass password manager app (worth $194.61)\n\nI stream on DLive (ad):\nhttps://go.dlive.tv/pewdiepie",
+				"defaultAudioLanguage": "en-GB"
+			},
+			"kind": "youtube#video"
+		}
+	],
+	"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/HJWYl4qei4s3n-qdR6CWU4hlQY8\"",
+	"kind": "youtube#videoListResponse",
+	"pageInfo": {
+		"totalResults": 1,
+		"resultsPerPage": 1
+	}
+}
