@@ -88,11 +88,21 @@ def make_video_table(videoId):
     
     topic = list(set(topic))
     
-    
     topic_result = []
     for result in topic:
         topic_result.append(TOPICS.get(result))
+        print(topic_result)
     
+    try:
+        tags = ','.join(res_dict.get('snippet').get('tags'))
+    except:
+        tags = ''
+    
+    try:
+        topic = ','.join(topic_result)
+    except:
+        topic = ''
+
 
     video = {
         'vno': videoId,
@@ -105,9 +115,9 @@ def make_video_table(videoId):
         'bad': res_dict.get('statistics').get('dislikeCount'),
         'regDate': res_dict.get('snippet').get('publishedAt')[0:10], 
         'youtubeCategory': res_dict.get('snippet').get('categoryId'),
-        'tags': ','.join(res_dict.get('snippet').get('tags')),
         'thumbnail': res_dict.get('snippet').get('thumbnails').get('high').get('url'),
-        'topic': ','.join(topic_result),
+        'tags': tags,
+        'topic': topic,
     }
     
     ###### 파일 출력
