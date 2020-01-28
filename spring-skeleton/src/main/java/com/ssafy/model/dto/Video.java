@@ -3,6 +3,8 @@ package com.ssafy.model.dto;
 import java.sql.Date;
 
 public class Video {
+	//vidio 테이블 + youtube_category 테이블의 컬럼을 합쳐놓은 DTO
+	
 	private int vno;
 	private int yno;
 	private String videoName;
@@ -16,6 +18,9 @@ public class Video {
 	private String tags;
 	private String thumbnail;
 	private String topic;
+	
+	private String krCategory;	//youtube_category 테이블의 컬럼
+	private String enCategory;	//youtube_category 테이블의 컬럼
 	
 	public int getVno() {
 		return vno;
@@ -94,5 +99,17 @@ public class Video {
 	}
 	public void setTopic(String topic) {
 		this.topic = topic;
+	}
+	public String getKrCategory() {
+		return krCategory;
+	}
+	public void setKrCategory(String krCategory) {
+		this.krCategory = krCategory;
+	}
+	public String getEnCategory() {
+		return enCategory;
+	}
+	public void setEnCategory(String enCategory) {
+		this.enCategory = enCategory;
 	}
 }
