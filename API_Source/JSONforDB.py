@@ -4,9 +4,7 @@
     'youtubeName': '',
     'channelDescription': '',
     'bannerImageLink': '',
-    'namuwiki': '',
-    'instagram': '',
-    'facebook': '',
+    'channelLink':,
     'thumbnails': '',
     'publishedDate': '',
     'subscriber': '',
@@ -21,6 +19,11 @@
     'clickCount': '',
     'updateDate': '',
     'regDate': '',
+    'otherLink1':'',
+    'otherLink2':'',
+    'otherLink3':'',
+    'otherLink4':'',
+    'otherLink5':'',
 }
 
 categoryToYoutuber = {

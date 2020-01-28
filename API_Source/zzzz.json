@@ -1,0 +1,60 @@
+﻿{
+	"kind": "youtube#videoListResponse",
+	"items": [
+		{
+			"id": "9kA4h_xvxbQ",
+			"kind": "youtube#video",
+			"snippet": {
+				"liveBroadcastContent": "none",
+				"description": "- 경희대학교 서울 캠퍼스\n\n#윤하 #고윤하 #YOUNHA",
+				"categoryId": "22",
+				"channelTitle": "때.요",
+				"publishedAt": "2019-10-01T15:47:21.000Z",
+				"title": "191001 경희대를 뒤집어 놓은 윤하의 추억 소환 - 비밀번호 486 + 혜성",
+				"tags": [
+					"윤하",
+					"고윤하",
+					"YOUNHA"
+				],
+				"channelId": "UCYwDEbYljyS02Uv029rpm2g",
+				"localized": {
+					"title": "191001 경희대를 뒤집어 놓은 윤하의 추억 소환 - 비밀번호 486 + 혜성",
+					"description": "- 경희대학교 서울 캠퍼스\n\n#윤하 #고윤하 #YOUNHA"
+				},
+				"thumbnails": {
+					"high": {
+						"url": "https://i.ytimg.com/vi/9kA4h_xvxbQ/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					},
+					"maxres": {
+						"url": "https://i.ytimg.com/vi/9kA4h_xvxbQ/maxresdefault.jpg",
+						"width": 1280,
+						"height": 720
+					},
+					"default": {
+						"url": "https://i.ytimg.com/vi/9kA4h_xvxbQ/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"standard": {
+						"url": "https://i.ytimg.com/vi/9kA4h_xvxbQ/sddefault.jpg",
+						"width": 640,
+						"height": 480
+					},
+					"medium": {
+						"url": "https://i.ytimg.com/vi/9kA4h_xvxbQ/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					}
+				}
+			},
+			"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/ijf5EjwjyNCXQwCt0YmVqGrjsF8\""
+		}
+	],
+	"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/Hlen66hxIzivYxhzgASD2S7wVDw\"",
+	"pageInfo": {
+		"totalResults": 1,
+		"resultsPerPage": 1
+	}
+}
