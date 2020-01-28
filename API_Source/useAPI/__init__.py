@@ -3,6 +3,7 @@ from decouple import config
 from urllib.request import urlopen, unquote
 import urllib.request
 import json
+import time
 import sys
 import io
 
@@ -87,6 +88,7 @@ def get_channelID_from_URL(input_URL):
 
     return channelID
 
+
 def get_latest_videos_using_channelID(channelID):
     KEY = config('GOOGLEAPIKEY')
     URL = 'https://www.googleapis.com/youtube/v3/search?key={}&channelId={}&part=snippet,id&order=date&maxResults={}'.format(KEY, channelID, maxResult)
@@ -135,7 +137,6 @@ def get_video_details(videoId):
     except:
         topic = ''
 
-
     video = {
         'vno': videoId,
         'yno': res_dict.get('snippet').get('channelId'),
@@ -183,43 +184,61 @@ def get_channel_info(channelID):
     json_obj = json.loads(string)
 
     snippet = json_obj["items"][0]["snippet"]
-    title = snippet["title"]
-    description = snippet["description"]
-    thumbnail = snippet["thumbnails"]["default"]["url"]
-    
-    
-    channel_info_dict["title"] = title
-    channel_info_dict["description"] = description
-    channel_info_dict["thumbnail"] = thumbnail
+    channel_info_dict["title"] = snippet["title"]
+    channel_info_dict['customUrl'] = snippet.get('customUrl')
+    channel_info_dict["description"] = snippet["description"]
+    channel_info_dict["thumbnail"] = snippet["thumbnails"]["default"]["url"]
+    channel_info_dict['publishedAt'] = snippet["publishedAt"][:10]
 
     statistics = json_obj["items"][0]["statistics"]
-    view_count = statistics["viewCount"]
-    subscriber_count = statistics["subscriberCount"]
-    video_count = statistics["videoCount"]
-    
-    
-    channel_info_dict["viewCount"] = view_count
-    channel_info_dict["subscriberCount"] = subscriber_count
-    channel_info_dict["videoCount"] = video_count
+    channel_info_dict["viewCount"] = statistics["viewCount"]
+    channel_info_dict["subscriberCount"] = statistics["subscriberCount"]
+    channel_info_dict["videoCount"] = statistics["videoCount"]
+
+    brandingSettings = json_obj["items"][0]["brandingSettings"]
+    channel_info_dict['banner_url'] = brandingSettings["image"]["bannerImageUrl"]
 
     return channel_info_dict
 
 
 if __name__ == "__main__":
     key = config('GOOGLEAPIKEY')
-
+    now = time.gmtime(time.time())
     url = "https://www.youtube.com/user/officialpsy"
     channel_id = get_channelID_from_URL(url)
     # get_latest_videos_using_channelID(channel_id)
     other_links = get_channel_other_sites(url)
     channel_info = get_channel_info(channel_id)
 
-
     print('* url : ' + url)
     print('* channel_id : ' + channel_id)
     print('* other_links : ' + str(len(other_links)))
     for index, link in enumerate(other_links):
-        print('\t%d - %s' %(index + 1, link))
+        print('\t%d - %s' % (index + 1, link))
     print('* channel_info')
     for item in channel_info:
-        print('\t%s - %s' %(item, channel_info[item]))
+        print('\t%s - %s' % (item, channel_info[item]))
+
+    youtuber = {
+        'channelID': channel_id,
+        'channelName': channel_info['title'],
+        'youtubeName': channel_info['customUrl'],
+        'channelDescription': channel_info['description'],
+        'bannerImageLink': channel_info['banner_url'],
+        'channelLink': url,
+        'thumbnail': channel_info['thumbnail'],
+        'publishedDate': channel_info['publishedAt'],
+        'subscriber': channel_info['subscriberCount'],
+        'totalViewCount': channel_info['viewCount'],
+        'totalVideoCount': channel_info['videoCount'],
+        'updateDate': '%d-%d-%d %d:%d:%d' % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec),
+        'regDate': '%d-%d-%d' % (now.tm_year, now.tm_mon, now.tm_mday),
+    }
+    for (index, item) in enumerate(other_links):
+        youtuber['otherLink{}'.format(index + 1)] = item
+
+# 새로운 유튜버 링크 입력 창 -> front 에서 get 으로 url 전송  -> isInOurDB(url)
+#                                      true -> 이미 우리 DB 등록되있는 유튜버이면 Response 해당 유튜버 yno -> 프론트에서 yno 주소 찾아가기
+#                                      false -> 우리 DB에 없는 유튜버면 새로운 유튜버 등록 후 response 성공 여부
+
+# 유튜버 정보 갱신버튼 클릭 -> front 에서 get 으로 yno 전송      -> DB 업데이트 후 response 성공 여부
