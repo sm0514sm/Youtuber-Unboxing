@@ -1,5 +1,6 @@
  youtuber = {
     'yno': '',
+    'channelID': '',
     'channelName': '',
     'youtubeName': '',
     'channelDescription': '',

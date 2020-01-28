@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 from bs4 import BeautifulSoup as BS
 from decouple import config
 from urllib.request import urlopen, unquote
@@ -12,10 +11,73 @@ import io
 # sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding = 'utf-8')
 
 
+TOPICS = {
+    '/m/04rlf': 'Music',
+    '/m/05fw6t': "Children's music",
+    '/m/02mscn': 'Christian music',
+    '/m/0ggq0m': 'Classical music',    
+    '/m/01lyv': 'Country',
+    '/m/02lkt': 'Electronic music',
+    '/m/0glt670': 'Hip hop music',
+    '/m/05rwpb': 'Independent music',
+    '/m/03_d0': 'Jazz',
+    '/m/028sqc': 'Music of Asia',
+    '/m/0g293': 'Music of Latin America',
+    '/m/064t9': 'Pop music',
+    '/m/06cqb': 'Reggae',
+    '/m/06j6l': 'Rhythm and blues',
+    '/m/06by7': 'Rock music',
+    '/m/0gywn': 'Soul music',
+    '/m/0bzvm2': 'Gaming',
+    '/m/025zzc': 'Action game',
+    '/m/02ntfj': 'Action-adventure game',
+    '/m/0b1vjn': 'Casual game',
+    '/m/02hygl': 'Music video game',
+    '/m/04q1x3q': 'Puzzle video game',
+    '/m/01sjng': 'Racing video game',
+    '/m/0403l3g': 'Role-playing video game',
+    '/m/021bp2': 'Simulation video game',
+    '/m/022dc6': 'Sports game',
+    '/m/03hf_rm': 'Strategy video game',
+    '/m/06ntj': 'Sports',
+    '/m/0jm_': 'American football',
+    '/m/018jz': 'Baseball',
+    '/m/018w8': 'Basketball',
+    '/m/01cgz': 'Boxing',
+    '/m/09xp_': 'Cricket',
+    '/m/02vx4': 'Football',
+    '/m/037hz': 'Golf',
+    '/m/03tmr': 'Ice hockey',
+    '/m/01h7lh': 'Mixed martial arts',
+    '/m/0410tth': 'Motorsport',
+    '/m/066wd': 'Professional wrestling',
+    '/m/07bs0': 'Tennis',
+    '/m/07_53': 'Volleyball',
+    '/m/02jjt': 'Entertainment',
+    '/m/095bb': 'Animated cartoon',
+    '/m/09kqc': 'Humor',
+    '/m/02vxn': 'Movies',
+    '/m/05qjc': 'Performing arts',
+    '/m/019_rr': 'Lifestyle',
+    '/m/032tl': 'Fashion',
+    '/m/027x7n': 'Fitness',
+    '/m/02wbm': 'Food',
+    '/m/0kt51': 'Health',
+    '/m/03glg': 'Hobby',
+    '/m/068hy': 'Pets',
+    '/m/041xxh': 'Physical attractiveness [Beauty]',
+    '/m/07c1v': 'Technology',
+    '/m/07bxq': 'Tourism',
+    '/m/07yv9': 'Vehicles',
+    '/m/01k8wb': 'Knowledge',
+    '/m/098wr': 'Society',
+}
+
+
 def get_channelID_from_URL(input_URL):
     # 해당 유튜버 페이지의 버튼 태그에서 속성값을 가져온다.
     html = urlopen(input_URL).read()
-    page_obj = BeautifulSoup(html, "html.parser", from_encoding='utf-8')
+    page_obj = BS(html, "html.parser", from_encoding='utf-8')
     class_attr = "yt-uix-button yt-uix-button-size-default yt-uix-button-subscribe-branded yt-uix-button-has-icon no-icon-markup yt-uix-subscription-button yt-can-buffer"
     channelID = page_obj.find(
         "button", 
@@ -35,18 +97,57 @@ def get_latest_videos_using_channelID(channelID):
     
     print(type(response))
     print(response)
+
+
+def get_video_details(videoId):
+    # snippet으로 가져오는 정보: 유튜버, 제목, 설명, 게시일, 카테고리, 태그, 섬네일
+    # statistics로 가져오는 정보: 조회수, 댓글 수, 좋아요 수, 싫어요 수
+    # topicdetails로 가져오는 정보: 토픽
+    part = 'snippet,statistics,topicDetails'
+    URL = 'https://www.googleapis.com/youtube/v3/videos?part={}&id={}&key={}'.format(part, videoId, config('GOOGLEAPIKEY'))
+    response = urlopen(URL).read().decode('utf-8')
+    res_dict = json.loads(response).get('items')[0]    
+    
+    
+    topic = []
+    if res_dict.get('topicDetails'):
+        topicId = res_dict.get('topicDetails').get('topicIds')
+        if topicId:
+            topic += topicId
+        relevantTopicId = res_dict.get('topicDetails').get('relevantTopicIds')
+        if relevantTopicId:
+            topic += relevantTopicId 
+    
+    topic = list(set(topic))
+    
+    
+    topic_result = []
+    for result in topic:
+        topic_result.append(TOPICS.get(result))
     
 
+    video = {
+        'vno': videoId,
+        'yno': res_dict.get('snippet').get('channelId'),
+        'videoName': res_dict.get('snippet').get('title'),
+        'videoDescription': res_dict.get('snippet').get('description'),
+        'videoViewCount': res_dict.get('statistics').get('viewCount'),
+        'videoCommentCount': res_dict.get('statistics').get('commentCount'),
+        'good': res_dict.get('statistics').get('likeCount'),
+        'bad': res_dict.get('statistics').get('dislikeCount'),
+        'regDate': res_dict.get('snippet').get('publishedAt')[0:10], 
+        'youtubeCategory': res_dict.get('snippet').get('categoryId'),
+        'tags': ','.join(res_dict.get('snippet').get('tags')),
+        'thumbnail': res_dict.get('snippet').get('thumbnails').get('high').get('url'),
+        'topic': ','.join(topic_result),
+    }
+    
+    ###### 파일 출력
+    # PATH = 'videoTableTest.json'
+    # with open("{}".format(PATH), 'w', encoding='utf-8-sig') as file: 
+    #     json.dump(video, file, indent="\t", ensure_ascii=False)
 
-def get_video_details(videoID):
-    URL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&id={}&key={}'.format(videoID, config('GOOGLEAPIKEY'))
-    response = urlopen(URL).read().decode('utf-8')
-    res_dict = json.loads(response)
-    # print(response)
-    # 들어온 정보를 JSON으로 저장
-    PATH = 'zzzz.json'
-    with open("{}".format(PATH), 'w', encoding='utf-8-sig') as file:
-        json.dump(res_dict, file, indent="\t", ensure_ascii=False)
+    return video
 
 
 def get_channel_other_sites(input_url):
@@ -75,6 +176,8 @@ def get_channel_info(channelID):
     title = snippet["title"]
     description = snippet["description"]
     thumbnail = snippet["thumbnails"]["default"]["url"]
+    
+    
     channel_info_dict["title"] = title
     channel_info_dict["description"] = description
     channel_info_dict["thumbnail"] = thumbnail
@@ -83,6 +186,8 @@ def get_channel_info(channelID):
     view_count = statistics["viewCount"]
     subscriber_count = statistics["subscriberCount"]
     video_count = statistics["videoCount"]
+    
+    
     channel_info_dict["viewCount"] = view_count
     channel_info_dict["subscriberCount"] = subscriber_count
     channel_info_dict["videoCount"] = video_count
