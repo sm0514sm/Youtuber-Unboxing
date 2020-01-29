@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.model.dao.YoutuberDao;
+import com.ssafy.model.dto.News;
+import com.ssafy.model.dto.Video;
 import com.ssafy.model.dto.Youtuber;
 
 @Service
@@ -54,14 +56,34 @@ public class YoutuberServiceImpl implements YoutuberService {
 			throw new RuntimeException("youtuber 랭킹 조회 중 에러가 발생했습니다.");
 		}
 	}
-
+	
 	@Override
-	public void insert(Youtuber youtuber) {
+	public List<News> searchNews(int yno) {
 		try {
-			dao.insert(youtuber);
+			return dao.searchNews(yno);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("youtuber 등록 중 에러 발생");
+			throw new RuntimeException("youtuber 관련 뉴스 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Video> searchVideo(int yno) {
+		try {
+			return dao.searchVideo(yno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 관련 뉴스 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Video> searchCommunity(int yno) {
+		try {
+			return dao.searchCommunity(yno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 관련 카테고리 조회 중 에러가 발생했습니다.");
 		}
 	}
 }
