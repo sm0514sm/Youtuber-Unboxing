@@ -19,10 +19,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception
 	{
 		http.authorizeRequests()
-			.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-			.anyRequest().authenticated()
-			.and()
-			.oauth2Login()
-			.permitAll();
+		.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+		.anyRequest().authenticated()
+		.and().logout().logoutSuccessUrl("/").permitAll()
+        .and().headers().frameOptions().sameOrigin()
+        .and().csrf().disable();
 	}
 }
