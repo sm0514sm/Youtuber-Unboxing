@@ -32,7 +32,7 @@ export default {
   created() {},
   methods: {
     tmpFunction() {
-      this.$store.dispatch(Constant.GET_zTEST, {
+      this.$store.dispatch(Constant.GET_TEST, {
         no: 3
       });
     },

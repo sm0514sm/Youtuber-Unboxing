@@ -7,7 +7,6 @@
       <v-flex xs12>
         <slot />
       </v-flex>
-      <h1> 뭐냐 이거 </h1>
       <feed-card
         v-for="(article, i) in paginatedArticles"
         :key="article.title"
@@ -16,7 +15,6 @@
       />
     </v-layout>
 
-    <h1> 뭐냐 이거 </h1>  
     <v-layout align-center>
       <v-flex xs3>
         <base-btn
