@@ -1,137 +1,112 @@
 <template>
-<div>
-  <v-card>
-    <v-card-title class="text-center justify-center py-6" style="background-color:#cdcdcd ; height : 500px">
-      <h1 class="font-weight-bold display-2 ">CATEGORY</h1>
-    </v-card-title>
-  </v-card>
-<v-container>
-     <v-tabs
-      v-model="tab"
-      background-color="transparent"
-      color="basil"
-      grow
-    >
-      <v-tab
-        v-for="(item,index) in categories"
-        :key="index"
-        @click="onCategoryButtonClicked(index)"
-      >
-        {{ item. nameEng}}
-      </v-tab>
-    </v-tabs>
-
-    <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="(item,index) in categories"
-        :key="index"
-      >
-        <v-card
-          color="basil"
-          flat
-        >
-          <v-card-content>
-
-            <v-card v-for="(item,i) in youtubersPerCategory" :key=i class="ma-5" >
-        <v-container>
-          <v-row> 
-          <v-col justify="space-between">
-            <v-col width>
-              <v-card
-                height="200"
-                width="200"
-                :img="item.thumbnails"
-                :to= "{ path: 'youtuberPage', query: { yno : item.yno}}"
-                flat
-              />
-            </v-col>
-          </v-col>
-
-          <v-col>
-            <h1> {{item.channelName}} </h1>
-            {{item.channelDescription}} <br>
-            {{item.regDate}}
-          </v-col>
-          </v-row>
-        </v-container>
-      </v-card>
-          </v-card-content>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
-
-    
-</v-container>
-</div>
+  <div>
+    <v-card>
+      <v-card-title class="justify-center py-6" style="background-color:#cdcdcd ; height : 300px">
+        <i class="font-weight-black display-3">CATEGORY</i>
+      </v-card-title>
+    </v-card>
+    <v-divider></v-divider>
+    <v-container name="container">
+      <v-tabs v-model="currentCategory" background-color="transparent" color="basil" grow>
+        <v-tab
+          v-for="(item,index) in categories"
+          :key="index"
+          @click="onCategoryButtonClicked(index)"
+        >{{ item. nameEng}}</v-tab>
+      </v-tabs>
+      <v-divider></v-divider>
+      <v-tabs-items v-model="currentCategory">
+        <v-tab-item v-for="(item,index) in categories" :key="index">
+          <v-card flat class="pa-3">
+            <v-card
+              v-for="(item,index) in youtubersPerCategory"
+              :key="index+100"
+              class="ma-5"
+              flat
+              outlined
+            >
+              <v-data-table
+                v-model="selected"
+                :headers="headers"
+                :items="desserts"
+                :single-select="singleSelect"
+                item-key="name"
+                show-select
+                class="elevation-1"
+              >
+              
+              </v-data-table>
+              <!-- <v-container>
+                <v-row>
+                  <v-col justify="space-between" :cols="4">
+                    <v-col>
+                      <v-card
+                        :img="item.thumbnails"
+                        :to="{ path: 'youtuberPage', query: { yno : item.yno}}"
+                        flat
+                      >
+                        <v-responsive :aspect-ratio="1/1"></v-responsive>
+                      </v-card>
+                    </v-col>
+                  </v-col>
+                  <v-col :cols="7" class="ma-3">
+                    <v-row>
+                        <p class="font-weight-light display-3">{{item.channelName}}</p>
+                    </v-row>
+                    <v-row>{{item.channelDescription}}</v-row>
+                    <v-row>{{item.regDate}}</v-row>
+                  </v-col>
+                </v-row>
+              </v-container>-->
+            </v-card>
+          </v-card>
+        </v-tab-item>
+      </v-tabs-items>
+    </v-container>
+  </div>
 </template>
 
 
 <script>
-import {
-    mapGetters
-}from 'vuex'
-import Constant from"../vuex/Constant";
-
+import { mapGetters } from "vuex";
+import Constant from "../vuex/Constant";
 
 export default {
   components: {},
   name: "categoryPage",
 
-  
   methods: {
-    onCategoryButtonClicked(index){
+    onCategoryButtonClicked(index) {
       this.$store.state.currentCategory = index;
       this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
-           category : this.findCano()
-         })
+        category: this.findCano()
+      });
     },
-    findCano : function() {
-        return this.categories[this.$store.state.currentCategory].cano;
-      }
-  },
-  mounted(){
-this.$vuetify.goTo(0)
-  },
-  created(){
-         this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
-           category : this.findCano()
-         })
-  },
-  computed: {
-    ...mapGetters(['categories']),
-    ...mapGetters(['youtubersPerCategory']),
-    currentCategory () {
-      return "tab-"+this.$store.state.currentCategory
+    findCano: function() {
+      return this.categories[this.$store.state.currentCategory].cano;
     }
   },
-  watch: {
-    // currentCategory : function(){
-    // console.log("dsfsdfsdfsd")
-
-    //   this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
-    //       category : this.findCano()
-    //     })
-    // }
-    
+  mounted() {
+    this.$vuetify.goTo(0);
   },
-  data () {
-      return {
-        tab: null,
-        items: [
-          'Appetizers', 'Entrees', 'Deserts', 'Cocktails',
-        ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-        
-
-      }
-    },
+  created() {
+    this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
+      category: this.findCano()
+    });
+  },
+  computed: {
+    ...mapGetters(["categories"]),
+    ...mapGetters(["youtubersPerCategory"]),
+    currentCategory() {
+      return Number(this.$store.state.currentCategory);
+    }
+  },
+  watch: {},
+  data() {
+    return {};
+  }
 };
 </script>
 
 <style scoped>
-.box {
-    position:absolute;
-    top:50%; left:50%;
-    transform: translate(-50%, -50%);
-    }
 </style>

@@ -2,7 +2,7 @@
 <div>
     <v-container wrap style="background : gray">
       <h1> hello {{currentCategory}}</h1>
-      <v-card v-for="(item,i) in youtubersPerCategory" :key=i class="ma-5" >
+      <v-card v-for="(item,i) in yovutubersPerCategory" :key=i class="ma-5" >
         <v-container>
           <v-row> 
           <v-col justify="space-between">
