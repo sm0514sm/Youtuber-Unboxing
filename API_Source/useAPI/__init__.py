@@ -204,7 +204,7 @@ def get_channel_info(channelID):
 if __name__ == "__main__":
     key = config('GOOGLEAPIKEY')
     now = time.gmtime(time.time())
-    url = "https://www.youtube.com/user/officialpsy"
+    url = "https://www.youtube.com/channel/UCdUcjkyZtf-1WJyPPiETF1g"
     channel_id = get_channelID_from_URL(url)
     # get_latest_videos_using_channelID(channel_id)
     other_links = get_channel_other_sites(url)
