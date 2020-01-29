@@ -2,7 +2,13 @@
   <!-- vuetify를 참고하여 작성하기
   https://vuetifyjs.com/ko/components/api-explorer
   -->
-  <v-container>
+  <div>
+    <v-card>
+      <v-card-title class="justify-center py-6" style="background-color:#cdcdcd ; height : 300px">
+        <i class="font-weight-black display-3">YOUTUBERPAGE</i>
+      </v-card-title>
+    </v-card>
+    <v-container>
     <h1>youtuberPage</h1>
 
     {{this.$route.query.yno}}
@@ -20,6 +26,7 @@
 
     
   </v-container>
+  </div>
 </template>
 
 <script>

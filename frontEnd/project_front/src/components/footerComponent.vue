@@ -7,7 +7,7 @@
     <v-container mx-auto>
       <v-layout wrap>
         <v-flex xs9>
-            <h1> 김주희, 김태민, 박진홍, 이상민, 홍기환 </h1>
+            <i class="font-weight-black display-1">김주희, 김태민, 박진홍, 이상민, 홍기환</i>
         </v-flex>
         <v-spacer />
         <v-btn
