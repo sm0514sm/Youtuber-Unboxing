@@ -521,3 +521,187 @@ play_list_url = 'https://www.youtube.com/watch?v=jEA3p1ekzSw&list=PLHqqPM2t7weIM
   }
  ]
 }
+
+
+### 영상별 상세 정보: videos API
+{
+	"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/a1fYLUKXsAwsVga8ihCpHLL21Vs\"",
+	"kind": "youtube#videoListResponse",
+	"pageInfo": {
+		"totalResults": 1,
+		"resultsPerPage": 1
+	},
+	"items": [
+		{
+			"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/YgbAFtE-uNsYlQ1pa03C-OIzoLE\"",
+			"id": "YPMARa8Ex58",
+			"kind": "youtube#video",
+			"snippet": {
+				"channelId": "UCUpJs89fSBXNolQGOYKn0YQ",
+				"tags": [
+					"코딩",
+					"프로그래밍"
+				],
+				"categoryId": "27",
+				"description": "약 2만명의 자바스크립트 개발자를 인터뷰하여 정리한 자료 모음!\n자바스크립트 연말정산 State of JavaScript!\nhttps://2019.stateofjs.com 을 함께 보고 분석해봤습니다. ;)\n1. JS Flavors\n2. Front-end Frameworks \n3. Data Layer \n4. Back-end Frameworks\n5. Mobile & Desktop\n6. Opinions\n참고로. 작년 영상은 요기 있어요 👇🏼\nhttps://youtu.be/lvgEdrDZUgY\n-\n무료JS 강의는 요기 있어요 👇🏼\nhttps://academy.nomadcoders.co/p/javascript-basics-for-absolute-beginners-kr\n.\nYoutube 구독은 사랑입니다 ❤️\n니콜라스와 코딩 공부하기 👉🏻https://academy.nomadcoders.co 👈🏻",
+				"channelTitle": "노마드 코더 Nomad Coders",
+				"publishedAt": "2020-01-20T09:45:40.000Z",
+				"defaultAudioLanguage": "en",
+				"defaultLanguage": "ko",
+				"title": "2020 자바스크립트 트렌드는 어떻게 될까?",
+				"thumbnails": {
+					"medium": {
+						"url": "https://i.ytimg.com/vi/YPMARa8Ex58/mqdefault.jpg",
+						"width": 320,
+						"height": 180
+					},
+					"default": {
+						"url": "https://i.ytimg.com/vi/YPMARa8Ex58/default.jpg",
+						"width": 120,
+						"height": 90
+					},
+					"high": {
+						"url": "https://i.ytimg.com/vi/YPMARa8Ex58/hqdefault.jpg",
+						"width": 480,
+						"height": 360
+					}
+				},
+				"localized": {
+					"description": "약 2만명의 자바스크립트 개발자를 인터뷰하여 정리한 자료 모음!\n자바스크립트 연말정산 State of JavaScript!\nhttps://2019.stateofjs.com 을 함께 보고 분석해봤습니다. ;)\n1. JS Flavors\n2. Front-end Frameworks \n3. Data Layer \n4. Back-end Frameworks\n5. Mobile & Desktop\n6. Opinions\n참고로. 작년 영상은 요기 있어요 👇🏼\nhttps://youtu.be/lvgEdrDZUgY\n-\n무료JS 강의는 요기 있어요 👇🏼\nhttps://academy.nomadcoders.co/p/javascript-basics-for-absolute-beginners-kr\n.\nYoutube 구독은 사랑입니다 ❤️\n니콜라스와 코딩 공부하기 👉🏻https://academy.nomadcoders.co 👈🏻",
+					"title": "2020 자바스크립트 트렌드는 어떻게 될까?"
+				},
+				"liveBroadcastContent": "none"
+			}
+		}
+	]
+}
+
+
+# video statistics
+
+{
+	"items": [
+		{
+			"statistics": {
+				"favoriteCount": "0",
+				"dislikeCount": "812",
+				"viewCount": "2425948",
+				"likeCount": "74599",
+				"commentCount": "5713"
+			},
+			"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/XJMNjXCEOMRzDleTqIWhClwHbwM\"",
+			"id": "rOCVOr130X8",
+			"kind": "youtube#video"
+		}
+	],
+	"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/BtcUIPbAJbutlvKEVDW4g_yhuJM\"",
+	"kind": "youtube#videoListResponse",
+	"pageInfo": {
+		"totalResults": 1,
+		"resultsPerPage": 1
+	}
+}
+
+# video topic detail
+{
+	"kind": "youtube#videoListResponse",
+	"pageInfo": {
+		"resultsPerPage": 1,
+		"totalResults": 1
+	},
+	"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/mM5wtt8AtXJLKW_4wZzWHZK4N-0\"",
+	"items": [
+		{
+			"topicDetails": {
+				"topicIds": [
+					"/m/019_rr"
+				],
+				"topicCategories": [
+					"https://en.wikipedia.org/wiki/Technology",
+					"https://en.wikipedia.org/wiki/Lifestyle_(sociology)"
+				],
+				"relevantTopicIds": [
+					"/m/07c1v",
+					"/m/019_rr",
+					"/m/07c1v"
+				]
+			},
+			"kind": "youtube#video",
+			"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/7uTth0pQbMmgi0OdN1tiXFbwNTk\"",
+			"id": "wpUiN5hBnyc"
+		}
+	]
+}
+
+# video snippet
+{
+	"items": [
+		{
+			"id": "IZXgjR9INsA",
+			"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/jdqZVL1UGLok9YksigKBg66xCC0\"",
+			"snippet": {
+				"liveBroadcastContent": "none",
+				"publishedAt": "2020-01-15T18:00:52.000Z",
+				"defaultLanguage": "en-US",
+				"channelTitle": "PewDiePie",
+				"thumbnails": {
+					"default": {
+						"height": 90,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/default.jpg",
+						"width": 120
+					},
+					"medium": {
+						"height": 180,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/mqdefault.jpg",
+						"width": 320
+					},
+					"standard": {
+						"height": 480,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/sddefault.jpg",
+						"width": 640
+					},
+					"maxres": {
+						"height": 720,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/maxresdefault.jpg",
+						"width": 1280
+					},
+					"high": {
+						"height": 360,
+						"url": "https://i.ytimg.com/vi/IZXgjR9INsA/hqdefault.jpg",
+						"width": 480
+					}
+				},
+				"categoryId": "24",
+				"channelId": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
+				"localized": {
+					"description": "Goodbye, See you soon.\n\nNerd City: https://www.youtube.com/watch?v=gtyyvMKTCuA\n\n100 CLUB MERCH OUT NOW! https://represent.com/store/pewdiepie (Thank you)\n\nPewdiepie's Pixelings DOWNLOAD:\niOS: https://buff.ly/2pNG0aT\nAndroid: https://buff.ly/34C68nZ\n#pewdiepie #pixelings\n\nMinecraft Playlist:\nhttps://www.youtube.com/watch?v=mhgS6...\n\nMy Stores:\nTSUKI:\nhttps://tsuki.market/\nMerch:\nhttps://represent.com/store/pewdiepie\n\nI drink GFUEL (affiliate link):\nhttps://gfuel.ly/31Kargr\n\nMy Setup (affiliate links):\nChair: https://clutchchairz.com/pewdiepie/\nOfficial Razer hardware:\nRazer Nari Ultimate headset: http://rzr.to/pdp-razer-nari \nRazer Customs phone cases: http://rzr.to/pdp-razer-case\n\nNordVPN DOWNLOAD (affiliate link):\nGo to https://NordVPN.com/pewdiepie or use code PEWDIEPIE for a special holiday deal. Get a 3-year plan with 81% off plus two amazing gifts: 4 extra months + NordPass password manager app (worth $194.61)\n\nI stream on DLive (ad):\nhttps://go.dlive.tv/pewdiepie",
+					"title": "It's been real, but I'm out!"
+				},
+				"tags": [
+					"SATIRE",
+					"pewdiepie break",
+					"pewdiepie break from youtube",
+					"taking a break",
+					"pewdiepie lwiay",
+					"lwiay",
+					"pewds",
+					"pewdie",
+					"pdp",
+					"It's been real",
+					"but I'm out!",
+					"im out"
+				],
+				"title": "It's been real, but I'm out!",
+				"description": "Goodbye, See you soon.\n\nNerd City: https://www.youtube.com/watch?v=gtyyvMKTCuA\n\n100 CLUB MERCH OUT NOW! https://represent.com/store/pewdiepie (Thank you)\n\nPewdiepie's Pixelings DOWNLOAD:\niOS: https://buff.ly/2pNG0aT\nAndroid: https://buff.ly/34C68nZ\n#pewdiepie #pixelings\n\nMinecraft Playlist:\nhttps://www.youtube.com/watch?v=mhgS6...\n\nMy Stores:\nTSUKI:\nhttps://tsuki.market/\nMerch:\nhttps://represent.com/store/pewdiepie\n\nI drink GFUEL (affiliate link):\nhttps://gfuel.ly/31Kargr\n\nMy Setup (affiliate links):\nChair: https://clutchchairz.com/pewdiepie/\nOfficial Razer hardware:\nRazer Nari Ultimate headset: http://rzr.to/pdp-razer-nari \nRazer Customs phone cases: http://rzr.to/pdp-razer-case\n\nNordVPN DOWNLOAD (affiliate link):\nGo to https://NordVPN.com/pewdiepie or use code PEWDIEPIE for a special holiday deal. Get a 3-year plan with 81% off plus two amazing gifts: 4 extra months + NordPass password manager app (worth $194.61)\n\nI stream on DLive (ad):\nhttps://go.dlive.tv/pewdiepie",
+				"defaultAudioLanguage": "en-GB"
+			},
+			"kind": "youtube#video"
+		}
+	],
+	"etag": "\"Fznwjl6JEQdo1MGvHOGaz_YanRU/HJWYl4qei4s3n-qdR6CWU4hlQY8\"",
+	"kind": "youtube#videoListResponse",
+	"pageInfo": {
+		"totalResults": 1,
+		"resultsPerPage": 1
+	}
+}

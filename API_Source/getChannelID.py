@@ -2,7 +2,7 @@ from urllib.request import urlopen, unquote
 from bs4 import BeautifulSoup as BS
 
 
-input_URL = 'https://www.youtube.com/channel/UC-Zedn7a_RJyb5hUQ-aGZog'
+input_URL = 'https://www.youtube.com/user/Mnet'
 URL = input_URL
 
 html = urlopen(URL).read()

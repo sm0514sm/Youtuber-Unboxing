@@ -1,11 +1,11 @@
-youtuber = {
+ youtuber = {
     'yno': '',
+    'channelID': '',
     'channelName': '',
     'youtubeName': '',
     'channelDescription': '',
-    'namuwiki': '',
-    'instagram': '',
-    'facebook': '',
+    'bannerImageLink': '',
+    'channelLink':,
     'thumbnails': '',
     'publishedDate': '',
     'subscriber': '',
@@ -20,7 +20,11 @@ youtuber = {
     'clickCount': '',
     'updateDate': '',
     'regDate': '',
-    'bannerLink': '', 
+    'otherLink1':'',
+    'otherLink2':'',
+    'otherLink3':'',
+    'otherLink4':'',
+    'otherLink5':'',
 }
 
 categoryToYoutuber = {
@@ -75,4 +79,7 @@ videos = {
     'good': '',
     'bad': '',
     'regDate': '', 
+    'youtubeCategory': '',
+    'tags': '',
+    'thumbnail': '',
 }
