@@ -13,7 +13,7 @@ public class Video {
 	private int videoCommentCount;
 	private int good;
 	private int bad;
-	private Date retDate;
+	private Date regDate;
 	private int ycano;
 	private String tags;
 	private String thumbnail;
@@ -70,11 +70,11 @@ public class Video {
 	public void setBad(int bad) {
 		this.bad = bad;
 	}
-	public Date getRetDate() {
-		return retDate;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setRetDate(Date retDate) {
-		this.retDate = retDate;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	public int getYcano() {
 		return ycano;

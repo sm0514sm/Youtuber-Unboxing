@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ssafy.model.dto.Growth;
 import com.ssafy.model.dto.News;
 import com.ssafy.model.dto.Video;
 import com.ssafy.model.dto.Youtuber;
@@ -18,4 +19,5 @@ public interface YoutuberDao {
 	public List<News> searchNews(int yno);
 	public List<Video> searchVideo(int yno);
 	public List<Video> searchCommunity(int yno);
+	public List<Growth> searchGrowth(int yno);
 }

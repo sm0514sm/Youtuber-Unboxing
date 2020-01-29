@@ -52,10 +52,10 @@ public class VideoRestController {
 	
 	@ApiOperation("검색 조건에 따른 video 랭킹 조회")
 	@GetMapping("/video/rank/{searchCondition}_{num}")
-	public ResponseEntity<Map<String, Object>> searchRanking(@PathVariable String searchCondition, @PathVariable String num){
+	public ResponseEntity<Map<String, Object>> searchRanking(@PathVariable String searchCondition, @PathVariable int num){
 		Map<String, String> map = new HashMap<>();
 		map.put("searchCondition", searchCondition);
-		map.put("num", num);
+		map.put("num", num + "");
 		List<Video> list = videoService.searchRanking(map);
 		return handleSuccess(list);
 	}
