@@ -7,7 +7,9 @@ public class Growth {
 	private int yno;
 	private Date recordDate;
 	private int pointSubscriber;
-	private int variance;
+	private int difSubscriber;
+	private int pointView;
+	private int difView;
 	
 	public int getGno() {
 		return gno;
@@ -33,10 +35,22 @@ public class Growth {
 	public void setPointSubscriber(int pointSubscriber) {
 		this.pointSubscriber = pointSubscriber;
 	}
-	public int getVariance() {
-		return variance;
+	public int getDifSubscriber() {
+		return difSubscriber;
 	}
-	public void setVariance(int variance) {
-		this.variance = variance;
+	public void setDifSubscriber(int difSubscriber) {
+		this.difSubscriber = difSubscriber;
+	}
+	public int getPointView() {
+		return pointView;
+	}
+	public void setPointView(int pointView) {
+		this.pointView = pointView;
+	}
+	public int getDifView() {
+		return difView;
+	}
+	public void setDifView(int difView) {
+		this.difView = difView;
 	}
 }
