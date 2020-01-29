@@ -36,14 +36,16 @@
 		<if test="searchCondition != null">
 			<choose>
 				<when test="searchCondition == 'clickCount'">
-					order by clickCount desc
+					order by clickCount desc limit ${num}
 				</when>
 				<when test="searchCondition == 'newsDate'">
-					order by newsDate desc
+					order by newsDate desc limit ${num}
 				</when>
+				<otherwise>
+					limit 0
+				</otherwise>
 			</choose>
 		</if>
-		limit ${num}
 	</select>
 	
 </mapper>

@@ -52,10 +52,10 @@ public class NewsRestController {
 	
 	@ApiOperation("검색 조건에 따른 news 랭킹 조회")
 	@GetMapping("/news/rank/{searchCondition}_{num}")
-	public ResponseEntity<Map<String, Object>> searchRanking(@PathVariable String searchCondition, @PathVariable String num){
+	public ResponseEntity<Map<String, Object>> searchRanking(@PathVariable String searchCondition, @PathVariable int num){
 		Map<String, String> map = new HashMap<>();
 		map.put("searchCondition", searchCondition);
-		map.put("num", num);
+		map.put("num", num + "");
 		List<News> list = newsService.searchRanking(map);
 		return handleSuccess(list);
 	}

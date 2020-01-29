@@ -22,14 +22,13 @@ public class Youtuber {
 	private int basicStat;
 	private int charm;
 	private int clickCount;
-	private Date updateDate;
+	private Date updatedDate;
 	private Date regDate;
 	private String otherLink1;
 	private String otherLink2;
 	private String otherLink3;
 	private String otherLink4;
 	private String otherLink5;
-	
 	public int getYno() {
 		return yno;
 	}
@@ -144,11 +143,11 @@ public class Youtuber {
 	public void setClickCount(int clickCount) {
 		this.clickCount = clickCount;
 	}
-	public Date getUpdateDate() {
-		return updateDate;
+	public Date getUpdatedDate() {
+		return updatedDate;
 	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	public Date getRegDate() {
 		return regDate;

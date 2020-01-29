@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.model.dao.YoutuberDao;
+import com.ssafy.model.dto.Growth;
 import com.ssafy.model.dto.News;
 import com.ssafy.model.dto.Video;
 import com.ssafy.model.dto.Youtuber;
@@ -84,6 +85,16 @@ public class YoutuberServiceImpl implements YoutuberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("youtuber 관련 카테고리 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Growth> searchGrowth(int yno) {
+		try {
+			return dao.searchGrowth(yno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 관련 성장성 데이터 조회 중 에러가 발생했습니다.");
 		}
 	}
 }
