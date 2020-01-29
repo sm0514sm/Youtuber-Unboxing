@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.model.dto.News;
-import com.ssafy.model.dto.Video;
 import com.ssafy.model.dto.Youtuber;
 import com.ssafy.model.service.YoutuberService;
 
@@ -38,7 +36,7 @@ public class YoutuberRestController {
 		return handleSuccess(youtuber);
 	}
 	
-	@ApiOperation("키워드로 youtuber 정보 검색")
+	@ApiOperation("youtuber 정보 검색")
 	@GetMapping("/youtuber/search/{keyword}")
 	public ResponseEntity<Map<String, Object>> searchKeyword(@PathVariable String keyword){
 		List<Youtuber> list = youtuberService.searchKeyword(keyword); 
@@ -62,26 +60,12 @@ public class YoutuberRestController {
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("youtuber 관련 뉴스 조회")
-	@GetMapping("/youtuber/detail/news/{yno}")
-	public ResponseEntity<Map<String, Object>> searchNews(@PathVariable int yno){
-		List<News> list = youtuberService.searchNews(yno);
-		return handleSuccess(list);
-	}
-	
-	@ApiOperation("youtuber 관련 영상 조회")
-	@GetMapping("/youtuber/detail/video/{yno}")
-	public ResponseEntity<Map<String, Object>> searchVideo(@PathVariable int yno){
-		List<Video> list = youtuberService.searchVideo(yno);
-		return handleSuccess(list);
-	}
-	
-	@ApiOperation("youtuber 관련 커뮤니티 조회")
-	@GetMapping("/youtuber/detail/community/{yno}")
-	public ResponseEntity<Map<String, Object>> searchCommunity(@PathVariable int yno){
-		List<Video> list = youtuberService.searchCommunity(yno);
-		return handleSuccess(list);
-	}
+//	@ApiOperation("youtuber 등록")
+//	@PostMapping("/youtuber")
+//	public ResponseEntity<Map<String, Object>> insert_youtuber(@RequestBody Youtuber youtuber){
+//		youtuberService.insert(youtuber);
+//		return handleSuccess("test 등록 완료");
+//	}
 	
 	// Exception Handle
 	public ResponseEntity<Map<String, Object>> handleFail(Object data, HttpStatus state){
