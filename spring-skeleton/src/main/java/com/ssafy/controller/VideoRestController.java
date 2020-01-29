@@ -13,73 +13,50 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.model.dto.News;
 import com.ssafy.model.dto.Video;
-import com.ssafy.model.dto.Youtuber;
-import com.ssafy.model.service.YoutuberService;
+import com.ssafy.model.service.VideoService;
 
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 @RestController
-public class YoutuberRestController {
+public class VideoRestController {
 	@Autowired
-	private YoutuberService youtuberService;
+	private VideoService videoService;
 	
 	@ExceptionHandler
 	public ResponseEntity<Map<String, Object>> handle(Exception e){
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-	@ApiOperation("youtuber 고유번호 검색")
-	@GetMapping("/youtuber/{yno}")
-	public ResponseEntity<Map<String, Object>> search(@PathVariable int yno){
-		Youtuber youtuber = youtuberService.search(yno); 
-		return handleSuccess(youtuber);
+	@ApiOperation("video 고유번호 검색")
+	@GetMapping("/video/{vno}")
+	public ResponseEntity<Map<String, Object>> search(@PathVariable int vno){
+		Video video = videoService.search(vno); 
+		return handleSuccess(video);
 	}
 	
-	@ApiOperation("키워드로 youtuber 정보 검색")
-	@GetMapping("/youtuber/search/{keyword}")
+	@ApiOperation("키워드로 video 정보 검색")
+	@GetMapping("/video/search/{keyword}")
 	public ResponseEntity<Map<String, Object>> searchKeyword(@PathVariable String keyword){
-		List<Youtuber> list = youtuberService.searchKeyword(keyword); 
+		List<Video> list = videoService.searchKeyword(keyword); 
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("전체 youtuber 조회")
-	@GetMapping("/youtuber/all")
+	@ApiOperation("전체 video 조회")
+	@GetMapping("/video/all")
 	public ResponseEntity<Map<String, Object>> searchAll(){
-		List<Youtuber> list = youtuberService.searchAll(); 
+		List<Video> list = videoService.searchAll(); 
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("검색 조건에 따른 youtuber 랭킹 조회")
-	@GetMapping("/youtuber/rank/{searchCondition}_{num}")
+	@ApiOperation("검색 조건에 따른 video 랭킹 조회")
+	@GetMapping("/video/rank/{searchCondition}_{num}")
 	public ResponseEntity<Map<String, Object>> searchRanking(@PathVariable String searchCondition, @PathVariable String num){
 		Map<String, String> map = new HashMap<>();
 		map.put("searchCondition", searchCondition);
 		map.put("num", num);
-		List<Youtuber> list = youtuberService.searchRanking(map);
-		return handleSuccess(list);
-	}
-	
-	@ApiOperation("youtuber 관련 뉴스 조회")
-	@GetMapping("/youtuber/detail/news/{yno}")
-	public ResponseEntity<Map<String, Object>> searchNews(@PathVariable int yno){
-		List<News> list = youtuberService.searchNews(yno);
-		return handleSuccess(list);
-	}
-	
-	@ApiOperation("youtuber 관련 영상 조회")
-	@GetMapping("/youtuber/detail/video/{yno}")
-	public ResponseEntity<Map<String, Object>> searchVideo(@PathVariable int yno){
-		List<Video> list = youtuberService.searchVideo(yno);
-		return handleSuccess(list);
-	}
-	
-	@ApiOperation("youtuber 관련 커뮤니티 조회")
-	@GetMapping("/youtuber/detail/community/{yno}")
-	public ResponseEntity<Map<String, Object>> searchCommunity(@PathVariable int yno){
-		List<Video> list = youtuberService.searchCommunity(yno);
+		List<Video> list = videoService.searchRanking(map);
 		return handleSuccess(list);
 	}
 	
@@ -95,6 +72,5 @@ public class YoutuberRestController {
 		resultMap.put("state", "ok");
 		resultMap.put("data", data);
 		return new ResponseEntity<Map<String,Object>>(resultMap, HttpStatus.OK);
-	}
-	
+	}	
 }

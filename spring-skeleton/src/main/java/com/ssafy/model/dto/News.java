@@ -9,6 +9,8 @@ public class News {
 	private String newsTitle;
 	private String newsDescription;
 	private Date newsDate;
+	private String pressName;
+	private int clickCount;
 	
 	public int getNno() {
 		return nno;
@@ -52,5 +54,10 @@ public class News {
 	public void setPressName(String pressName) {
 		this.pressName = pressName;
 	}
-	private String pressName;
+	public int getClickCount() {
+		return clickCount;
+	}
+	public void setClickCount(int clickCount) {
+		this.clickCount = clickCount;
+	}
 }
