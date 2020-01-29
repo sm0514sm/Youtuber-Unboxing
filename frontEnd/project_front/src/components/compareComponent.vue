@@ -9,7 +9,7 @@
         bottom
         right
       >
-        나중에 이미지로 바꾸렴
+        
       </v-btn>
     </template>
 

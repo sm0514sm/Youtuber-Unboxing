@@ -9,7 +9,7 @@
     </image-preloader>
         <v-card>
             <v-img :src="require('@/assets/coolcat.png')" class="py-6 lighten-5">
-                <i class="font-weight-black display-4 jb">YOUTUBER</i>
+                <i class="font-weight-black display-4 jb">CAT<br> DOMINATES<br>THE WORLD</i>
             </v-img>
         </v-card>
     
