@@ -73,18 +73,20 @@
         </v-card>
       </transition>
 
-        <v-row>
-          <v-col cols="9">
-            <v-card outlined flat>sdfsdf</v-card>
-          </v-col>
-          <v-col cols="3">
-            <v-card outlined flat>
-              <v-avatar color="red">
-                <span class="white--text headline">A</span>
-              </v-avatar>
-            </v-card>
-          </v-col>
-        </v-row>
+      <v-row>
+        <v-col cols="9">
+          <v-card outlined flat>
+            <apexchart type="radar" height="350" :options="chartOptions" :series="series"></apexchart>
+          </v-card>
+        </v-col>
+        <v-col cols="3">
+          <v-card outlined flat>
+            <v-avatar color="red">
+              <span class="white--text headline">A</span>
+            </v-avatar>
+          </v-card>
+        </v-col>
+      </v-row>
 
       <!-- mainContainer -->
       {{this.$route.query.yno}}
@@ -120,11 +122,15 @@ import {
 } from "vuex";
 import Constant from "../vuex/Constant";
 
+
 export default {
-  components: {},
+  components: {
+    
+  },
   name: "youtuberPage",
   created() {
     console.log(this.$route.query);
+    this.$vuetify.goTo(0);
     this.$store.dispatch(Constant.GET_YOUTUBER, {
       yno: this.$route.query.yno
     });
@@ -137,7 +143,45 @@ export default {
     })
   },
   data() {
-    return {};
+    return {
+       series: [{
+            name: 'Series 1',
+            data: [80, 50, 30, 40, 100, 20],
+          }, {
+            name: 'Series 2',
+            data: [20, 30, 40, 80, 20, 80], 
+          }, {
+            name: 'Series 3',
+            data: [44, 76, 78, 13, 43, 10],
+          }],
+          chartOptions: {
+            chart: {
+              height: 350,
+              type: 'radar',
+              dropShadow: {
+                enabled: true,
+                blur: 1,
+                left: 1,
+                top: 1
+              }
+            },
+            title: {
+            },
+            stroke: {
+              width: 0
+            },
+            fill: {
+              opacity: 0.4
+            },
+            markers: {
+              size: 0
+            },
+            xaxis: {
+              categories: ['2011', '2012', '2013', '2014', '2015', '2016']
+            }
+          },
+          
+    };
   }
 };
 </script>
