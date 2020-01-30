@@ -25,36 +25,46 @@ const state = {
         {
             nameEng: "entertainment",
             nameKor: "엔터",
-            cano: 3,
+            cano: 2,
         },
         {
             nameEng: "beauty",
             nameKor: "뷰티",
+            cano: 3,
         },
         {
             nameEng: "sports",
-            nameKor: "운동"
+            nameKor: "운동",
+            cano: 4,
+
         },
         {
             nameEng: "mukbang",
-            nameKor: "먹방"
+            nameKor: "먹방",
+            cano: 5,
         },
         {
             nameEng: "kids",
-            nameKor: "키즈"
+            nameKor: "키즈",
+            cano: 6,
+
         },
         {
             nameEng: "animals",
-            nameKor: "동물"
+            nameKor: "동물",
+            cano: 7,
+
         },
         {
             nameEng: "life",
             nameKor: "일상",
-            cano: 2,
+            cano: 8,
         },
         {
             nameEng: "it",
-            nameKor: "IT"
+            nameKor: "IT",
+            cano: 9,
+
         },
     ],
     youtubersPerCategory: [],
