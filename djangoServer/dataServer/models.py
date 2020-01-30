@@ -84,12 +84,9 @@ class Category(models.Model):
         managed = False
         db_table = 'category'
 
-    def __str__(self):
-        return self.name
-
 
 class CategoryYoutubeRelation(models.Model):
-    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno', primary_key=True)
+    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno')
     cano = models.ForeignKey(Category, models.DO_NOTHING, db_column='cano')
 
     class Meta:
@@ -107,11 +104,9 @@ class Community(models.Model):
         managed = False
         db_table = 'community'
 
-    def __str__(self):
-        return self.communityname
 
 class CommunityYoutuberRelation(models.Model):
-    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno', primary_key=True)
+    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno')
     cono = models.ForeignKey(Community, models.DO_NOTHING, db_column='cono')
     mentioncount = models.IntegerField(db_column='mentionCount', blank=True, null=True)  # Field name made lowercase.
     updatedate = models.DateTimeField(db_column='updateDate', blank=True, null=True)  # Field name made lowercase.
@@ -168,7 +163,7 @@ class DjangoSession(models.Model):
 
 class Growth(models.Model):
     gno = models.AutoField(primary_key=True)
-    yno = models.IntegerField()
+    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno', related_name="youtuber_growth")
     recorddate = models.DateTimeField(db_column='recordDate', blank=True, null=True)  # Field name made lowercase.
     pointsubscriber = models.IntegerField(db_column='pointSubscriber', blank=True, null=True)  # Field name made lowercase.
     difsubscriber = models.IntegerField(db_column='difSubscriber', blank=True, null=True)  # Field name made lowercase.
@@ -196,18 +191,19 @@ class News(models.Model):
 
 
 class Video(models.Model):
-    vno = models.AutoField(primary_key=True)
-    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno')
-    videoname = models.CharField(db_column='videoName', max_length=100, blank=True, null=True)  # Field name made lowercase.
+    vno = models.IntegerField(primary_key=True)
+    yno = models.IntegerField()
+    videoid = models.CharField(db_column='videoID', max_length=100)  # Field name made lowercase.
+    videoname = models.CharField(db_column='videoName', max_length=100)  # Field name made lowercase.
     videodescription = models.CharField(db_column='videoDescription', max_length=3000, blank=True, null=True)  # Field name made lowercase.
-    videoviewcount = models.IntegerField(db_column='videoViewCount', blank=True, null=True)  # Field name made lowercase.
-    videocommentcount = models.IntegerField(db_column='videoCommentCount', blank=True, null=True)  # Field name made lowercase.
-    good = models.IntegerField(blank=True, null=True)
-    bad = models.IntegerField(blank=True, null=True)
-    regdate = models.DateField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
-    ycano = models.ForeignKey('YoutubeCategory', models.DO_NOTHING, db_column='ycano', blank=True, null=True)
+    videoviewcount = models.IntegerField(db_column='videoViewCount')  # Field name made lowercase.
+    videocommentcount = models.IntegerField(db_column='videoCommentCount')  # Field name made lowercase.
+    good = models.IntegerField()
+    bad = models.IntegerField()
+    regdate = models.DateField(db_column='regDate')  # Field name made lowercase.
+    ycano = models.IntegerField(blank=True, null=True)
     tags = models.CharField(max_length=1000, blank=True, null=True)
-    thumbnail = models.CharField(max_length=1000, blank=True, null=True)
+    thumbnail = models.CharField(max_length=1000)
     topic = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:

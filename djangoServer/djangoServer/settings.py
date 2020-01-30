@@ -84,6 +84,7 @@ DATABASES = {
         'HOST': '15.165.77.1',
         'PORT': '3306',
         'SSL': 'not enabled',
+        'OPTIONS': {'charset': 'utf8mb4'},
     },
 }
 
