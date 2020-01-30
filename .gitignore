@@ -125,4 +125,3 @@ dmypy.json
 
 .env
 .vscode/
-mysqlclient-1.4.6-cp35-cp35m-win_amd64.whl
