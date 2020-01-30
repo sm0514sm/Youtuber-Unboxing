@@ -5,7 +5,6 @@ from .models import Category, CategoryYoutubeRelation, Community, CommunityYoutu
 admin.site.register(Category)
 admin.site.register(CategoryYoutubeRelation)
 admin.site.register(Community)
-admin.site.register(CommunityYoutuberRelation)
 admin.site.register(Growth)
 admin.site.register(News)
 admin.site.register(Video)

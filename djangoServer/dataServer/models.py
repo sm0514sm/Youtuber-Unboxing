@@ -84,6 +84,9 @@ class Category(models.Model):
         managed = False
         db_table = 'category'
 
+    def __str__(self):
+        return self.name
+
 
 class CategoryYoutubeRelation(models.Model):
     yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno', primary_key=True)
@@ -104,6 +107,8 @@ class Community(models.Model):
         managed = False
         db_table = 'community'
 
+    def __str__(self):
+        return self.communityname
 
 class CommunityYoutuberRelation(models.Model):
     yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno', primary_key=True)
