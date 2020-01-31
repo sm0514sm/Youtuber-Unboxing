@@ -126,3 +126,5 @@ dmypy.json
 .env
 .vscode/
 .idea
+.vscode
+.env
