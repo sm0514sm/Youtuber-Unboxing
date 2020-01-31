@@ -9,7 +9,7 @@
     </image-preloader>
         <v-card>
             <v-img :src="require('@/assets/coolcat.png')" class="py-6 lighten-5">
-                <i class="font-weight-black display-4 jb mb-5 pm-5">YOUTUBESWAG</i>
+                <i class="font-weight-black display-4 jb mb-5 pm-5">Youtube Analysis</i>
                 <!-- <v-text-field class="mt-5 jb" background-color="#be228a94" append-icon="mdi-magnify" flat hide-details solo-inverted style="max-width: 300px; " @keyup.enter="search" v-model="searchWord" :key="$route.fullPath"/> -->
             </v-img>
         </v-card>
@@ -22,17 +22,13 @@
                     <v-responsive :aspect-ratio="1/1">
                         <v-btn block :aspect-ratio="1/1" @click="onCategoryButtonClicked(i)" height="100%" width="50px" class="rounded-card">
                             <v-img :src="require('@/assets/' + i + '.png')" class="rounded-card pa-5">
-                                <h1 font-family="PT sans"> {{category.nameEng}} </h1>
+                                
                             </v-img>
                         </v-btn>
                     </v-responsive>
+                    <h1 class="categoryName"> {{category.nameEng}} </h1>
                 </v-flex>
             </v-layout>
-    
-            <h1 v-for=" a in  tmp" :key="a">
-                스크롤을 위한 글 넣기
-            </h1>
-    
         </v-container>
     </div>
 </template>
@@ -80,9 +76,13 @@ export default {
     background-color: #95b3e8a9;
     margin-bottom: 50px;
 }
-.rounded-card{
-    
-    border-radius:150px;
+.rounded-card{   
+    border-radius:20%;
     box-shadow: none;
+}
+.categoryName {
+    font-family: PT sans;
+    color: blacks;
+    text-align: center;
 }
 </style>
