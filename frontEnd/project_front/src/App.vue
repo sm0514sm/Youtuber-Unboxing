@@ -27,6 +27,10 @@ export default {
       return {
       //
       }
+    },
+    created() {
+      localStorage.setItem('currentCategory',0)
+
     }
 };
 </script>

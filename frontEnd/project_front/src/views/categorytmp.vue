@@ -86,6 +86,12 @@ export default {
          })
     },
     findCano : function() {
+      
+        console.log(this.$store.state.currentCategory)
+        console.log(typeof(this.$store.state.currentCategory))
+        if(typeof(this.$store.state.currentCategory) == "undefined"){
+          return 0;
+        }
         return this.categories[this.$store.state.currentCategory].cano;
       }
   },

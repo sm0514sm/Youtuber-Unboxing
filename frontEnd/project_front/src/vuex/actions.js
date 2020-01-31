@@ -18,7 +18,6 @@ export default {
     },
     [Constant.GET_YOUTUBERS_PER_CATEGORY]: (store, payload) => {
         console.log("action_GET_YOUTUBERS_PER_CATEGORY " + payload.category);
-        store.commit(Constant.CHANGE_CATEGORY_LOADING, { bool: true });
         http
             .get("/category/" + payload.category)
             .then(response => {
@@ -26,14 +25,13 @@ export default {
                 store.commit(Constant.GET_YOUTUBERS_PER_CATEGORY, {
                     youtuberslist: response.data.data
                 });
-                store.commit(Constant.CHANGE_CATEGORY_LOADING, { bool: false });
             })
             .catch(exp => {
                 alert("GET_YOUTUBERS_PER_CATEGORY에 실패하였습니다\n" + exp);
             });
     },
     [Constant.GET_YOUTUBER]: (store, payload) => {
-        console.log("action_GET_YOUTUBER " + payload.yno);
+        console.log("action_GET_YOUTUBER " + store.state.youtuber);
         //store.commit(Constant.CHANGE_CATEGORY_LOADING, { bool: true });
         http
             .get("/youtuber/" + payload.yno)
