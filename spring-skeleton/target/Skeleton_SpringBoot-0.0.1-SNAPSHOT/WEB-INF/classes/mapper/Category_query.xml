@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.model.dao.CategoryDao">
+
+	<!-- category에 속한 유투버 검색 / 구독자 순 정렬 -->
+	<select id="search" parameterType="int" resultType="youtuber">
+		select *
+		from youtuber y inner join category_youtube_relation care
+		using (yno)
+		where care.cano = #{cano}
+		order by y.subscriber desc
+	</select>
+
+	<!-- 전체 category 검색 -->
+	<select id="searchAll" resultType="category">
+		select *
+		from category
+		order by clickCount desc
+	</select>
+</mapper>

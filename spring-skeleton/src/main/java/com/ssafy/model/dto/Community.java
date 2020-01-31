@@ -11,6 +11,7 @@ public class Community {
 	private int yno;					//community_youtuber_relationg 테이블의 컬럼
 	private int mentionCount;			//community_youtuber_relationg 테이블의 컬럼
 	private Date updateDate;			//community_youtuber_relationg 테이블의 컬럼
+	
 	public int getCono() {
 		return cono;
 	}

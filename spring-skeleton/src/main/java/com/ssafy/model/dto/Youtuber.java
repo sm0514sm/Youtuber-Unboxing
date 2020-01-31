@@ -29,6 +29,7 @@ public class Youtuber {
 	private String otherLink3;
 	private String otherLink4;
 	private String otherLink5;
+	
 	public int getYno() {
 		return yno;
 	}
