@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from .models import Youtuber
+from .models import *
 import urllib.request
 import json
 import time
@@ -160,3 +160,7 @@ def update_youtuber(request, yno):
 
 if __name__ == "__main__":
     pass
+
+def add_video(request, videoId):
+    pass
+
