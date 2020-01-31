@@ -1,6 +1,6 @@
 <template>
     <v-app-bar id="app_bar_tt" :color="headerColor" fixed elevate-on-scroll scroll-threshold="500" v-scroll="onScroll">
-        <v-img :src="require('@/assets/logo2.png')" class="" contain height="48" width="48" max-width="48" @click="gotoHome" />
+        <v-img :src="require('@/assets/logo.png')" class="" contain height="48" width="48" max-width="48" @click="gotoHome" />
 
         <v-spacer />
         <v-text-field class="ma-2" append-icon="mdi-magnify" flat hide-details solo-inverted style="max-width: 300px; " @keyup.enter="search" v-model="searchWord" :key="$route.fullPath" />
