@@ -1,6 +1,8 @@
 import mainPage from "./views/mainPage.vue";
 import categoryPage from "./views/categoryPage.vue";
-import tmpPage3 from "./views/tmpPage3.vue";
+import youtuberPage from "./views/youtuberPage.vue";
+import searchPage from "./views/searchPage.vue";
+
 
 export default [{
         path: "/",
@@ -13,8 +15,15 @@ export default [{
         component: categoryPage
     },
     {
-        path: "/tmpPage3",
-        name: "tmpPage3",
-        component: tmpPage3
-    }
+        path: "/youtuberPage",
+        name: "youtuberPage",
+        component: youtuberPage
+    },
+    {
+        path: "/searchPage",
+        name: "searchPage",
+        component: searchPage
+    },
+
+
 ];
