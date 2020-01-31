@@ -15,6 +15,7 @@ export default {
         store.state.currentcategory = payload.category;
     },
     [Constant.GET_YOUTUBER]: (state, payload) => {
+        console.log(payload.youtuber)
         store.state.youtuber = payload.youtuber;
     },
     [Constant.SEARCH_YOUTUBER]: (state, payload) => {

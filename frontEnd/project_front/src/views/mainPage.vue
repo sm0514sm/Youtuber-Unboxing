@@ -48,7 +48,7 @@ export default {
     name: "mainPage",
     methods: {
         onCategoryButtonClicked(i) {
-            this.$store.state.currentCategory = i;
+            localStorage.setItem('currentCategory',i)
             this.$router.push("/categoryPage");
 
         },

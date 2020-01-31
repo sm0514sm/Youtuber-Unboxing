@@ -24,10 +24,8 @@
           width="300"
           max-width="300"
         />
+        <span> 비교하기 기능을 위한 menu </span>
         </v-card>
-        <v-btn>
-
-        </v-btn>
         
       </v-list-item>
       

@@ -42,8 +42,8 @@
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col class="pa-0">
-                    <v-divider></v-divider>
+                  <v-col class="ma-0 pa-0">
+                    <v-divider class="pa-0 ma-0"></v-divider>
                   </v-col>
                 </v-row>
 
@@ -75,20 +75,84 @@
 
       <v-row>
         <v-col cols="9">
-          <v-card outlined flat>
-            <apexchart type="radar" height="350" :options="chartOptions" :series="series"></apexchart>
-          </v-card>
+          <v-col class="pa-0 pb-3">
+            <v-card outlined flat>
+              <v-row>
+                <v-col class="ma-5">
+                  <v-list-item-title class="headline font-weight-black mb-1">능력치</v-list-item-title>
+                  <v-divider></v-divider>
+                </v-col>
+              </v-row>
+              <apexchart
+                type="radar"
+                height="500"
+                :options="chartOptions"
+                :series="series"
+                :influence="youtuber.influence"
+                id="myapexchart"
+                ref="myDiv"
+              ></apexchart>
+            </v-card>
+          </v-col>
+
+          <v-col class="pa-0 py-3">
+            <v-card outlined flat>
+              <v-row>
+                <v-col class="ma-5 pb-0 mb-0">
+                  <v-list-item-title class="headline font-weight-black mb-1">각능력치</v-list-item-title>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-container>
+                    <b-tabs content-class="mt-3" fill>
+                      <b-tab title="영향력" active>
+                        <p class="ma-3">I'm the 영향력 tab</p>
+                      </b-tab>
+                      <b-tab title="활동력">
+                        <p class="ma-3">I'm the 활동력 tab</p>
+                      </b-tab>
+                      <b-tab title="성장력">
+                        <p class="ma-3">I'm the 성장력 tab!</p>
+                      </b-tab>
+                      <b-tab title="기본수치">
+                        <p class="ma-3">I'm the 기본수치 tab!</p>
+                      </b-tab>
+                      <b-tab title="매력">
+                        <p class="ma-3">I'm the 매력 tab!</p>
+                      </b-tab>
+                    </b-tabs>
+                  </v-container>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
         </v-col>
+
         <v-col cols="3">
-          <v-card outlined flat>
-            <v-avatar color="red">
-              <span class="white--text headline">A</span>
-            </v-avatar>
+          <v-card outlined flat class="pa-4 pt-0">
+            <v-row>
+              <v-col class="ma-5 mx-0">
+                <v-list-item-title class="headline font-weight-black mb-1">등급</v-list-item-title>
+                <v-divider></v-divider>
+              </v-col>
+            </v-row>
+            <transition appear name="fade">
+              <v-btn
+                fab
+                :color="setGradeColor(youtuber.grade)"
+                style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
+              >
+                <p
+                  style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
+                >{{youtuber.grade}}</p>
+              </v-btn>
+            </transition>
           </v-card>
         </v-col>
       </v-row>
 
-      <!-- mainContainer -->
+      <!-- mainContainer
       {{this.$route.query.yno}}
       <v-divider></v-divider>
       {{youtuber.yno}}
@@ -111,76 +175,131 @@
       <br />
       {{youtuber.subscriber}}
       <br />
+      {{youtuber.influence}}-->
     </v-container>
+    <!-- <v-btn @click="test('AA')">안녕</v-btn> -->
   </div>
 </template>
 
 <script>
-import {
-  // mapState,
-  mapGetters
-} from "vuex";
-import Constant from "../vuex/Constant";
-
+import http from "../vuex/http-common";
 
 export default {
-  components: {
-    
-  },
+  components: {},
   name: "youtuberPage",
+  beforecreated() {},
   created() {
-    console.log(this.$route.query);
     this.$vuetify.goTo(0);
-    this.$store.dispatch(Constant.GET_YOUTUBER, {
-      yno: this.$route.query.yno
-    });
-    console.log(this.$store.state.youtuber.yno);
   },
-  methods: {},
-  computed: {
-    ...mapGetters({
-      youtuber: "youtuber"
-    })
+  mounted() {
+    http
+      .get("/youtuber/" + this.$route.query.yno)
+      .then(response => {
+        console.log(response.data.data);
+        this.youtuber = response.data.data;
+        setTimeout(
+          function() {
+            this.renderGraph();
+          }.bind(this),
+          1200
+        );
+      })
+      .catch(exp => {
+        alert("GET_YOUTUBER 실패하였습니다\n" + exp);
+      });
   },
+  methods: {
+    renderGraph() {
+      var chart = this.$refs.myDiv;
+      var influence = this.youtuber.influence;
+      var activity = this.youtuber.activity;
+      var growth = this.youtuber.growth;
+      var basicStat = this.youtuber.basicStat;
+      var charm = this.youtuber.charm;
+
+      chart.appendSeries({
+        name: " ",
+        data: [influence, activity, growth, basicStat, charm],
+        animation: true
+      });
+    },
+    setGradeColor(str) {
+      if(typeof(str) == "undefined"){
+        return "gray"
+      }
+      console.log(str)
+      if(str.startsWith("S") || str.startsWith("A")){
+        return "red"
+      }else if(str.startsWith("B")){
+        return "orange"
+      }else if(str.startsWith("C")){
+        return "yellow"
+      }else if(str.startsWith("D")){
+        return "green"
+      }else if(str.startsWith("E")){
+        return "blue"
+      }else{
+        return "gray"
+      }
+    }
+  },
+  computed: {},
   data() {
     return {
-       series: [{
-            name: 'Series 1',
-            data: [80, 50, 30, 40, 100, 20],
-          }, {
-            name: 'Series 2',
-            data: [20, 30, 40, 80, 20, 80], 
-          }, {
-            name: 'Series 3',
-            data: [44, 76, 78, 13, 43, 10],
-          }],
-          chartOptions: {
-            chart: {
-              height: 350,
-              type: 'radar',
-              dropShadow: {
-                enabled: true,
-                blur: 1,
-                left: 1,
-                top: 1
-              }
-            },
-            title: {
-            },
-            stroke: {
-              width: 0
-            },
-            fill: {
-              opacity: 0.4
-            },
-            markers: {
-              size: 0
-            },
-            xaxis: {
-              categories: ['2011', '2012', '2013', '2014', '2015', '2016']
+      youtuber: {},
+      series: [
+        // {
+        //   name: " ",
+        //   data: [0, 0, 0, 0, 0],
+        //   animation: true
+        // }
+      ],
+      chartOptions: {
+        chart: {
+          type: "radar",
+          dropShadow: {
+            enabled: true,
+            blur: 1,
+            left: 1,
+            top: 1
+          }
+        },
+        title: {},
+        stroke: {
+          width: 0
+        },
+        fill: {
+          opacity: 0.4
+        },
+        markers: {
+          size: 0
+        },
+        xaxis: {
+          categories: ["영향력", "활동력", "성장력", "기본수치", "매력"],
+          labels: {
+            style: {
+              fontSize: "20px",
+              colors: ["black", "black", "black", "black", "black"],
+              fontFamily: "bold"
             }
-          },
-          
+          }
+        },
+        yaxis: {
+          show: false,
+          max: 100,
+          min: 0
+        },
+        dataLabels: {
+          enabled: true,
+          background: {
+            enabled: true,
+            borderRadius: 2
+          }
+        },
+        animations: {
+          enabled: false
+        }
+      }
     };
   }
 };
@@ -207,6 +326,13 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: red;
+  color: white;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 3s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

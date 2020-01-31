@@ -6,14 +6,14 @@
       </v-card-title>
     </v-card>
     <v-container name="container" background-color="transparent">
-      <v-tabs v-model="currentCategory" background-color="transparent" grow>
+      <v-tabs :value="currentCategory" background-color="transparent" grow>
         <v-tab
           v-for="(item,index) in categories"
           :key="index"
           @click="onCategoryButtonClicked(index)"
         >{{ item. nameEng}}</v-tab>
       </v-tabs>
-      <v-tabs-items v-model="currentCategory" >
+      <v-tabs-items :value="currentCategory" >
         <v-tab-item v-for="(item,index) in categories" :key="index"  >
           <v-card flat class="pa-3" color="#FAFAFA">
             <v-data-table flat :headers="headers" :items="youtubersPerCategory" class="elevation-1" hide-default-footer>
@@ -47,6 +47,7 @@
         </v-tab-item>
       </v-tabs-items>
     </v-container>
+    
   </div>
 </template>
 
@@ -61,19 +62,20 @@ export default {
 
   methods: {
     onCategoryButtonClicked(index) {
-      this.$store.state.currentCategory = index;
+      localStorage.setItem('currentCategory',index)
       this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
         category: this.findCano()
       });
     },
     findCano: function() {
-      return this.categories[this.$store.state.currentCategory].cano;
+      return this.categories[localStorage.getItem('currentCategory')].cano;
     }
   },
   mounted() {
     this.$vuetify.goTo(0);
   },
   created() {
+
     this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
       category: this.findCano()
     });
@@ -82,7 +84,7 @@ export default {
     ...mapGetters(["categories"]),
     ...mapGetters(["youtubersPerCategory"]),
     currentCategory() {
-      return Number(this.$store.state.currentCategory);
+      return Number(localStorage.getItem('currentCategory'));
     }
   },
   watch: {},
