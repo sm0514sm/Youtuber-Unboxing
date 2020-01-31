@@ -52,7 +52,7 @@ def make_new_youtuber(request, url):
     for (i, site) in enumerate(get_channel_other_sites(url)):
         other_links[i] = site
     channel_info = get_channel_info(key_google, channel_id)
-    if channel_info['subscriberCount'] < config('MIN_SUBSCRIBER'):
+    if int(channel_info['subscriberCount']) < int(config('MIN_SUBSCRIBER')):
         return HttpResponse(-11)
     youtuber = Youtuber.objects.create(
         channelid=channel_id,
