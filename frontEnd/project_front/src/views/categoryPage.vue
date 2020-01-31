@@ -75,7 +75,7 @@ export default {
     this.$vuetify.goTo(0);
   },
   created() {
-
+    
     this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
       category: this.findCano()
     });
