@@ -14,7 +14,8 @@ SSAFY 2기 1반 8조 프로젝트
 
 # 기술 아키텍쳐
 
-<center><img src="img/architecture.jpg" width="90%"></center>
+<center><img src="img/architecture.jpg" width="90%"></center><br>
+
   저희 사이트는 2개의 서버를 운용합니다. 스프링과 장고가 그것입니다. 스프링은 뷰에서 사용자의 요청이 들어오면 이에 대해 응답을 보냅니다. 장고는 데이터를 업데이트하는 서버입니다. 사용자와 직접 통신하지는 않지만 자동화 알고리즘을 통해 DB를 항상 최신으로 유지합니다. 장고는 네이버와 유튜브의 API를 사용하여 정보를 갱신합니다.
 
 
@@ -23,8 +24,8 @@ SSAFY 2기 1반 8조 프로젝트
 
 현재 브렌칭 상황입니다.
 
+<center><img src="img/gitFlow.jpg" width="90%"></center><br>
 
-<center><img src="img/gitFlow.jpg" width="90%"></center>
 - `master` : 프로젝트의 최종 결과물 및 관련 문서들을 정리하였습니다.
 - `develop` : 현재 개발 단계에 있어 master로 merge하기 전에 검토하는 브렌치입니다.
 - `frontDev` : Vue의 개발 진행을 총괄하는 브렌치입니다. 세부 기능별 개발 브렌치를 가지고 있습니다.
