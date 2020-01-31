@@ -204,7 +204,7 @@ def get_channel_info(channelID):
 if __name__ == "__main__":
     key = config('GOOGLEAPIKEY')
     now = time.gmtime(time.time())
-    url = "https://www.youtube.com/user/officialpsy"
+    url = "https://www.youtube.com/channel/UCdUcjkyZtf-1WJyPPiETF1g"
     channel_id = get_channelID_from_URL(url)
     # get_latest_videos_using_channelID(channel_id)
     other_links = get_channel_other_sites(url)
@@ -236,9 +236,3 @@ if __name__ == "__main__":
     }
     for (index, item) in enumerate(other_links):
         youtuber['otherLink{}'.format(index + 1)] = item
-
-# 새로운 유튜버 링크 입력 창 -> front 에서 get 으로 url 전송  -> isInOurDB(url)
-#                                      true -> 이미 우리 DB 등록되있는 유튜버이면 Response 해당 유튜버 yno -> 프론트에서 yno 주소 찾아가기
-#                                      false -> 우리 DB에 없는 유튜버면 새로운 유튜버 등록 후 response 성공 여부
-
-# 유튜버 정보 갱신버튼 클릭 -> front 에서 get 으로 yno 전송      -> DB 업데이트 후 response 성공 여부
