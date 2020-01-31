@@ -153,7 +153,9 @@ def get_channel_info(key, channelID):
 
     branding_settings = json_obj["items"][0]["brandingSettings"]
     channel_info_dict['banner_url'] = branding_settings["image"]["bannerImageUrl"]
-
+    if '/default_banner' in channel_info_dict['banner_url']:
+        channel_info_dict['banner_url'] = ''
+        
     return channel_info_dict
 
 
