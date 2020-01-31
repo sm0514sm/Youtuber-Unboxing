@@ -80,9 +80,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ProjectDB',
-        'USER': 'ssafy',
-        'PASSWORD': 'ssafy',
-        'HOST': '15.165.77.1',
+        'USER': config('DB_ID'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('HOST'),
         'PORT': '3306',
         'SSL': 'not enabled',
         'OPTIONS': {'charset': 'utf8mb4'},
