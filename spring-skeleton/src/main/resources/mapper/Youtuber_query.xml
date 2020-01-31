@@ -1,26 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 
 <mapper namespace="com.ssafy.model.dao.YoutuberDao">
 
-	<!-- 여러개가 나오더라도 resultType에는 리스트 형으로 쓰지 않는다. -->
-	<select id="search" parameterType="String" resultType="youtuber">
+	<!-- 여러개가 나오더라도 resultType에는 리스트 형으로 쓰지 않는다 -->
+
+	<!-- youtuber 고유번호로 유투버 정보 검색 + TODO : 카테고리 추가해야함 -->
+	<select id="search" parameterType="int" resultType="youtuber">
 		select *
-		from YOUTUBER
-		where channelName like concat('%', #{name}, '%')
-		 or youtuberName like concat('%', #{name}, '%')
-		order by subscriber desc;
+		from youtuber
+		where yno=#{yno}
 	</select>
 
+	<!-- 키워드로 youtuber 정보 검색 / 구독자 순으로 -->
+	<select id="searchKeyword" parameterType="String" resultType="youtuber">
+		select *
+		from youtuber
+		where channelName like concat('%', #{keyword}, '%')
+		 or youtuberName like concat('%', #{keyword}, '%')
+		 or channelDescription like concat('%', #{keyword}, '%')
+		order by subscriber desc
+	</select>
+	
+	<!-- 전체 youtuber 조회 / 구독자 순으로 -->
 	<select id="searchAll" resultType="youtuber">
-		select * from YOUTUBER
+		select *
+		from youtuber
+		order by subscriber desc
 	</select>
-
-	<insert id="insert" parameterType="youtuber">
-		insert into YOUTUBER (id, value)
-		values ( #{id:INTEGER}
-		,#{value:VARCHAR})
-	</insert>
+	
+	<!-- 정렬 조건에 따른 youtuber 랭킹 조회. searchCondition이 정렬 조건, num이 가져올 개수 -->
+	<select id="searchRanking" parameterType="java.util.Map" resultType="youtuber">
+		<if test="searchCondition != null">
+			select *
+			from youtuber
+			<choose>
+				<when test="searchCondition == 'subscriber'">
+					order by subscriber desc limit ${num}
+				</when>
+				<when test="searchCondition == 'totalViewCount'">
+					order by totalViewCount desc limit ${num}
+				</when>
+				<when test="searchCondition == 'totalVideoCount'">
+					order by totalVideoCount desc limit ${num}
+				</when>
+				<when test="searchCondition == 'grade'">
+					order by grade desc limit ${num}
+				</when>
+				<when test="searchCondition == 'clickCount'">
+					order by clickCount desc limit ${num}
+				</when>
+				<when test="searchCondition == 'updatedDate'">
+					order by updatedDate desc limit ${num}
+				</when>
+				<otherwise>
+					limit 0
+				</otherwise>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 유투버 상세페이지에 보여줄 뉴스 검색 / 최신 뉴스 순으로 -->
+	<select id="searchNews" parameterType="int" resultType="news">
+		<!-- select n.nno, n.yno, n.newsLink, n.newsTitle, n.newsDescription, n.newsDate, n.pressName, n.clickCount -->
+		select *
+		from youtuber y inner join news n
+		using (yno)
+		where y.yno = #{yno}
+		order by newsDate desc
+	</select>
+	
+	<!-- 유투버 상세페이지에 보여줄 영상 검색 / 영상 조회수가 높은 순으로 -->
+	<select id="searchVideo" parameterType="int" resultType="video">
+		<!-- select v.vno, v.yno, v.videoName, v.videoDescription, v.videoViewCount, v.videoCommentCount, 
+		v.good, v.bad, v.regDate, v.ycano, v.tags, v.thumbnail, v.topic -->
+		select *
+		from youtuber y inner join video v
+		using (yno)
+		where y.yno = #{yno}
+		order by videoViewCount desc
+	</select>
+	
+	<!-- 유투버 상세페이지에 보여줄 커뮤니티 검색 / 언급수 높은 순으로 -->
+	<select id="searchCommunity" parameterType="int" resultType="community">
+		select *
+		from community_youtuber_relation core inner join community c
+		using (cono)
+		where core.yno = #{yno}
+		order by mentionCount desc
+	</select>
+	
+	<!-- 유투버 상세페이지에 보여줄 성장성 데이터 / 과거 날짜 순으로 -->
+	<select id="searchGrowth" parameterType="int" resultType="growth">
+		select *
+		from growth
+		where yno = #{yno}
+		order by recordDate asc
+	</select>
 </mapper>
