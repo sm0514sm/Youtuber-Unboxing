@@ -36,13 +36,13 @@
 
 ### 조원
 
-:sunglasses:김주희
+:sunglasses: 김주희
 
-:cat:김태민
+:cat: 김태민
 
-:smirk:박진홍
+:smirk: 박진홍
 
-:cloud:이상민
+:cloud: 이상민
 
-:zzz:홍기환
+:zzz: 홍기환
 
