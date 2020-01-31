@@ -7,6 +7,7 @@ public class Video {
 	
 	private int vno;
 	private int yno;
+	private String videoID;
 	private String videoName;
 	private String videoDescription;
 	private int videoViewCount;
@@ -33,6 +34,12 @@ public class Video {
 	}
 	public void setYno(int yno) {
 		this.yno = yno;
+	}
+	public String getVideoID() {
+		return videoID;
+	}
+	public void setVideoID(String videoID) {
+		this.videoID = videoID;
 	}
 	public String getVideoName() {
 		return videoName;
