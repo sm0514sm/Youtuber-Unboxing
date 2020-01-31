@@ -26,7 +26,8 @@ def index(request):
 =  -6. 다른 기타 정보 테이블 수집 후 DB 추가 중 에러
 =  -7. 위에서 생성된 정보들 기반으로 스텟, 등급 계산 중 에러
 =  -8. 유튜버의 스텟, 등급, updatedDate 갱신 중 에러 
-= -10, 알 수 없는 오류'''
+= -10, 알 수 없는 오류
+= -11, 너무 인기 없는 유튜버라서 지원안함'''
 
 
 def make_new_youtuber(request, url):
@@ -51,6 +52,8 @@ def make_new_youtuber(request, url):
     for (i, site) in enumerate(get_channel_other_sites(url)):
         other_links[i] = site
     channel_info = get_channel_info(key_google, channel_id)
+    if channel_info['subscriberCount'] < config('MIN_SUBSCRIBER'):
+        return HttpResponse(-11)
     youtuber = Youtuber.objects.create(
         channelid=channel_id,
         channelname=channel_info['title'],
