@@ -191,8 +191,8 @@ class News(models.Model):
 
 
 class Video(models.Model):
-    vno = models.IntegerField(primary_key=True)
-    yno = models.IntegerField()
+    vno = models.AutoField(primary_key=True)
+    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno')
     videoid = models.CharField(db_column='videoID', max_length=100)  # Field name made lowercase.
     videoname = models.CharField(db_column='videoName', max_length=100)  # Field name made lowercase.
     videodescription = models.CharField(db_column='videoDescription', max_length=3000, blank=True, null=True)  # Field name made lowercase.
@@ -248,6 +248,7 @@ class Youtuber(models.Model):
     otherlink3 = models.CharField(db_column='otherLink3', max_length=1000, blank=True, null=True)  # Field name made lowercase.
     otherlink4 = models.CharField(db_column='otherLink4', max_length=1000, blank=True, null=True)  # Field name made lowercase.
     otherlink5 = models.CharField(db_column='otherLink5', max_length=1000, blank=True, null=True)  # Field name made lowercase.
+    uploadsid = models.CharField(db_column='uploadsID', max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False
