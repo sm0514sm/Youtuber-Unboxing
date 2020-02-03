@@ -22,7 +22,8 @@ public class HomeController {
         
         return "index";
     }
-    
+
+	
     @RequestMapping(value="/login")
     public String login(@RequestParam("code") String code, HttpSession session) {
     	System.out.println("code:"+code);
