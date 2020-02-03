@@ -4,5 +4,6 @@ export default {
     CHANGE_CATEGORY_LOADING: "changecategoryloading",
     CHANGE_CURRENT_CATEGORY: "chagecurrentcateagory",
     GET_YOUTUBER: "getyoutuber",
-    SEARCH_YOUTUBER: "searchyoutuber"
+    SEARCH_YOUTUBER: "searchyoutuber",
+    ADD_COMPAREd_YOUTUBER: "addcomparedyoutuber"
 };

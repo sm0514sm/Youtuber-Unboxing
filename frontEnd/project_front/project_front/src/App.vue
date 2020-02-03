@@ -1,6 +1,5 @@
 <template>
   <v-app id="app">
-    
     <header-component></header-component>
 
     <v-content>
@@ -8,8 +7,8 @@
     </v-content>
 
     <footer-component></footer-component>
-    
-      <compare-component />
+
+    <compare-component />
   </v-app>
 </template>
 
@@ -21,16 +20,21 @@ import compareComponent from "./components/compareComponent";
 export default {
   name: "app",
   components: {
-    headerComponent, footerComponent, compareComponent,
+    headerComponent,
+    footerComponent,
+    compareComponent
   },
-    data () {
-      return {
+  data() {
+    return {
       //
-      }
-    },
-    created() {
-      localStorage.setItem('currentCategory',0)
+    };
+  },
+  created() {
+    var arr = [{"aaaa" : "aaaaa"},{"nnnnn" :"nnnn"}];
 
-    }
+    localStorage.setItem("compareYoutuber", JSON.stringify(arr));
+    localStorage.setItem("currentCategory", 0);
+
+  }
 };
 </script>

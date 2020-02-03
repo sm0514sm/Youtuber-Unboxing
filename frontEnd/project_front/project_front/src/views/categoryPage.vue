@@ -18,20 +18,23 @@
           <v-card flat class="pa-3" color="#FAFAFA">
             <v-data-table flat :headers="headers" :items="youtubersPerCategory" class="elevation-1" hide-default-footer>
 
+              <template v-slot:item.insertCompare="{ item }">
+                <v-btn @click="onClikcedinsertCompare(item.yno,item.channelName)"> </v-btn>
+              </template>
+            
+            <!-- 썸네일과 channelName -->
               <template v-slot:item.thumbnails="{ item }">
                 <v-card color="#00000000" flat :to="{ path: 'youtuberPage', query: { yno : item.yno}}">
                   <v-row>
-                    <v-col cols="4">
+                    <v-col cols="2" class = "px-0">
                       <v-card color="#00000000"   width="50px" flat>
                         <v-responsive :aspect-ratio="1/1">
                           <v-img class="circle" :src="item.thumbnails" flat/>
                         </v-responsive>
                       </v-card>
-                      <!-- <v-card  :img="item.thumbnails" flat width="50px">
-                        <v-responsive :aspect-ratio="1/1"></v-responsive>
-                      </v-card> -->
+
                     </v-col>
-                    <v-col cols="8" >
+                    <v-col cols="10" class = "px-0">
                       <v-container fill-height>
                         <v-layout align-center>
                           <v-flex xs12 text-xs-center><div class="font-weight-light">{{item.channelName}}</div></v-flex>
@@ -47,7 +50,6 @@
         </v-tab-item>
       </v-tabs-items>
     </v-container>
-    
   </div>
 </template>
 
@@ -69,6 +71,16 @@ export default {
     },
     findCano: function() {
       return this.categories[localStorage.getItem('currentCategory')].cano;
+    },
+    onClikcedinsertCompare : function(yno,channelName) {
+      var output = localStorage.getItem("compareYoutuber");		
+      var arr = JSON.parse(output);
+
+      arr.push({"yno" : yno , "channelName" : channelName})
+      console.log(arr);
+
+      localStorage.setItem("compareYoutuber", JSON.stringify(arr));
+      console.log(yno+"*******************"+channelName+" "+localStorage.getItem('compareYoutuber'))
     }
   },
   mounted() {
@@ -91,6 +103,8 @@ export default {
   data() {
     return {
       headers: [
+        
+        { text: "", value: "insertCompare", sortable: false },
         { text: "", value: "thumbnails", sortable: false },
         { text: "subscriber", value: "subscriber" },
         { text: "influence", value: "influence" },
