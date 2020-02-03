@@ -4,33 +4,20 @@
 
         <v-spacer />
         <v-text-field class="ma-2" append-icon="mdi-magnify" flat hide-details solo-inverted style="max-width: 300px; " @keyup.enter="search" v-model="searchWord" :key="$route.fullPath" />
+
+
+
+        
             <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on }">
                         <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">login</v-btn>
                 </template>
-      <v-card>
-        <v-card-title>
-          <span class="headline">LoginModal</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            login 해보렴
-          </v-container>
-          <small>*indicates required field</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
-        </v-card-actions>
-      </v-card>
+      
     </v-dialog>
-
-
 
     <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on }">
-                        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">join</v-btn>
+                        <v-btn class="ma-2" color="indigo" large outlined dark v-on:click="login">test</v-btn>
 </template>
       <v-card>
         <v-card-title>
@@ -38,7 +25,7 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            login 해보렴
+            회원가입 해보렴
           </v-container>
           <small>*indicates required field</small>
         </v-card-text>
@@ -64,6 +51,10 @@ export default {
         ...mapGetters(['links'])
     },
     methods: {
+        login() {
+            window.location.href = "www.google.com";
+            console.log("!")
+        },
         gotoHome(e) {
             e.stopPropagation()
             if (this.$route.path === "/") {
