@@ -29,6 +29,7 @@ public class Youtuber {
 	private String otherLink3;
 	private String otherLink4;
 	private String otherLink5;
+	private String uploadsID;
 	
 	public int getYno() {
 		return yno;
@@ -185,5 +186,11 @@ public class Youtuber {
 	}
 	public void setOtherLink5(String otherLink5) {
 		this.otherLink5 = otherLink5;
+	}
+	public String getUploadsID() {
+		return uploadsID;
+	}
+	public void setUploadsID(String uploadsID) {
+		this.uploadsID = uploadsID;
 	}
 }
