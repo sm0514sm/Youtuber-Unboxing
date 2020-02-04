@@ -75,19 +75,8 @@ export default {
       return this.categories[localStorage.getItem('currentCategory')].cano;
     },
     onClikcedinsertCompare : function(yno,channelName) {
-      var output = localStorage.getItem("compareYoutuber");		
-      var arr = JSON.parse(output);
-      // if(arr.length > 2){
-      //   alert("더이상 비교할 수 있는 유튜버를 넣을 수 없습니다.");
-      // }
-      if(typeof(arr) == "undefined" || arr == null){
-        arr = [];
-      }
       
-      arr.push({"yno" : yno , "channelName" : channelName})
-      localStorage.setItem("compareYoutuber", JSON.stringify(arr));
-      
-      EventBus.$emit("changeCompareYoutuber")
+      EventBus.$emit("insertYoutuber",yno,channelName)
     }
   },
   mounted() {

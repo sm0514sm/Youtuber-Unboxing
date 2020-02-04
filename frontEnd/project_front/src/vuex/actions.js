@@ -1,5 +1,6 @@
 import Constant from "./Constant";
 import http from "./http-common";
+import axios from "axios"
 
 export default {
     [Constant.GET_TEST]: store => {
@@ -62,5 +63,44 @@ export default {
                 alert("GET_YOUTUBER 실패하였습니다\n" + exp);
             });
     },
+    [Constant.GET_COMPARE_YOUTUBER]: (store, payload) => {
+
+        var youtuber1 = payload.youtuber1;
+        var youtuber2 = payload.youtuber2;
+        var callback = payload.callback;
+
+        const youtuber1Search = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/" + youtuber1.yno)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        const youtuber2Search = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/" + youtuber2.yno)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        Promise.all([youtuber1Search, youtuber2Search]).then(
+            axios.spread((...responses) => {
+
+                console.log(responses[0], responses[1])
+
+                callback(responses[0], responses[1]);
+
+
+            })
+        );
+    }
 
 };

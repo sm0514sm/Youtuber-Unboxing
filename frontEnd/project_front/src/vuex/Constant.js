@@ -5,5 +5,6 @@ export default {
     CHANGE_CURRENT_CATEGORY: "chagecurrentcateagory",
     GET_YOUTUBER: "getyoutuber",
     SEARCH_YOUTUBER: "searchyoutuber",
-    ADD_COMPARED_YOUTUBER: "addcomparedyoutuber"
+    ADD_COMPARED_YOUTUBER: "addcomparedyoutuber",
+    GET_COMPARE_YOUTUBER: "getcompareyoutuber"
 };

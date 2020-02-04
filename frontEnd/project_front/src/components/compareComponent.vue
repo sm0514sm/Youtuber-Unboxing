@@ -30,7 +30,6 @@
       </v-list-item>
       <v-list-item>
         <v-card>최근 본 유튜버</v-card>
-        <a target="_blank" href="https://www.naver.com">Policies</a>
       </v-list-item>
     </v-list>
   </v-menu>
@@ -65,11 +64,29 @@ export default {
     gotoComparePage : function() {
       console.log("gotoComparePage")
       this.$router.push("/comparePage");
+    },
+    insertYoutuber : function(yno,channelName) {
+      var output = localStorage.getItem("compareYoutuber");	
+      var arr = JSON.parse(output);
+      
+      if(typeof(arr) == "undefined" || arr == null){
+        arr = [];
+      }
+
+      if(arr.length >= 2){
+        alert("더이상 비교할 수 있는 유튜버를 넣을 수 없습니다.");
+        return;
+      }
+
+      this.youtubers = arr;
+      arr.push({"yno" : yno , "channelName" : channelName})
+      localStorage.setItem("compareYoutuber", JSON.stringify(arr));
+
     }
     
   },
   created() {
-    EventBus.$on("changeCompareYoutuber", this.updateyoutubers);
+    EventBus.$on("insertYoutuber", (yno,channelName) => {this.insertYoutuber(yno,channelName)});
     var output = localStorage.getItem("compareYoutuber");
     var arr = JSON.parse(output);
     this.youtubers = arr;
