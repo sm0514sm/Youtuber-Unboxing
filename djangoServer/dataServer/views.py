@@ -1,17 +1,23 @@
 from django.shortcuts import render, HttpResponse
+from django.db.models import Count
 from .models import *
 import urllib.request
 import time
+import requests
 from decouple import config
 from urllib.request import urlopen, unquote
 from bs4 import BeautifulSoup as bs
 import json
 import copy
 import timeit
+import datetime
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
-# Create your views here.
 text = ""
+
+key_list = [config('GOOGLEAPIKEY1'), config('GOOGLEAPIKEY2'),
+            config('GOOGLEAPIKEY3'), config('GOOGLEAPIKEY4')]
+key_index = 0
 
 
 def index(request):
@@ -35,7 +41,7 @@ def index(request):
 
 def make_new_youtuber(request, url):
     start = timeit.default_timer()
-    key_google = config('GOOGLEAPIKEY')
+
     url = url.replace('~', '/')
 
     # 1. 올바른 유튜브 채널 URL 판단
@@ -61,7 +67,7 @@ def make_new_youtuber(request, url):
     other_links = ['', '', '', '', '']
     for (i, site) in enumerate(get_channel_other_sites(url)):
         other_links[i] = site
-    channel_info = get_channel_info(key_google, channel_id)
+    channel_info = get_channel_info(channel_id)
     if int(channel_info['subscriberCount']) < int(config('MIN_SUBSCRIBER')):
         return HttpResponse(-11)
     youtuber = Youtuber.objects.create(
@@ -83,7 +89,8 @@ def make_new_youtuber(request, url):
         basicstat='0',
         charm='0',
         clickcount='0',
-        updateddate='%d-%d-%d %d:%d:%d' % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec),
+        updateddate='%d-%d-%d %d:%d:%d' % (now.tm_year, now.tm_mon,
+                                           now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec),
         regdate='%d-%d-%d' % (now.tm_year, now.tm_mon, now.tm_mday),
         otherlink1=other_links[0],
         otherlink2=other_links[1],
@@ -102,14 +109,15 @@ def make_new_youtuber(request, url):
     print('5. Locate and import the yno of the created user from the DB : %.2fs' % end5)
 
     # 6. Video 테이블 수집
-    video_id_list = get_video_list(key_google, channel_info['uploadsID'])
+    video_id_list = get_video_list(channel_info['uploadsID'])
     end66 = timeit.default_timer() - end5
     print('6. get video list : %.2fs' % end66)
-
-    for video_id in video_id_list:
+    video_detail_list = []
+    for idx, video_id in enumerate(video_id_list):
         video_detail = get_video_detail(video_id)
+        video_detail_list.append(video_detail)
         end666 = timeit.default_timer() - end66
-        print('666. get_video_detail : %.2fs' % end666)
+
         video = Video.objects.create(
             yno=youtuber,
             videoid=video_detail['video_id'],
@@ -120,12 +128,14 @@ def make_new_youtuber(request, url):
             good=video_detail['good'],
             bad=video_detail['bad'],
             regdate=video_detail['regDate'],
-            # ycano=video_detail['ycano'],
+            ycano=video_detail['ycano'],
             tags=video_detail['tags'],
             thumbnail=video_detail['thumbnail'],
             topic=video_detail['topic'],
         )
         video.save()
+        print('   - get_video_detail : %.2fs (%d/%d)' %
+              (end666, idx + 1, len(video_id_list)))
     end6 = timeit.default_timer() - end5
     print('6. get & insert Video : %.2fs' % end6)
 
@@ -144,7 +154,32 @@ def make_new_youtuber(request, url):
     end7 = timeit.default_timer() - end6
     print('7. get & insert Growth : %.2fs' % end7)
 
-    # Todo 8.  category_youtuber_relation, community_youtuber_relation, news 테이블 수집 후 DB 추가
+    # 8. 카테고리-유튜버 관계 설정
+    # 8-1 calculate valid ycano list
+    valid_ycano_list = []
+    tmp_ycano_list = Video.objects.filter(yno=yno).values('ycano').annotate(
+        total=Count('ycano')).order_by('total').reverse()
+    for ycategory in tmp_ycano_list:
+        if ycategory['total'] >= int(channel_info['videoCount']) * 0.14:
+            valid_ycano_list.append(ycategory['ycano'])
+    end8_1 = timeit.default_timer() - end7
+    print('8-1. calculate valid ycano list : %.2fs' % end8_1)
+
+    # 8-2 get our category
+    our_cano_list = get_our_cano(valid_ycano_list, video_detail_list)
+    print('our_cano_list : ', our_cano_list)
+    end8_2 = timeit.default_timer() - end8_1
+    print('8-2. get our category : %.2fs' % end8_2)
+
+    for our_cano in our_cano_list:
+        category = Category.objects.get(cano=our_cano)
+        print(category.name)
+        cy_relation = CategoryYoutubeRelation.objects.create(
+            yno=youtuber,
+            cano=category
+        )
+        cy_relation.save()
+    # Todo 8.  community, news 테이블 수집 후 DB 추가
 
     # Todo 9. 위에서 생성된 정보들 기반으로 스텟, 등급 계산
 
@@ -167,8 +202,8 @@ def get_channel_id_from_url(url):
     html = urlopen(url).read()
     soup = bs(html, "html.parser", from_encoding='utf-8')
     ff = soup.find("button", attrs={'class': "yt-uix-button yt-uix-button-size-default "
-                                                 "yt-uix-button-subscribe-branded yt-uix-button-has-icon "
-                                                 "no-icon-markup yt-uix-subscription-button yt-can-buffer"})
+                                    "yt-uix-button-subscribe-branded yt-uix-button-has-icon "
+                                    "no-icon-markup yt-uix-subscription-button yt-can-buffer"})
     return ff.get('data-channel-external-id')
 
 
@@ -194,11 +229,21 @@ def get_channel_other_sites(input_url):
     return other_link_list
 
 
-def get_channel_info(key, channelID):
+def get_channel_info(channelID):
+    global key_index
+    global key_list
+    key = key_list[key_index]
     channel_info_dict = {}
     base_url = "https://www.googleapis.com/youtube/v3/channels"
     part = "id,snippet,brandingSettings,contentDetails,invideoPromotion,statistics,topicDetails"
-    response = urllib.request.urlopen(base_url + "?part=%s&id=%s&key=%s" % (part, channelID, key))
+    try:
+        response = urllib.request.urlopen(
+            base_url + "?part=%s&id=%s&key=%s" % (part, channelID, key))
+    except urllib.request.HTTPError:
+        print('*--- next key setting & restart ---*')
+        key_index += 1
+        key_index %= len(key_list)
+        return get_channel_info(channelID)
     string = response.read().decode('utf-8')
     json_obj = json.loads(string)
     info_obj = json_obj["items"][0]
@@ -230,7 +275,8 @@ def get_growth_list(channel_id):
     options.add_argument('--no-sandbox')
     options.add_argument('--headless')
     options.add_argument('--disable-dev-shm-usage')
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko")
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko")
     driver = webdriver.Chrome('./chromedriver', options=options)
 
     url = 'https://socialblade.com/youtube/channel/' + channel_id + '/monthly'
@@ -267,14 +313,17 @@ def get_growth_list(channel_id):
                     data['recordDate'] = line
                     cnt += 1
                 else:
-                    x = line.replace('+', "").replace(",", "").replace('--', '0').replace('LIVE', '')
+                    x = line.replace('+', "").replace(",",
+                                                      "").replace('--', '0').replace('LIVE', '')
                     total_stars = 0
                     if 'K' in x:
                         if len(x) > 1:
-                            total_stars = float(x.replace('K', '')) * 1000  # convert k to a thousand
+                            # convert k to a thousand
+                            total_stars = float(x.replace('K', '')) * 1000
                     elif 'M' in x:
                         if len(x) > 1:
-                            total_stars = float(x.replace('M', '')) * 1000000  # convert M to a million
+                            # convert M to a million
+                            total_stars = float(x.replace('M', '')) * 1000000
                     else:
                         total_stars = int(x)  # Less than 1000
                     if cnt == 2:
@@ -292,15 +341,26 @@ def get_growth_list(channel_id):
     return orm
 
 
-def get_video_list(key, uploads_id):
+def get_video_list(uploads_id):
+    global key_list
+    global key_index
+    key = key_list[key_index]
     video_id_lists = []
     page_token = ''
     base_url = "https://www.googleapis.com/youtube/v3/playlistItems"
     while True:
-        url = base_url + "?playlistId=%s&key=%s&part=snippet&maxResults=50" % (uploads_id, key)
+        url = base_url + \
+            "?playlistId=%s&key=%s&part=snippet&maxResults=50" % (
+                uploads_id, key)
         if page_token != '':
             url += "&pageToken=" + page_token
-        response = urllib.request.urlopen(url)
+        try:
+            response = urllib.request.urlopen(url)
+        except urllib.request.HTTPError:
+            print('*--- next key setting & restart ---*')
+            key_index += 1
+            key_index %= len(key_list)
+            return get_video_list(uploads_id)
         string = response.read().decode('utf-8')
         json_objs = json.loads(string)
         for obj in json_objs['items']:
@@ -376,12 +436,22 @@ TOPICS = {
 
 
 def get_video_detail(video_id):
+    global key_list
+    global key_index
+    key = key_list[key_index]
     # snippet으로 가져오는 정보: 유튜버, 제목, 설명, 게시일, 카테고리, 태그, 섬네일
     # statistics로 가져오는 정보: 조회수, 댓글 수, 좋아요 수, 싫어요 수
     # topicdetails로 가져오는 정보: 토픽
     part = 'snippet,statistics,topicDetails'
-    url = 'https://www.googleapis.com/youtube/v3/videos?part={}&id={}&key={}'.format(part, video_id, config('GOOGLEAPIKEY'))
-    response = urlopen(url).read().decode('utf-8')
+    url = 'https://www.googleapis.com/youtube/v3/videos?part={}&id={}&key={}'.format(
+        part, video_id, key)
+    try:
+        response = urlopen(url).read().decode('utf-8')
+    except:
+        print('*--- next key setting & restart ---*')
+        key_index += 1
+        key_index %= len(key_list)
+        return get_video_detail(video_id)
     res_dict = json.loads(response).get('items')[0]
 
     topic = []
@@ -440,10 +510,140 @@ def get_video_detail(video_id):
     return video
 
 
+def get_news_list(youtuber, category, last_updated_date):
+    # 기본, 게임, 엔터테인먼트, 뷰티, 스포츠, 먹망, 키즈, 동물, 일상, IT
+    NECESSARY_WORD = [
+        ['유튜브', '유튜버', '유투버', '채널'],
+        ['게임', 'game'],
+        ['엔터테인먼트', '예능', 'entertainment'],
+        ['뷰티', '화장', '패션'],
+        ['운동', 'Sports', '스포츠', '헬스'],
+        ['먹방', '음식', '푸드', 'Food'],
+        ['키즈', '어린이', 'Kids'],
+        ['동물', '애니멀', 'Animal'],
+        ['일상', '브이로그', 'V-log', 'Vlog'],
+        ['IT', 'SW', '소프트웨어', '기술', '신제품', '노트북', '컴퓨터', '시스템', '스마트폰', '무선']
+    ]
+
+    MONTH = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May',
+             'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    YOUTUBER = youtuber  # DB 에서 yno 에 해당하는 channelName or youtubeName 을 입력
+    CATEGORY = [2]  # 해당 유튜버의 카테고리가 게임과 엔터테인먼트
+
+    URL = 'https://openapi.naver.com/v1/search/news.json?'
+    params = {
+        'query': YOUTUBER,
+        'display': 100,
+        'start': 1,
+        'sort': 'date'
+    }
+
+    headers = {
+        'X-Naver-Client-Id': config('X_NAVER_CLIENT_ID'),
+        'X-Naver-Client-Secret': config('X_NAVER_CLIENT_SECRET'),
+    }
+
+    category_keyword = NECESSARY_WORD[0]
+    for num in CATEGORY:
+        category_keyword += NECESSARY_WORD[num]
+
+    # 만약 last updatedDate 가 2019-03-15 면 3월 15일 이후의 기사만 가져와야함
+    updated_date = datetime.datetime(2019, 3, 15)
+    news_list = []
+    while True:
+        response = requests.get(
+            URL, params=params, headers=headers).text  # str type
+        total = json.loads(response)["total"]
+        newses = json.loads(response)["items"]
+
+        for news in newses:
+            is_correct = False
+            date = datetime.datetime(int(news["pubDate"][12:16]), MONTH.index(
+                news["pubDate"][8:11]), int(news["pubDate"][5:7]))
+
+            # 업데이트되어있는 기사는 추가하지 않음
+            if (date - updated_date).days < 0:
+                break
+
+            # Description 에 특정 키워드가 없는 기사는 추가하지 않음
+            for keyword in category_keyword:
+                if keyword in news["description"]:
+                    is_correct = True
+                    break
+            if not is_correct:
+                continue
+
+            new_news = {
+                'newsLink': news["link"],
+                'newsTitle': news["title"],
+                'newsDescription': news["description"],
+                'newsDate': str(date)[:10]
+            }
+            news_list.append(new_news)
+        if params['start'] >= min(1000, total):
+            break
+        params['start'] += params['display']
+
+
+CANO_MAPPING = {
+    '2': 9,
+    '10': 2,
+    '15': 7,
+    '17': 4,
+    '19': 8,
+    '20': 1,
+    '23': 2,
+    '25': 8,
+    '26': 3,
+    '27': 6,
+    '28': 9,
+    '29': 8
+}
+
+
+def get_our_cano(ycano_list, video_detail_list):
+    print('* ycano_list : ', ycano_list, len(video_detail_list))
+    our_list = []
+    for ycano in ycano_list:
+        print('**', ycano)
+        if str(ycano) in list(CANO_MAPPING.keys()):
+            if CANO_MAPPING[str(ycano)] not in our_list:
+                our_list.append(CANO_MAPPING[str(ycano)])
+                print('***', CANO_MAPPING[str(ycano)], '추가')
+        elif ycano == 1 or ycano == 24:
+            count = 0
+            for video_detail in video_detail_list:
+                if 'kids' in video_detail['videoName'] or '키즈' in video_detail['videoName'] or '어린이' in video_detail['videoName']:
+                    count += 1
+            print('**ycano: 1 or 24:', count)
+            if count >= len(video_detail_list) * 0.2:
+                if 6 not in our_list:
+                    our_list.append(6)
+            else:
+                if 2 not in our_list:
+                    our_list.append(2)
+        elif ycano == 22:
+            count = 0
+            for video_detail in video_detail_list:
+                if 'mukbang' in video_detail['videoName'] or '먹방' in video_detail['videoName'] \
+                        or '음식' in video_detail['videoName'] or 'food' in video_detail['videoName'] or '맛있' in video_detail['videoName']:
+                    count += 1
+            print('**ycano : 22 :', count)
+            if count >= len(video_detail_list) * 0.2:
+                if 5 not in our_list:
+                    our_list.append(5)
+            else:
+                if 8 not in our_list:
+                    our_list.append(8)
+        else:
+            if 0 not in our_list:
+                our_list.append(0)
+    return our_list
+
+
 def update_youtuber(request, yno):
     return HttpResponse(yno)
 
 
 def add_video(request, videoId):
     pass
-

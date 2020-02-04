@@ -21,13 +21,7 @@ MONTH = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct
 YOUTUBER = 'workman'    # DB 에서 yno 에 해당하는 channelName or youtubeName 을 입력
 CATEGORY = [2]     # 해당 유튜버의 카테고리가 게임과 엔터테인먼트
 
-
-NEWS_URL = 'https://openapi.naver.com/v1/search/news.json?'
-BLOG_URL = 'https://openapi.naver.com/v1/search/blog.json?'
-CAFE_URL = 'https://openapi.naver.com/v1/search/cafearticle.json?'
-WEB_URL = 'https://openapi.naver.com/v1/search/webkr.json?'
-
-URL = NEWS_URL
+URL = 'https://openapi.naver.com/v1/search/news.json?'
 params = {
     'query': YOUTUBER,
     'display': 100,
@@ -46,7 +40,7 @@ for num in CATEGORY:
 
 # 만약 last updatedDate 가 2019-03-15 면 3월 15일 이후의 기사만 가져와야함
 updatedDate = datetime.datetime(2019, 3, 15)
-
+news_list = []
 while True:
     response = requests.get(URL, params=params, headers=headers).text  # str type
     total = json.loads(response)["total"]
@@ -74,7 +68,7 @@ while True:
             'newsDescription': news["description"],
             'newsDate': str(date)[:10]
         }
-        print(newNews)
+        news_list.append(newNews)
     if params['start'] >= min(1000, total):
         break
     params['start'] += params['display']
