@@ -10,7 +10,6 @@
 - snippets: 유튜버 화면 재생목록
 - id: 재생목록 아이디만 가져옴
 
-
 ### playlistitems
 - contentDetails: 특정 플레이리스트에 해당하는 모든 영상을 가져옴
 

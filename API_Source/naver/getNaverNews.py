@@ -3,36 +3,35 @@ import requests
 from decouple import config
 import datetime
 
-# 기본, 게임, 엔터테인먼트, 뷰티, 스포츠, 먹망, 키즈, 동물, 일상, IT
+# 기본, 게임, 엔터테인먼트, 뷰티, 스포츠, 먹방, 키즈, 동물, 일상, IT
 NECESSARY_WORD = [
-    ['유튜브', '유튜버', '유투버', '채널'],
-    ['게임', 'game'],
-    ['엔터테인먼트', '예능', 'entertainment'],
-    ['뷰티', '화장', '패션'],
-    ['운동', 'Sports', '스포츠', '헬스'],
-    ['먹방', '음식', '푸드', 'Food'],
-    ['키즈', '어린이', 'Kids'],
-    ['동물', '애니멀', 'Animal'],
-    ['일상', '브이로그', 'V-log', 'Vlog'],
-    ['IT', 'SW', '소프트웨어', '기술', '신제품', '노트북', '컴퓨터', '시스템', '스마트폰', '무선']
+    ['유튜브', '유튜버', '유투버', '채널'], # 기본
+    ['게임', 'game'], # 게임
+    ['엔터테인먼트', '예능', 'entertainment'], # 엔터테인먼트
+    ['뷰티', '화장', '패션'], # 뷰티
+    ['운동', 'Sports', '스포츠', '헬스'], # 스포츠
+    ['먹방', '음식', '푸드', 'Food'], # 먹방
+    ['키즈', '어린이', 'Kids'], # 키즈
+    ['동물', '애니멀', 'Animal'], # 동물
+    ['일상', '브이로그', 'V-log', 'Vlog'], # 일상
+    ['IT', 'SW', '소프트웨어', '기술', '신제품', '노트북', '컴퓨터', '시스템', '스마트폰', '무선'] # IT
 ]
 
 MONTH = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 YOUTUBER = 'workman'    # DB 에서 yno 에 해당하는 channelName or youtubeName 을 입력
 CATEGORY = [2]     # 해당 유튜버의 카테고리가 게임과 엔터테인먼트
 
-
 NEWS_URL = 'https://openapi.naver.com/v1/search/news.json?'
 BLOG_URL = 'https://openapi.naver.com/v1/search/blog.json?'
 CAFE_URL = 'https://openapi.naver.com/v1/search/cafearticle.json?'
-WEB_URL = 'https://openapi.naver.com/v1/search/webkr.json?'
 
 URL = NEWS_URL
+
 params = {
     'query': YOUTUBER,
-    'display': 100,
-    'start': 1,
-    'sort': 'date'
+    'display': 100,  # 10 ~ 100
+    'start': 1,  # 1 ~ 1000
+    'sort': 'date' # sim 유사도순, date 날짜순
 }
 
 headers = {
@@ -40,7 +39,8 @@ headers = {
     'X-Naver-Client-Secret': config('X_NAVER_CLIENT_SECRET'),
 }
 
-category_keyword = NECESSARY_WORD[0]
+category_keyword = NECESSARY_WORD[4]
+
 for num in CATEGORY:
     category_keyword += NECESSARY_WORD[num]
 
@@ -78,3 +78,4 @@ while True:
     if params['start'] >= min(1000, total):
         break
     params['start'] += params['display']
+
