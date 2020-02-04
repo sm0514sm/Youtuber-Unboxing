@@ -57,6 +57,8 @@
 <script>
 import { mapGetters } from "vuex";
 import Constant from "../vuex/Constant";
+import EventBus from "../components/eventBus"
+
 
 export default {
   components: {},
@@ -75,12 +77,17 @@ export default {
     onClikcedinsertCompare : function(yno,channelName) {
       var output = localStorage.getItem("compareYoutuber");		
       var arr = JSON.parse(output);
-
+      // if(arr.length > 2){
+      //   alert("더이상 비교할 수 있는 유튜버를 넣을 수 없습니다.");
+      // }
+      if(typeof(arr) == "undefined" || arr == null){
+        arr = [];
+      }
+      
       arr.push({"yno" : yno , "channelName" : channelName})
-      console.log(arr);
-
       localStorage.setItem("compareYoutuber", JSON.stringify(arr));
-      console.log(yno+"*******************"+channelName+" "+localStorage.getItem('compareYoutuber'))
+      
+      EventBus.$emit("changeCompareYoutuber")
     }
   },
   mounted() {

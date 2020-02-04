@@ -2,6 +2,7 @@ import mainPage from "./views/mainPage.vue";
 import categoryPage from "./views/categoryPage.vue";
 import youtuberPage from "./views/youtuberPage.vue";
 import searchPage from "./views/searchPage.vue";
+import comparePage from "./views/comparePage.vue";
 
 
 export default [{
@@ -24,6 +25,11 @@ export default [{
         name: "searchPage",
         component: searchPage
     },
+    {
+        path: "/comparePage",
+        name: "comparePage",
+        component: comparePage
+    }
 
 
 ];

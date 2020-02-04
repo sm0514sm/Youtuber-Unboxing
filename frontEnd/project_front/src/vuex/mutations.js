@@ -21,10 +21,6 @@ export default {
     [Constant.SEARCH_YOUTUBER]: (state, payload) => {
         store.state.searchyoutuber = payload.youtubers;
     },
-    [Constant.ADD_COMPAREd_YOUTUBER]: (state, payload) => {
-        console.log("ADD_COMPAREd_YOUTUBER&&&&&&&&&&&&&" + payload.channelName);
-        store.state.compareyoutuber.push(payload.channelName);
-    }
 
 
 };

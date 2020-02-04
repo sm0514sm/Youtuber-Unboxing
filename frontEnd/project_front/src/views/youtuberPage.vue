@@ -3,22 +3,11 @@
     <!-- header -->
     <v-card flat class="pa-0">
       <v-img :src="youtuber.bannerImageLink" class="py-6 lighten-5">
-        <!-- <i class="font-weight-black display-4 jb">YOUTUBER</i> -->
       </v-img>
     </v-card>
 
-    <!-- <v-card>
-      <v-card-title class="justify-center py-6" style="background-color:#cdcdcd ; height : 300px">
-        <i class="font-weight-black display-3" color="red">YOUTUBERPAGE</i>
-      </v-card-title>
-    </v-card>-->
-
     <!-- content -->
     <v-container>
-      <!-- <v-card flat class="pa-0">
-        <v-img :src="youtuber.bannerImageLink" class="py-6 lighten-5">
-        </v-img>
-      </v-card>-->
       <transition appear name="slide-fade">
         <!--기본정보-->
         <v-card class="my-3" outlined flat>

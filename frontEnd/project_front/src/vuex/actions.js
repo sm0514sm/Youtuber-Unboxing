@@ -61,6 +61,6 @@ export default {
             .catch(exp => {
                 alert("GET_YOUTUBER 실패하였습니다\n" + exp);
             });
-    }
+    },
 
 };

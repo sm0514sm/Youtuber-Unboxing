@@ -30,6 +30,7 @@
 
 <script>
   import Constant from"../vuex/Constant";
+  import EventBus from "./eventBus"
   import {
     mapGetters,
     mapState

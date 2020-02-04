@@ -30,10 +30,10 @@ export default {
     };
   },
   created() {
-    var arr = [{"aaaa" : "aaaaa"},{"nnnnn" :"nnnn"}];
+    // var arr = [{"aaaa" : "aaaaa"},{"nnnnn" :"nnnn"}];
 
-    localStorage.setItem("compareYoutuber", JSON.stringify(arr));
-    localStorage.setItem("currentCategory", 0);
+    // localStorage.setItem("compareYoutuber", JSON.stringify(arr));
+    // localStorage.setItem("currentCategory", 0);
 
   }
 };
