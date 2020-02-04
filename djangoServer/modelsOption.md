@@ -17,7 +17,8 @@ $ python manage.py inspectdb > dataServer/models.py
 - priamry_key 옵션을 삭제한다.
   - CategoryYoutuberRelation 클래스의 yno의 옵션 중 `primary_key=True`를 삭제한다.
   - Favorite 클래스의 yno 옵션 중 `primary_key=True`를 삭제한다.
-
+- Growth 클래스의 yno에 옵션을 추가한다.
+  - `related_name="youtuber_growth"`를 추가한다.
 
 
 \# 옵션사항

@@ -165,7 +165,7 @@ class Favorite(models.Model):
 
 class Growth(models.Model):
     gno = models.AutoField(primary_key=True)
-    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno')
+    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno', related_name="youtuber_growth")
     recorddate = models.DateTimeField(db_column='recordDate', blank=True, null=True)  # Field name made lowercase.
     pointsubscriber = models.IntegerField(db_column='pointSubscriber', blank=True, null=True)  # Field name made lowercase.
     difsubscriber = models.IntegerField(db_column='difSubscriber', blank=True, null=True)  # Field name made lowercase.
