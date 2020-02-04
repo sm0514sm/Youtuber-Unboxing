@@ -86,7 +86,7 @@ class Category(models.Model):
 
 
 class CategoryYoutubeRelation(models.Model):
-    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno', primary_key=True)
+    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno')
     cano = models.ForeignKey(Category, models.DO_NOTHING, db_column='cano')
 
     class Meta:
@@ -153,7 +153,7 @@ class DjangoSession(models.Model):
 
 
 class Favorite(models.Model):
-    yno = models.IntegerField(primary_key=True)
+    yno = models.IntegerField()
     usno = models.IntegerField()
     regdate = models.DateField(db_column='regDate', blank=True, null=True)  # Field name made lowercase.
 
