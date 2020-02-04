@@ -16,8 +16,10 @@
     </v-dialog>
 
     <v-dialog v-model="dialog" persistent max-width="600px">
-                <template v-slot:activator="{ on }">
-                        <v-btn class="ma-2" color="indigo" large outlined dark v-on:click="login">test</v-btn>
+                <template>
+                <v-btn href="https://kauth.kakao.com/oauth/authorize?client_id=caca7722fcbd20626b2343a0f5bf4083&redirect_uri=http://localhost:8080/login&response_type=code" target="_blank" @click="login()"> kakao
+                    
+</v-btn>     
 </template>
       <v-card>
         <v-card-title>
@@ -44,16 +46,26 @@
 <script>
 import {
     mapGetters
-} from 'vuex'
-
+} from 'vuex';
+import axios from "axios";
 export default {
     computed: {
-        ...mapGetters(['links'])
+        ...mapGetters(['links']),
     },
     methods: {
         login() {
-            window.location.href = "www.google.com";
-            console.log("!")
+            axios
+				.get('http://localhost:8080/login')
+				.then(response => {
+                    this.info = response.data.data
+                    console.log(response.data.data)
+                    console.log("rest")
+                    })
+				.catch(error=>{
+					console.log(error)
+				})
+				.finally(()=>this.loading=false)
+
         },
         gotoHome(e) {
             e.stopPropagation()

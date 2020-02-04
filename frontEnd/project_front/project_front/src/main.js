@@ -24,6 +24,7 @@ Vue.component('apexchart', VueApexCharts)
 
 
 const router = new Router({
+    mode: 'history',
     routes
 });
 
