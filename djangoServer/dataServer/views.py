@@ -160,7 +160,7 @@ def make_new_youtuber(request, url):
     tmp_ycano_list = Video.objects.filter(yno=yno).values('ycano').annotate(
         total=Count('ycano')).order_by('total').reverse()
     for ycategory in tmp_ycano_list:
-        if ycategory['total'] >= int(channel_info['videoCount']) * 0.14:
+        if ycategory['total'] >= len(video_id_list) * 0.14:
             valid_ycano_list.append(ycategory['ycano'])
     end8_1 = timeit.default_timer() - end7
     print('8-1. calculate valid ycano list : %.2fs' % end8_1)
@@ -175,9 +175,10 @@ def make_new_youtuber(request, url):
         category = Category.objects.get(cano=our_cano)
         print(category.name)
         cy_relation = CategoryYoutubeRelation.objects.create(
-            yno=youtuber,
-            cano=category
+            yno=youtuber.yno,
+            cano=category.cano
         )
+        print('!@#!@#!@#!@#!@#!@#!@#@!')
         cy_relation.save()
     # Todo 8.  community, news 테이블 수집 후 DB 추가
 
@@ -348,6 +349,7 @@ def get_video_list(uploads_id):
     video_id_lists = []
     page_token = ''
     base_url = "https://www.googleapis.com/youtube/v3/playlistItems"
+    cnt = 0
     while True:
         url = base_url + \
             "?playlistId=%s&key=%s&part=snippet&maxResults=50" % (
@@ -369,6 +371,9 @@ def get_video_list(uploads_id):
         if json_objs.get('nextPageToken') is None or json_objs.get('nextPageToken') == '':
             break
         page_token = json_objs.get('nextPageToken')
+        cnt += 1
+        if cnt == 2:
+            break
     return video_id_lists
 
 
