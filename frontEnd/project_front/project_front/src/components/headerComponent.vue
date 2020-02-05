@@ -10,7 +10,7 @@
         
             <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on }">
-                        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">login</v-btn>
+                        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on" :disabled="$session.get('token')==undefined">login</v-btn>
                 </template>
       
     </v-dialog>
@@ -47,18 +47,30 @@ import {
 } from 'vuex';
 export default {
     computed: {
-        ...mapGetters(['links']),
+        ...mapGetters(['links'])
     },
+    
     mounted(){
-        var currentUrl = window.location.pathname;
-        console.log(this)
-        console.log(this.$route)
         console.log(this.$route.query)
-        console.log(currentUrl);
+        var token = this.$route.query.access_Token
+        if(token!=undefined){
+            this.$session.set('token', token)
+            console.log("token:"+this.$session.get('token'))
+        }
+        if(this.$session.get('token')!=undefined){
+            console.log("session:"+this.$session.get('token'))
+        }
     },
     methods: {
         login() {
             window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=caca7722fcbd20626b2343a0f5bf4083&redirect_uri=http://localhost:8080/login&response_type=code"
+        },
+        isDisabled(){
+            if(this.$session.get('token')!=undefined){
+                console.log('hide')
+                return true;
+            }
+            return false;
         },
         gotoHome(e) {
             e.stopPropagation()
@@ -113,6 +125,7 @@ export default {
     },
     creted() {
         this.headerColor = "#00000000"
+        
     }
 
 

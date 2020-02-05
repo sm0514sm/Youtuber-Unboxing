@@ -10,6 +10,7 @@ import AxiosPlugin from 'vue-axios-cors';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueApexCharts from 'vue-apexcharts'
+import VueSession from 'vue-session'
 Vue.use(VueApexCharts)
 Vue.use(AxiosPlugin)
 
@@ -23,6 +24,10 @@ Vue.use(imagePreloader)
 Vue.use(BootstrapVue)
 Vue.component('apexchart', VueApexCharts)
 
+var sessionOptions = {
+    persist: true
+  }
+  Vue.use(VueSession, sessionOptions)
 
 const router = new Router({
     mode: 'history',
