@@ -10,8 +10,8 @@ client_secret = config("NAVER_DATALAB_CLIENT_SECRET")
 
 url = "https://openapi.naver.com/v1/datalab/search";
 
-startDate = '2019-01-01'
-endDate = '2019-12-31'
+startDate = '2019-01-01' # 현재부터 1년 전
+endDate = '2019-12-31' # 현재 날짜
 timeUnit = 'week'
 keyword = '피지컬갤러리'
 
@@ -43,7 +43,8 @@ if(rescode==200):
     response_body = response.read().decode('utf-8')
     data = json.loads(response_body).get('results')[0].get('data') 
     data = {'data': data} 
-    insert_data = json.dumps(data) # insert_data를 DB data에 담는다.
-    print(len(insert_data))
+    result = json.dumps(data) # result를 DB data에 담는다.
+    # print(len(result))
+    pprint(result)
 else:
     print("Error Code:" + rescode)

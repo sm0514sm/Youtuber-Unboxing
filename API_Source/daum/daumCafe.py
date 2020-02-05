@@ -7,14 +7,14 @@ from pprint import pprint
 
 
 API_KEY = config('DAUM_API_KEY')
-youtuber = 7 # 유튜버 고유번호
+youtuber = 5 # 유튜버 고유번호
 
 
 params = {
     'query': '피지컬갤러리',
     'sort': 'recency',
     'page': 1,
-    'size': 30,
+    'size': 50,
 }
 
 headers = {
@@ -49,8 +49,12 @@ if (response.status_code == 200):
         except:
             print('error')
             continue
-    # 날짜까지 계산
+        
+    # 날짜까지 계산해야 한다.
     print(DB_list)
+    
+    
+    ##### 파일로 저장
     # PATH = 'daumCafeExample.json'
     # with open("{}".format(PATH), 'w', encoding='utf-8-sig') as file:
     #     json.dump(DB_list, file, indent="\t", ensure_ascii=False)

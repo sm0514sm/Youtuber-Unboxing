@@ -34,15 +34,18 @@ params = {
     'sort': 'date' # sim 유사도순, date 날짜순
 }
 
+
 headers = {
     'X-Naver-Client-Id': config('X_NAVER_CLIENT_ID'),
     'X-Naver-Client-Secret': config('X_NAVER_CLIENT_SECRET'),
 }
 
-category_keyword = NECESSARY_WORD[4]
+category_keyword = NECESSARY_WORD[0]
 
 for num in CATEGORY:
     category_keyword += NECESSARY_WORD[num]
+
+# print('Category Keywords:', category_keyword)
 
 # 만약 last updatedDate 가 2019-03-15 면 3월 15일 이후의 기사만 가져와야함
 updatedDate = datetime.datetime(2019, 3, 15)
@@ -51,6 +54,10 @@ while True:
     response = requests.get(URL, params=params, headers=headers).text  # str type
     total = json.loads(response)["total"]
     newses = json.loads(response)["items"]
+
+############# 파일로 출력
+##### with open("work_getNaverNews.json", 'w', encoding='utf-8-sig') as file: 
+#####     json.dump(json.loads(response), file, indent="\t", ensure_ascii=False)
 
     for (index, news) in enumerate(newses):
         isCorrect = False
@@ -74,8 +81,9 @@ while True:
             'newsDescription': news["description"],
             'newsDate': str(date)[:10]
         }
+        #### 새로운 뉴스를 더하자
         print(newNews)
-    if params['start'] >= min(1000, total):
+    if params['start'] >= min(200, total):
         break
     params['start'] += params['display']
 
