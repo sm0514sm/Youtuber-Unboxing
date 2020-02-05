@@ -101,6 +101,27 @@ export default {
 
             })
         );
+    },
+
+    [Constant.INSERT_YOUTUBUER]: (store, payload) => {
+        //통신하기
+        console.log("INSERT_YOUTUBUER" + payload.address)
+
+        //통신하고 완료되면 then 
+        //code
+        var code = Math.floor(Math.random() * (2 + 11) - 11);
+
+        //yno
+        var yno = 45
+        code = 0
+
+        var callback = payload.callback
+        setTimeout(function() {
+            callback(code, yno)
+        }, 2000)
+
+
+
     }
 
 };

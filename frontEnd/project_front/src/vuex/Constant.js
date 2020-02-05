@@ -6,5 +6,6 @@ export default {
     GET_YOUTUBER: "getyoutuber",
     SEARCH_YOUTUBER: "searchyoutuber",
     ADD_COMPARED_YOUTUBER: "addcomparedyoutuber",
-    GET_COMPARE_YOUTUBER: "getcompareyoutuber"
+    GET_COMPARE_YOUTUBER: "getcompareyoutuber",
+    INSERT_YOUTUBUER: "insertyoutbuer",
 };

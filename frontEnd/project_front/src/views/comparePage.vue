@@ -85,12 +85,12 @@ export default {
   name: "comparePage",
   beforecreated() {},
   created() {
-    this.$vuetify.goTo(0);
-    var output = localStorage.getItem("compareYoutuber");
+    this.$vuetify.goTo(0);Item("compareYoutuber");
     var arr = JSON.parse(output);
     var list = [];
     list.push(arr[0]);
     list.push(arr[1]);
+    var output = localStorage.get
     this.youtubers = list;
   },
   mounted() {
