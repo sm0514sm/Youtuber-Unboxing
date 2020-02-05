@@ -6,11 +6,12 @@ import store from "./vuex/store";
 import vuetify from './plugins/vuetify';
 import imagePreloader from 'vue-image-preloader'
 import BootstrapVue from 'bootstrap-vue'
+import AxiosPlugin from 'vue-axios-cors';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueApexCharts from 'vue-apexcharts'
 Vue.use(VueApexCharts)
-
+Vue.use(AxiosPlugin)
 
 
 

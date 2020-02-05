@@ -16,10 +16,8 @@
     </v-dialog>
 
     <v-dialog v-model="dialog" persistent max-width="600px">
-                <template>
-                <v-btn href="https://kauth.kakao.com/oauth/authorize?client_id=caca7722fcbd20626b2343a0f5bf4083&redirect_uri=http://localhost:8080/login&response_type=code" target="_blank" @click="login()"> kakao
-                    
-</v-btn>     
+                <template v-slot:activator="{ on }">
+                <v-btn class="ma-2" color="indigo" large outlined dark @click="login()"> kakao</v-btn>     
 </template>
       <v-card>
         <v-card-title>
@@ -47,25 +45,20 @@
 import {
     mapGetters
 } from 'vuex';
-import axios from "axios";
 export default {
     computed: {
         ...mapGetters(['links']),
     },
+    mounted(){
+        var currentUrl = window.location.pathname;
+        console.log(this)
+        console.log(this.$route)
+        console.log(this.$route.query)
+        console.log(currentUrl);
+    },
     methods: {
         login() {
-            axios
-				.get('http://localhost:8080/login')
-				.then(response => {
-                    this.info = response.data.data
-                    console.log(response.data.data)
-                    console.log("rest")
-                    })
-				.catch(error=>{
-					console.log(error)
-				})
-				.finally(()=>this.loading=false)
-
+            window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=caca7722fcbd20626b2343a0f5bf4083&redirect_uri=http://localhost:8080/login&response_type=code"
         },
         gotoHome(e) {
             e.stopPropagation()
