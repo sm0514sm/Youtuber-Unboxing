@@ -67,31 +67,29 @@ TOPICS = {
 }
 
 
-def make_video_table(videoId):
+def make_video_table(video_id):
     # snippet으로 가져오는 정보: 유튜버, 제목, 설명, 게시일, 카테고리, 태그, 섬네일
     # statistics로 가져오는 정보: 조회수, 댓글 수, 좋아요 수, 싫어요 수
     # topicdetails로 가져오는 정보: 토픽
     part = 'snippet,statistics,topicDetails'
-    URL = 'https://www.googleapis.com/youtube/v3/videos?part={}&id={}&key={}'.format(part, videoId, config('GOOGLEAPIKEY'))
-    response = urlopen(URL).read().decode('utf-8')
+    url = 'https://www.googleapis.com/youtube/v3/videos?part={}&id={}&key={}'.format(part, video_id, config('GOOGLEAPIKEY'))
+    response = urlopen(url).read().decode('utf-8')
     res_dict = json.loads(response).get('items')[0]    
-    
     
     topic = []
     if res_dict.get('topicDetails'):
-        topicId = res_dict.get('topicDetails').get('topicIds')
-        if topicId:
-            topic += topicId
-        relevantTopicId = res_dict.get('topicDetails').get('relevantTopicIds')
-        if relevantTopicId:
-            topic += relevantTopicId 
+        topic_id = res_dict.get('topicDetails').get('topicIds')
+        if topic_id:
+            topic += topic_id
+        relevant_topic_id = res_dict.get('topicDetails').get('relevantTopicIds')
+        if relevant_topic_id:
+            topic += relevant_topic_id
     
     topic = list(set(topic))
     
     topic_result = []
     for result in topic:
         topic_result.append(TOPICS.get(result))
-        print(topic_result)
     
     try:
         tags = ','.join(res_dict.get('snippet').get('tags'))
@@ -103,9 +101,8 @@ def make_video_table(videoId):
     except:
         topic = ''
 
-
     video = {
-        'vno': videoId,
+        'vno': video_id,
         'yno': res_dict.get('snippet').get('channelId'),
         'videoName': res_dict.get('snippet').get('title'),
         'videoDescription': res_dict.get('snippet').get('description'),
@@ -114,15 +111,18 @@ def make_video_table(videoId):
         'good': res_dict.get('statistics').get('likeCount'),
         'bad': res_dict.get('statistics').get('dislikeCount'),
         'regDate': res_dict.get('snippet').get('publishedAt')[0:10], 
-        'youtubeCategory': res_dict.get('snippet').get('categoryId'),
+        'ycano': res_dict.get('snippet').get('categoryId'),
         'thumbnail': res_dict.get('snippet').get('thumbnails').get('high').get('url'),
         'tags': tags,
         'topic': topic,
     }
     
-    ###### 파일 출력
+    # 파일 출력
     # PATH = 'videoTableTest.json'
     # with open("{}".format(PATH), 'w', encoding='utf-8-sig') as file: 
     #     json.dump(video, file, indent="\t", ensure_ascii=False)
 
     return video
+
+
+print(make_video_table('2oP4ni2ojBU'))
