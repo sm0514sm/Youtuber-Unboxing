@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.model.dto.Growth;
+import com.ssafy.model.dto.Trend;
 import com.ssafy.model.dto.News;
 import com.ssafy.model.dto.Video;
 import com.ssafy.model.dto.Youtuber;
@@ -77,17 +77,17 @@ public class YoutuberRestController {
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("youtuber 관련 커뮤니티 조회")
-	@GetMapping("/youtuber/detail/community/{yno}")
-	public ResponseEntity<Map<String, Object>> searchCommunity(@PathVariable int yno){
-		List<Video> list = youtuberService.searchCommunity(yno);
-		return handleSuccess(list);
-	}
+//	@ApiOperation("youtuber 관련 커뮤니티 조회")
+//	@GetMapping("/youtuber/detail/community/{yno}")
+//	public ResponseEntity<Map<String, Object>> searchCommunity(@PathVariable int yno){
+//		List<Video> list = youtuberService.searchCommunity(yno);
+//		return handleSuccess(list);
+//	}
 	
 	@ApiOperation("youtuber 관련 성장성 데이터 조회")
-	@GetMapping("/youtuber/detail/growth/{yno}")
+	@GetMapping("/youtuber/detail/trend/{yno}")
 	public ResponseEntity<Map<String, Object>> searchGrowth(@PathVariable int yno){
-		List<Growth> list = youtuberService.searchGrowth(yno);
+		List<Trend> list = youtuberService.searchTrend(yno);
 		return handleSuccess(list);
 	}
 	

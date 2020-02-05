@@ -7,8 +7,8 @@
 
 	<!-- 즐겨찾기 추가  -->
 	<insert id="insertFavorite" parameterType="favorite">
-		insert into favorite (yno, usno, regDate)
-		values ( #{yno:INTEGER}, #{usno:INTEGER}, #{regDate:Date})
+		insert into favorite (yno, usno)
+		values ( #{yno:INTEGER}, #{usno:INTEGER})
 	</insert>
 	
 	<!-- 즐겨찾기 삭제 -->

@@ -2,20 +2,20 @@ package com.ssafy.model.dto;
 
 import java.sql.Date;
 
-public class Growth {
-	private int gno;
+public class Trend {
+	private int tno;
 	private int yno;
 	private Date recordDate;
 	private int pointSubscriber;
 	private int difSubscriber;
 	private int pointView;
 	private int difView;
-	
-	public int getGno() {
-		return gno;
+
+	public int getTno() {
+		return tno;
 	}
-	public void setGno(int gno) {
-		this.gno = gno;
+	public void setTno(int tno) {
+		this.tno = tno;
 	}
 	public int getYno() {
 		return yno;

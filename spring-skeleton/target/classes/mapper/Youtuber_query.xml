@@ -82,19 +82,28 @@
 	</select>
 	
 	<!-- 유투버 상세페이지에 보여줄 커뮤니티 검색 / 언급수 높은 순으로 -->
-	<select id="searchCommunity" parameterType="int" resultType="community">
+	<!-- <select id="searchCommunity" parameterType="int" resultType="community">
 		select *
 		from community_youtuber_relation core inner join community c
 		using (cono)
 		where core.yno = #{yno}
 		order by mentionCount desc
-	</select>
+	</select> -->
 	
 	<!-- 유투버 상세페이지에 보여줄 성장성 데이터 / 과거 날짜 순으로 -->
-	<select id="searchGrowth" parameterType="int" resultType="growth">
+	<select id="searchGrowth" parameterType="int" resultType="trend">
 		select *
-		from growth
+		from "trend"
 		where yno = #{yno}
 		order by recordDate asc
+	</select>
+	
+	<!-- 유투버 상세페이지에 보여줄 가장 최근 동영상 정보 + 좋아요 싫어요 비율 정보(goodRatio) / 최근 영상 num개에 대해서 -->
+	<select id="searchGoodBad" parameterType="java.util.Map" resultType="double">
+		select *, (good / (good + bad)) goodRatio
+		from video
+		where yno = #{yno}
+		order by regDate desc
+		limit #{num}
 	</select>
 </mapper>

@@ -8,7 +8,7 @@
 		<typeAlias type="com.ssafy.model.dto.Community"	alias="community"/>
 		<typeAlias type="com.ssafy.model.dto.News"		alias="news"/>
 		<typeAlias type="com.ssafy.model.dto.Video"		alias="video"/>
-		<typeAlias type="com.ssafy.model.dto.Growth"	alias="growth"/>
+		<typeAlias type="com.ssafy.model.dto.Trend"	alias="trend"/>
 		<typeAlias type="com.ssafy.model.dto.User"		alias="user"/>
 		<typeAlias type="com.ssafy.model.dto.Favorite"	alias="favorite"/>
 	</typeAliases>
