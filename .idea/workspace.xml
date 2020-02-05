@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/API_Source/getChannelID.py" line="24" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="ce9a9ce1-0e23-4c6d-99f8-5f4d7d4af4dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/API_Source/getChannelID.py" beforeDir="false" afterPath="$PROJECT_DIR$/API_Source/getChannelID.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API_Source/getChannelInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/API_Source/getChannelInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API_Source/daum/daumCafe.py" beforeDir="false" afterPath="$PROJECT_DIR$/API_Source/daum/daumCafe.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,47 +50,44 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-1372457986">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.3" value="3" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="10" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="10" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/API_Source/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/API_Source/getLatestVideos.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/API_Source/getChannelInfo.py">
+        <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="79" selection-start-line="7" selection-start-column="79" selection-end-line="7" selection-end-column="79" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="342">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/API_Source/getChannelID.py">
+        <entry file="file://$PROJECT_DIR$/API_Source/daum/daumCafe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="25" column="11" lean-forward="true" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1083">
+              <caret line="57" column="49" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -128,6 +121,7 @@
         <option value="$PROJECT_DIR$/API_Source/getLatestVideos.py" />
         <option value="$PROJECT_DIR$/API_Source/getChannelID.py" />
         <option value="$PROJECT_DIR$/API_Source/getChannelInfo.py" />
+        <option value="$PROJECT_DIR$/API_Source/daum/daumCafe.py" />
       </list>
     </option>
   </component>
@@ -144,28 +138,34 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="8조프로젝트" type="b2602c69:ProjectViewProjectNode" />
-              <item name="8조프로젝트" type="462c0819:PsiDirectoryNode" />
+              <item name="8 project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="8 project" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="8조프로젝트" type="b2602c69:ProjectViewProjectNode" />
-              <item name="8조프로젝트" type="462c0819:PsiDirectoryNode" />
+              <item name="8 project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="8 project" type="462c0819:PsiDirectoryNode" />
               <item name="API_Source" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="8 project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="8 project" type="462c0819:PsiDirectoryNode" />
+              <item name="API_Source" type="462c0819:PsiDirectoryNode" />
+              <item name="daum" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.spelling" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../study_algorithm" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -185,7 +185,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.getChannelInfo">
+  <component name="RunManager" selected="Python.daumCafe">
+    <configuration name="daumCafe" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="8조프로젝트" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/API_Source/daum" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/API_Source/daum/daumCafe.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="getChannelID" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="8조프로젝트" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -249,27 +270,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="naverNewsAPI (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="8조프로젝트" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/API_Source" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/API_Source/naverNewsAPI.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="to_get_all_description (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="8조프로젝트" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -292,25 +292,25 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.naverNewsAPI (1)" />
       <item itemvalue="Python.to_get_all_description (1)" />
       <item itemvalue="Python.getLatestVideos" />
       <item itemvalue="Python.getChannelID" />
       <item itemvalue="Python.getChannelInfo" />
+      <item itemvalue="Python.daumCafe" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.daumCafe" />
         <item itemvalue="Python.getChannelInfo" />
         <item itemvalue="Python.getChannelID" />
         <item itemvalue="Python.getLatestVideos" />
         <item itemvalue="Python.to_get_all_description (1)" />
-        <item itemvalue="Python.naverNewsAPI (1)" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" BundledDictionaries="5" BundledDictionary0="django.dic" BundledDictionary1="python.dic" BundledDictionary2="pythonExtras.dic" BundledDictionary3="jetbrains.dic" BundledDictionary4="english.dic" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="project-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\multicampus\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -322,22 +322,31 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24609375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.61647725" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.6162311" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32954547" />
-      <window_info anchor="bottom" id="Python Console" order="9" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.31911966" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32954547" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.41403025" />
+      <window_info anchor="bottom" id="Python Console" order="9" weight="0.32954547" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -362,70 +371,26 @@
     <entry file="file://$PROJECT_DIR$/JSONtoDB.py" />
     <entry file="file://$PROJECT_DIR$/getLatestVideos.py" />
     <entry file="file://$PROJECT_DIR$/getChannelID.py" />
-    <entry file="file://$PROJECT_DIR$/API_Source/naverNewsAPI.py">
+    <entry file="file://$PROJECT_DIR$/API_Source/naverNewsAPI.py" />
+    <entry file="file://$PROJECT_DIR$/API_Source/to_get_all_description.py" />
+    <entry file="file://$PROJECT_DIR$/API_Source/8조 프로젝트.md" />
+    <entry file="file://$PROJECT_DIR$/API_Source/API정보.md" />
+    <entry file="file://$PROJECT_DIR$/API_Source/JSONtoDB.py" />
+    <entry file="file://$PROJECT_DIR$/API_Source/getLatestVideos.py" />
+    <entry file="file://$PROJECT_DIR$/API_Source/getChannelID.py" />
+    <entry file="file://$PROJECT_DIR$/API_Source/getChannelInfo.py" />
+    <entry file="file://$PROJECT_DIR$/API_Source/.env" />
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="32" column="58" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="58" />
+        <state relative-caret-position="342">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/API_Source/.env">
+    <entry file="file://$PROJECT_DIR$/API_Source/daum/daumCafe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API_Source/to_get_all_description.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API_Source/8조 프로젝트.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API_Source/API정보.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API_Source/JSONtoDB.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API_Source/getLatestVideos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API_Source/getChannelID.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="25" column="11" lean-forward="true" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API_Source/getChannelInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="79" selection-start-line="7" selection-start-column="79" selection-end-line="7" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1083">
+          <caret line="57" column="49" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="49" />
         </state>
       </provider>
     </entry>
