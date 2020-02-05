@@ -1,6 +1,6 @@
 DB 수정이 발생했을 경우 해당 사항을 models.py에 적용시킬 수 있다.
 
-먼저 `djangoServer` 디렉터리로 bash 실행 위치를 이동하괘
+먼저 `djangoServer` 디렉터리로 bash 실행 위치를 이동하고
 
 아래의 명령어를 입력한다.
 
@@ -23,5 +23,5 @@ $ python manage.py inspectdb > dataServer/models.py
 
 \# 옵션사항
 
-- `on_delete=models.CASCADE` 를 추가한다.
+- `on_delete=models.CASCADE`  추가 여부 (현재는 DB 자체 옵션으로 실행 중)
 
