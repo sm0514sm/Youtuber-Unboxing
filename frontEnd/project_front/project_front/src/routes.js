@@ -2,6 +2,7 @@ import mainPage from "./views/mainPage.vue";
 import categoryPage from "./views/categoryPage.vue";
 import youtuberPage from "./views/youtuberPage.vue";
 import searchPage from "./views/searchPage.vue";
+import memberPage from "./views/memberPage.vue";
 
 
 export default [{
@@ -23,6 +24,11 @@ export default [{
         path: "/searchPage",
         name: "searchPage",
         component: searchPage
+    },
+    {
+        path: "/memberPage",
+        name: "memberPage",
+        component: memberPage
     },
 
 

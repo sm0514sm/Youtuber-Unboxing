@@ -4,40 +4,30 @@
 
         <v-spacer />
         <v-text-field class="ma-2" append-icon="mdi-magnify" flat hide-details solo-inverted style="max-width: 300px; " @keyup.enter="search" v-model="searchWord" :key="$route.fullPath" />
+        <v-img v-if="!loginStatus" :src="require('@/assets/kakao.png')" class="" contain height="100" width="100" max-width="100" @click="login()"/>
 
-
-
-        
-            <v-dialog v-model="dialog" persistent max-width="600px">
-                <template v-slot:activator="{ on }">
-                        <v-btn v-if="isDisabled" class="ma-2" color="indigo" large outlined dark v-on="on">MY INFO</v-btn>
-                        <v-btn v-else class="ma-2" color="indigo" large outlined dark @click="login()"> kakao</v-btn>
-                </template>
-      
-    </v-dialog>
-
-    <v-dialog v-model="dialog" persistent max-width="600px">
-                <template v-if="isDisabled" v-slot:activator="{ on }">
-                <v-btn class="ma-2" color="indigo" large outlined dark @click="logout()"> logout</v-btn>     
-</template>
-      <v-card>
-        <v-card-title>
-          <span class="headline">LoginModal</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            회원가입 해보렴
-          </v-container>
-          <small>*indicates required field</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  
+        <v-dialog v-model="dialog" persistent max-width="600px">
+            <template v-if="loginStatus" v-slot:activator="{ on }">  
+                <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">LOGOUT</v-btn>
+                <v-btn class="ma-2" color="indigo" large outlined dark @click="gotoMember()">MY INFO</v-btn>
+            </template>
+            <v-card>
+            <v-card-title>
+                <span class="headline">LogoutModal</span>
+            </v-card-title>
+            <v-card-text>
+                <v-container>
+                정말로 로그아웃 하겠습니까?
+                </v-container>
+                <small>*indicates required field</small>
+            </v-card-text>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="dialog = false">No</v-btn>
+                <v-btn color="blue darken-1" text @click="logout()">Yes</v-btn>
+            </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-app-bar>
 </template>
 
@@ -46,46 +36,53 @@
 import {
     mapGetters
 } from 'vuex';
-import axios from "axios";
+// import axios from "axios";
 export default {
     computed: {
         ...mapGetters(['links'])
     },
     
     mounted(){
+        console.log("loginStatus:"+this.loginStatus)
+        console.log(this.$session)
+        if (!this.$session.exists()) {
+            this.loginStatus=false
+            console.log("no session")
+        }
         console.log(this.$route.query)
         var token = this.$route.query.access_Token
         if(token!=undefined){
             this.$session.start()
             this.$session.set('token', token)
+            this.loginStatus=true
             console.log("token:"+this.$session.get('token'))
-        }
-        if(this.$session.get('token')!=undefined){
-            console.log("session:"+this.$session.get('token'))
+            this.$router.push('/')
         }
     },
     methods: {
+        gotoMember(){
+            this.$router.push("/memberPage");
+        },
         login() {
-            window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=caca7722fcbd20626b2343a0f5bf4083&redirect_uri=http://localhost:8080/login&response_type=code"
+            window.location.href = "https://accounts.kakao.com/login?continue=https%3a%2f%2fkauth.kakao.com%2foauth%2fauthorize%3fclient_id%3dcaca7722fcbd20626b2343a0f5bf4083%26redirect_uri%3dhttp%3a%2f%2flocalhost%3a8080%2flogin%26response_type%3dcode"
         },
         logout(){
-
-            axios.get('localhost:8080/logout')
-            .then(response=>{
-                console.log(response)
-                this.$session.destroy()
-                let query  = Object.assign({}, this.$route.path)
-                console.log(query)
-                this.$router.push({ query })
-            }).catch(err=>{
-                console.log(err)
-            })
+            this.$session.destroy()
+            window.location.reload()
+            
+            // axios.get('localhost:8080/logout')
+            // .then(response=>{
+            //     console.log(response)
+            //     this.$session.destroy()
+            //     let query  = Object.assign({}, this.$route.path)
+            //     console.log(query)
+            //     this.$router.push({ query })
+            // }).catch(err=>{
+            //     console.log(err)
+            // })
         },
         isDisabled(){
-            if(this.$session.get('token')!=undefined){
-                return true;
-            }
-            return false;
+            return true;
         },
         gotoHome(e) {
             e.stopPropagation()
@@ -132,6 +129,7 @@ export default {
     },
     data() {
         return {
+            loginStatus: true,
             searchWord: "",
             dialog: false,
             headerColor: "transparent"
