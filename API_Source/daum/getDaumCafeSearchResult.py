@@ -19,9 +19,6 @@ NECESSARY_WORD = [
     ['IT', 'SW', '소프트웨어', '기술', 'technology', '신제품', '노트북', '컴퓨터', '시스템', '스마트폰', '무선', '과학'],  # 9
 ]
 
-# API_KEY를 더 넣도록 합시다.
-API_KEYS = [config('DAUM_API_KEY'), 'temporary_key1', 'temporary_key2', 'temporary_key3']
-
 
 def date_is_valid(dateStr): # ex) '2019-03-16'
     global lastUpdate
@@ -34,6 +31,9 @@ def date_is_valid(dateStr): # ex) '2019-03-16'
 
 def get_daumCafe_search_result(YOUTUBER):
     global lastUpdate
+    # API_KEY를 더 넣도록 합시다.
+    API_KEYS = [config('DAUM_API_KEY'), 'temporary_key1', 'temporary_key2', 'temporary_key3']
+    
     ######### YOUTUBER를 활용해, searchKeyword, lastUpdate, category 등등을 가져온다.
     youtuber = 5 # 유튜버 객체, 
     searchKeyword = '피지컬갤러리' # 해당 youtuber의 searchKeyword
@@ -47,10 +47,12 @@ def get_daumCafe_search_result(YOUTUBER):
     page = 1
     MORE_PAGES = True
     MORE_DATES = True
-    MAX_page = 6
+    
+    DEFAULT_MAX = 6  # 6이면, 6 * 50 인 300개 검색
+    MAX_page = DEFAULT_MAX
     
     while MORE_PAGES and MORE_DATES:
-        if page == MAX_page:
+        if page >= MAX_page:
             MORE_PAGES = False
         
         params = {
@@ -75,11 +77,9 @@ def get_daumCafe_search_result(YOUTUBER):
             # 모든 API_KEY를 다 썼을 경우
             return "---------- Can't get daum cafe articles since api keys are ran out. ----------"
 
-        MAX_page = min(6, total_count // 50) # 최근 300개만 가져오기 위한 장치
+        MAX_page = min(DEFAULT_MAX, total_count // 50)
 
         documents = response_dict.get('documents')  # 가져온 글들의 모든 목록
-        
-        # Date를 어디에 표시하지? Date가 언제 표시되냐? 한 번 이라도 False가 나오면 그 다음부터는 아예 할 필요도 없지!
         
         if (response.status_code == 200):
             for document in documents:
@@ -96,6 +96,7 @@ def get_daumCafe_search_result(YOUTUBER):
                             }
                             # 여기서 바로 저장
                             # DB에 저장
+                            # objects.save() 가즈아아아아
                             break
                 else:
                     MORE_DATES = False
