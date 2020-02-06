@@ -9,7 +9,6 @@ class updateThread:
 
     def threadOpen(self):
         # 업데이트 로직 넣으면 됨
-        print('hello')
         threading.Timer(86000, self.threadOpen).start()
 
 
