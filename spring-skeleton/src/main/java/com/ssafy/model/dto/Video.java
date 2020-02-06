@@ -19,6 +19,7 @@ public class Video {
 	private String tags;
 	private String thumbnail;
 	private String topic;
+	private double goodRatio;	//좋아요 싫어요 비율 계산을 위한 변수
 	
 	private String krCategory;	//youtube_category 테이블의 컬럼
 	private String enCategory;	//youtube_category 테이블의 컬럼
@@ -118,5 +119,11 @@ public class Video {
 	}
 	public void setEnCategory(String enCategory) {
 		this.enCategory = enCategory;
+	}
+	public double getGoodRatio() {
+		return goodRatio;
+	}
+	public void setGoodRatio(double goodRatio) {
+		this.goodRatio = goodRatio;
 	}
 }

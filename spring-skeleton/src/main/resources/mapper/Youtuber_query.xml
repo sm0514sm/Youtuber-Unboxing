@@ -82,19 +82,63 @@
 	</select>
 	
 	<!-- 유투버 상세페이지에 보여줄 커뮤니티 검색 / 언급수 높은 순으로 -->
-	<select id="searchCommunity" parameterType="int" resultType="community">
+	<!-- <select id="searchCommunity" parameterType="int" resultType="community">
 		select *
 		from community_youtuber_relation core inner join community c
 		using (cono)
 		where core.yno = #{yno}
 		order by mentionCount desc
-	</select>
+	</select> -->
 	
 	<!-- 유투버 상세페이지에 보여줄 성장성 데이터 / 과거 날짜 순으로 -->
-	<select id="searchGrowth" parameterType="int" resultType="growth">
+	<select id="searchTrend" parameterType="int" resultType="trend">
 		select *
-		from growth
+		from "trend"
 		where yno = #{yno}
 		order by recordDate asc
+	</select>
+	
+	<!-- 호감도 / 유투버 상세페이지에 보여줄 가장 최근 동영상 정보 + 좋아요 싫어요 비율 정보(goodRatio) / 최근 영상 num개에 대해서 -->
+	<select id="searchVideoGoodRatio" parameterType="java.util.Map" resultType="video">
+		select *, (good / (good + bad)) goodRatio
+		from video
+		where yno = #{yno} 
+		order by regDate desc
+		limit #{num}
+	</select>
+	
+	<!-- 호감도 / 유투버 상세페이지에 보여줄 최근 num개 동영상에 대한 좋아요 싫어요 비율 정보(goodRatio) -> 총합산비율 하나만 나옴 -->
+	<select id="searchGoodRatio" parameterType="java.util.Map" resultType="double">
+		select sum(good) / sum(bad) as goodRatio
+		from video
+		where yno = #{yno} 
+		order by regDate desc
+		limit #{num}
+	</select>
+	
+	<!-- 활동 지수 / 유투버 상세페이지에 보여줄 최근 N달 간 업로드 한 영상 개수  -->
+	<select id="searchVideoCount" parameterType="java.util.Map" resultType="int">
+		select count(vno) videoCount
+		from video
+		WHERE yno = #{yno} and date(regDate) >= SUBDATE(NOW(), INTERVAL #{term} MONTH)
+	</select>
+	
+	<!-- 활동 지수 / 유투버 상세페이지에 보여줄 주별(or 달별) 영상 개수 / 최근 num 주에 대하여  과거순으로 -->
+	<select id="searchTermVideoCount" parameterType="java.util.Map" resultType="int">
+		select count(*) videoCount
+		from video 
+		where yno=#{yno}
+			and regDate 
+				between date_sub(DATE_ADD(now(), INTERVAL (DAYOFWEEK(now())-1) * -1 DAY), INTERVAL #{num} week) 
+		        and DATE_ADD(now(), INTERVAL (DAYOFWEEK(now())-1) * -1 DAY)
+		group by date_format(regDate, '%y-%u')
+		order by date_format(regDate, '%y-%u') asc;
+		
+		<!-- 이전 코드 (사용X) -->
+		<!-- select count(*) videoCount
+		from video
+		where yno=${yno}
+			and regDate between date_add(NOW(), INTERVAL ${end} WEEK)
+								and date_add(NOW(), INTERVAL ${start} WEEK) -->
 	</select>
 </mapper>

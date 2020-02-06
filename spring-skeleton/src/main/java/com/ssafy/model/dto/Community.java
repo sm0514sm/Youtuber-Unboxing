@@ -3,14 +3,12 @@ package com.ssafy.model.dto;
 import java.sql.Date;
 
 public class Community {
-	//community 테이블 + community_youtuber_relation 테이블의 컬럼을 합쳐놓은 DTO
 	private int cono;
-	private String communityName;
-	private String communityAgeGroup;
-	
-	private int yno;					//community_youtuber_relationg 테이블의 컬럼
-	private int mentionCount;			//community_youtuber_relationg 테이블의 컬럼
-	private Date updateDate;			//community_youtuber_relationg 테이블의 컬럼
+	private int yno;
+	private String articleTitle;
+	private String articleLink;
+	private String articleDescription;
+	private Date articleDate;
 	
 	public int getCono() {
 		return cono;
@@ -18,34 +16,34 @@ public class Community {
 	public void setCono(int cono) {
 		this.cono = cono;
 	}
-	public String getCommunityName() {
-		return communityName;
-	}
-	public void setCommunityName(String communityName) {
-		this.communityName = communityName;
-	}
-	public String getCommunityAgeGroup() {
-		return communityAgeGroup;
-	}
-	public void setCommunityAgeGroup(String communityAgeGroup) {
-		this.communityAgeGroup = communityAgeGroup;
-	}
 	public int getYno() {
 		return yno;
 	}
 	public void setYno(int yno) {
 		this.yno = yno;
 	}
-	public int getMentionCount() {
-		return mentionCount;
+	public String getArticleTitle() {
+		return articleTitle;
 	}
-	public void setMentionCount(int mentionCount) {
-		this.mentionCount = mentionCount;
+	public void setArticleTitle(String articleTitle) {
+		this.articleTitle = articleTitle;
 	}
-	public Date getUpdateDate() {
-		return updateDate;
+	public String getArticleLink() {
+		return articleLink;
 	}
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
+	public void setArticleLink(String articleLink) {
+		this.articleLink = articleLink;
+	}
+	public String getArticleDescription() {
+		return articleDescription;
+	}
+	public void setArticleDescription(String articleDescription) {
+		this.articleDescription = articleDescription;
+	}
+	public Date getArticleDate() {
+		return articleDate;
+	}
+	public void setArticleDate(Date articleDate) {
+		this.articleDate = articleDate;
 	}
 }

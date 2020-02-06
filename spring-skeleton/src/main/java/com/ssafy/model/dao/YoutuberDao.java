@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ssafy.model.dto.Growth;
+import com.ssafy.model.dto.Trend;
 import com.ssafy.model.dto.News;
 import com.ssafy.model.dto.Video;
 import com.ssafy.model.dto.Youtuber;
@@ -18,6 +18,10 @@ public interface YoutuberDao {
 	public List<Youtuber> searchRanking(Map<String, String> condition);
 	public List<News> searchNews(int yno);
 	public List<Video> searchVideo(int yno);
-	public List<Video> searchCommunity(int yno);
-	public List<Growth> searchGrowth(int yno);
+//	public List<Video> searchCommunity(int yno);
+	public List<Trend> searchTrend(int yno);
+	public List<Video> searchVideoGoodRatio(Map<String, Integer> condition);
+	public double searchGoodRatio(Map<String, Integer> condition);
+	public int searchVideoCount(Map<String, Integer> condition);
+	public List<Integer> searchTermVideoCount(Map<String, Integer> condition);
 }
