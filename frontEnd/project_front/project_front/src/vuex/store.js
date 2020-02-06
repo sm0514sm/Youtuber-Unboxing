@@ -71,7 +71,8 @@ const state = {
     isCategoryLoading: false,
     currentCategory: "life",
     youtuber: {},
-    searchyoutuber: []
+    searchyoutuber: [],
+    compareyoutuber: ["aaaaaa", "Bbbbbbbba"]
 };
 
 const getters = {
@@ -91,6 +92,9 @@ const getters = {
     searchyoutuber: state => {
         return state.searchyoutuber
     },
+    compareyoutuber: state => {
+        return state.compareyoutuber
+    }
 }
 
 export default new Vuex.Store({

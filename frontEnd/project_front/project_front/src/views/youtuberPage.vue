@@ -2,23 +2,11 @@
   <div>
     <!-- header -->
     <v-card flat class="pa-0">
-      <v-img :src="youtuber.bannerImageLink" class="py-6 lighten-5">
-        <!-- <i class="font-weight-black display-4 jb">YOUTUBER</i> -->
-      </v-img>
+      <v-img :src="youtuber.bannerImageLink" class="py-6 lighten-5"></v-img>
     </v-card>
-
-    <!-- <v-card>
-      <v-card-title class="justify-center py-6" style="background-color:#cdcdcd ; height : 300px">
-        <i class="font-weight-black display-3" color="red">YOUTUBERPAGE</i>
-      </v-card-title>
-    </v-card>-->
 
     <!-- content -->
     <v-container>
-      <!-- <v-card flat class="pa-0">
-        <v-img :src="youtuber.bannerImageLink" class="py-6 lighten-5">
-        </v-img>
-      </v-card>-->
       <transition appear name="slide-fade">
         <!--기본정보-->
         <v-card class="my-3" outlined flat>
@@ -34,6 +22,9 @@
                 <v-row>
                   <v-col class="pb-0">
                     <p class="font-weight-black thin display-3 ma-0">{{youtuber.channelName}}</p>
+                  </v-col>
+                  <v-col>
+                    <v-btn rounded depressed color="#9CDCF0">임시</v-btn>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -88,7 +79,6 @@
                 height="500"
                 :options="chartOptions"
                 :series="series"
-                :influence="youtuber.influence"
                 id="myapexchart"
                 ref="myDiv"
               ></apexchart>
@@ -107,7 +97,7 @@
                   <v-container>
                     <b-tabs content-class="mt-3" fill>
                       <b-tab title="영향력" active>
-                        <p class="ma-3">I'm the 영향력 tab</p>
+                        <v-icon>info</v-icon>
                       </b-tab>
                       <b-tab title="활동력">
                         <p class="ma-3">I'm the 활동력 tab</p>
@@ -133,8 +123,16 @@
           <v-card outlined flat class="pa-4 pt-0">
             <v-row>
               <v-col class="ma-5 mx-0">
-                <v-list-item-title class="headline font-weight-black mb-1">등급</v-list-item-title>
-                <v-divider></v-divider>
+                <v-list-item-title class="headline font-weight-black mb-1">
+                  등급
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-icon v-on="on">info</v-icon>
+                    </template>
+                    <span>등급산정기준은 뭐라뭐라뭘마ㅝ라입니다</span>
+                  </v-tooltip>
+                </v-list-item-title>
+            <v-divider></v-divider>
               </v-col>
             </v-row>
             <transition appear name="fade">
@@ -224,22 +222,22 @@ export default {
       });
     },
     setGradeColor(str) {
-      if(typeof(str) == "undefined"){
-        return "gray"
+      if (typeof str == "undefined") {
+        return "gray";
       }
-      console.log(str)
-      if(str.startsWith("S") || str.startsWith("A")){
-        return "red"
-      }else if(str.startsWith("B")){
-        return "orange"
-      }else if(str.startsWith("C")){
-        return "yellow"
-      }else if(str.startsWith("D")){
-        return "green"
-      }else if(str.startsWith("E")){
-        return "blue"
-      }else{
-        return "gray"
+      console.log(str);
+      if (str.startsWith("S") || str.startsWith("A")) {
+        return "red";
+      } else if (str.startsWith("B")) {
+        return "orange";
+      } else if (str.startsWith("C")) {
+        return "yellow";
+      } else if (str.startsWith("D")) {
+        return "green";
+      } else if (str.startsWith("E")) {
+        return "blue";
+      } else {
+        return "gray";
       }
     }
   },

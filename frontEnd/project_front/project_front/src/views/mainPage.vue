@@ -14,7 +14,7 @@
             </v-img>
         </v-card>
     
-        <!-- <banner /> -->
+        <banner />
     
         <v-container transition="slide-y-transition">
             <v-layout wrap class="pa-12 ma-10">
@@ -30,11 +30,13 @@
                 </v-flex>
             </v-layout>
         </v-container>
+        <input-component></input-component>
     </div>
 </template>
 
 <script>
-// import banner from "../components/banner";
+import banner from "../components/banner";
+import inputComponent from "../components/inputComponent";
 import {
     mapGetters
 } from 'vuex'
@@ -42,7 +44,8 @@ import {
 
 export default {
     components: { 
-        // banner 
+        inputComponent,
+        banner 
     },
     name: "mainPage",
     methods: {

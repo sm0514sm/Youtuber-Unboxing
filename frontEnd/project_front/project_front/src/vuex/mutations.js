@@ -20,6 +20,7 @@ export default {
     },
     [Constant.SEARCH_YOUTUBER]: (state, payload) => {
         store.state.searchyoutuber = payload.youtubers;
-    }
+    },
+
 
 };

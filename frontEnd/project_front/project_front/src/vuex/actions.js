@@ -1,5 +1,6 @@
 import Constant from "./Constant";
 import http from "./http-common";
+import axios from "axios"
 
 export default {
     [Constant.GET_TEST]: store => {
@@ -61,6 +62,66 @@ export default {
             .catch(exp => {
                 alert("GET_YOUTUBER 실패하였습니다\n" + exp);
             });
+    },
+    [Constant.GET_COMPARE_YOUTUBER]: (store, payload) => {
+
+        var youtuber1 = payload.youtuber1;
+        var youtuber2 = payload.youtuber2;
+        var callback = payload.callback;
+
+        const youtuber1Search = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/" + youtuber1.yno)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        const youtuber2Search = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/" + youtuber2.yno)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        Promise.all([youtuber1Search, youtuber2Search]).then(
+            axios.spread((...responses) => {
+
+                console.log(responses[0], responses[1])
+
+                callback(responses[0], responses[1]);
+
+
+            })
+        );
+    },
+
+    [Constant.INSERT_YOUTUBUER]: (store, payload) => {
+        //통신하기
+        console.log("INSERT_YOUTUBUER" + payload.address)
+
+        //통신하고 완료되면 then 
+        //code
+        var code = Math.floor(Math.random() * (2 + 11) - 11);
+
+        //yno
+        var yno = 45
+        code = 0
+
+        var callback = payload.callback
+        setTimeout(function() {
+            callback(code, yno)
+        }, 2000)
+
+
+
     }
 
 };
