@@ -20,4 +20,8 @@ public interface YoutuberDao {
 	public List<Video> searchVideo(int yno);
 //	public List<Video> searchCommunity(int yno);
 	public List<Trend> searchTrend(int yno);
+	public List<Video> searchVideoGoodRatio(Map<String, Integer> condition);
+	public double searchGoodRatio(Map<String, Integer> condition);
+	public int searchVideoCount(Map<String, Integer> condition);
+	public List<Integer> searchTermVideoCount(Map<String, Integer> condition);
 }

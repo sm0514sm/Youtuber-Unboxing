@@ -97,4 +97,44 @@ public class YoutuberServiceImpl implements YoutuberService {
 			throw new RuntimeException("youtuber 관련 성장성 데이터 조회 중 에러가 발생했습니다.");
 		}
 	}
+
+	@Override
+	public List<Video> searchVideoGoodRatio(Map<String, Integer> condition) {
+		try {
+			return dao.searchVideoGoodRatio(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 호감도 및 영상 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public double searchGoodRatio(Map<String, Integer> condition) {
+		try {
+			return dao.searchGoodRatio(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 호감도 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public int searchVideoCount(Map<String, Integer> condition) {
+		try {
+			return dao.searchVideoCount(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 활동지수 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Integer> searchTermVideoCount(Map<String, Integer> condition) {
+		try {
+			return dao.searchTermVideoCount(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 기간별 활동지수 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
 }

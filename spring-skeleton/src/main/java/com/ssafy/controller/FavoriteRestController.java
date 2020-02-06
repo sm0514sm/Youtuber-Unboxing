@@ -43,6 +43,10 @@ public class FavoriteRestController {
 		Favorite favorite = new Favorite();
 		favorite.setYno(yno);
 		favorite.setUsno(usno);
+//		Map<String, Integer> map = new HashMap<>();
+//		map.put("yno", yno);
+//		map.put("usno", usno);
+		
 //		favorite.setRegDate(date);
 //		System.out.println(date);
 		favoriteService.insertFavorite(favorite); 
