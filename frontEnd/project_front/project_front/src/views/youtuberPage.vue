@@ -211,13 +211,13 @@ export default {
       var chart = this.$refs.myDiv;
       var influence = this.youtuber.influence;
       var activity = this.youtuber.activity;
-      var growth = this.youtuber.growth;
-      var basicStat = this.youtuber.basicStat;
+      var viewCountTrend  = this.youtuber.viewCountTrend;
+      var subscriberCountTrend  = this.youtuber.subscriberCountTrend ;
       var charm = this.youtuber.charm;
 
       chart.appendSeries({
         name: " ",
-        data: [influence, activity, growth, basicStat, charm],
+        data: [influence, activity, viewCountTrend , subscriberCountTrend , charm],
         animation: true
       });
     },
@@ -273,7 +273,7 @@ export default {
           size: 0
         },
         xaxis: {
-          categories: ["영향력", "활동력", "성장력", "기본수치", "매력"],
+          categories: ["영향력", "활동력", "영상조회수증감추이", "구독자증감추이", "호감도"],
           labels: {
             style: {
               fontSize: "20px",

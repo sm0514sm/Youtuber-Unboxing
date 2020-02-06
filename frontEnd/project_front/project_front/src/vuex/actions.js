@@ -119,6 +119,90 @@ export default {
         setTimeout(function() {
             callback(code, yno)
         }, 2000)
+    },
+
+    [Constant.GET_MANYTOP5]: (store, payload) => {
+        console.log("GET_MANYTOP5")
+        var callback = payload.callback;
+        console.log(callback)
+
+        const subscriber = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/rank/subscriber_5")
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        const totalViewCount = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/rank/totalViewCount_5")
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        const totalVideoCount = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/rank/totalVideoCount_5")
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        const grade = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/rank/grade_5")
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        const clickCount = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/rank/clickCount_5")
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+
+
+        Promise.all([subscriber, totalViewCount, totalVideoCount, grade, clickCount]).then(
+            axios.spread((...responses) => {
+
+                var list = []
+                var titles = ["구독자", "총영상조회수", "총영상수", "등급", "사이트조회수"]
+
+                for (var i = 0; i < responses.length; i++) {
+                    list.push({ title: titles[i], list: responses[i] })
+                }
+
+                console.log(list)
+
+                // callback(responses[0], responses[1]);
+
+                store.commit(Constant.GET_MANYTOP5, {
+                    list: list
+                });
+
+            })
+        );
 
 
 
