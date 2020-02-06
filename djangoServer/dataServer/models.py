@@ -24,8 +24,8 @@ class Youtuber(models.Model):
     grade = models.CharField(max_length=10, blank=True, null=True)
     influence = models.IntegerField(blank=True, null=True)
     activity = models.IntegerField(blank=True, null=True)
-    growth = models.IntegerField(blank=True, null=True)
-    basicstat = models.IntegerField(db_column='basicStat', blank=True, null=True)  # Field name made lowercase.
+    viewCountTrend = models.IntegerField(blank=True, null=True)
+    subscriberCountTrend = models.IntegerField(db_column='subscriberCountTrend', blank=True, null=True)  # Field name made lowercase.
     charm = models.IntegerField(blank=True, null=True)
     clickcount = models.IntegerField(db_column='clickCount', blank=True, null=True)  # Field name made lowercase.
     updateddate = models.DateTimeField(db_column='updatedDate', blank=True, null=True)  # Field name made lowercase.
@@ -122,13 +122,13 @@ class Category(models.Model):
 
 
 class CategoryYoutubeRelation(models.Model):
+    cyno = models.IntegerField(primary_key=True)
     yno = models.ForeignKey(Youtuber, models.DO_NOTHING, db_column='yno')
     cano = models.ForeignKey(Category, models.DO_NOTHING, db_column='cano')
 
     class Meta:
         managed = False
         db_table = 'category_youtube_relation'
-        unique_together = (('yno', 'cano'),)
 
 
 class Community(models.Model):
@@ -197,8 +197,8 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class Growth(models.Model):
-    gno = models.AutoField(primary_key=True)
+class Trend(models.Model):
+    tno = models.AutoField(primary_key=True)
     yno = models.ForeignKey(Youtuber, models.DO_NOTHING, db_column='yno', related_name="youtuber_growth")
     recorddate = models.DateTimeField(db_column='recordDate', blank=True, null=True)  # Field name made lowercase.
     pointsubscriber = models.IntegerField(db_column='pointSubscriber', blank=True, null=True)  # Field name made lowercase.
@@ -208,7 +208,7 @@ class Growth(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'growth'
+        db_table = 'trend'
 
 
 class News(models.Model):
