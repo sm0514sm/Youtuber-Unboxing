@@ -10,14 +10,15 @@
         
             <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on }">
-                        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on" :disabled="$session.get('token')==undefined">login</v-btn>
+                        <v-btn v-if="isDisabled" class="ma-2" color="indigo" large outlined dark v-on="on">MY INFO</v-btn>
+                        <v-btn v-else class="ma-2" color="indigo" large outlined dark @click="login()"> kakao</v-btn>
                 </template>
       
     </v-dialog>
 
     <v-dialog v-model="dialog" persistent max-width="600px">
-                <template v-slot:activator="{ on }">
-                <v-btn class="ma-2" color="indigo" large outlined dark @click="login()"> kakao</v-btn>     
+                <template v-if="isDisabled" v-slot:activator="{ on }">
+                <v-btn class="ma-2" color="indigo" large outlined dark @click="logout()"> logout</v-btn>     
 </template>
       <v-card>
         <v-card-title>
@@ -45,6 +46,7 @@
 import {
     mapGetters
 } from 'vuex';
+import axios from "axios";
 export default {
     computed: {
         ...mapGetters(['links'])
@@ -54,6 +56,7 @@ export default {
         console.log(this.$route.query)
         var token = this.$route.query.access_Token
         if(token!=undefined){
+            this.$session.start()
             this.$session.set('token', token)
             console.log("token:"+this.$session.get('token'))
         }
@@ -65,9 +68,21 @@ export default {
         login() {
             window.location.href = "https://kauth.kakao.com/oauth/authorize?client_id=caca7722fcbd20626b2343a0f5bf4083&redirect_uri=http://localhost:8080/login&response_type=code"
         },
+        logout(){
+
+            axios.get('localhost:8080/logout')
+            .then(response=>{
+                console.log(response)
+                this.$session.destroy()
+                let query  = Object.assign({}, this.$route.path)
+                console.log(query)
+                this.$router.push({ query })
+            }).catch(err=>{
+                console.log(err)
+            })
+        },
         isDisabled(){
             if(this.$session.get('token')!=undefined){
-                console.log('hide')
                 return true;
             }
             return false;
