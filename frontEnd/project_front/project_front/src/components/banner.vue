@@ -51,7 +51,7 @@ export default {
       ];
   },
   methods: {
-    test : function() {
+    test : function(e) {
      
       console.log("hi")
     }
