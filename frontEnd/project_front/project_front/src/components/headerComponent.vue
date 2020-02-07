@@ -63,7 +63,7 @@ export default {
             this.$router.push("/memberPage");
         },
         login() {
-            window.location.href = "https://accounts.kakao.com/login?continue=https%3a%2f%2fkauth.kakao.com%2foauth%2fauthorize%3fclient_id%3dcaca7722fcbd20626b2343a0f5bf4083%26redirect_uri%3dhttp%3a%2f%2flocalhost%3a8080%2flogin%26response_type%3dcode"
+            window.location.href = "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3Dcaca7722fcbd20626b2343a0f5bf4083%26redirect_uri%3Dhttp%3A%2F%2Flocalhost%3A8080%2FSpringBoot%2Flogin%26response_type%3Dcode"
         },
         logout(){
             this.$session.destroy()
