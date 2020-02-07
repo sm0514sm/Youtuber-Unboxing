@@ -32,20 +32,94 @@ export default {
             });
     },
     [Constant.GET_YOUTUBER]: (store, payload) => {
-        console.log("action_GET_YOUTUBER " + store.state.youtuber);
-        //store.commit(Constant.CHANGE_CATEGORY_LOADING, { bool: true });
-        http
-            .get("/youtuber/" + payload.yno)
-            .then(response => {
-                console.log(response.data.data);
-                store.commit(Constant.GET_YOUTUBER, {
-                    youtuber: response.data.data
+        console.log("action_GET_YOUTUBER ");
+
+        var yno = payload.yno
+        var callback = payload.callback
+        var failCallback = payload.failCallback
+
+        //youtuber 기본정보
+        const BasicImpormation = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/" + yno)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
                 });
-                //store.commit(Constant.CHANGE_CATEGORY_LOADING, { bool: false });
+        });
+
+
+        // activity : youtuber 활동력 최근 {{month}}간 몇개의 영상을 올렸는지
+        var month = 1
+        const videoDuringMonth = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/activity/videoCount/" + yno + "_" + month)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        // activity : youtuber {{week}}주동안 영상 업로드 수
+        var week = 4
+        const video4Weeks = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/activity/termVideoCount/" + yno + "_" + week)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        // charm : 최근 {{recent}}개의 전체 좋아요비율
+        var recent = 10
+        const entiregoodratio = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/charm/goodRatio/" + yno + "_" + recent)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        // charm : 최근 {{videoCount}}개의 각 동영상의 좋아요 비율
+        var videoCount = 3
+        const goodRatioperVideo = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/charm/video/" + yno + "_" + videoCount)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+
+
+
+        Promise.all([BasicImpormation, videoDuringMonth, video4Weeks, entiregoodratio, goodRatioperVideo]).then(
+            axios.spread((...responses) => {
+
+
+                for (var i = 0; i < responses.length; i++) {
+                    console.log(responses[i])
+                }
+                callback(...responses)
+
             })
-            .catch(exp => {
-                alert("GET_YOUTUBER 실패하였습니다\n" + exp);
-            });
+        ).catch(
+            failCallback()
+
+        );
     },
     [Constant.SEARCH_YOUTUBER]: (store, payload) => {
         console.log("action-SEARCH_YOUTUBER " + payload.searchWord);
@@ -121,10 +195,8 @@ export default {
         }, 2000)
     },
 
-    [Constant.GET_MANYTOP5]: (store, payload) => {
-        console.log("GET_MANYTOP5")
-        var callback = payload.callback;
-        console.log(callback)
+    [Constant.GET_MANYTOP5]: (store) => {
+        // var callback = payload.callback;
 
         const subscriber = new Promise((resolve, reject) => {
             http
