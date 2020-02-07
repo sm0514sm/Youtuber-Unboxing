@@ -129,7 +129,7 @@ public class YoutuberRestController {
 		return handleSuccess(list);
 	}
 
-	@ApiOperation("youtuber 상세페이지에 보여줄 주별 영상 개수  / 과거 등록일부터 ")
+	@ApiOperation("유투버 상세페이지에 보여줄 num주(or 달)간 영상 개수  / 과거 등록일부터 ")
 	@GetMapping("/youtuber/detail/activity/termVideoCount/{yno}_{num}")
 	public ResponseEntity<Map<String, Object>> searchTermVideoCount(@PathVariable int yno, @PathVariable int num){
 		
