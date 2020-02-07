@@ -3,6 +3,7 @@
         <v-img :src="require('@/assets/logo.png')" class="" contain height="48" width="48" max-width="48" @click="gotoHome" />
 
         <v-spacer />
+        <input-component></input-component>
         <v-text-field class="ma-2" append-icon="mdi-magnify" flat hide-details solo-inverted style="max-width: 300px; " @keyup.enter="search" v-model="searchWord" :key="$route.fullPath" />
         <v-img v-if="!loginStatus" :src="require('@/assets/kakao.png')" class="" contain height="100" width="100" max-width="100" @click="login()"/>
 
@@ -33,11 +34,15 @@
 
 
 <script>
+import inputComponent from './inputComponent'
 import {
     mapGetters
 } from 'vuex';
 // import axios from "axios";
 export default {
+    components: { 
+        inputComponent,
+    },
     computed: {
         ...mapGetters(['links'])
     },
@@ -64,7 +69,7 @@ export default {
             this.$router.push("/memberPage");
         },
         login() {
-            window.location.href = "https://accounts.kakao.com/login?continue=https%3a%2f%2fkauth.kakao.com%2foauth%2fauthorize%3fclient_id%3dcaca7722fcbd20626b2343a0f5bf4083%26redirect_uri%3dhttp%3a%2f%2flocalhost%3a8080%2flogin%26response_type%3dcode"
+            window.location.href = "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3Dcaca7722fcbd20626b2343a0f5bf4083%26redirect_uri%3Dhttp%3A%2F%2F70.12.247.108%3A8080%2Flogin%26response_type%3Dcode"
         },
         logout(){
             this.$session.destroy()

@@ -30,13 +30,12 @@
                 </v-flex>
             </v-layout>
         </v-container>
-        <input-component></input-component>
     </div>
 </template>
 
 <script>
 import banner from "../components/banner";
-import inputComponent from "../components/inputComponent";
+// import inputComponent from "../components/inputComponent";
 import {
     mapGetters
 } from 'vuex'
@@ -44,7 +43,7 @@ import {
 
 export default {
     components: { 
-        inputComponent,
+        // inputComponent,
         banner 
     },
     name: "mainPage",
