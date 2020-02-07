@@ -45,4 +45,14 @@ public class UserServiceImpl implements UserService {
 			throw new RuntimeException("userID로 즐겨찾기 정보 검색 중 에러가 발생했습니다.");
 		}
 	}
+
+	@Override
+	public int searchUserExist(String userID) {
+		try {
+			return dao.searchUserExist(userID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("userID로 회원 가입 여부 조회 중 에러가 발생했습니다.");
+		}
+	}
 }

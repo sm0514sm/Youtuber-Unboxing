@@ -16,6 +16,6 @@
 	<select id="searchAll" resultType="category">
 		select *
 		from category
-		order by clickCount desc
 	</select>
+	
 </mapper>
