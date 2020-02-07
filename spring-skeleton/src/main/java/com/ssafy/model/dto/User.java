@@ -4,10 +4,17 @@ import java.sql.Date;
 
 public class User {
 	private int usno;
+	private String userID;
 	private String userEmail;
 	private String userName;
 	private Date regDate;
 	
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 	public int getUsno() {
 		return usno;
 	}

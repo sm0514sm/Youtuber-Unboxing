@@ -1,7 +1,5 @@
 package com.ssafy.controller;
 
-import java.sql.Date;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.model.dto.Favorite;
@@ -36,25 +35,15 @@ public class FavoriteRestController {
 	
 	@ApiOperation("즐겨찾기 추가")
 	@PostMapping("/favorite/insert/{yno}_{usno}")
-	public ResponseEntity<Map<String, Object>> insertFavorite(@PathVariable int yno,  @PathVariable int usno){
-//		Calendar cal = Calendar.getInstance();
-//		Date date = new Date(cal.getTimeInMillis());
-
+	public ResponseEntity<Map<String, Object>> insertFavorite(@PathVariable int yno, @PathVariable int usno){
 		Favorite favorite = new Favorite();
 		favorite.setYno(yno);
 		favorite.setUsno(usno);
-//		Map<String, Integer> map = new HashMap<>();
-//		map.put("yno", yno);
-//		map.put("usno", usno);
-		
-//		favorite.setRegDate(date);
-//		System.out.println(date);
 		favoriteService.insertFavorite(favorite); 
-		
 		return handleSuccess("즐겨찾기 등록 완료");
 	}
 	
-	@ApiOperation("즐 겨찾기 삭제")
+	@ApiOperation("즐겨찾기 삭제")
 	@DeleteMapping("/favorite/delete/{yno}_{usno}")
 	public ResponseEntity<Map<String, Object>> searchKeyword(@PathVariable int yno,  @PathVariable int usno){
 		Map<String, Integer> map = new HashMap<>();
