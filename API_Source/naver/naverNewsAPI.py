@@ -96,8 +96,8 @@ def get_news_list(youtuber, category, last_updated_date):
 
     MONTH = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May',
              'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    YOUTUBER = youtuber.channelname  # DB 에서 yno 에 해당하는 channelName or youtubeName 을 입력
-    CATEGORY = category
+    YOUTUBER = '가로세로연구소'  # DB 에서 yno 에 해당하는 channelName or youtubeName 을 입력
+    CATEGORY = [8]
 
     URL = 'https://openapi.naver.com/v1/search/news.json?'
     params = {

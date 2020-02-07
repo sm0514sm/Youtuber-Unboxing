@@ -3,7 +3,7 @@
 from django.shortcuts import render, HttpResponse
 from django.db.models import Count
 from .models import *
-from .stat  import get_influence, get_activity, get_growth, get_basicstat, get_charm, get_grade
+from .stat  import get_influence, get_activity, get_trend, get_basicstat, get_charm, get_grade
 import urllib.request
 import time
 import requests
@@ -115,7 +115,7 @@ def get_channel_info(channelID):
     return channel_info_dict
 
 
-def get_growth_list(channel_id):
+def get_trend_list(channel_id):
     options = webdriver.ChromeOptions()
     options.add_argument('--no-sandbox')
     options.add_argument('--headless')
@@ -148,7 +148,7 @@ def get_growth_list(channel_id):
                     fin = dict()
                     fin['pk'] = pk
                     pk += 1
-                    fin['model'] = "dataServer.growth"
+                    fin['model'] = "dataServer.trend"
                     fin['fields'] = data
                     temp = copy.deepcopy(fin)
                     orm.append(temp)
@@ -478,17 +478,15 @@ def get_our_cano(ycano_list, video_detail_list):
 
 
 
-def date_is_valid(dateStr): # ex) '2019-03-16'
-    global lastUpdate
+def date_is_valid(dateStr, lastupdate): # ex) '2019-03-16'
     article_date = datetime.datetime.strptime(dateStr, '%Y-%m-%d')
-    if (article_date - lastUpdate).days > 0:
+    if (article_date - lastupdate).days > 0:
         return True
     else:
         return False
 
 
 def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
-    global lastUpdate
     # API_KEY를 더 넣도록 합시다.
     API_KEYS = [config('DAUM_API_KEY')]
     
@@ -541,19 +539,17 @@ def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
         if (response.status_code == 200):
             for document in documents:
                 contents = document.get('contents')
-                if date_is_valid(document.get('datetime')[:10]):
+                if date_is_valid(document.get('datetime')[:10], lastUpdate):
                     for keyword in keywords:
                         if keyword in contents:
-                            new_rows = {
-                                'yno': YOUTUBER,
-                                'articleTitle': document.get('title'),
-                                'articleLink': document.get('url'),
-                                'articleDescription': document.get('contents'),
-                                'articleDate': document.get('datetime')[:10],
-                            }
-                            # 여기서 바로 저장
-                            # DB에 저장
-                            # objects.save() 가즈아아아아
+                            community = Community.objects.create(
+                                yno = YOUTUBER,
+                                articletitle = document.get('title'),
+                                articlelink = document.get('url'),
+                                articledescription = document.get('contents'),
+                                articledate = document.get('datetime')[:10],
+                            )
+                            community.save()
                             break
                 else:
                     MORE_DATES = False
