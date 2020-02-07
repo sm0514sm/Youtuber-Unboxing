@@ -55,6 +55,13 @@ public class UserRestController {
 		List<Youtuber> list = userService.searchUserFavoriteYoutuber(userID); 
 		return handleSuccess(list);
 	}
+
+	@ApiOperation("userID로 회원 가입 여부 조회")
+	@GetMapping("/user/exist/{userID}")
+	public ResponseEntity<Map<String, Object>> searchUserExist(@PathVariable String userID){
+		int userCount = userService.searchUserExist(userID); 
+		return handleSuccess(userCount);
+	}
 	
 	// Exception Handle
 	public ResponseEntity<Map<String, Object>> handleFail(Object data, HttpStatus state){
