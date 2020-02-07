@@ -5,8 +5,6 @@ import searchPage from "./views/searchPage.vue";
 import comparePage from "./views/comparePage.vue";
 import testPage from "./views/test.vue";
 import memberPage from "./views/memberPage.vue";
-import comparePage from "./views/comparePage.vue";
-import testPage from "./views/test.vue";
 
 
 export default [{
