@@ -1,186 +1,266 @@
 <template>
   <div>
-    <!-- header -->
-    <v-card flat class="pa-0">
-      <v-img :src="youtuber.bannerImageLink" class="py-6 lighten-5"></v-img>
-    </v-card>
+    <div v-if="loading == 'loading'">
+      <v-container>
+        <v-row>
+          <v-col cols="12">데이터 요청중입니다 ...</v-col>
+        </v-row>
+        <v-row>
+          <v-spacer></v-spacer>
+          <v-col>
+            <v-progress-circular :size="200" :width="50" color="blue" indeterminate></v-progress-circular>
+          </v-col>
+          <v-spacer></v-spacer>
+        </v-row>
+      </v-container>
+    </div>
+    <div v-if= "loading == 'fail'">
+      이거 만들어 놓으니깐 또 fail이 안 뜨네...
+    </div>
+    <div :v-if="loading == 'success'">
+      <!-- header -->
+      <v-card flat class="pa-0">
+        <v-img :src="youtuber.bannerImageLink" class="py-6 lighten-5"></v-img>
+      </v-card>
 
-    <!-- content -->
-    <v-container>
-      <transition appear name="slide-fade">
-        <!--기본정보-->
-        <v-card class="my-3" outlined flat>
-          <v-container fluid>
-            <v-row>
-              <!-- thumbnail -->
-              <v-col cols="2" class="pa-3">
-                <v-img class="circle" :src="youtuber.thumbnails" flat :aspect-ratio="1/1" />
-              </v-col>
-
-              <!-- 기본정보 -->
-              <v-col cols="10">
-                <v-row>
-                  <v-col class="pb-0">
-                    <p class="font-weight-black thin display-3 ma-0">{{youtuber.channelName}}</p>
-                  </v-col>
-                  <v-col>
-                    <v-btn rounded depressed color="#9CDCF0">임시</v-btn>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col class="pt-0">
-                    <span class="font-weight-light">개설일 : {{youtuber.publishedDate}} &nbsp;&nbsp;</span>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col class="ma-0 pa-0">
-                    <v-divider class="pa-0 ma-0"></v-divider>
-                  </v-col>
-                </v-row>
-
-                <v-row>
-                  <v-col>
-                    <span class="font-weight-bold">구독자 수</span>
-                    <br />
-                    {{youtuber.subscriber}}
-                  </v-col>
-                  <v-divider vertical class="mx-3"></v-divider>
-                  <v-col>
-                    <span class="font-weight-bold">총 영상 수</span>
-                    <br />
-                    {{youtuber.totalVideoCount}}
-                  </v-col>
-                  <v-divider vertical class="mx-3"></v-divider>
-                  <v-col>
-                    <span class="font-weight-bold">총 영상조회 수</span>
-                    <br />
-                    {{youtuber.totalViewCount}}
-                  </v-col>
-                  <v-spacer></v-spacer>
-                </v-row>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card>
-      </transition>
-
-      <v-row>
-        <v-col cols="9">
-          <v-col class="pa-0 pb-3">
-            <v-card outlined flat>
+      <!-- content -->
+      <v-container class="pa-0">
+        <transition appear name="slide-fade">
+          <!--기본정보-->
+          <v-card class="my-3" outlined flat>
+            <v-container fluid>
               <v-row>
-                <v-col class="ma-5">
-                  <v-list-item-title class="headline font-weight-black mb-1">능력치</v-list-item-title>
+                <!-- thumbnail -->
+                <v-col cols="2" class="pa-3">
+                  <v-img class="circle" :src="youtuber.thumbnails" flat :aspect-ratio="1/1" />
+                </v-col>
+
+                <!-- 기본정보 -->
+                <v-col cols="10">
+                  <v-row>
+                    <v-col class="pb-0">
+                      <p class="font-weight-black thin display-3 ma-0">{{youtuber.channelName}}</p>
+                    </v-col>
+                    <v-col>
+                      <v-btn rounded depressed color="#9CDCF0">임시</v-btn>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col class="pt-0">
+                      <span class="font-weight-light">개설일 : {{youtuber.publishedDate}} &nbsp;&nbsp;</span>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col class="ma-0 pa-0">
+                      <v-divider class="pa-0 ma-0"></v-divider>
+                    </v-col>
+                  </v-row>
+
+                  <v-row>
+                    <v-col>
+                      <span class="font-weight-bold">구독자 수</span>
+                      <br />
+                      {{youtuber.subscriber}}
+                    </v-col>
+                    <v-divider vertical class="mx-3"></v-divider>
+                    <v-col>
+                      <span class="font-weight-bold">총 영상 수</span>
+                      <br />
+                      {{youtuber.totalVideoCount}}
+                    </v-col>
+                    <v-divider vertical class="mx-3"></v-divider>
+                    <v-col>
+                      <span class="font-weight-bold">총 영상조회 수</span>
+                      <br />
+                      {{youtuber.totalViewCount}}
+                    </v-col>
+                    <v-spacer></v-spacer>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card>
+        </transition>
+
+        <v-row>
+          <v-col cols="9">
+            <v-col class="pa-0 pb-3">
+              <v-card outlined flat>
+                <v-row>
+                  <v-col class="ma-5">
+                    <v-list-item-title class="headline font-weight-black mb-1">능력치</v-list-item-title>
+                    <v-divider></v-divider>
+                  </v-col>
+                </v-row>
+                <apexchart
+                  type="radar"
+                  height="500"
+                  :options="chartOptions"
+                  :series="series"
+                  id="myapexchart"
+                  ref="myDiv"
+                ></apexchart>
+              </v-card>
+            </v-col>
+
+            <v-col class="pa-0 py-3">
+              <v-card outlined flat>
+                <v-row>
+                  <v-col class="ma-5 pb-0 mb-0">
+                    <v-list-item-title class="headline font-weight-black mb-1">각능력치</v-list-item-title>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col>
+                    <v-container>
+                      <v-tabs v-model="tab" background-color="gray" dark grow>
+                        <v-tab>영향력</v-tab>
+                        <v-tab>활동력</v-tab>
+                        <v-tab>영상조회수증감추이</v-tab>
+                        <v-tab>구독자증감추이</v-tab>
+                        <v-tab>호감도</v-tab>
+                      </v-tabs>
+
+                      <v-tabs-items v-model="tab">
+                        <!-- 영향력 -->
+                        <v-tab-item>영향력</v-tab-item>
+
+                        <!-- 활동력 -->
+                        <v-tab-item>
+                          <v-container class="ma-5">
+                            <v-row class="mr-10">
+                              <p class="display-1">한달간 영상의 수는</p>
+                              <p class="display-1" style="color : red">"{{activityDuringMonth}}"</p>
+                              <p class="display-1">입니다.</p>
+                            </v-row>
+                            <v-row class="mr-10">
+                              <apexchart
+                                :options="activityOptions"
+                                :series="activity4weeksData"
+                                ref="activityChart"
+                                style="width:100%"
+                              ></apexchart>
+                            </v-row>
+                          </v-container>
+                        </v-tab-item>
+
+                        <!-- 영상조회수증감추이 -->
+                        <v-tab-item>영상조회수증감추이</v-tab-item>
+
+                        <!-- 구독자증감추이 -->
+                        <v-tab-item>구독자증감추이</v-tab-item>
+
+                        <!-- 호감도 -->
+                        <v-tab-item>
+                          <v-container>
+                            <v-container class="ma-5">
+                              <v-row class="mr-10">최근 10개 동영상 좋아요/싫어요 비율</v-row>
+                              <v-row class="mr-10">
+                                <v-col cols="2">좋아요</v-col>
+                                <v-col cols="8">
+                                  <v-progress-linear
+                                    background-color="blue"
+                                    color="red"
+                                    :value="entiregoodratio*100"
+                                    height="40"
+                                  ></v-progress-linear>
+                                </v-col>
+                                <v-col cols="2">
+                                  <p>싫어요</p>
+                                </v-col>
+                              </v-row>
+                              <v-row class="mr-10">최근 3개의 동영상 좋아요비율</v-row>
+                              <v-row class="mr-10">
+                                <v-row v-for="(video,i) in recentVideoList" :key="i" class="pa-1">
+                                  <v-col cols="12">
+                                    <v-card flat color>
+                                      <v-row>
+                                        <v-col cols="6">
+                                          <iframe
+                                            :src="String('https://www.youtube.com/embed/')+video.videoID"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen
+                                          ></iframe>
+                                        </v-col>
+                                        <v-col cols="6">
+                                          <v-row>{{video.vno}}</v-row>
+                                          <v-row>{{video.regDate}}</v-row>
+                                          <v-row>
+                                            <v-col
+                                              class="pa-1"
+                                              cols="2"
+                                              style="text-align : center"
+                                            >{{video.good}}</v-col>
+                                            <v-col class="pa-1">
+                                              <v-progress-linear
+                                                background-color="blue"
+                                                color="red"
+                                                :value="video.goodRatio*100"
+                                                height="30"
+                                              ></v-progress-linear>
+                                            </v-col>
+                                            <v-col
+                                              class="pa-1"
+                                              cols="2"
+                                              style="text-align : center"
+                                            >{{video.bad}}</v-col>
+                                          </v-row>
+                                        </v-col>
+                                      </v-row>
+                                    </v-card>
+                                  </v-col>
+                                </v-row>
+                              </v-row>
+                            </v-container>
+                          </v-container>
+                        </v-tab-item>
+                      </v-tabs-items>
+                    </v-container>
+                  </v-col>
+                </v-row>
+              </v-card>
+            </v-col>
+          </v-col>
+
+          <v-col cols="3">
+            <v-card outlined flat class="pa-4 pt-0">
+              <v-row>
+                <v-col class="ma-5 mx-0">
+                  <v-list-item-title class="headline font-weight-black mb-1">
+                    등급
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <v-icon v-on="on">info</v-icon>
+                      </template>
+                      <span>등급산정기준은 뭐라뭐라뭘마ㅝ라입니다</span>
+                    </v-tooltip>
+                  </v-list-item-title>
                   <v-divider></v-divider>
                 </v-col>
               </v-row>
-              <apexchart
-                type="radar"
-                height="500"
-                :options="chartOptions"
-                :series="series"
-                id="myapexchart"
-                ref="myDiv"
-              ></apexchart>
+              <transition appear name="fade">
+                <v-btn
+                  fab
+                  :color="setGradeColor(youtuber.grade)"
+                  style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
+                >
+                  <p
+                    style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
+                  >{{youtuber.grade}}</p>
+                </v-btn>
+              </transition>
             </v-card>
           </v-col>
-
-          <v-col class="pa-0 py-3">
-            <v-card outlined flat>
-              <v-row>
-                <v-col class="ma-5 pb-0 mb-0">
-                  <v-list-item-title class="headline font-weight-black mb-1">각능력치</v-list-item-title>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <v-container>
-                    <b-tabs content-class="mt-3" fill>
-                      <b-tab title="영향력" active>
-                        <v-icon>info</v-icon>
-                      </b-tab>
-                      <b-tab title="활동력">
-                        <p class="ma-3">I'm the 활동력 tab</p>
-                      </b-tab>
-                      <b-tab title="성장력">
-                        <p class="ma-3">I'm the 성장력 tab!</p>
-                      </b-tab>
-                      <b-tab title="기본수치">
-                        <p class="ma-3">I'm the 기본수치 tab!</p>
-                      </b-tab>
-                      <b-tab title="매력">
-                        <p class="ma-3">I'm the 매력 tab!</p>
-                      </b-tab>
-                    </b-tabs>
-                  </v-container>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col>
-        </v-col>
-
-        <v-col cols="3">
-          <v-card outlined flat class="pa-4 pt-0">
-            <v-row>
-              <v-col class="ma-5 mx-0">
-                <v-list-item-title class="headline font-weight-black mb-1">
-                  등급
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-icon v-on="on">info</v-icon>
-                    </template>
-                    <span>등급산정기준은 뭐라뭐라뭘마ㅝ라입니다</span>
-                  </v-tooltip>
-                </v-list-item-title>
-            <v-divider></v-divider>
-              </v-col>
-            </v-row>
-            <transition appear name="fade">
-              <v-btn
-                fab
-                :color="setGradeColor(youtuber.grade)"
-                style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
-              >
-                <p
-                  style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
-                >{{youtuber.grade}}</p>
-              </v-btn>
-            </transition>
-          </v-card>
-        </v-col>
-      </v-row>
-
-      <!-- mainContainer
-      {{this.$route.query.yno}}
-      <v-divider></v-divider>
-      {{youtuber.yno}}
-      <br />
-      {{youtuber.channelName}}
-      <br />
-      {{youtuber.youtuberName}}
-      <br />
-      {{youtuber.channelDescription}}
-      <br />
-      {{youtuber.namuwiki}}
-      <br />
-      {{youtuber.instagram}}
-      <br />
-      {{youtuber.facebook}}
-      <br />
-      {{youtuber.thumbnails}}
-      <br />
-      {{youtuber.publishedDate}}
-      <br />
-      {{youtuber.subscriber}}
-      <br />
-      {{youtuber.influence}}-->
-    </v-container>
-    <!-- <v-btn @click="test('AA')">안녕</v-btn> -->
+        </v-row>
+      </v-container>
+    </div>
   </div>
 </template>
 
 <script>
-import http from "../vuex/http-common";
+// import http from "../vuex/http-common";
+import Constant from "../vuex/Constant";
 
 export default {
   components: {},
@@ -190,34 +270,77 @@ export default {
     this.$vuetify.goTo(0);
   },
   mounted() {
-    http
-      .get("/youtuber/" + this.$route.query.yno)
-      .then(response => {
-        console.log(response.data.data);
-        this.youtuber = response.data.data;
-        setTimeout(
-          function() {
-            this.renderGraph();
-          }.bind(this),
-          1200
-        );
-      })
-      .catch(exp => {
-        alert("GET_YOUTUBER 실패하였습니다\n" + exp);
-      });
+    this.$store.dispatch(Constant.GET_YOUTUBER, {
+      yno: this.$route.query.yno,
+      callback: this.render,
+      failCallback : this.failCallback,
+    });
   },
   methods: {
-    renderGraph() {
+    render(...responses) {
+     
+      var youtuber = responses[0];
+      var activityDuringMonth = responses[1];
+      var activity4weeks = responses[2];
+      var charmentiregoodratio = responses[3];
+      var charmRecentVideo = responses[4];
+
+      this.youtuber = youtuber;
+      this.activityDuringMonth = activityDuringMonth;
+      this.entiregoodratio = charmentiregoodratio;
+      this.recentVideoList = charmRecentVideo;
+      this.activity4weeksData = [
+        {
+          name: " ",
+          data: [
+            activity4weeks[0],
+            activity4weeks[1],
+            activity4weeks[2],
+            activity4weeks[3]
+          ],
+          animation: true
+        }
+      ];
+
+      this.renderMainChart();
+      this.loading = 'success';
+      // this.renderActivityChart(activity4weeks);
+    },
+    renderMainChart() {
       var chart = this.$refs.myDiv;
       var influence = this.youtuber.influence;
       var activity = this.youtuber.activity;
-      var growth = this.youtuber.growth;
-      var basicStat = this.youtuber.basicStat;
+      var viewCountTrend = this.youtuber.viewCountTrend;
+      var subscriberCountTrend = this.youtuber.subscriberCountTrend;
       var charm = this.youtuber.charm;
 
       chart.appendSeries({
         name: " ",
-        data: [influence, activity, growth, basicStat, charm],
+        data: [
+          influence,
+          activity,
+          viewCountTrend,
+          subscriberCountTrend,
+          charm
+        ],
+        animation: true
+      });
+    },
+    renderActivityChart(activity4weeks) {
+      var chart = this.$refs.activityChart;
+
+      console.log(typeof chart == "undefined");
+
+      this.renderActivityChart(activity4weeks);
+      console.log(typeof chart == "undefined");
+      chart.appendSeries({
+        name: " ",
+        data: [
+          activity4weeks[0],
+          activity4weeks[1],
+          activity4weeks[2],
+          activity4weeks[3]
+        ],
         animation: true
       });
     },
@@ -225,7 +348,6 @@ export default {
       if (typeof str == "undefined") {
         return "gray";
       }
-      console.log(str);
       if (str.startsWith("S") || str.startsWith("A")) {
         return "red";
       } else if (str.startsWith("B")) {
@@ -239,19 +361,16 @@ export default {
       } else {
         return "gray";
       }
+    },
+    failCallback() {
+      this.loading = 'fail';
     }
   },
   computed: {},
   data() {
     return {
       youtuber: {},
-      series: [
-        // {
-        //   name: " ",
-        //   data: [0, 0, 0, 0, 0],
-        //   animation: true
-        // }
-      ],
+      series: [],
       chartOptions: {
         chart: {
           type: "radar",
@@ -273,7 +392,13 @@ export default {
           size: 0
         },
         xaxis: {
-          categories: ["영향력", "활동력", "성장력", "기본수치", "매력"],
+          categories: [
+            "영향력",
+            "활동력",
+            "영상조회수증감추이",
+            "구독자증감추이",
+            "호감도"
+          ],
           labels: {
             style: {
               fontSize: "20px",
@@ -297,7 +422,42 @@ export default {
         animations: {
           enabled: false
         }
-      }
+      },
+      activityOptions: {
+        series: [],
+        chart: {
+          type: "line",
+          zoom: {
+            enabled: false
+          }
+        },
+        dataLabels: {
+          enabled: true
+        },
+        stroke: {
+          width: 7,
+          curve: "smooth"
+        },
+        title: {
+          text: "동영상",
+          align: "center"
+        },
+        grid: {
+          row: {
+            colors: ["#f3f3f3", "transparent"],
+            opacity: 0.5
+          }
+        },
+        xaxis: {
+          categories: ["4주전", "3주전", "2주전", "1주전"]
+        }
+      },
+      activityDuringMonth: 0,
+      entiregoodratio: 0,
+      recentVideoList: [],
+      tab: null,
+      activity4weeksData: [],
+      loading: "loading"
     };
   }
 };

@@ -21,6 +21,9 @@ export default {
     [Constant.SEARCH_YOUTUBER]: (state, payload) => {
         store.state.searchyoutuber = payload.youtubers;
     },
+    [Constant.GET_MANYTOP5]: (state, payload) => {
+        store.state.manytop5list = payload.list
+    }
 
 
 };

@@ -85,14 +85,15 @@ export default {
   name: "comparePage",
   beforecreated() {},
   created() {
-    this.$vuetify.goTo(0);Item("compareYoutuber");
+    this.$vuetify.goTo(0);
+    var output = localStorage.getItem("compareYoutuber");
     var arr = JSON.parse(output);
     var list = [];
     list.push(arr[0]);
     list.push(arr[1]);
-    var output = localStorage.get
     this.youtubers = list;
   },
+
   mounted() {
     this.$store.dispatch(Constant.GET_COMPARE_YOUTUBER, {
       youtuber1: this.youtubers[0],
@@ -110,31 +111,31 @@ export default {
 
       var influence1 = this.youtuber1.influence;
       var activity1 = this.youtuber1.activity;
-      var growth1 = this.youtuber1.growth;
-      var basicStat1 = this.youtuber1.basicStat;
+      var viewCountTrend1 = this.youtuber1.viewCountTrend;
+      var subscriberCountTrend1 = this.youtuber1.subscriberCountTrend;
       var charm1 = this.youtuber1.charm;
 
       var influence2 = this.youtuber2.influence;
       var activity2 = this.youtuber2.activity;
-      var growth2 = this.youtuber2.growth;
-      var basicStat2 = this.youtuber2.basicStat;
+      var viewCountTrend2 = this.youtuber2.viewCountTrend;
+      var subscriberCountTrend2 = this.youtuber2.subscriberCountTrend;
       var charm2 = this.youtuber2.charm;
 
       chart.appendSeries({
         name: this.youtuber1.channelName,
-        data: [influence1, activity1, growth1, basicStat1, charm1]
+        data: [influence1, activity1, viewCountTrend1, subscriberCountTrend1, charm1]
       });
       chart.appendSeries({
         name: this.youtuber2.channelName,
-        data: [influence2, activity2, growth2, basicStat2, charm2]
+        data: [influence2, activity2, viewCountTrend2, subscriberCountTrend2, charm2]
       });
 
       //render table
       this.youtuber_stat = [
         { name: "영향력", figure1: influence1, figure2: influence2 },
         { name: "활동력", figure1: activity1 , figure2: activity2 },
-        { name: "성장력", figure1: growth1, figure2: growth2  },
-        { name: "기본수치", figure1: basicStat1, figure2: basicStat2 },
+        { name: "영상조회수증감추이", figure1: viewCountTrend1, figure2: viewCountTrend2  },
+        { name: "구독자증감추이", figure1: subscriberCountTrend1, figure2: subscriberCountTrend2 },
         { name: "매력", figure1: charm1 , figure2: charm2 }
       ];
 
@@ -169,7 +170,7 @@ export default {
           size: 0
         },
         xaxis: {
-          categories: ["영향력", "활동력", "성장력", "기본수치", "매력"],
+          categories: ["영향력", "활동력", "영상조회수증감추이", "구독자증감추이", "매력"],
           labels: {
             style: {
               fontSize: "20px",

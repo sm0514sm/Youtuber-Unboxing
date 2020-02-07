@@ -72,7 +72,8 @@ const state = {
     currentCategory: "life",
     youtuber: {},
     searchyoutuber: [],
-    compareyoutuber: ["aaaaaa", "Bbbbbbbba"]
+    compareyoutuber: ["aaaaaa", "Bbbbbbbba"],
+    manytop5list: [],
 };
 
 const getters = {
@@ -94,6 +95,9 @@ const getters = {
     },
     compareyoutuber: state => {
         return state.compareyoutuber
+    },
+    manytop5list: state => {
+        return state.manytop5list
     }
 }
 

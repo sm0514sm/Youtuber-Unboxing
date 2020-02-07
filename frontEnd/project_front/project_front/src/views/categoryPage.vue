@@ -19,7 +19,7 @@
             <v-data-table flat :headers="headers" :items="youtubersPerCategory" class="elevation-1" hide-default-footer>
 
               <template v-slot:item.insertCompare="{ item }">
-                <v-btn @click="onClikcedinsertCompare(item.yno,item.channelName)"> </v-btn>
+                <v-btn @click="onClikcedinsertCompare(item.yno,item.channelName)">담기</v-btn>
               </template>
             
             <!-- 썸네일과 channelName -->
