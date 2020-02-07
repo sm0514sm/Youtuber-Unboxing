@@ -44,7 +44,6 @@ export default {
     
     mounted(){
         console.log("loginStatus:"+this.loginStatus)
-        console.log(this.$session)
         if (!this.$session.exists()) {
             this.loginStatus=false
             console.log("no session")
@@ -68,6 +67,10 @@ export default {
         },
         logout(){
             this.$session.destroy()
+            console.log(this.$route.query)
+            if(this.$route.path=='/memberPage'){
+                this.$router.push('/')
+            }
             window.location.reload()
             
             // axios.get('localhost:8080/logout')
