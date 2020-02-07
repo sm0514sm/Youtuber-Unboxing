@@ -1,5 +1,5 @@
 <template>
-  <v-carousel height="400" hide-delimiter-background show-arrows-on-hover>
+  <v-carousel height="500" hide-delimiter-background show-arrows-on-hover>
     <v-carousel-item v-for="(top5list, i) in manytop5list" :key="i" interval="10">
       <v-sheet color="transparent" height="100%">
         <!-- table -->
@@ -17,13 +17,13 @@
             <v-simple-table style="width: 100%;" light>
               <template v-slot:default>
                 <thead>
-                  <th></th>
-                  <th></th>
-                  <th>채널명</th>
-                  <th>구독자</th>
-                  <th>총영상조회수</th>
-                  <th>총비디오수</th>
-                  <th>사이트조회수</th>
+                  <th style="width:7%"></th>
+                  <th style="width:5%"></th>
+                  <th style="width:35%">채널명</th>
+                  <th style="width:10%">구독자</th>
+                  <th style="width:10%">총영상조회수</th>
+                  <th style="width:10%">총비디오수</th>
+                  <!-- <th>사이트조회수</th> -->
                   <th>등급</th>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@
                     <td>{{item.subscriber}}</td>
                     <td>{{item.totalViewCount}}</td>
                     <td>{{item.totalVideoCount}}</td>
-                    <td>{{item.clickCount}}</td>
+                    <!-- <td>{{item.clickCount}}</td> -->
                     <td>{{item.grade}}</td>
                   </tr>
                 </tbody>
