@@ -36,7 +36,7 @@ export default {
 
         var yno = payload.yno
         var callback = payload.callback
-        var failCallback = payload.failCallback
+            //var failCallback = payload.failCallback
 
         //youtuber 기본정보
         const BasicImpormation = new Promise((resolve, reject) => {
@@ -83,6 +83,7 @@ export default {
             http
                 .get("/youtuber/detail/charm/goodRatio/" + yno + "_" + recent)
                 .then(response => {
+
                     resolve(response.data.data);
                 })
                 .catch(err => {
@@ -116,10 +117,8 @@ export default {
                 callback(...responses)
 
             })
-        ).catch(
-            failCallback()
+        )
 
-        );
     },
     [Constant.SEARCH_YOUTUBER]: (store, payload) => {
         console.log("action-SEARCH_YOUTUBER " + payload.searchWord);
@@ -179,20 +178,35 @@ export default {
 
     [Constant.INSERT_YOUTUBUER]: (store, payload) => {
         //통신하기
-        console.log("INSERT_YOUTUBUER" + payload.address)
 
-        //통신하고 완료되면 then 
-        //code
-        var code = Math.floor(Math.random() * (2 + 11) - 11);
-
-        //yno
-        var yno = 45
-        code = 0
-
+        function replaceAll(str, searchStr, replaceStr) {
+            return str.split(searchStr).join(replaceStr);
+        }
+        var address = replaceAll(payload.address, "/", "~")
         var callback = payload.callback
-        setTimeout(function() {
-            callback(code, yno)
-        }, 2000)
+
+
+        console.log("INSERT_YOUTUBUER" + address)
+
+
+        axios
+            .get("http://70.12.246.59:8000/data/newYoutuber/" + address)
+            .then(response => {
+                var code = response.data.code
+                var yno = response.data.yno
+
+                console.log(response);
+
+                callback(code, yno)
+            })
+            .catch(exp => {
+                callback(-100, 0)
+                console.log(exp);
+
+            });
+
+
+
     },
 
     [Constant.GET_MANYTOP5]: (store) => {

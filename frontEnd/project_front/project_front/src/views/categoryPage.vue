@@ -16,7 +16,7 @@
       <v-tabs-items :value="currentCategory" >
         <v-tab-item v-for="(item,index) in categories" :key="index"  >
           <v-card flat class="pa-3" color="#FAFAFA">
-            <v-data-table flat :headers="headers" :items="youtubersPerCategory" class="elevation-1" hide-default-footer>
+            <v-data-table flat :headers="headers" :items="youtubersPerCategory" class="elevation-1" >
 
               <template v-slot:item.insertCompare="{ item }">
                 <v-btn @click="onClikcedinsertCompare(item.yno,item.channelName)">담기</v-btn>
@@ -105,8 +105,8 @@ export default {
         { text: "subscriber", value: "subscriber" },
         { text: "influence", value: "influence" },
         { text: "activity", value: "activity" },
-        { text: "growth", value: "growth" },
-        { text: "basicStat", value: "basicStat" },
+        { text: "viewCountTrend", value: "viewCountTrend" },
+        { text: "subscriberCountTrend", value: "subscriberCountTrend" },
         { text: "charm", value: "charm" },
         { text: "grade", value: "grade" }
       ]

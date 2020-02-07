@@ -10,30 +10,7 @@
     <hr />
 
     <v-container wrap style="background : gray">
-      <!-- <v-card v-for="(item,i) in searchedyoutuber.slice(0,3)" :key="i" class="ma-5">
-        <v-container>
-          <v-row>
-            <v-col justify="space-between">
-              <v-col width>
-                <v-card
-                  height="200"
-                  width="200"
-                  :img="item.thumbnails"
-                  :to="{ path: 'youtuberPage', query: { yno : item.yno}}"
-                />
-              </v-col>
-            </v-col>
-
-            <v-col>
-              <h1>{{item.channelName}}</h1>
-              {{item.channelDescription}}
-              <br />
-              {{item.regDate}}
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card>-->
-      <v-card v-for="(item,i) in searchedyoutuber.slice(0,10)" :key="i" class="my-3" outlined flat>
+      <v-card v-for="(item,i) in searchedyoutuber.slice(0,10)" :key="i" class="my-3" outlined flat @click="gotoYoutuberPage(item.yno)">
         <v-container fluid>
           <v-row>
             <!-- thumbnail -->
@@ -188,6 +165,12 @@ export default {
       }else{
         return "gray"
       }
+    },
+    gotoYoutuberPage: function(yno) {
+      this.dialog = false;
+      this.$vuetify.goTo(0);
+      this.$router.push({ path: "/youtuberPage", query: { yno: yno } });
+      this.$vuetify.goTo(0);
     }
   },
   mounted() {
@@ -292,7 +275,7 @@ export default {
     return {
       searchedyoutuber: [],
       searchednews: [],
-      searchedvideo: []
+      searchedvideo: [],
     };
   }
 };

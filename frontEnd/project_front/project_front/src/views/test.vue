@@ -19,7 +19,9 @@
         </v-card>
       </v-hover>
     </v-col>
+    <v-btn @click="test">test</v-btn>
   </v-row>
+  
 </template>
 
 <!-- <b-tabs content-class="mt-3" fill>
@@ -83,8 +85,23 @@
                     </b-tabs>-->
 
 <script>
+  import axios from "axios"
 export default {
-  name: "TestPage"
+  name: "TestPage",
+  methods: {
+    test : function() {
+        axios
+            .get("http://70.12.246.59:8000/data/newYoutuber/https:~~www.youtube.com~channel~UC0M-_02RJqMlGTKUjF1WhJg")
+            .then(response => {
+                console.log(response);
+                
+            })
+            .catch(exp => {
+                console.log(exp)
+            });
+
+    }
+  }
 };
 </script>
 
