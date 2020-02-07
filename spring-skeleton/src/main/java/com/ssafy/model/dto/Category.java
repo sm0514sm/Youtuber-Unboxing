@@ -6,11 +6,14 @@ public class Category {
 	private String name;
 	private int clickCount;
 	private String imageLink;
+	
+	private int cyno;			//category_youtuber_relation 테이블의 컬럼
 	private int yno;			//category_youtuber_relation 테이블의 컬럼
 	
 	public int getCano() {
 		return cano;
 	}
+	
 	public void setCano(int cano) {
 		this.cano = cano;
 	}
@@ -31,6 +34,12 @@ public class Category {
 	}
 	public void setImageLink(String imageLink) {
 		this.imageLink = imageLink;
+	}
+	public int getCyno() {
+		return cyno;
+	}
+	public void setCyno(int cyno) {
+		this.cyno = cyno;
 	}
 	public int getYno() {
 		return yno;

@@ -1,7 +1,6 @@
 package com.ssafy.controller;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.model.dto.Category;
 import com.ssafy.model.dto.News;
 import com.ssafy.model.dto.Trend;
 import com.ssafy.model.dto.Video;
@@ -38,6 +38,13 @@ public class YoutuberRestController {
 	public ResponseEntity<Map<String, Object>> search(@PathVariable int yno){
 		Youtuber youtuber = youtuberService.search(yno); 
 		return handleSuccess(youtuber);
+	}
+	
+	@ApiOperation("youtuber 고유번호로 카테고리 목록 검색")
+	@GetMapping("/youtuber/category/{yno}")
+	public ResponseEntity<Map<String, Object>> searchCategoryList(@PathVariable int yno){
+		List<Category> list = youtuberService.searchCategoryList(yno); 
+		return handleSuccess(list);
 	}
 	
 	@ApiOperation("키워드로 youtuber 정보 검색")

@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.model.dao.YoutuberDao;
-import com.ssafy.model.dto.Trend;
+import com.ssafy.model.dto.Category;
 import com.ssafy.model.dto.News;
+import com.ssafy.model.dto.Trend;
 import com.ssafy.model.dto.Video;
 import com.ssafy.model.dto.Youtuber;
 
@@ -25,6 +26,16 @@ public class YoutuberServiceImpl implements YoutuberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("youtuber 고유번호 조회 중 에러가 발생했습니다.");
+		}
+	}
+	
+	@Override
+	public List<Category> searchCategoryList(int yno) {
+		try {
+			return dao.searchCategoryList(yno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 고유번호로 카테고리 번호, 카테고리명 검색  중 에러가 발생했습니다.");
 		}
 	}
 	
