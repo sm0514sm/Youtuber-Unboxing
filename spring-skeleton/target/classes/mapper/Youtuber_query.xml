@@ -118,7 +118,7 @@
 	
 	<!-- 호감도 / 유투버 상세페이지에 보여줄 최근 num개 동영상에 대한 좋아요 싫어요 비율 정보(goodRatio) -> 총합산비율 하나만 나옴 -->
 	<select id="searchGoodRatio" parameterType="java.util.Map" resultType="double">
-		select sum(good) / sum(bad) as goodRatio
+		select (sum(good) / (sum(good) + sum(bad))) as goodRatio
 		from video
 		where yno = #{yno} 
 		order by regDate desc
