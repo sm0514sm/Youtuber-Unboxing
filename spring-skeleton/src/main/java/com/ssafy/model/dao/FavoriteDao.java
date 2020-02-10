@@ -12,6 +12,7 @@ import com.ssafy.model.dto.Youtuber;
 public interface FavoriteDao {
 	public void insertFavorite(Favorite favorite);
 	public void deleteFavorite(Map<String, Integer> condition);
+	public int searchFavorite(Map<String, Integer> condition);
 	public List<Youtuber> searchUserFavoriteYoutuber(int usno);
 	public int searchYoutuberFavoriteNum(int yno);
 }

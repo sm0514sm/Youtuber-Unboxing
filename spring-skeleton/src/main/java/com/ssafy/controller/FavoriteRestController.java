@@ -53,6 +53,16 @@ public class FavoriteRestController {
 		return handleSuccess("즐겨찾기 삭제 완료");
 	}
 	
+	@ApiOperation("즐겨찾기 조회")
+	@GetMapping("/favorite/select/{yno}_{usno}")
+	public ResponseEntity<Map<String, Object>> searchFavorite(@PathVariable int yno, @PathVariable int usno){
+		Map<String, Integer> map = new HashMap<>();
+		map.put("yno", yno);
+		map.put("usno", usno);
+		int count = favoriteService.searchFavorite(map);
+		return handleSuccess(count);
+	}
+	
 	@ApiOperation("user 고유번호로 사용자가 즐겨찾기 한 유투버 정보 검색")
 	@GetMapping("/favorite/user/{usno}")
 	public ResponseEntity<Map<String, Object>> searchUserFavoriteYoutuber(@PathVariable int usno){
@@ -80,5 +90,4 @@ public class FavoriteRestController {
 		resultMap.put("data", data);
 		return new ResponseEntity<Map<String,Object>>(resultMap, HttpStatus.OK);
 	}
-	
 }
