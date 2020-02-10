@@ -29,28 +29,28 @@ public class NewsRestController {
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-	@ApiOperation("news 고유번호 검색")
+	@ApiOperation("news 고유번호 | 해당 news 정보 검색")
 	@GetMapping("/news/{nno}")
 	public ResponseEntity<Map<String, Object>> search(@PathVariable int nno){
 		News news = newsService.search(nno); 
 		return handleSuccess(news);
 	}
 	
-	@ApiOperation("키워드로 news 정보 검색")
+	@ApiOperation("keyword | news 제목,설명,언론사 이름에 keyword가 포함된 news 목록 검색 | 기사 날짜 기준 내림차순")
 	@GetMapping("/news/search/{keyword}")
 	public ResponseEntity<Map<String, Object>> searchKeyword(@PathVariable String keyword){
 		List<News> list = newsService.searchKeyword(keyword); 
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("전체 news 조회")
+	@ApiOperation("전체 news 목록 조회 | 기사 날짜 기준 내림차순")
 	@GetMapping("/news/all")
 	public ResponseEntity<Map<String, Object>> searchAll(){
 		List<News> list = newsService.searchAll(); 
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("검색 조건에 따른 news 랭킹 조회")
+	@ApiOperation("정렬 조건, 검색 개수 | 정렬 조건(clickCount, newsDate)으로 정렬 후 검색 개수만큼 가져옴 | 정렬 기준으로 내림차순\n정렬 조건이 잘못 입력된 경우 아무것도 반환하지 않음")
 	@GetMapping("/news/rank/{searchCondition}_{num}")
 	public ResponseEntity<Map<String, Object>> searchRanking(@PathVariable String searchCondition, @PathVariable int num){
 		Map<String, String> map = new HashMap<>();

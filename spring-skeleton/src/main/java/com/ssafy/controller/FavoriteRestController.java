@@ -33,7 +33,7 @@ public class FavoriteRestController {
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-	@ApiOperation("즐겨찾기 추가")
+	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 youtuber를 해당 user의 즐겨찾기에 추가")
 	@PostMapping("/favorite/insert/{yno}_{usno}")
 	public ResponseEntity<Map<String, Object>> insertFavorite(@PathVariable int yno, @PathVariable int usno){
 		Favorite favorite = new Favorite();
@@ -43,7 +43,7 @@ public class FavoriteRestController {
 		return handleSuccess("즐겨찾기 등록 완료");
 	}
 	
-	@ApiOperation("즐겨찾기 삭제")
+	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 youtuber를 해당 user의 즐겨찾기에서 삭제")
 	@DeleteMapping("/favorite/delete/{yno}_{usno}")
 	public ResponseEntity<Map<String, Object>> searchKeyword(@PathVariable int yno,  @PathVariable int usno){
 		Map<String, Integer> map = new HashMap<>();
@@ -53,7 +53,7 @@ public class FavoriteRestController {
 		return handleSuccess("즐겨찾기 삭제 완료");
 	}
 	
-	@ApiOperation("즐겨찾기 조회")
+	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 user의 즐겨찾기에 해당 youtuber가 있는지 조회 (있으면 1, 없으면 0)")
 	@GetMapping("/favorite/select/{yno}_{usno}")
 	public ResponseEntity<Map<String, Object>> searchFavorite(@PathVariable int yno, @PathVariable int usno){
 		Map<String, Integer> map = new HashMap<>();
@@ -63,14 +63,14 @@ public class FavoriteRestController {
 		return handleSuccess(count);
 	}
 	
-	@ApiOperation("user 고유번호로 사용자가 즐겨찾기 한 유투버 정보 검색")
+	@ApiOperation("user 고유번호 | 해당 user가 즐겨찾기 한  youtuber 목록 검색 | 즐겨찾기 추가 날짜 기준 내림차순")
 	@GetMapping("/favorite/user/{usno}")
 	public ResponseEntity<Map<String, Object>> searchUserFavoriteYoutuber(@PathVariable int usno){
 		List<Youtuber> list = favoriteService.searchUserFavoriteYoutuber(usno); 
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("유투버 고유번호로 해당 유투버를 즐겨찾기 한 사람 수 조회")
+	@ApiOperation("youtuber 고유번호 | 해당 youtuber 즐겨찾기 한 user 수 총합 조회")
 	@GetMapping("/favorite/youtuber/{yno}")
 	public ResponseEntity<Map<String, Object>> searchRanking(@PathVariable int yno){
 		int count = favoriteService.searchYoutuberFavoriteNum(yno);

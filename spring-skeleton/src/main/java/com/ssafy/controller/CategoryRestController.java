@@ -30,14 +30,14 @@ public class CategoryRestController {
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-	@ApiOperation("category에 속한 유투버 검색 ")
+	@ApiOperation("category 고유번호 | 해당 category에 속한 youtuber 목록 검색 | 구독자 기준 내림차순 정렬 ")
 	@GetMapping("/category/{cano}")
 	public ResponseEntity<Map<String, Object>> search(@PathVariable int cano){
 		List<Youtuber> list = categoryService.search(cano); 
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("전체 category 검색")
+	@ApiOperation("전체 category 목록 검색 | category 고유번호 기준 오름차순")
 	@GetMapping("/category/searchAll")
 	public ResponseEntity<Map<String, Object>> searchKeyword(){
 		List<Category> list = categoryService.searchAll(); 

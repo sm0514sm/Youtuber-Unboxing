@@ -36,15 +36,15 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
-	@Override
-	public List<Youtuber> searchUserFavoriteYoutuber(String userID) {
-		try {
-			return dao.searchUserFavoriteYoutuber(userID);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("userID로 즐겨찾기 정보 검색 중 에러가 발생했습니다.");
-		}
-	}
+//	@Override
+//	public List<Youtuber> searchUserFavoriteYoutuber(String userID) {
+//		try {
+//			return dao.searchUserFavoriteYoutuber(userID);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new RuntimeException("userID로 즐겨찾기 정보 검색 중 에러가 발생했습니다.");
+//		}
+//	}
 
 	@Override
 	public int searchUserExist(String userID) {
