@@ -32,8 +32,8 @@ public class SwaggerConfig {
 	 */
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("FAQ API")
-				.description("FAQ API Reference for Developers")
+		return new ApiInfoBuilder().title("Youtube Analysis API")
+				.description("Youtube Analysis API Reference for Developers")
 				.version("1.0").build();
 	}
 
