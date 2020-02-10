@@ -4,6 +4,7 @@ from django.shortcuts import render, HttpResponse
 import threading
 from datetime import datetime, timedelta
 from dataServer.models import Youtuber
+from dataServer.function import get_channel_other_sites
 import time
 from decouple import config
 import urllib.request
@@ -23,10 +24,13 @@ class updateThread:
         global key_index, key_list
         KEY = key_list[key_index]
         base_url = "https://www.googleapis.com/youtube/v3/channels"
+        # 안 쓰는 파트 나중에 삭제하자
         part = "id,snippet,brandingSettings,contentDetails,invideoPromotion,statistics,topicDetails"
-        youtubers = Youtuber.objects.all()[:1]
+        youtubers = Youtuber.objects.all()[8:11]
         left_api_keys = len(key_list)
         for  youtuber in youtubers:
+            
+            # 유튜버 테이블 업데이트
             while left_api_keys:
                 try:
                     response = urllib.request.urlopen(base_url + "?part=%s&id=%s&key=%s" % (part, youtuber.channelid, KEY))
@@ -37,8 +41,7 @@ class updateThread:
                     key_index %= len(key_list)
                     left_api_keys -= 1
             if not left_api_keys:
-                return HttpResponse('key is expired.')  # api_key 모두 소진
-            now = datetime.utcnow() + timedelta(hours=9)
+                return HttpResponse('key is expired during updating Youtuber Page. {} is not updated.'.format(youtuber.yno))  # api_key 모두 소진
             
             info_obj = json.loads(response.read().decode('utf-8')).get('items')[0]
             
@@ -47,9 +50,11 @@ class updateThread:
             branding_settings = info_obj.get('brandingSettings')
             content_details = info_obj.get('contentDetails')
             
-            # print(youtuber.yno, ' : ', youtuber.channelname)
-            # youtuber.searchkeyword = 'test2'
-            # youtuber.save()
+            other_links = ['', '', '', '', '']
+            for (i, site) in enumerate(get_channel_other_sites(youtuber.channellink)):
+                other_links[i] = site
+            
+            now = datetime.utcnow() + timedelta(hours=9)
             
             youtuber.channelname = snippet.get('title')
             youtuber.youtubername = snippet.get('customURL')
@@ -57,65 +62,35 @@ class updateThread:
             youtuber.bannerimagelink = branding_settings.get('image').get('bannerImageUrl')
             if '/default_banner' in youtuber.bannerimagelink:
                 youtuber.bannerimagelink = ''
-            youtuber.thumbnails = snippet.get('thumbnails').get('default')
+            youtuber.thumbnails = snippet.get('thumbnails').get('default').get('url')
             youtuber.subscriber = statistics.get('subscriberCount')  # 이건 트렌드에도 추가해야 됨
             youtuber.totalviewcount = statistics.get('viewCount')    # 이건 트렌드에도 추가해야 됨
             youtuber.totalvideocount = statistics.get('videoCount')
-            youtuber.updateddate = '%d-%d-%d %d:%d:%d' % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
+            youtuber.updateddate = '{0:04d}-{1:02d}-{2:02d} {3:02d}:{4:02d}:{5:02d}'.format(now.year, now.month, now.day, now.hour, now.minute, now.second)
             youtuber.otherlink1 = other_links[0]
             youtuber.otherlink2 = other_links[1]
             youtuber.otherlink3 = other_links[2]
             youtuber.otherlink4 = other_links[3]
             youtuber.otherlink5 = other_links[4]
-            youtuber.uploadsid = channel_info['uploadsID']
+            youtuber.uploadsid = content_details.get('relatedPlaylists').get('uploads')
+            
+            youtuber.save()
+            
+            print("{}: {}'s youtuber table is updated.".format(youtuber.yno, 1))
             
             
-            # youtuber = Youtuber.objects.create(
-            #     # channelid=channel_id,
-            #     channelname=channel_info['title'],
-            #     youtubername=channel_info['customUrl'],
-            #     channeldescription=channel_info['description'],
-            #     bannerimagelink=channel_info['banner_url'],
-            #     # channellink=url,
-            #     thumbnails=channel_info['thumbnail'],
-            #     # publisheddate=channel_info['publishedAt'],
-            #     subscriber=channel_info['subscriberCount'], # 이건 트렌드에도 추가해야 됨
-            #     totalviewcount=channel_info['viewCount'], # 이것도 업데이트
-            #     totalvideocount=channel_info['videoCount'], # 이것도 업데이트
-            #     # grade='Unknown',
-            #     # influence='0',
-            #     # activity='0',
-            #     # subscribercounttrend='0',
-            #     # viewcounttrend='0',
-            #     # charm='0',
-            #     # clickcount='0',
-            #     updateddate='%d-%d-%d %d:%d:%d' % (now.tm_year, now.tm_mon,
-            #                                     now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec),
-            #     # regdate='%d-%d-%d' % (now.tm_year, now.tm_mon, now.tm_mday),
-            #     otherlink1=other_links[0],
-            #     otherlink2=other_links[1],
-            #     otherlink3=other_links[2],
-            #     otherlink4=other_links[3],
-            #     otherlink5=other_links[4],
-            #     uploadsid=channel_info['uploadsID']
-            # )
             
             
+            # youtuber.save() # 여기까지 끝나면 일단 유튜버 정보는 업데이트 성공!
+            
+        
+        ########## 모두 끝나고, 업데이트 주기 다시 실행!
         # threading.Timer(86000, self.threadOpen).start()
-
-############## 서버 켜짐과 동시에 자동 업데이트를 실행하는 로직 ##############
+        
 
 def update_youtuber(request):
     updateStart = updateThread()
     updateStart.threadOpen()
     return HttpResponse()
-
-now = datetime.utcnow() + timedelta(hours=9)
-
-
-print('-----------------------------------')
-print(now)
-print('%d-%d-%d' % (now.year, now.month, now.day))
-print('-----------------------------------')
 
 
