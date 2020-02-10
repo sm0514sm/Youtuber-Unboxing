@@ -41,9 +41,9 @@
                     <v-col class="pb-0">
                       <p class="font-weight-black thin display-3 ma-0">{{youtuber.channelName}}</p>
                     </v-col>
-                    <!-- <v-col>
-                      <v-btn rounded depressed color="#9CDCF0">임시</v-btn>
-                    </v-col>-->
+                    <v-col>
+                      <v-btn rounded depressed color="#9CDCF0" v-if="true" @click="fav()">임시</v-btn>
+                    </v-col>
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
@@ -284,6 +284,11 @@ export default {
             .catch();
   },
   methods: {
+    fav(){
+      console.log("!")
+      console.log(this.$session.get('token'))
+    }
+    ,
     render(...responses) {
       var youtuber = responses[0];
       var activityDuringMonth = responses[1];
