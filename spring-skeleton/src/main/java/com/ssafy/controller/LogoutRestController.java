@@ -6,16 +6,15 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 @RestController
@@ -26,23 +25,24 @@ public class LogoutRestController {
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/logout")
-    @ResponseBody
-    public ResponseEntity<Map<String, Object>> logout(@RequestParam("access_Token") String access_Token) {
+	@ApiOperation("로그아웃")
+	@GetMapping(value="/logout/{token}")
+    public ResponseEntity<Map<String, Object>> logout(@PathVariable String token) {
         String reqURL = "https://kapi.kakao.com/v1/user/logout";
+        HashMap<String, Integer> result = new HashMap<>();
         int responseCode=0;
         try {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+            conn.setRequestProperty("Authorization", "Bearer " + token);
             responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
+            result.put("responseCode", responseCode);
+            System.out.println(result);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return handleSuccess(responseCode);
+        return handleSuccess(result);
     }
 	
 	

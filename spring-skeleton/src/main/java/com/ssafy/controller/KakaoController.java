@@ -56,7 +56,7 @@ public class KakaoController {
 			user.setUserName(userName);
 			userService.insertUser(user);
 		}
-        return "redirect:http://localhost:3000/?access_Token="+access_Token;
+        return "redirect:http://15.165.77.1:3000/?access_Token="+access_Token;
     }
 	
 }
