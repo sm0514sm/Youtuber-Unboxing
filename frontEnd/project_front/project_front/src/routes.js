@@ -41,11 +41,6 @@ export default [{
         path: "/memberPage",
         name: "memberPage",
         component: memberPage
-
-
-
-
-
     },
 
 
