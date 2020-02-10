@@ -37,6 +37,16 @@ public class FavoriteServiceImpl implements FavoriteService {
 	}
 
 	@Override
+	public int searchFavorite(Map<String, Integer> condition) {
+		try {
+			return dao.searchFavorite(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("유투버 고유번호와 회원 고유번호로 즐겨찾기 여부를 조회하는 중 에러가 발생했습니다.");
+		}
+	}
+	
+	@Override
 	public List<Youtuber> searchUserFavoriteYoutuber(int usno) {
 		try {
 			return dao.searchUserFavoriteYoutuber(usno);

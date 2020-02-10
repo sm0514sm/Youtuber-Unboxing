@@ -14,8 +14,15 @@
 	<!-- 즐겨찾기 삭제 -->
 	<delete id="deleteFavorite" parameterType="java.util.Map">
 		delete from favorite
-		where yno=#{yno} and usno=#{usno};
+		where yno=#{yno} and usno=#{usno}
 	</delete>
+
+	<!-- 유투버 고유번호, 회원 고유번호로 즐겨찾기 여부 조회-->
+	<select id="searchFavorite" parameterType="java.util.Map" resultType="int">
+		select count(*)
+		from favorite
+		where yno=#{yno} and usno=#{usno}
+	</select>
 
 	<!-- user 고유번호로 사용자가 즐겨찾기 한 유투버 정보 검색 -->
 	<select id="searchUserFavoriteYoutuber" parameterType="int" resultType="youtuber">
@@ -32,4 +39,5 @@
 		from favorite
 		where yno=#{yno}
 	</select>
+	
 </mapper>
