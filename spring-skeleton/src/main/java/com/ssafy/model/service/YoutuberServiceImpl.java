@@ -120,7 +120,7 @@ public class YoutuberServiceImpl implements YoutuberService {
 	}
 
 	@Override
-	public double searchGoodRatio(Map<String, Integer> condition) {
+	public Double searchGoodRatio(Map<String, Integer> condition) {
 		try {
 			return dao.searchGoodRatio(condition);
 		} catch (Exception e) {
@@ -146,6 +146,46 @@ public class YoutuberServiceImpl implements YoutuberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("youtuber 상세페이지의 기간별 활동지수 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Integer> searchCommunityMentionCount(Map<String, Integer> condition) {
+		try {
+			return dao.searchCommunityMentionCount(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 커뮤니티 파급력 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Integer> searchNewsMentionCount(Map<String, Integer> condition) {
+		try {
+			return dao.searchNewsMentionCount(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 뉴스 파급력 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Trend> searchViewCountDif(Map<String, Integer> condition) {
+		try {
+			return dao.searchViewCountDif(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 영상 조회수 증감 추이 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Trend> searchSubscriberCountDif(Map<String, Integer> condition) {
+		try {
+			return dao.searchSubscriberCountDif(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 구독자 수 증감 추이 조회 중 에러가 발생했습니다.");
 		}
 	}
 }
