@@ -29,24 +29,22 @@ import time
 
 ########## thread process second example
 ########################################
-class firstThread:
+class goThread:
     def __init__(self):
         pass
     
     def firstThread(self):
-        print('firstThread')
+        print('first Thread')
         threading.Timer(2, self.firstThread).start()
         
         
     def secondThread(self):
-        print('secondThread')
+        print('second Thread')
         threading.Timer(4, self.secondThread).start()
 
         
 if __name__ == '__main__':
-    obj = firstThread()
+    obj = goThread()
     obj.firstThread()
     obj.secondThread()
 ########################################
-
-
