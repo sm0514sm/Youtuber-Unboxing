@@ -172,7 +172,7 @@ class Naverdatalab(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'naverDataLab'
+        db_table = 'naver_data_lab'
 
 
 class News(models.Model):
