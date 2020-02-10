@@ -163,12 +163,12 @@ class Favorite(models.Model):
 
 
 class Naverdatalab(models.Model):
-    dno = models.IntegerField(primary_key=True)
+    dno = models.AutoField(primary_key=True)
     yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno', blank=True, null=True)
     searchkeyword = models.CharField(db_column='searchKeyword', max_length=100, blank=True, null=True)  # Field name made lowercase.
     startdate = models.DateField(db_column='startDate', blank=True, null=True)  # Field name made lowercase.
     enddate = models.DateField(db_column='endDate', blank=True, null=True)  # Field name made lowercase.
-    data = models.CharField(max_length=3000, blank=True, null=True)
+    data = models.CharField(max_length=16000, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -218,9 +218,9 @@ class User(models.Model):
 
 class Stat(models.Model):
     sno = models.AutoField(primary_key=True)
-    yno = models.IntegerField(db_column='userID', max_length=100)  # Field name made lowercase.
-    kinds = models.IntegerField(db_column='userEmail', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    values = models.FloatField(db_column='userName', max_length=100)  # Field name made lowercase.
+    yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno')
+    kinds = models.IntegerField(db_column='kinds', blank=True, null=True) 
+    value = models.FloatField(db_column='value', blank=True, null=True) 
 
     class Meta:
         managed = False
