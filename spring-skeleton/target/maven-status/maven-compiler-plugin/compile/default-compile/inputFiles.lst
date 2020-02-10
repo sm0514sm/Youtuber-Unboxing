@@ -4,11 +4,11 @@ C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\VideoServiceImpl.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\KakaoAPI.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\VideoService.java
+C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\controller\KakaoController.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\Community.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\YoutuberService.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\Category.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\controller\NewsRestController.java
-C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\CategoryYoutuberRelation.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\FavoriteServiceImpl.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\UserService.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\Youtuber.java
@@ -25,7 +25,6 @@ C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\SwaggerConfig.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dao\FavoriteDao.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\YoutuberServiceImpl.java
-C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\controller\HomeController.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\Trend.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\FavoriteService.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\controller\CategoryRestController.java
@@ -34,6 +33,7 @@ C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\ServletInitializer.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\controller\VideoRestController.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dao\CategoryDao.java
+C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\controller\LogoutRestController.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\Favorite.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\NewsService.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\config\SecurityConfig.java
