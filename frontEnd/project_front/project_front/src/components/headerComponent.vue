@@ -38,7 +38,6 @@ import inputComponent from './inputComponent'
 import {
     mapGetters
 } from 'vuex';
-import http from "../vuex/http-common";
 // import axios from "axios";
 export default {
     components: { 
@@ -50,6 +49,7 @@ export default {
     
     mounted(){
         console.log("loginStatus:"+this.loginStatus)
+        console.log(this.$session)
         if (!this.$session.exists()) {
             this.loginStatus=false
             console.log("no session")
@@ -69,36 +69,22 @@ export default {
             this.$router.push("/memberPage");
         },
         login() {
-            window.location.href = "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3Dcaca7722fcbd20626b2343a0f5bf4083%26redirect_uri%3Dhttp%3A%2F%2F15.165.77.1%3A8080%2FSpringBootNew%2Flogin%26response_type%3Dcode"
+            window.location.href = "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3Dcaca7722fcbd20626b2343a0f5bf4083%26redirect_uri%3Dhttp%3A%2F%2F70.12.247.108%3A8080%2Flogin%26response_type%3Dcode"
         },
         logout(){
-            let a
-            let result = new Promise((resolve, reject)=>{
-                http
-                .get("/logout/" + this.$session.get('token'))
-                .then(response => { 
-                    a=response.data.data.responseCode
-                    if(a=='200'){
-                        this.$session.destroy()
-                        console.log(this.$route.query)
-                        if(this.$route.path=='/memberPage'){
-                            this.$router.push('/')
-                        }
-                        window.location.reload()
-                    }
-                    resolve(response);
-                })
-                .catch(err => {
-                    reject(err);
-                });
-            })
-            console.log(result)
             this.$session.destroy()
-            if(this.$route.path=='/memberPage'){
-                this.$router.push('/')
-            }
             window.location.reload()
-
+            
+            // axios.get('localhost:8080/logout')
+            // .then(response=>{
+            //     console.log(response)
+            //     this.$session.destroy()
+            //     let query  = Object.assign({}, this.$route.path)
+            //     console.log(query)
+            //     this.$router.push({ query })
+            // }).catch(err=>{
+            //     console.log(err)
+            // })
         },
         isDisabled(){
             return true;
