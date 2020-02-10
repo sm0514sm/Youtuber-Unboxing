@@ -3,9 +3,8 @@
 from django.shortcuts import render, HttpResponse
 from django.db.models import Count
 from .models import *
-from .stat  import get_influence, get_activity, get_trend, get_basicstat, get_charm, get_grade
+from .stat  import get_influence, get_activity, get_trend, get_views, get_charm, get_grade
 import urllib.request
-import time
 import requests
 from decouple import config
 from urllib.request import urlopen, unquote
@@ -18,8 +17,9 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
 
-key_list = [config('GOOGLEAPIKEY1'), config('GOOGLEAPIKEY2'),
-            config('GOOGLEAPIKEY3'), config('GOOGLEAPIKEY4')]
+key_list = [config('GOOGLEAPIKEY5'), config('GOOGLEAPIKEY7'), config('GOOGLEAPIKEY6'), config('GOOGLEAPIKEY8'),
+            config('GOOGLEAPIKEY1'), config('GOOGLEAPIKEY2'), config('GOOGLEAPIKEY3'), config('GOOGLEAPIKEY4'),
+            config('GOOGLEAPIKEY9')]
 key_index = 0
 
 # 기본, 게임, 엔터테인먼트, 뷰티, 스포츠, 먹망, 키즈, 동물, 일상, IT
@@ -85,7 +85,7 @@ def get_channel_info(channelID):
         response = urllib.request.urlopen(
             base_url + "?part=%s&id=%s&key=%s" % (part, channelID, key))
     except urllib.request.HTTPError:
-        print('*--- next key setting & restart ---*')
+        print('*--- %d -> %d : next key setting & restart ---*' % (key_index, (key_index+1)%len(key_list)))
         key_index += 1
         key_index %= len(key_list)
         return get_channel_info(channelID)
@@ -291,7 +291,7 @@ def get_video_detail(video_id):
     # snippet으로 가져오는 정보: 유튜버, 제목, 설명, 게시일, 카테고리, 태그, 섬네일
     # statistics로 가져오는 정보: 조회수, 댓글 수, 좋아요 수, 싫어요 수
     # topicdetails로 가져오는 정보: 토픽
-    part = 'snippet,statistics,topicDetails'
+    part = 'snippet,statistics'
     url = 'https://www.googleapis.com/youtube/v3/videos?part={}&id={}&key={}'.format(
         part, video_id, key)
     try:
@@ -555,3 +555,52 @@ def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
                     MORE_DATES = False
                     break
         page += 1
+
+def insert_naver_data_lab(youtuber):
+    result = ''
+    client_id = config("NAVER_DATALAB_CLIENT_ID")
+    client_secret = config("NAVER_DATALAB_CLIENT_SECRET")
+    url = "https://openapi.naver.com/v1/datalab/search";
+    startDate = (datetime.datetime.utcnow() + datetime.timedelta(days=-365)).strftime("%Y-%m-%d")
+    endDate = datetime.datetime.utcnow().strftime("%Y-%m-%d") 
+    timeUnit = 'week'
+    keyword = youtuber.channelname
+
+    body = {
+        "startDate": startDate,
+        "endDate": endDate,
+        "timeUnit": timeUnit,
+        "keywordGroups": [
+                {
+                    "groupName": keyword, 
+                    "keywords": [
+                            keyword
+                        ]
+                }
+            ]
+    }
+
+    body = str(body).replace("'", '\"')
+
+
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id",client_id)
+    request.add_header("X-Naver-Client-Secret",client_secret)
+    request.add_header("Content-Type","application/json")
+
+    response = urllib.request.urlopen(request, data=body.encode("utf-8"))
+    rescode = response.getcode()
+    if(rescode==200):
+        response_body = response.read().decode('utf-8')
+        data = json.loads(response_body).get('results')[0].get('data') 
+        result = json.dumps(data) # result를 DB data에 담는다.
+        Naverdatalab.objects.create(
+            yno = youtuber,
+            searchkeyword = keyword,
+            startdate = startDate,
+            enddate = endDate,
+            data = data
+        )
+    else:
+        print("Error Code:" + rescode)
+    return result
