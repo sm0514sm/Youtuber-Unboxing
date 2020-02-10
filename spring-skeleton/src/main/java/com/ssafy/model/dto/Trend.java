@@ -8,7 +8,7 @@ public class Trend {
 	private Date recordDate;
 	private int pointSubscriber;
 	private int difSubscriber;
-	private int pointView;
+	private long pointView;
 	private int difView;
 
 	public int getTno() {
@@ -41,10 +41,10 @@ public class Trend {
 	public void setDifSubscriber(int difSubscriber) {
 		this.difSubscriber = difSubscriber;
 	}
-	public int getPointView() {
+	public long getPointView() {
 		return pointView;
 	}
-	public void setPointView(int pointView) {
+	public void setPointView(long pointView) {
 		this.pointView = pointView;
 	}
 	public int getDifView() {

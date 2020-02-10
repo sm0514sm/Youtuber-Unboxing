@@ -29,4 +29,11 @@
 					where us.userID = #{userID}) usinfo
 		using (yno);
 	</select>
+	
+	<!-- userID로  이미 가입되어 있는 사용자인지를 조회 -->
+	<select id="searchUserExist" parameterType="String" resultType="int">
+		select count(*) userNum
+		from user
+		where userID=#{userID}
+	</select>
 </mapper>
