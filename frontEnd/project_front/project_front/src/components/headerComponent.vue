@@ -3,6 +3,7 @@
         <v-img :src="require('@/assets/logo.png')" class="" contain height="48" width="48" max-width="48" @click="gotoHome" />
 
         <v-spacer />
+        <input-component></input-component>
         <v-text-field class="ma-2" append-icon="mdi-magnify" flat hide-details solo-inverted style="max-width: 300px; " @keyup.enter="search" v-model="searchWord" :key="$route.fullPath" />
         <v-img v-if="!loginStatus" :src="require('@/assets/kakao.png')" class="" contain height="100" width="100" max-width="100" @click="login()"/>
 
@@ -33,12 +34,16 @@
 
 
 <script>
+import inputComponent from './inputComponent'
 import {
     mapGetters
 } from 'vuex';
 import http from "../vuex/http-common";
 // import axios from "axios";
 export default {
+    components: { 
+        inputComponent,
+    },
     computed: {
         ...mapGetters(['links'])
     },

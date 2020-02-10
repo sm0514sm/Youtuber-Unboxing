@@ -2,7 +2,7 @@
 <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark v-on="on" @click="init">Open Dialog</v-btn>
+            <v-btn color="primary" dark v-on="on" @click="init">유튜버 추가하기</v-btn>
         </template>
         <v-card>
             <v-card-title>
@@ -72,18 +72,19 @@ export default {
         onSendButton: function () {
             this.nowPage = "loadingPage";
             this.$store.dispatch(Constant.INSERT_YOUTUBUER, {
-                address: this.address.replace("/", "~"),
+                address: this.address,
                 callback: this.processDispatch
             });
         },
         processDispatch: function (code, yno) {
-            if (code >= 0) {
+            console.log("processDispatch"+code+" "+code+" "+yno)
+            if (code == 1) {
                 // 원래 있던 유튜버가 보여질 때
                 this.completeTitle = "추가하려는 유튜버가 이미 있습니다!";
                 this.completeSmallTitle = "";
                 this.youtuberPage = true;
                 this.youtuberYno = yno;
-            } else if (code == 1) {
+            } else if (code == 0) {
                 // 추가가 완료 됐을 때
                 this.completeTitle = "유튜버를 추가했습니다!";
                 this.completeSmallTitle = "";
@@ -98,7 +99,7 @@ export default {
                     this.completeSmallTitle = "입력한 URL이 올바르지 않습니다.";
                 } else if (code == -3) {
                     // 너무 인기 없는 유튜버라 지원 안함.
-                    this.completeSmallTitle = "인기 없는 유튜버라 지원 안합니다.";
+                    this.completeSmallTitle = "구독자 10만명이하인 유튜버는 insert를 지원 하지 않습니다.";
                 } else {
                     // 서버문제로 지원 안 함.
                     this.completeSmallTitle = "서버 에러";

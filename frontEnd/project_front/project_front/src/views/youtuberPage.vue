@@ -14,10 +14,10 @@
         </v-row>
       </v-container>
     </div>
-    <div v-if= "loading == 'fail'">
-      이거 만들어 놓으니깐 또 fail이 안 뜨네...
-    </div>
-    <div :v-if="loading == 'success'">
+    <!-- <div v-else-if="loading == 'fail'">
+      서버와 오류가 발생헀습니다 새로고침(F5)를 눌러주세요.
+    </div>-->
+    <div v-if="loading == 'success'">
       <!-- header -->
       <v-card flat class="pa-0">
         <v-img :src="youtuber.bannerImageLink" class="py-6 lighten-5"></v-img>
@@ -41,9 +41,9 @@
                     <v-col class="pb-0">
                       <p class="font-weight-black thin display-3 ma-0">{{youtuber.channelName}}</p>
                     </v-col>
-                    <v-col>
+                    <!-- <v-col>
                       <v-btn rounded depressed color="#9CDCF0">임시</v-btn>
-                    </v-col>
+                    </v-col>-->
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
@@ -96,7 +96,7 @@
                   type="radar"
                   height="500"
                   :options="chartOptions"
-                  :series="series"
+                  :series="mainData"
                   id="myapexchart"
                   ref="myDiv"
                 ></apexchart>
@@ -159,11 +159,12 @@
                                 <v-col cols="2">좋아요</v-col>
                                 <v-col cols="8">
                                   <v-progress-linear
-                                    background-color="blue"
-                                    color="red"
+                                    background-color="red"
+                                    color="blue"
                                     :value="entiregoodratio*100"
                                     height="40"
                                   ></v-progress-linear>
+                                  {{entiregoodratio}}
                                 </v-col>
                                 <v-col cols="2">
                                   <p>싫어요</p>
@@ -194,9 +195,9 @@
                                             >{{video.good}}</v-col>
                                             <v-col class="pa-1">
                                               <v-progress-linear
-                                                background-color="blue"
-                                                color="red"
-                                                :value="video.goodRatio*100"
+                                                background-color="red"
+                                                color="blue"
+                                                :value="video.goodRatio==0 ? 50 : video.goodRatio*100"
                                                 height="30"
                                               ></v-progress-linear>
                                             </v-col>
@@ -261,6 +262,7 @@
 <script>
 // import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
+import axios from "axios";
 
 export default {
   components: {},
@@ -268,17 +270,21 @@ export default {
   beforecreated() {},
   created() {
     this.$vuetify.goTo(0);
+    this.loading = "loading";
   },
   mounted() {
     this.$store.dispatch(Constant.GET_YOUTUBER, {
       yno: this.$route.query.yno,
       callback: this.render,
-      failCallback : this.failCallback,
+      failCallback: this.failCallback
     });
+     axios
+            .get("http://70.12.246.59:8000/data/updateStat/" + this.$route.query.yno)
+            .then()
+            .catch();
   },
   methods: {
     render(...responses) {
-     
       var youtuber = responses[0];
       var activityDuringMonth = responses[1];
       var activity4weeks = responses[2];
@@ -302,8 +308,28 @@ export default {
         }
       ];
 
-      this.renderMainChart();
-      this.loading = 'success';
+      var influence = this.youtuber.influence;
+      var activity = this.youtuber.activity;
+      var viewCountTrend = this.youtuber.viewCountTrend;
+      var subscriberCountTrend = this.youtuber.subscriberCountTrend;
+      var charm = this.youtuber.charm;
+      this.mainData = [
+        {
+          name: " ",
+          data: [
+            influence,
+            activity,
+            viewCountTrend,
+            subscriberCountTrend,
+            charm
+          ]
+        }
+      ];
+
+        this.loading = "success";
+
+      console.log(this.loading);
+      // this.renderMainChart();
       // this.renderActivityChart(activity4weeks);
     },
     renderMainChart() {
@@ -362,15 +388,17 @@ export default {
         return "gray";
       }
     },
-    failCallback() {
-      this.loading = 'fail';
+    failCallback(err) {
+      console.log("****************" + err);
+      // this.loading = 'fail';
+      console.log(this.loading);
     }
   },
   computed: {},
   data() {
     return {
       youtuber: {},
-      series: [],
+      mainData: [],
       chartOptions: {
         chart: {
           type: "radar",
