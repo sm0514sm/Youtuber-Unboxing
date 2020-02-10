@@ -262,6 +262,7 @@
 <script>
 // import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
+import axios from "axios";
 
 export default {
   components: {},
@@ -277,6 +278,10 @@ export default {
       callback: this.render,
       failCallback: this.failCallback
     });
+     axios
+            .get("http://70.12.246.59:8000/data/updateStat/" + this.$route.query.yno)
+            .then()
+            .catch();
   },
   methods: {
     render(...responses) {
