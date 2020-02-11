@@ -50,18 +50,12 @@
                       >
                         <b>{{category.name}}</b>
                       </v-btn>
-                      <v-btn text icon color="yellow" @click="flag? (flag = false) : (flag = true)">
-                        <v-icon v-if="flag" x-large>star</v-icon>
-                        <v-icon v-if="!flag" x-large>star_border</v-icon>
-                      </v-btn>
-                    </v-col>
-                      <v-btn v-if="loginStatus" text icon color="red" @click="manageFav">
+                      <v-btn v-if="loginStatus" text icon color="yellow" @click="manageFav">
                         <v-icon v-if="flag" @click="deleteFav" x-large>star</v-icon>
                         <v-icon v-if="!flag" @click="insertFav" x-large>star_border</v-icon>
                       </v-btn>
-                    <v-col>
-                      <v-btn rounded depressed color="#9CDCF0">임시</v-btn>
                     </v-col>
+                      
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
@@ -525,7 +519,7 @@ export default {
     });
     if(this.$session.exists()){
       this.loginStatus=true
-      let initialUrl=this.$route.query.yno+"_"+this.$session.get('token')
+      let initialUrl=this.$route.query.yno+"&"+this.$session.get('token')
       console.log(initialUrl)
       http.get("/favorite/select/"+initialUrl)
       .then(data => this.flag = data.data.data==0 ? false : true)
@@ -554,7 +548,7 @@ export default {
       console.log("delete")
       console.log(this.$session.get('token'))
       console.log(this.youtuber.yno)
-      let par = this.youtuber.yno+"_"+this.$session.get('token')
+      let par = this.youtuber.yno+"&"+this.$session.get('token')
       let deleteUrl = "/favorite/delete/"+par
       http.delete(deleteUrl)
       .then(function (response) {
