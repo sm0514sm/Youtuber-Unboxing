@@ -141,24 +141,122 @@
       </v-col>
     </v-row>
 
-    <!-- 기본 수치 비교 -->
+    <!-- 총영상수 주기 -->
     <v-row>
-      <v-col cols="6">
+      <v-col>
         <v-hover v-slot:default="{ hover }" open-delay="100">
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1">기본 수치 비교</v-list-item-title>
+                <v-list-item-title class="headline font-weight-black mb-1">영상수 주기</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
             <v-row>
               <v-col>
                 <apexchart
+                  height="200"
+                  :options="videoPeriodOptions"
+                  :series="videoPeriodData"
+                ></apexchart>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-hover>
+      </v-col>
+    </v-row>
+
+    <!-- 구독자 추이 -->
+    <v-row>
+      <v-col>
+        <v-hover v-slot:default="{ hover }" open-delay="100">
+          <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
+            <v-row>
+              <v-col class="ma-0 mt-5">
+                <v-list-item-title class="headline font-weight-black mb-1">구독자 추이</v-list-item-title>
+                <v-divider></v-divider>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <apexchart
+                  height="200"
+                  :options="subscriberPeriodOptions"
+                  :series="subscriberPeriodData"
+                ></apexchart>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-hover>
+      </v-col>
+    </v-row>
+
+    <!-- 총조회수추이 -->
+    <v-row>
+      <v-col>
+        <v-hover v-slot:default="{ hover }" open-delay="100">
+          <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
+            <v-row>
+              <v-col class="ma-0 mt-5">
+                <v-list-item-title class="headline font-weight-black mb-1">총조회수 추이</v-list-item-title>
+                <v-divider></v-divider>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <apexchart
+                  height="200"
+                  :options="totalViewPeriodOptions"
+                  :series="totalViewPeriodData"
+                ></apexchart>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-hover>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <!-- 기본 수치 비교 -->
+      <v-col cols="6">
+        <v-hover v-slot:default="{ hover }" open-delay="100">
+          <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
+            <v-row>
+              <v-col class="ma-0 mt-5 pb-0">
+                <v-list-item-title class="headline font-weight-black mb-1">기본 수치 비교</v-list-item-title>
+                <v-divider></v-divider>
+              </v-col>
+            </v-row>
+            <!--구독자 -->
+            <v-row>
+              <v-col class="py-0">
+                <apexchart
                   type="bar"
                   height="200"
-                  :options="getChartOption('subscriber')"
+                  :options="getChartOption('구독자')"
                   :series="subscriberData"
+                ></apexchart>
+              </v-col>
+            </v-row>
+            <!-- totalViewCount -->
+            <v-row>
+              <v-col class="py-0">
+                <apexchart
+                  type="bar"
+                  height="200"
+                  :options="getChartOption('총영상조회수')"
+                  :series="totalViewCountData"
+                ></apexchart>
+              </v-col>
+            </v-row>
+            <!-- totalVideoCount -->
+            <v-row>
+              <v-col class="py-0">
+                <apexchart
+                  type="bar"
+                  height="200"
+                  :options="getChartOption('총영상수')"
+                  :series="totalVideoCountData"
                 ></apexchart>
               </v-col>
             </v-row>
@@ -209,10 +307,10 @@ export default {
     callback(...responses) {
       var youtuber1 = responses[0];
       var youtuber2 = responses[1];
-      // var activity4weeks1 = responses[2];
-      // var activity4weeks2 = responses[3];
-      // var subscriberView1 = responses[4];
-      // var subscriberView2 = responses[5];
+      var activity25weeks1 = responses[2];
+      var activity25weeks2 = responses[3];
+      var subscriberView1 = responses[4];
+      var subscriberView2 = responses[5];
 
       //데이터 집어넣기
       this.youtuber1 = youtuber1;
@@ -282,6 +380,78 @@ export default {
           data: [this.youtuber2.subscriber]
         }
       ];
+      this.totalViewCountData = [
+        {
+          name: this.youtuber1.channelName,
+          data: [this.youtuber1.totalViewCount]
+        },
+        {
+          name: this.youtuber2.channelName,
+          data: [this.youtuber2.totalViewCount]
+        }
+      ];
+      this.totalVideoCountData = [
+        {
+          name: this.youtuber1.channelName,
+          data: [this.youtuber1.totalVideoCount]
+        },
+        {
+          name: this.youtuber2.channelName,
+          data: [this.youtuber2.totalVideoCount]
+        }
+      ];
+
+      //영상수주기
+      this.videoPeriodData = [
+        {
+          name: this.youtuber1.channelName,
+          data: activity25weeks1
+        },
+        {
+          name: this.youtuber2.channelName,
+          data: activity25weeks2
+        }
+      ];
+      for (let index = activity25weeks1.length-1; index > 0; index--) {
+        this.videoPeriodOptions["xaxis"]["categories"].push(index + "주전");
+      }
+
+      //구독자주기
+      this.subscriberPeriodData = [
+        {
+          name: this.youtuber1.channelName,
+          data: []
+        },
+        {
+          name: this.youtuber2.channelName,
+          data: []
+        }
+      ];
+
+      for (let index = 0; index < subscriberView1.length; index++) {
+        this.subscriberPeriodData[0]["data"].push(subscriberView1[index].pointSubscriber)
+        this.subscriberPeriodData[1]["data"].push(subscriberView2[index].pointSubscriber)
+        this.subscriberPeriodOptions["xaxis"]["categories"].push(subscriberView1[index].recordDate.substring(5,10));
+      }
+
+      //총영상수추이
+      this.totalViewPeriodData = [
+        {
+          name: this.youtuber1.channelName,
+          data: []
+        },
+        {
+          name: this.youtuber2.channelName,
+          data: []
+        }
+      ];
+
+      for (let index = 0; index < subscriberView1.length; index++) {
+        this.totalViewPeriodData[0]["data"].push(subscriberView1[index].pointView)
+        this.totalViewPeriodData[1]["data"].push(subscriberView2[index].pointView)
+        this.totalViewPeriodOptions["xaxis"]["categories"].push(subscriberView1[index].recordDate.substring(5,10));
+      }
+      
     },
     setGradeColor(str) {
       if (typeof str == "undefined") {
@@ -337,9 +507,24 @@ export default {
           },
           categories: [str]
         },
-        yaxis: {},
+        yaxis: {
+          show: false
+        },
         legend: {
           show: false
+        },
+        title: {
+          text: str,
+          align: "center",
+          margin: 0,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize: "17px",
+            fontWeight: "bold",
+            color: "black"
+          }
         }
       };
     }
@@ -409,7 +594,103 @@ export default {
       },
       subscriberData: [],
       totalViewCountData: [],
-      totalVideoCountData: []
+      totalVideoCountData: [],
+      videoPeriodData: [],
+      videoPeriodOptions: {
+        series: [],
+        chart: {
+          type: "line",
+          zoom: {
+            enabled: false
+          },
+          toolbar: {
+            show: false
+          }
+        },
+        dataLabels: {
+          enabled: true
+        },
+        stroke: {
+          width: 3,
+          curve: "smooth"
+        },
+        title: {
+          align: "center"
+        },
+        grid: {
+          row: {
+            colors: ["#f3f3f3", "transparent"],
+            opacity: 0.5
+          }
+        },
+        xaxis: {
+          categories: ["25주전"]
+        }
+      },
+      subscriberPeriodData: [],
+      subscriberPeriodOptions: {
+        series: [],
+        chart: {
+          type: "line",
+          zoom: {
+            enabled: false
+          },
+          toolbar: {
+            show: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          width: 3,
+          curve: "smooth"
+        },
+        title: {
+          align: "center"
+        },
+        grid: {
+          row: {
+            colors: ["#f3f3f3", "transparent"],
+            opacity: 0.5
+          }
+        },
+        xaxis: {
+          categories: [],
+        }
+      },
+      totalViewPeriodData: [],
+      totalViewPeriodOptions: {
+        series: [],
+        chart: {
+          type: "line",
+          zoom: {
+            enabled: false
+          },
+          toolbar: {
+            show: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          width: 3,
+          curve: "smooth"
+        },
+        title: {
+          align: "center"
+        },
+        grid: {
+          row: {
+            colors: ["#f3f3f3", "transparent"],
+            opacity: 0.5
+          }
+        },
+        xaxis: {
+          categories: [],
+        }
+      },
     };
   }
 };

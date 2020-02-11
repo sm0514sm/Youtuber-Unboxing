@@ -49,15 +49,12 @@
                         justify="center"
                       >
                         <b>{{category.name}}</b>
-                      </v-btn> 
+                      </v-btn>
                       <v-btn text icon color="yellow" @click="flag? (flag = false) : (flag = true)">
                         <v-icon v-if="flag" x-large>star</v-icon>
                         <v-icon v-if="!flag" x-large>star_border</v-icon>
                       </v-btn>
                     </v-col>
-                    <!-- <v-col>
-                      <v-btn rounded depressed color="#9CDCF0">임시</v-btn>
-                    </v-col>-->
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
@@ -89,9 +86,48 @@
                       {{youtuber.totalViewCount}}
                     </v-col>
                     <v-divider vertical class="mx-3"></v-divider>
+                    <!-- 외부링크 -->
                     <v-col>
-                      <!-- <v-img v-for="(link,i) in otherLinkIcon" :key="i" :src="link['icon']" /> -->
-                      <!-- <img src="../assets/instagramIcon.png"/> -->
+                      <v-row align ="center" style="float: left;">
+                       
+                       <!-- instagram -->
+                      <v-img
+                        width = "32px"
+                        class="ml-2 mr-2 my-3"
+                        v-if="otherLinkIcon[0] != '' "
+                        src="../assets/instagramIcon.png"
+                        @click="openNewWindow(otherLinkIcon[0])"
+                      />
+                      <!-- twitter -->
+                      <v-img
+                        width = "32px"
+                        class="ml-2 mr-2 my-3"
+                        v-if="otherLinkIcon[1] != '' "
+                        src="../assets/twitterIcon.png"
+                        @click="openNewWindow(otherLinkIcon[1])"
+                      />
+                      <!-- facebook -->
+                      <v-img
+                        width = "32px"
+                        class="ml-2 mr-2 my-3"
+                        v-if="otherLinkIcon[2] != '' "
+                        src="../assets/facebookIcon.png"
+                        @click="openNewWindow(otherLinkIcon[2])"
+                      />
+                      <!-- tiktok -->
+                      <v-img
+                        width = "32px"
+                        class="ml-2 mr-2 my-3"
+                        v-if="otherLinkIcon[3] != '' "
+                        src="../assets/tiktokIcon.png"
+                        @click="openNewWindow(otherLinkIcon[3])"/>
+                          
+                         
+                      
+                      </v-row>
+                     
+                      
+                    
                     </v-col>
                     <v-spacer></v-spacer>
                   </v-row>
@@ -113,7 +149,7 @@
                 </v-row>
                 <apexchart
                   type="radar"
-                  height="500"
+                  height="700"
                   :options="chartOptions"
                   :series="mainData"
                   id="myapexchart"
@@ -523,51 +559,14 @@ export default {
         );
       }
 
-      // this.makeOtherLinkIcon();
+      this.makeOtherLinkIcon();
       this.loading = "success";
 
       console.log(this.loading);
       // this.renderMainChart();
       // this.renderActivityChart(activity4weeks);
     },
-    renderMainChart() {
-      var chart = this.$refs.myDiv;
-      var influence = this.youtuber.influence;
-      var activity = this.youtuber.activity;
-      var viewCountTrend = this.youtuber.viewCountTrend;
-      var subscriberCountTrend = this.youtuber.subscriberCountTrend;
-      var charm = this.youtuber.charm;
 
-      chart.appendSeries({
-        name: " ",
-        data: [
-          influence,
-          activity,
-          viewCountTrend,
-          subscriberCountTrend,
-          charm
-        ],
-        animation: true
-      });
-    },
-    renderActivityChart(activity4weeks) {
-      var chart = this.$refs.activityChart;
-
-      console.log(typeof chart == "undefined");
-
-      this.renderActivityChart(activity4weeks);
-      console.log(typeof chart == "undefined");
-      chart.appendSeries({
-        name: " ",
-        data: [
-          activity4weeks[0],
-          activity4weeks[1],
-          activity4weeks[2],
-          activity4weeks[3]
-        ],
-        animation: true
-      });
-    },
     setGradeColor(str) {
       if (typeof str == "undefined") {
         return "gray";
@@ -597,12 +596,6 @@ export default {
     },
     makeOtherLinkIcon() {
       var site = ["instagram", "twitter", "facebook", "tiktok"];
-      // var icon = [
-      //   "require('@/assets/instagramIcon.png')",
-      //   "../assets/twitterIcon.png",
-      //   "../assets/facebookIcon.png",
-      //   "require('@/assets/tiktokIcon.png')"
-      // ];
       var y = this.youtuber;
       var link = [
         y.otherLink1,
@@ -611,21 +604,21 @@ export default {
         y.otherLink4,
         y.otherLink5
       ];
-      this.iconflag = [false, false, false, false];
+
+      this.otherLinkIcon = ["", "", "", ""];
 
       for (let i = 0; i < link.length; i++) {
         for (let j = 0; j < site.length; j++) {
-          if (link[i].indexOf(site[j]) != -1) {
-            this.otherLinkIcon.push({ link: link[i] });
-            this.other;
+          if(link[i].indexOf(site[j]) != -1){
+            this.otherLinkIcon[j] = link[i];
             break;
           }
         }
       }
+
     },
-    getImgUrl() {
-      // var images = require.context('../assets/', false, /\.png$/)
-      return "../assets/instagramIcon.png";
+    openNewWindow(str) {
+      window.open(str);
     }
   },
   computed: {},
@@ -641,6 +634,9 @@ export default {
             blur: 1,
             left: 1,
             top: 1
+          },
+          toolbar: {
+            show: false
           }
         },
         title: {},
@@ -811,8 +807,7 @@ export default {
       news: [],
       categoryOfYoutuber: [],
       otherLinkIcon: [],
-      iconflag: [],
-      flag : false,
+      flag: false
     };
   }
 };

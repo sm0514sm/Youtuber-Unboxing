@@ -242,7 +242,7 @@ export default {
 
 
         // activity1 : youtuber {{week}}주동안 영상 업로드 수
-        var week = 4
+        var week = 25
         const video4Weeks1 = new Promise((resolve, reject) => {
             http
                 .get("/youtuber/detail/activity/termVideoCount/" + yno1 + "_" + week)
@@ -255,7 +255,7 @@ export default {
         });
 
         // activity2 : youtuber {{week}}주동안 영상 업로드 수
-        week = 4
+        week = 25
         const video4Weeks2 = new Promise((resolve, reject) => {
             http
                 .get("/youtuber/detail/activity/termVideoCount/" + yno2 + "_" + week)
