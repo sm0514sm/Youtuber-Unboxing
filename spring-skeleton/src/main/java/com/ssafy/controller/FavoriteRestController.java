@@ -43,7 +43,7 @@ public class FavoriteRestController {
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-	@ApiOperation("해당 youtuber를 해당 user의 즐겨찾기에 추가")
+	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 youtuber를 해당 user의 즐겨찾기에 추가")
 	@PostMapping("/favorite/insert")
 	public ResponseEntity<Map<String, Object>> insertFavorite(@RequestParam Map<String, Object> fav){
 		Gson gson = new Gson(); 
