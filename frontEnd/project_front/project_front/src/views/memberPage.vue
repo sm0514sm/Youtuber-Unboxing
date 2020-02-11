@@ -10,12 +10,13 @@
   <v-card flat>
     <v-card-text>
       <v-container fluid>
-        <v-toolbar-title>관심 항목 설정</v-toolbar-title>
+        <v-toolbar-title>관심 항목 설정 [최대 3개 항목]</v-toolbar-title>
         <p>{{ interest }}</p>
         <v-row>
           <v-col cols="12" sm="4" md="4">
             <v-switch
               v-model="interest"
+              :disabled="check('0')"
               label="패션"
               color="red"
               value='0'
@@ -23,6 +24,7 @@
             ></v-switch>
             <v-switch
               v-model="interest"
+              :disabled="check('1')"
               label="화장품/뷰티"
               color="pink"
               value='1'
@@ -30,6 +32,7 @@
             ></v-switch>
             <v-switch
               v-model="interest"
+              :disabled="check('2')"
               label="디지털/가전"
               color="purple"
               value="2"
@@ -39,6 +42,7 @@
           <v-col cols="12" sm="4" md="4">
             <v-switch
               v-model="interest"
+              :disabled="check('3')"
               label="식품"
               color="indigo"
               value="3"
@@ -46,6 +50,7 @@
             ></v-switch>
             <v-switch
               v-model="interest"
+              :disabled="check('4')"
               label="출산/육아"
               color="blue"
               value="4"
@@ -53,6 +58,7 @@
             ></v-switch>
             <v-switch
               v-model="interest"
+              :disabled="check('5')"
               label="생활/건강"
               color="cyan"
               value="5"
@@ -62,6 +68,7 @@
           <v-col cols="12" sm="4" md="4">
             <v-switch
               v-model="interest"
+              :disabled="check('6')"
               label="공연/레저/문화"
               color="green"
               value="6"
@@ -69,6 +76,7 @@
             ></v-switch>
             <v-switch
               v-model="interest"
+              :disabled="check('7')"
               label="스포츠/레저"
               color="yellow"
               value="7"
@@ -76,6 +84,7 @@
             ></v-switch>
             <v-switch
               v-model="interest"
+              :disabled="check('8')"
               label="여행"
               color="orange"
               value="8"
@@ -152,6 +161,7 @@
 import http from "../vuex/http-common";
   export default {
     data: () => ({
+      maxlength: [v => v.length < 3 || ""],
       headers: [
         { text: '채널 이름', align:'left', value:'thumbnails', sortable:false},
         { text: '구독자', value: 'subscriber' },
@@ -169,7 +179,7 @@ import http from "../vuex/http-common";
       ],
       fav: [],
       user: [],
-      interest: ['1','2','4','5'],
+      interest: ['1','3'],
       recommend: [],
       loader: null,
       loading: false,
@@ -190,6 +200,11 @@ import http from "../vuex/http-common";
     },
 
     methods: {
+      check(a){
+        if(this.interest.length>2 && !(this.interest.includes(a))){
+          return true
+        }else return false
+      },
       getRecommend(){
         console.log("recommed")
         console.log(this.interest)
