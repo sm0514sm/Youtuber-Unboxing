@@ -16,15 +16,51 @@
                     </v-col>
                     <v-col cols="7" class="pb-0">
                       <v-row style="height :45%">
-                        <v-col>
+                        <v-col class="px-0">
                           <p class="font-weight-black thin ma-0 headline">{{youtuber1.channelName}}</p>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="7">
-                          <p
-                            class="font-weight-black thin ma-0 headline"
-                          >{{youtuber1.publishedDate}}</p>
+                          <v-row>
+                            <p
+                              class="font-weight-black thin ma-0 headline"
+                            >{{youtuber1.publishedDate}}</p>
+                          </v-row>
+                          <v-row class="mt-5" style="float: left;">
+                            <!-- instagram -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon1[0] != '' "
+                              src="../assets/instagramIcon.png"
+                              @click="openNewWindow(otherLinkIcon1[0])"
+                            />
+                            <!-- twitter -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon1[1] != '' "
+                              src="../assets/twitterIcon.png"
+                              @click="openNewWindow(otherLinkIcon1[1])"
+                            />
+                            <!-- facebook -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon1[2] != '' "
+                              src="../assets/facebookIcon.png"
+                              @click="openNewWindow(otherLinkIcon1[2])"
+                            />
+                            <!-- tiktok -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon1[3] != '' "
+                              src="../assets/tiktokIcon.png"
+                              @click="openNewWindow(otherLinkIcon1[3])"
+                            />
+                          </v-row>
                         </v-col>
                         <v-col cols="5">
                           <v-btn
@@ -63,14 +99,49 @@
                             style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
                           >
                             <p
-                              style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px;"
+                              style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px; text-align: right;"
                             >{{youtuber2.grade}}</p>
                           </v-btn>
                         </v-col>
                         <v-col cols="7">
-                          <p
-                            class="font-weight-black thin ma-0 headline"
-                          >{{youtuber2.publishedDate}}</p>
+                          <v-row class="pl-7">
+                              <p
+                              class="font-weight-black thin ma-0 headline" style="text-align='right'">{{youtuber2.publishedDate}}</p>
+                          </v-row>
+                          <v-row align="center" class="mt-5" style="float: left;">
+                            <!-- instagram -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon2[0] != '' "
+                              src="../assets/instagramIcon.png"
+                              @click="openNewWindow(otherLinkIcon2[0])"
+                            />
+                            <!-- twitter -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon2[1] != '' "
+                              src="../assets/twitterIcon.png"
+                              @click="openNewWindow(otherLinkIcon2[1])"
+                            />
+                            <!-- facebook -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon2[2] != '' "
+                              src="../assets/facebookIcon.png"
+                              @click="openNewWindow(otherLinkIcon2[2])"
+                            />
+                            <!-- tiktok -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon2[3] != '' "
+                              src="../assets/tiktokIcon.png"
+                              @click="openNewWindow(otherLinkIcon2[3])"
+                            />
+                          </v-row>
                         </v-col>
                       </v-row>
                     </v-col>
@@ -154,11 +225,7 @@
             </v-row>
             <v-row>
               <v-col>
-                <apexchart
-                  height="200"
-                  :options="videoPeriodOptions"
-                  :series="videoPeriodData"
-                ></apexchart>
+                <apexchart height="200" :options="videoPeriodOptions" :series="videoPeriodData"></apexchart>
               </v-col>
             </v-row>
           </v-card>
@@ -412,7 +479,7 @@ export default {
           data: activity25weeks2
         }
       ];
-      for (let index = activity25weeks1.length-1; index > 0; index--) {
+      for (let index = activity25weeks1.length - 1; index > 0; index--) {
         this.videoPeriodOptions["xaxis"]["categories"].push(index + "주전");
       }
 
@@ -429,9 +496,15 @@ export default {
       ];
 
       for (let index = 0; index < subscriberView1.length; index++) {
-        this.subscriberPeriodData[0]["data"].push(subscriberView1[index].pointSubscriber)
-        this.subscriberPeriodData[1]["data"].push(subscriberView2[index].pointSubscriber)
-        this.subscriberPeriodOptions["xaxis"]["categories"].push(subscriberView1[index].recordDate.substring(5,10));
+        this.subscriberPeriodData[0]["data"].push(
+          subscriberView1[index].pointSubscriber
+        );
+        this.subscriberPeriodData[1]["data"].push(
+          subscriberView2[index].pointSubscriber
+        );
+        this.subscriberPeriodOptions["xaxis"]["categories"].push(
+          subscriberView1[index].recordDate.substring(5, 10)
+        );
       }
 
       //총영상수추이
@@ -447,11 +520,19 @@ export default {
       ];
 
       for (let index = 0; index < subscriberView1.length; index++) {
-        this.totalViewPeriodData[0]["data"].push(subscriberView1[index].pointView)
-        this.totalViewPeriodData[1]["data"].push(subscriberView2[index].pointView)
-        this.totalViewPeriodOptions["xaxis"]["categories"].push(subscriberView1[index].recordDate.substring(5,10));
+        this.totalViewPeriodData[0]["data"].push(
+          subscriberView1[index].pointView
+        );
+        this.totalViewPeriodData[1]["data"].push(
+          subscriberView2[index].pointView
+        );
+        this.totalViewPeriodOptions["xaxis"]["categories"].push(
+          subscriberView1[index].recordDate.substring(5, 10)
+        );
       }
-      
+
+      //otherLink
+      // this.makeOtherLinkIcon();
     },
     setGradeColor(str) {
       if (typeof str == "undefined") {
@@ -527,6 +608,31 @@ export default {
           }
         }
       };
+    },
+    makeOtherLinkIcon() {
+      var site = ["instagram", "twitter", "facebook", "tiktok"];
+      var y1 = this.youtuber1;
+      var link1 = [
+        y1.otherLink1,
+        y1.otherLink2,
+        y1.otherLink3,
+        y1.otherLink4,
+        y1.otherLink5
+      ];
+
+      this.otherLinkIcon1 = ["", "", "", ""];
+
+      for (let i = 0; i < link1.length; i++) {
+        for (let j = 0; j < site.length; j++) {
+          if (link1[i].indexOf(site[j]) != -1) {
+            this.otherLinkIcon1[j] = link1[i];
+            break;
+          }
+        }
+      }
+    },
+    openNewWindow(str) {
+      window.open(str);
     }
   },
   computed: {},
@@ -656,7 +762,7 @@ export default {
           }
         },
         xaxis: {
-          categories: [],
+          categories: []
         }
       },
       totalViewPeriodData: [],
@@ -688,9 +794,11 @@ export default {
           }
         },
         xaxis: {
-          categories: [],
+          categories: []
         }
       },
+      otherLinkIcon1: [],
+      otherLinkIcon2: []
     };
   }
 };

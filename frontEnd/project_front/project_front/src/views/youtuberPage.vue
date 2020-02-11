@@ -88,46 +88,40 @@
                     <v-divider vertical class="mx-3"></v-divider>
                     <!-- 외부링크 -->
                     <v-col>
-                      <v-row align ="center" style="float: left;">
-                       
-                       <!-- instagram -->
-                      <v-img
-                        width = "32px"
-                        class="ml-2 mr-2 my-3"
-                        v-if="otherLinkIcon[0] != '' "
-                        src="../assets/instagramIcon.png"
-                        @click="openNewWindow(otherLinkIcon[0])"
-                      />
-                      <!-- twitter -->
-                      <v-img
-                        width = "32px"
-                        class="ml-2 mr-2 my-3"
-                        v-if="otherLinkIcon[1] != '' "
-                        src="../assets/twitterIcon.png"
-                        @click="openNewWindow(otherLinkIcon[1])"
-                      />
-                      <!-- facebook -->
-                      <v-img
-                        width = "32px"
-                        class="ml-2 mr-2 my-3"
-                        v-if="otherLinkIcon[2] != '' "
-                        src="../assets/facebookIcon.png"
-                        @click="openNewWindow(otherLinkIcon[2])"
-                      />
-                      <!-- tiktok -->
-                      <v-img
-                        width = "32px"
-                        class="ml-2 mr-2 my-3"
-                        v-if="otherLinkIcon[3] != '' "
-                        src="../assets/tiktokIcon.png"
-                        @click="openNewWindow(otherLinkIcon[3])"/>
-                          
-                         
-                      
+                      <v-row align="center" style="float: left;">
+                        <!-- instagram -->
+                        <v-img
+                          width="32px"
+                          class="ml-2 mr-2 my-3"
+                          v-if="otherLinkIcon[0] != '' "
+                          src="../assets/instagramIcon.png"
+                          @click="openNewWindow(otherLinkIcon[0])"
+                        />
+                        <!-- twitter -->
+                        <v-img
+                          width="32px"
+                          class="ml-2 mr-2 my-3"
+                          v-if="otherLinkIcon[1] != '' "
+                          src="../assets/twitterIcon.png"
+                          @click="openNewWindow(otherLinkIcon[1])"
+                        />
+                        <!-- facebook -->
+                        <v-img
+                          width="32px"
+                          class="ml-2 mr-2 my-3"
+                          v-if="otherLinkIcon[2] != '' "
+                          src="../assets/facebookIcon.png"
+                          @click="openNewWindow(otherLinkIcon[2])"
+                        />
+                        <!-- tiktok -->
+                        <v-img
+                          width="32px"
+                          class="ml-2 mr-2 my-3"
+                          v-if="otherLinkIcon[3] != '' "
+                          src="../assets/tiktokIcon.png"
+                          @click="openNewWindow(otherLinkIcon[3])"
+                        />
                       </v-row>
-                     
-                      
-                    
                     </v-col>
                     <v-spacer></v-spacer>
                   </v-row>
@@ -390,6 +384,53 @@
                 </v-row>
               </v-card>
             </v-col>
+
+            <!-- 최신동영상 -->
+            <v-col class="pa-0 pb-3">
+              <v-card outlined flat class="mr-0 my-3 pa-3">
+                <v-row class="pt-0 pl-3 pb-0">
+                  <v-col>
+                    <v-list-item-title class="headline font-weight-black mb-1">최신동영상</v-list-item-title>
+                    <v-divider></v-divider>
+                  </v-col>
+                </v-row>
+                <!-- scroll 녛기 -->
+                <v-row class="pt-0 pl-0 pb-0 ml-0 mr-1">
+                  <v-col
+                    v-for="(item, $index) in videolist"
+                    :key="$index"
+                    :data-num="$index + 1"
+                    class="pa-5"
+                    cols="6"
+                  >
+                    <v-card>
+                      <v-container>
+                        <v-row>
+                          <v-col>
+                            <v-list-item-content class="py-0">
+                              <iframe
+                                :src="String('https://www.youtube.com/embed/')+item.videoID"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                              ></iframe>
+                            </v-list-item-content>
+                          </v-col>
+                        </v-row>
+                        <v-row>
+                          <v-col class="pt-0">
+                            <p class="text-truncate title mb-0">{{item.videoName}}</p>
+                            <p style="font-size: 13px"> 게시일 : {{item.regDate}} / 조회수 : {{item.videoViewCount}} 회 </p>
+                            <p v-html="item.videoDescription.substring(0,120).concat('...')" class="font-weight-light" style="color:gray"></p>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                    </v-card>
+                  </v-col>
+                </v-row>
+                <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+              </v-card>
+            </v-col>
           </v-col>
 
           <v-col cols="3">
@@ -403,7 +444,7 @@
                       <template v-slot:activator="{ on }">
                         <v-icon v-on="on">info</v-icon>
                       </template>
-                      <span>등급산정기준은 뭐라뭐라뭘마ㅝ라입니다</span>
+                      <span>등급산정기준은 현재 사이트 기준으로 상위 5%는<br> SS등급, 10%는 S등급, 20%는 A등급, 50%는 B등급, 80%는 C등급으로 챙적하고 있습니다.</span>
                     </v-tooltip>
                   </v-list-item-title>
                   <v-divider></v-divider>
@@ -416,8 +457,8 @@
                   style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
                 >
                   <p
-                    style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
-                  >{{youtuber.grade}}</p>
+                    style="font-weight-black text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
+                  >{{setGrade(youtuber.grade)}}</p>
                 </v-btn>
               </transition>
             </v-card>
@@ -455,13 +496,17 @@
 </template>
 
 <script>
-// import http from "../vuex/http-common";
+import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
+import InfiniteLoading from "vue-infinite-loading";
+
 // import axios from "axios";
 
 export default {
-  components: {},
   name: "youtuberPage",
+  components: {
+    InfiniteLoading
+  },
   beforecreated() {},
   created() {
     this.$vuetify.goTo(0);
@@ -567,22 +612,22 @@ export default {
       // this.renderActivityChart(activity4weeks);
     },
 
-    setGradeColor(str) {
-      if (typeof str == "undefined") {
+    setGradeColor(num) {
+      if (typeof num == "undefined") {
         return "gray";
       }
-      if (str.startsWith("S") || str.startsWith("A")) {
-        return "red";
-      } else if (str.startsWith("B")) {
-        return "orange";
-      } else if (str.startsWith("C")) {
-        return "yellow";
-      } else if (str.startsWith("D")) {
-        return "green";
-      } else if (str.startsWith("E")) {
-        return "blue";
-      } else {
-        return "gray";
+      if(num >= 95){
+        return "red"
+      }else  if(num >= 90){
+        return "orange"
+      }else  if(num >= 80){
+        return "yellow"
+      }else  if(num >= 50){
+        return "green"
+      }else  if(num >= 20){
+        return "blue"
+      }else {
+        return "gray"
       }
     },
     failCallback(err) {
@@ -609,16 +654,51 @@ export default {
 
       for (let i = 0; i < link.length; i++) {
         for (let j = 0; j < site.length; j++) {
-          if(link[i].indexOf(site[j]) != -1){
+          if (link[i].indexOf(site[j]) != -1) {
             this.otherLinkIcon[j] = link[i];
             break;
           }
         }
       }
-
     },
     openNewWindow(str) {
       window.open(str);
+    },
+    infiniteHandler($state) {
+      var range = 10;
+      var rawList = [];
+      http
+        .get("/youtuber/detail/video/" + this.$route.query.yno)
+        .then(({ data }) => {
+          rawList = data.data;
+          var tmplist = rawList.slice(
+            this.page * range,
+            this.page * range + range
+          );
+          console.log(rawList);
+          if (tmplist.length > 0) {
+            this.page += 1;
+            this.videolist.push(...tmplist);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        });
+    },
+    setGrade(num){
+      if(num >= 95){
+        return "SS"
+      }else  if(num >= 90){
+        return "S"
+      }else  if(num >= 80){
+        return "A"
+      }else  if(num >= 50){
+        return "B"
+      }else  if(num >= 20){
+        return "C"
+      }else {
+        return "D"
+      }
     }
   },
   computed: {},
@@ -807,7 +887,9 @@ export default {
       news: [],
       categoryOfYoutuber: [],
       otherLinkIcon: [],
-      flag: false
+      flag: false,
+      page: 0,
+      videolist: []
     };
   }
 };

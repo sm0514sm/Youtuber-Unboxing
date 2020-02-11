@@ -13,38 +13,44 @@
           @click="onCategoryButtonClicked(index)"
         >{{ item. nameEng}}</v-tab>
       </v-tabs>
-      <v-tabs-items :value="currentCategory" >
-        <v-tab-item v-for="(item,index) in categories" :key="index"  >
+      <v-tabs-items :value="currentCategory">
+        <v-tab-item v-for="(item,index) in categories" :key="index">
           <v-card flat class="pa-3" color="#FAFAFA">
-            <v-data-table flat :headers="headers" :items="youtubersPerCategory" class="elevation-1" >
-
+            <v-data-table flat :headers="headers" :items="youtubersPerCategory" class="elevation-1">
               <template v-slot:item.insertCompare="{ item }">
-                <v-btn @click="onClikcedinsertCompare(item.yno,item.channelName)">담기</v-btn>
+                <v-btn @click="onClikcedinsertCompare(item.yno,item.channelName)" text color="green">
+                  <v-icon dark>input</v-icon>
+                  담기
+                </v-btn>
               </template>
-            
-            <!-- 썸네일과 channelName -->
+
+              <!-- 썸네일과 channelName -->
               <template v-slot:item.thumbnails="{ item }">
-                <v-card color="#00000000" flat :to="{ path: 'youtuberPage', query: { yno : item.yno}}">
+                <v-card
+                  color="#00000000"
+                  flat
+                  :to="{ path: 'youtuberPage', query: { yno : item.yno}}"
+                >
                   <v-row>
-                    <v-col cols="2" class = "px-0">
-                      <v-card color="#00000000"   width="50px" flat>
+                    <v-col cols="2" class="px-0">
+                      <v-card color="#00000000" width="50px" flat>
                         <v-responsive :aspect-ratio="1/1">
-                          <v-img class="circle" :src="item.thumbnails" flat/>
+                          <v-img class="circle" :src="item.thumbnails" flat />
                         </v-responsive>
                       </v-card>
-
                     </v-col>
-                    <v-col cols="10" class = "px-0">
+                    <v-col cols="10" class="px-0">
                       <v-container fill-height>
                         <v-layout align-center>
-                          <v-flex xs12 text-xs-center><div class="font-weight-light">{{item.channelName}}</div></v-flex>
+                          <v-flex xs12 text-xs-center>
+                            <div class="font-weight-light">{{item.channelName}}</div>
+                          </v-flex>
                         </v-layout>
                       </v-container>
                     </v-col>
                   </v-row>
                 </v-card>
               </template>
-
             </v-data-table>
           </v-card>
         </v-tab-item>
@@ -57,8 +63,7 @@
 <script>
 import { mapGetters } from "vuex";
 import Constant from "../vuex/Constant";
-import EventBus from "../components/eventBus"
-
+import EventBus from "../components/eventBus";
 
 export default {
   components: {},
@@ -66,24 +71,22 @@ export default {
 
   methods: {
     onCategoryButtonClicked(index) {
-      localStorage.setItem('currentCategory',index)
+      localStorage.setItem("currentCategory", index);
       this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
         category: this.findCano()
       });
     },
     findCano: function() {
-      return this.categories[localStorage.getItem('currentCategory')].cano;
+      return this.categories[localStorage.getItem("currentCategory")].cano;
     },
-    onClikcedinsertCompare : function(yno,channelName) {
-      
-      EventBus.$emit("insertYoutuber",yno,channelName)
+    onClikcedinsertCompare: function(yno, channelName) {
+      EventBus.$emit("insertYoutuber", yno, channelName);
     }
   },
   mounted() {
     this.$vuetify.goTo(0);
   },
   created() {
-    
     this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
       category: this.findCano()
     });
@@ -92,16 +95,15 @@ export default {
     ...mapGetters(["categories"]),
     ...mapGetters(["youtubersPerCategory"]),
     currentCategory() {
-      return Number(localStorage.getItem('currentCategory'));
+      return Number(localStorage.getItem("currentCategory"));
     }
   },
   watch: {},
   data() {
     return {
       headers: [
-        
         { text: "", value: "insertCompare", sortable: false },
-        { text: "", value: "thumbnails", sortable: false, width: '70%' },
+        { text: "", value: "thumbnails", sortable: false, width: "70%" },
         { text: "subscriber", value: "subscriber" },
         { text: "influence", value: "influence" },
         { text: "activity", value: "activity" },
@@ -123,7 +125,7 @@ export default {
   transform: translate(-50%, -50%);
 }
 
-.circle{
+.circle {
   border-radius: 50%;
 }
 </style>
