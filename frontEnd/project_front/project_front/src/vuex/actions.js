@@ -36,13 +36,16 @@ export default {
 
         var yno = payload.yno
         var callback = payload.callback
-            //var failCallback = payload.failCallback
+        var failCallback = payload.failCallback
 
         //youtuber 기본정보
         const BasicImpormation = new Promise((resolve, reject) => {
             http
                 .get("/youtuber/" + yno)
                 .then(response => {
+                    if (response.data.stata == "fail") {
+                        failCallback()
+                    }
                     resolve(response.data.data);
                 })
                 .catch(err => {
@@ -104,10 +107,77 @@ export default {
                 });
         });
 
+        //influence : {{term}} 달간 달마다 커뮤니티에서 언급된 횟수
+        var term = 12
+        const communityCount = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/influence/community/" + yno + "_" + term)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        //influence : {{term}}달간 달마다 뉴스에서 언급된 횟수
+        term = 12
+        const newsCount = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/influence/news/" + yno + "_" + term)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        //subscriberCount,viewCount : {{num}}개의 증감추이
+        var num = 50
+        const subscriberViewCount = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/trend/subscriberCount/" + yno + "_" + num)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        //news 
+        const news = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/news/" + yno)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        //유튜버가 속한 카테고리
+        const categoryOfYoutuber = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/category/" + yno)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
 
 
 
-        Promise.all([BasicImpormation, videoDuringMonth, video4Weeks, entiregoodratio, goodRatioperVideo]).then(
+
+
+
+
+
+        Promise.all([BasicImpormation, videoDuringMonth, video4Weeks, entiregoodratio, goodRatioperVideo, communityCount, newsCount, subscriberViewCount, news, categoryOfYoutuber]).then(
             axios.spread((...responses) => {
 
 
@@ -138,13 +208,44 @@ export default {
     },
     [Constant.GET_COMPARE_YOUTUBER]: (store, payload) => {
 
-        var youtuber1 = payload.youtuber1;
-        var youtuber2 = payload.youtuber2;
+        var yno1 = payload.yno1;
+        var yno2 = payload.yno2;
         var callback = payload.callback;
 
-        const youtuber1Search = new Promise((resolve, reject) => {
+
+
+        //youtuber1 기본정보
+        const BasicImpormation1 = new Promise((resolve, reject) => {
             http
-                .get("/youtuber/" + youtuber1.yno)
+                .get("/youtuber/" + yno1)
+                .then(response => {
+                    // if (response.data.stata == "fail") {}
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+        //youtuber2 기본정보
+        const BasicImpormation2 = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/" + yno2)
+                .then(response => {
+                    // if (response.data.stata == "fail") {}
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+
+        // activity1 : youtuber {{week}}주동안 영상 업로드 수
+        var week = 25
+        const video4Weeks1 = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/activity/termVideoCount/" + yno1 + "_" + week)
                 .then(response => {
                     resolve(response.data.data);
                 })
@@ -153,9 +254,11 @@ export default {
                 });
         });
 
-        const youtuber2Search = new Promise((resolve, reject) => {
+        // activity2 : youtuber {{week}}주동안 영상 업로드 수
+        week = 25
+        const video4Weeks2 = new Promise((resolve, reject) => {
             http
-                .get("/youtuber/" + youtuber2.yno)
+                .get("/youtuber/detail/activity/termVideoCount/" + yno2 + "_" + week)
                 .then(response => {
                     resolve(response.data.data);
                 })
@@ -164,16 +267,51 @@ export default {
                 });
         });
 
-        Promise.all([youtuber1Search, youtuber2Search]).then(
+        //subscriberCount,viewCount1 : {{num}}개의 증감추이
+        var num = 50
+        const subscriberViewCount1 = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/trend/subscriberCount/" + yno1 + "_" + num)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+
+        //subscriberCount,viewCount2 : {{num}}개의 증감추이
+        num = 50
+        const subscriberViewCount2 = new Promise((resolve, reject) => {
+            http
+                .get("/youtuber/detail/trend/subscriberCount/" + yno2 + "_" + num)
+                .then(response => {
+                    resolve(response.data.data);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+
+
+        Promise.all([BasicImpormation1, BasicImpormation2, video4Weeks1, video4Weeks2, subscriberViewCount1, subscriberViewCount2]).then(
             axios.spread((...responses) => {
 
-                console.log(responses[0], responses[1])
 
-                callback(responses[0], responses[1]);
-
+                for (var i = 0; i < responses.length; i++) {
+                    console.log(responses[i])
+                }
+                callback(...responses)
 
             })
-        );
+        )
+
+
+
+
+
+
     },
 
     [Constant.INSERT_YOUTUBUER]: (store, payload) => {
@@ -194,6 +332,8 @@ export default {
             .then(response => {
                 var code = response.data.code
                 var yno = response.data.yno
+
+                console.log("*****************" + code)
 
                 console.log(response);
 

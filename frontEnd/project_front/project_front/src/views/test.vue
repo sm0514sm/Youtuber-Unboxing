@@ -1,27 +1,7 @@
 <template>
-  <v-row>
-    <v-col cols="12" sm="6">
-      <v-hover v-slot:default="{ hover }" open-delay="200">
-        <v-card :elevation="hover ? 16 : 2" class="mx-auto" height="350" max-width="350">
-          <v-card-text
-            class="font-weight-medium mt-12 text-center subtitle-1"
-          >Open Delay (Mouse enter)</v-card-text>
-        </v-card>
-      </v-hover>
-    </v-col>
-
-    <v-col cols="12" sm="6">
-      <v-hover v-slot:default="{ hover }" close-delay="200">
-        <v-card :elevation="hover ? 16 : 2" class="mx-auto" height="350" max-width="350">
-          <v-card-text
-            class="font-weight-medium mt-12 text-center subtitle-1"
-          >Close Delay (Mouse leave)</v-card-text>
-        </v-card>
-      </v-hover>
-    </v-col>
-    <v-btn @click="test">test</v-btn>
-  </v-row>
-  
+  <div id="chart">
+    <apexchart type="radar" height="350" :options="chartOptions" :series="series"></apexchart>
+  </div>
 </template>
 
 <!-- <b-tabs content-class="mt-3" fill>
@@ -85,22 +65,67 @@
                     </b-tabs>-->
 
 <script>
-  import axios from "axios"
+import axios from "axios";
 export default {
   name: "TestPage",
   methods: {
-    test : function() {
-        axios
-            .get("http://70.12.246.59:8000/data/newYoutuber/https:~~www.youtube.com~channel~UC0M-_02RJqMlGTKUjF1WhJg")
-            .then(response => {
-                console.log(response);
-                
-            })
-            .catch(exp => {
-                console.log(exp)
-            });
-
+    test: function() {
+      axios
+        .get(
+          "http://70.12.246.59:8000/data/newYoutuber/https:~~www.youtube.com~channel~UC0M-_02RJqMlGTKUjF1WhJg"
+        )
+        .then(response => {
+          console.log(response);
+        })
+        .catch(exp => {
+          console.log(exp);
+        });
     }
+  },
+  data() {
+    return {
+      series: [
+        {
+          name: "Series 1",
+          data: [80, 50, 30, 40, 100, 20]
+        },
+        {
+          name: "Series 2",
+          data: [20, 30, 40, 80, 20, 80]
+        },
+        {
+          name: "Series 3",
+          data: [44, 76, 78, 13, 43, 10]
+        }
+      ],
+      chartOptions: {
+        chart: {
+          height: 350,
+          type: "radar",
+          dropShadow: {
+            enabled: true,
+            blur: 1,
+            left: 1,
+            top: 1
+          }
+        },
+        title: {
+          text: "Radar Chart - Multi Series"
+        },
+        stroke: {
+          width: 0
+        },
+        fill: {
+          opacity: 0.4
+        },
+        markers: {
+          size: 0
+        },
+        xaxis: {
+          categories: ["2011", "2012", "2013", "2014", "2015", "2016"]
+        }
+      }
+    };
   }
 };
 </script>
