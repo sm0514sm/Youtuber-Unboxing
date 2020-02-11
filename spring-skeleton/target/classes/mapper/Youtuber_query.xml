@@ -82,9 +82,8 @@
 	
 	<!-- youtuber 고유번호 | video 테이블에서 youtuber가 올린 video 조회 | 영상 조회수 기준 내림차순 -->
 	<select id="searchVideo" parameterType="int" resultType="video">
-		<!-- select v.vno, v.yno, v.videoName, v.videoDescription, v.videoViewCount, v.videoCommentCount, 
-		v.good, v.bad, v.regDate, v.ycano, v.tags, v.thumbnail, v.topic -->
-		select *
+		select v.vno, v.yno, v.videoID, v.videoName, v.videoDescription, v.videoViewCount, v.videoCommentCount, 
+		v.good, v.bad, v.regDate, v.ycano, v.tags, v.thumbnail
 		from youtuber y inner join video v
 		using (yno)
 		where y.yno = #{yno}

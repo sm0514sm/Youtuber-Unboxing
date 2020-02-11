@@ -15,7 +15,7 @@ public class Youtuber {
 	private int subscriber;
 	private long totalViewCount;
 	private int totalVideoCount;
-	private String grade;
+	private int grade;
 	private int influence;
 	private int activity;
 	private int viewCountTrend;
@@ -31,6 +31,7 @@ public class Youtuber {
 	private String otherLink5;
 	private String uploadsID;
 	private String searchKeyword;
+	private int status;
 	
 	public int getYno() {
 		return yno;
@@ -104,10 +105,10 @@ public class Youtuber {
 	public void setTotalVideoCount(int totalVideoCount) {
 		this.totalVideoCount = totalVideoCount;
 	}
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
 	public int getInfluence() {
@@ -199,5 +200,11 @@ public class Youtuber {
 	}
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }
