@@ -110,7 +110,7 @@
 	
 	<!-- youtuber 고유번호, 검색  개수 | 검색 개수만큼 youtuber의 최근 video 정보 및 그 video의 좋아요 싫어요 비율 정보(goodRatio)를 검색 | 영상 등록일 기준 내림차순 -->
 	<select id="searchVideoGoodRatio" parameterType="java.util.Map" resultType="video">
-		select *, (good / (good + bad)) goodRatio
+		select *, nvl(good / (good + bad), '0') goodRatio
 		from video
 		where yno = #{yno} 
 		order by regDate desc
@@ -119,7 +119,7 @@
 	
 	<!-- youtuber 고유번호, 검색 개수 | 검색 개수만큼 youtuber의 최근 video의 좋아요 싫어요 개수 합산 비율 정보(goodRatio) | 총합산비율 하나만 나옴 -->
 	<select id="searchGoodRatio" parameterType="java.util.Map" resultType="Double">
-		select (sum(v.good) / (sum(v.good) + sum(v.bad))) as goodRatio
+		select nvl(sum(v.good) / (sum(v.good) + sum(v.bad)), '0') as goodRatio
 		from (select good, bad
 				from video
 				where yno = #{yno}
