@@ -11,6 +11,7 @@
 		<typeAlias type="com.ssafy.model.dto.Trend"		alias="trend"/>
 		<typeAlias type="com.ssafy.model.dto.Favorite"	alias="favorite"/>
 		<typeAlias type="com.ssafy.model.dto.User"		alias="user"/>
+		<typeAlias type="com.ssafy.model.dto.Interest"	alias="interest"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/Youtuber_query.xml"/>
@@ -19,5 +20,6 @@
 		<mapper resource="mapper/Video_query.xml"/>
 		<mapper resource="mapper/Favorite_query.xml"/>
 		<mapper resource="mapper/User_query.xml"/>
+		<mapper resource="mapper/Interest_query.xml"/>
 	</mappers>
 </configuration>
