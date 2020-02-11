@@ -5,7 +5,7 @@ from .models import *
 #   - kinds = 1 파급력 ( (커뮤니티 언급수(그래프) + 뉴스언급수), 구독자수, 조회수)
 def get_influence(youtuber):
     references_cnt = len(Community.objects.filter(yno=youtuber.yno)) + len(News.objects.filter(yno=youtuber.yno))
-    score = (youtuber.subscriber * 300 + youtuber.totalviewcount) / 1000 + references_cnt
+    score = (int(youtuber.subscriber) * 300 + int(youtuber.totalviewcount)) / 1000
     value = references_cnt + score
     Stat.objects.create(
         yno=youtuber,
@@ -77,7 +77,7 @@ def get_charm(video_list):
 
 #   - kinds = 0 등급 
 def get_grade(youtuber, stat_influence, stat_activity, stat_trend, stat_views, stat_charm):
-    value = (stat_influence + stat_activity + stat_trend + stat_views + stat_charm*0.5)/5
+    value = (stat_influence + stat_activity + stat_trend*0.7 + stat_views*0.7 + stat_charm*0.5)/5
     Stat.objects.create(
         yno=youtuber,
         kinds=0,
