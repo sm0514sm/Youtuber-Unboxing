@@ -10,6 +10,7 @@
   <v-card flat>
     <v-card-text>
       <v-container fluid>
+        <v-toolbar-title>관심 항목 설정</v-toolbar-title>
         <p>{{ interest }}</p>
         <v-row>
           <v-col cols="12" sm="4" md="4">
@@ -17,14 +18,14 @@
               v-model="interest"
               label="패션"
               color="red"
-              value="0"
+              value='0'
               hide-details
             ></v-switch>
             <v-switch
               v-model="interest"
               label="화장품/뷰티"
               color="pink"
-              value="1"
+              value='1'
               hide-details
             ></v-switch>
             <v-switch
@@ -82,7 +83,7 @@
             ></v-switch>
           </v-col>
         </v-row>
-        <v-btn class="ma-2" :loading="loading" :disabled="loading" color="info" @click="loader = 'loading'">
+        <v-btn class="ma-2" :loading="loading" :disabled="loading" color="info" @click="loader = 'loading'; getRecommend()">
       유튜버 추천 받기
       <template v-slot:loader>
         <span class="custom-loader">
@@ -94,46 +95,9 @@
     </v-card-text>
   </v-card>
 </template>
-<template>
-  <v-data-table
-    :headers="headers1"
-    :items="fav"
-    :items-per-page="5"
-    sort-by="subscriber"
-    class="elevation-1"
-  >
-    <template v-slot:top>
-      <v-toolbar flat color="white">
-        <v-toolbar-title>추천 유튜버 목록</v-toolbar-title>
-        <v-divider
-          class="mx-4"
-          inset
-          vertical
-        ></v-divider>
-      </v-toolbar>
-    </template>
-    <template v-slot:item.thumbnails="{ item }">
-                <v-card color="#00000000" flat :to="{ path: 'youtuberPage', query: { yno : item.yno}}">
-                  <v-row>
-                    <v-col cols="2" class = "px-0">
-                      <v-card color="#00000000"   width="50px" flat>
-                        <v-responsive :aspect-ratio="1/1">
-                          <v-img class="circle" :src="item.thumbnails" flat/>
-                        </v-responsive>
-                      </v-card>
-                    </v-col>
-                    <v-col cols="10" class = "px-0">
-                      <v-container fill-height>
-                        <v-layout align-center>
-                          <v-flex xs12 text-xs-center><div class="font-weight-light">{{item.channelName}}</div></v-flex>
-                        </v-layout>
-                      </v-container>
-                    </v-col>
-                  </v-row>
-                </v-card>
-              </template>
-  </v-data-table>
-</template>
+
+
+<v-divider inset></v-divider>
 <template>
   <v-data-table
     :headers="headers"
@@ -141,6 +105,7 @@
     sort-by="subscriber"
     class="elevation-1"
   >
+  
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>내 즐겨찾기 목록</v-toolbar-title>
@@ -155,7 +120,9 @@
       <v-icon small @click="deleteItem(item)" color="red">
         delete
       </v-icon>
+      
     </template>
+
     <template v-slot:item.thumbnails="{ item }">
                 <v-card color="#00000000" flat :to="{ path: 'youtuberPage', query: { yno : item.yno}}">
                   <v-row>
@@ -202,7 +169,7 @@ import axios from "axios";
       ],
       fav: [],
       user: [],
-      interest: [],
+      interest: ['1','2','4','5'],
       recommend: [],
       loader: null,
       loading: false,
@@ -211,33 +178,36 @@ import axios from "axios";
       loader () {
         const l = this.loader
         this[l] = !this[l]
-        setTimeout(() => (this[l] = false), 3000)
+        setTimeout(() => (this[l] = false), 1000)
         this.loader = null
       },
     },
     created () {
-      this.basicInfo(),
+      this.basicInfo()
       this.initialize()
     },
+    mounted(){
+    },
+
     methods: {
+      getRecommend(){
+        console.log("recommed")
+        console.log(this.interest)
+      },
       basicInfo(){
         axios.get("http://localhost:8080/user/"+this.$session.get('token'))
         .then(response=>{
           this.user=response.data.data
-          console.log(this.user)
         })
       },
       initialize () {
         axios.get("http://localhost:8080/favorite/user/"+this.$session.get('token'))
         .then(response=>{
-          console.log(response)
           this.fav = response.data.data
-          console.log(this.fav)
         })
       },
       deleteItem (item) {
         const index = this.fav.indexOf(item)
-        console.log(item.yno)
         if(confirm('Are you sure you want to delete this item?')){
           this.fav.splice(index, 1)
           let par = item.yno+"_"+this.$session.get('token')
@@ -251,6 +221,7 @@ import axios from "axios";
       });
         }
       },
+      
     },
   }
 </script>
@@ -264,6 +235,7 @@ import axios from "axios";
 .circle{
   border-radius: 50%;
 }
+
  .custom-loader {
     animation: loader 1s infinite;
     display: flex;

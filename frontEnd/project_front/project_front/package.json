@@ -19,6 +19,7 @@
         "material-design-icons-iconfont": "^5.0.1",
         "passport-kakao": "^1.0.0",
         "stylus-loader": "^3.0.2",
+        "thousands-counter": "^2.1.0",
         "vue": "^2.6.10",
         "vue-apexcharts": "^1.5.2",
         "vue-axios-cors": "^1.0.1",
@@ -28,6 +29,7 @@
         "vue-infinite-loading": "^2.4.4",
         "vue-router": "^3.1.5",
         "vue-session": "^1.0.0",
+        "vue-star": "0.0.4",
         "vuetify": "^2.2.4",
         "vuex": "^3.1.2",
         "yarn": "^1.21.1"

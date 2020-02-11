@@ -8,5 +8,6 @@ export default {
     ADD_COMPARED_YOUTUBER: "addcomparedyoutuber",
     GET_COMPARE_YOUTUBER: "getcompareyoutuber",
     INSERT_YOUTUBUER: "insertyoutbuer",
-    GET_MANYTOP5: "getmanytop5"
+    GET_MANYTOP5: "getmanytop5",
+    GET_ALLYOUTUBER: "getallyoutuber"
 };

@@ -20,6 +20,7 @@
                           <p class="font-weight-black thin ma-0 headline">{{youtuber1.channelName}}</p>
                         </v-col>
                       </v-row>
+                      <v-divider class="ma-0"></v-divider>
                       <v-row>
                         <v-col cols="7">
                           <v-row>
@@ -28,40 +29,42 @@
                             >{{youtuber1.publishedDate}}</p>
                           </v-row>
                           <v-row class="mt-5" style="float: left;">
-                            <v-col align ="right">
-                              <!-- instagram -->
-                              <v-img
-                                width="32px"
-                                class="mx-1"
-                                v-if="otherLinkIcon1[0] != '' "
-                                src="../assets/instagramIcon.png"
-                                @click="openNewWindow(otherLinkIcon1[0])"
-                              />
-                              <!-- twitter -->
-                              <v-img
-                                width="32px"
-                                class="mx-1"
-                                v-if="otherLinkIcon1[1] != '' "
-                                src="../assets/twitterIcon.png"
-                                @click="openNewWindow(otherLinkIcon1[1])"
-                              />
-                              <!-- facebook -->
-                              <v-img
-                                width="32px"
-                                class="mx-1"
-                                v-if="otherLinkIcon1[2] != '' "
-                                src="../assets/facebookIcon.png"
-                                @click="openNewWindow(otherLinkIcon1[2])"
-                              />
-                              <!-- tiktok -->
-                              <v-img
-                                width="32px"
-                                class="mx-1"
-                                v-if="otherLinkIcon1[3] != '' "
-                                src="../assets/tiktokIcon.png"
-                                @click="openNewWindow(otherLinkIcon1[3])"
-                              />
-                            </v-col>
+                            <!-- instagram -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon1[0] != '' "
+                              src="../assets/instagramIcon.png"
+                              @click="openNewWindow(otherLinkIcon1[0])"
+                              style="cursor:pointer"
+                            />
+                            <!-- twitter -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon1[1] != '' "
+                              src="../assets/twitterIcon.png"
+                              @click="openNewWindow(otherLinkIcon1[1])"
+                              style="cursor:pointer"
+                            />
+                            <!-- facebook -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon1[2] != '' "
+                              src="../assets/facebookIcon.png"
+                              @click="openNewWindow(otherLinkIcon1[2])"
+                              style="cursor:pointer"
+                            />
+                            <!-- tiktok -->
+                            <v-img
+                              width="32px"
+                              class="mx-1"
+                              v-if="otherLinkIcon1[3] != '' "
+                              src="../assets/tiktokIcon.png"
+                              @click="openNewWindow(otherLinkIcon1[3])"
+                              style="cursor:pointer"
+                            />
                           </v-row>
                         </v-col>
                         <v-col cols="5">
@@ -72,7 +75,7 @@
                           >
                             <p
                               style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px;"
-                            >{{youtuber1.grade}}</p>
+                            >{{setGrade(youtuber1.grade)}}</p>
                           </v-btn>
                         </v-col>
                       </v-row>
@@ -93,6 +96,7 @@
                           <p class="font-weight-black thin ma-0 headline">{{youtuber2.channelName}}</p>
                         </v-col>
                       </v-row>
+                      <v-divider class="ma-0"></v-divider>
                       <v-row>
                         <v-col cols="5">
                           <v-btn
@@ -102,15 +106,13 @@
                           >
                             <p
                               style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px; text-align: right;"
-                            >{{youtuber2.grade}}</p>
+                            >{{setGrade(youtuber2.grade)}}</p>
                           </v-btn>
                         </v-col>
                         <v-col cols="7">
                           <v-row class="pl-7">
-                            <p
-                              class="font-weight-black thin ma-0 headline"
-                              style="text-align='right'"
-                            >{{youtuber2.publishedDate}}</p>
+                              <p
+                              class="font-weight-black thin ma-0 headline" style="text-align='right'">{{youtuber2.publishedDate}}</p>
                           </v-row>
                           <v-row align="center" class="mt-5" style="float: left;">
                             <!-- instagram -->
@@ -120,6 +122,7 @@
                               v-if="otherLinkIcon2[0] != '' "
                               src="../assets/instagramIcon.png"
                               @click="openNewWindow(otherLinkIcon2[0])"
+                              style="cursor:pointer"
                             />
                             <!-- twitter -->
                             <v-img
@@ -128,6 +131,7 @@
                               v-if="otherLinkIcon2[1] != '' "
                               src="../assets/twitterIcon.png"
                               @click="openNewWindow(otherLinkIcon2[1])"
+                              style="cursor:pointer"
                             />
                             <!-- facebook -->
                             <v-img
@@ -136,6 +140,7 @@
                               v-if="otherLinkIcon2[2] != '' "
                               src="../assets/facebookIcon.png"
                               @click="openNewWindow(otherLinkIcon2[2])"
+                              style="cursor:pointer"
                             />
                             <!-- tiktok -->
                             <v-img
@@ -144,6 +149,7 @@
                               v-if="otherLinkIcon2[3] != '' "
                               src="../assets/tiktokIcon.png"
                               @click="openNewWindow(otherLinkIcon2[3])"
+                              style="cursor:pointer"
                             />
                           </v-row>
                         </v-col>
@@ -536,21 +542,21 @@ export default {
       }
 
       //otherLink
-      this.makeOtherLinkIcon();
+      // this.makeOtherLinkIcon();
     },
-    setGradeColor(str) {
-      if (typeof str == "undefined") {
+    setGradeColor(num) {
+      if (typeof num == "undefined") {
         return "gray";
       }
-      if (str.startsWith("S") || str.startsWith("A")) {
+      if (num >= 95) {
         return "red";
-      } else if (str.startsWith("B")) {
+      } else if (num >= 90) {
         return "orange";
-      } else if (str.startsWith("C")) {
+      } else if (num >= 80) {
         return "yellow";
-      } else if (str.startsWith("D")) {
+      } else if (num >= 50) {
         return "green";
-      } else if (str.startsWith("E")) {
+      } else if (num >= 20) {
         return "blue";
       } else {
         return "gray";
@@ -634,29 +640,24 @@ export default {
           }
         }
       }
-
-      var y2 = this.youtuber2;
-      var link2 = [
-        y2.otherLink1,
-        y2.otherLink2,
-        y2.otherLink3,
-        y2.otherLink4,
-        y2.otherLink5
-      ];
-
-      this.otherLinkIcon2 = ["", "", "", ""];
-
-      for (let i = 0; i < link2.length; i++) {
-        for (let j = 0; j < site.length; j++) {
-          if (link2[i].indexOf(site[j]) != -1) {
-            this.otherLinkIcon2[j] = link2[i];
-            break;
-          }
-        }
-      }
     },
     openNewWindow(str) {
       window.open(str);
+    },
+    setGrade(num) {
+      if (num >= 95) {
+        return "SS";
+      } else if (num >= 90) {
+        return "S";
+      } else if (num >= 80) {
+        return "A";
+      } else if (num >= 50) {
+        return "B";
+      } else if (num >= 20) {
+        return "C";
+      } else {
+        return "D";
+      }
     }
   },
   computed: {},

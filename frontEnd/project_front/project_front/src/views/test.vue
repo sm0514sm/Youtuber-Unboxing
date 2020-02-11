@@ -1,69 +1,90 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col
-        v-for="(item, $index) in videolist"
-        :key="$index"
-        :data-num="$index + 1"
-        class="pa-1"
-        cols="6"
-      >
-        <v-row>
-          <v-col>
-            <iframe
-              :src="String('https://www.youtube.com/embed/')+item.videoID"
-              frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </v-col>
-        </v-row>
-        <v-row><p class="text-truncate">{{item.videoName}}</p></v-row>
-      </v-col>
-    </v-row>
-    <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-  </v-container>
+  <div>
+    <br />
+    <br />
+    <br />
+    <v-autocomplete
+      :items="searchItems"
+      hide-details
+      item-text="channelName"
+      item-value="channelName"
+      :search-input.sync="inputKeyword"
+      solo
+      @keyup.enter="search"
+      ref="keyword"
+      id = "keyword"
+      label="유튜버를 검색해보세요"
+      style="max-width: 300px; "
+    >
+      <template v-slot:no-data>
+        <v-list-item>
+          <v-list-item-title>검색 결과가 없습니다.</v-list-item-title>
+        </v-list-item>
+      </template>
+
+      <template v-slot:item="{ item }">
+        <v-list-item-avatar color="red" class="headline font-weight-light white--text">
+          <img :src="item.thumbnails" alt="John" />
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title v-text="item.channelName"></v-list-item-title>
+          <v-list-item-subtitle>{{item.subscriber}}</v-list-item-subtitle>
+        </v-list-item-content>
+      </template>
+    </v-autocomplete>
+  </div>
 </template>
 
 
 <script>
-import axios from "axios";
-import InfiniteLoading from "vue-infinite-loading";
-
-const api = "http://15.165.77.1:8080/SpringBootNew/youtuber/detail/video/597";
-
+import http from "../vuex/http-common";
 export default {
   name: "TestPage",
-  components: {
-    InfiniteLoading
+  components: {},
+  data: () => ({
+    searchItems: [],
+    inputKeyword: null,
+  }),
+  created() {
+http
+        .get("/youtuber/all")
+        .then(response => {
+          console.log(response.data.data);
+          this.searchItems = response.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        })
   },
-  methods: {
-    infiniteHandler($state) {
-      var range = 10;
-      var rawList = [];
-      axios.get(api).then(({ data }) => {
-        rawList = data.data;
-        var tmplist = rawList.slice(
-          this.page * range,
-          this.page * range + range
-        );
-        if (tmplist.length > 0) {
-          this.page += 1;
-          this.videolist.push(...tmplist);
-          $state.loaded();
-        } else {
-          $state.complete();
-        }
-      });
+
+  watch: {
+    
+    inputKeyword() {
+      // Items have already been loaded
+      if (this.searchItems.length > 0) return;
+
+
+      // Lazily load input items
+      http
+        .get("/youtuber/all")
+        .then(response => {
+          console.log(response.data.data);
+          this.searchItems = response.data.data;
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
   },
-  data() {
-    return {
-      page: 0,
-      videolist: []
-    };
-  },
-  created() {}
+  methods: {
+    search: function() {
+      console.log("*************"+document.getElementById("keyword").value)
+      this.$router.push(
+        { path: "/searchPage", query: { word: document.getElementById("keyword").value } },
+        () => {}
+      );
+    },
+  }
 };
 </script>
 

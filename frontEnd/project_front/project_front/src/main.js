@@ -26,8 +26,8 @@ Vue.component('apexchart', VueApexCharts)
 
 var sessionOptions = {
     persist: true
-  }
-  Vue.use(VueSession, sessionOptions)
+}
+Vue.use(VueSession, sessionOptions)
 
 const router = new Router({
     mode: 'history',
