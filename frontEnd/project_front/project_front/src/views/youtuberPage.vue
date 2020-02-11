@@ -55,6 +55,13 @@
                         <v-icon v-if="!flag" x-large>star_border</v-icon>
                       </v-btn>
                     </v-col>
+                      <v-btn v-if="loginStatus" text icon color="red" @click="manageFav">
+                        <v-icon v-if="flag" @click="deleteFav" x-large>star</v-icon>
+                        <v-icon v-if="!flag" @click="insertFav" x-large>star_border</v-icon>
+                      </v-btn>
+                    <v-col>
+                      <v-btn rounded depressed color="#9CDCF0">임시</v-btn>
+                    </v-col>
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
@@ -518,12 +525,47 @@ export default {
       callback: this.render,
       failCallback: this.failCallback
     });
-    // axios
-    //   .get("http://70.12.246.59:8000/data/updateStat/" + this.$route.query.yno)
-    //   .then()
-    //   .catch();
+    if(this.$session.exists()){
+      this.loginStatus=true
+      let initialUrl=this.$route.query.yno+"_"+this.$session.get('token')
+      console.log(initialUrl)
+      axios.get("http://localhost:8080/favorite/select/"+initialUrl)
+      .then(data => this.flag = data.data.data==0 ? false : true)
+    }
   },
   methods: {
+    manageFav(){
+      this.flag? (this.flag = false) : (this.flag = true)
+    },
+    insertFav(){
+      console.log("insert")
+      console.log(this.$session.get('token'))
+      console.log(this.youtuber.yno)
+      axios.post('http://localhost:8080/favorite/insert', {
+        yno: this.youtuber.yno,
+        token: this.$session.get('token')
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    deleteFav(){
+      console.log("delete")
+      console.log(this.$session.get('token'))
+      console.log(this.youtuber.yno)
+      let par = this.youtuber.yno+"_"+this.$session.get('token')
+      let deleteUrl = "http://localhost:8080/favorite/delete/"+par
+      axios.delete(deleteUrl)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
     render(...responses) {
       var youtuber = responses[0];
       var activityDuringMonth = responses[1];
