@@ -101,7 +101,7 @@ export default {
       headers: [
         
         { text: "", value: "insertCompare", sortable: false },
-        { text: "", value: "thumbnails", sortable: false },
+        { text: "", value: "thumbnails", sortable: false, width: '70%' },
         { text: "subscriber", value: "subscriber" },
         { text: "influence", value: "influence" },
         { text: "activity", value: "activity" },

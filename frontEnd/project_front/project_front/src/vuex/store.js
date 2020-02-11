@@ -28,24 +28,24 @@ const state = {
             cano: 2,
         },
         {
-            nameEng: "beauty",
-            nameKor: "뷰티",
+            nameEng: "know-how/style",
+            nameKor: "노하우/스타일",
             cano: 3,
         },
         {
             nameEng: "sports",
-            nameKor: "운동",
+            nameKor: "스포츠/운동",
             cano: 4,
 
         },
         {
-            nameEng: "mukbang",
-            nameKor: "먹방",
+            nameEng: "mukbang/food",
+            nameKor: "먹방/음식/푸드",
             cano: 5,
         },
         {
-            nameEng: "kids",
-            nameKor: "키즈",
+            nameEng: "kids/edu",
+            nameKor: "키즈/교육",
             cano: 6,
 
         },
@@ -61,8 +61,8 @@ const state = {
             cano: 8,
         },
         {
-            nameEng: "it",
-            nameKor: "IT",
+            nameEng: "science",
+            nameKor: "과학",
             cano: 9,
 
         },
