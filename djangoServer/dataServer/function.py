@@ -3,7 +3,7 @@
 from django.shortcuts import render, HttpResponse
 from django.db.models import Count
 from .models import *
-from .stat  import get_influence, get_activity, get_trend, get_views, get_charm, get_grade
+from .stat import get_influence, get_activity, get_trend, get_views, get_charm, get_grade
 import urllib.request
 import requests
 from decouple import config
@@ -18,7 +18,8 @@ from selenium.common.exceptions import NoSuchElementException
 
 
 key_list = [config('GOOGLEAPIKEY5'), config('GOOGLEAPIKEY7'), config('GOOGLEAPIKEY6'), config('GOOGLEAPIKEY8'),
-            config('GOOGLEAPIKEY1'), config('GOOGLEAPIKEY2'), config('GOOGLEAPIKEY3'), config('GOOGLEAPIKEY4'),
+            config('GOOGLEAPIKEY1'), config('GOOGLEAPIKEY2'), config(
+                'GOOGLEAPIKEY3'), config('GOOGLEAPIKEY4'),
             config('GOOGLEAPIKEY9')]
 key_index = 0
 
@@ -35,6 +36,7 @@ NECESSARY_WORD = [
     ['일상', '브이로그', 'V-log', 'Vlog'],
     ['IT', 'SW', '소프트웨어', '기술', '신제품', '노트북', '컴퓨터', '시스템', '스마트폰', '무선']
 ]
+
 
 def is_youtube_channel_url(url):
     if 'youtube' not in url:
@@ -85,7 +87,8 @@ def get_channel_info(channelID):
         response = urllib.request.urlopen(
             base_url + "?part=%s&id=%s&key=%s" % (part, channelID, key))
     except urllib.request.HTTPError:
-        print('*--- %d -> %d : next key setting & restart ---*' % (key_index, (key_index+1)%len(key_list)))
+        print('*--- %d -> %d : next key setting & restart ---*' %
+              (key_index, (key_index+1) % len(key_list)))
         key_index += 1
         key_index %= len(key_list)
         return get_channel_info(channelID)
@@ -361,7 +364,6 @@ def get_video_detail(video_id):
 
 def get_news_list(youtuber, category, last_updated_date):
 
-
     MONTH = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May',
              'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     YOUTUBER = youtuber.channelname  # DB 에서 yno 에 해당하는 channelName or youtubeName 을 입력
@@ -397,8 +399,7 @@ def get_news_list(youtuber, category, last_updated_date):
             print(json.loads(response))
         for news in newses:
             is_correct = False
-            date = datetime.datetime(int(news["pubDate"][12:16]), MONTH.index(
-                news["pubDate"][8:11]), int(news["pubDate"][5:7]))
+            date = datetime.datetime(int(news["pubDate"][12:16]), MONTH.index(news["pubDate"][8:11]), int(news["pubDate"][5:7]))
 
             # 업데이트되어있는 기사는 추가하지 않음
             if (date - last_updated_date).days < 0:
@@ -423,6 +424,7 @@ def get_news_list(youtuber, category, last_updated_date):
             break
         params['start'] += params['display']
     return news_list
+
 
 CANO_MAPPING = {
     '2': 9,
@@ -477,8 +479,7 @@ def get_our_cano(ycano_list, video_detail_list):
     return our_list
 
 
-
-def date_is_valid(dateStr, lastupdate): # ex) '2019-03-16'
+def date_is_valid(dateStr, lastupdate):  # ex) '2019-03-16'
     article_date = datetime.datetime.strptime(dateStr, '%Y-%m-%d')
     if (article_date - lastupdate).days > 0:
         return True
@@ -489,8 +490,8 @@ def date_is_valid(dateStr, lastupdate): # ex) '2019-03-16'
 def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
     # API_KEY를 더 넣도록 합시다.
     API_KEYS = [config('DAUM_API_KEY')]
-    
-    ######### YOUTUBER를 활용해, searchKeyword, lastUpdate, category 등등을 가져온다.
+
+    # YOUTUBER를 활용해, searchKeyword, lastUpdate, category 등등을 가져온다.
     searchKeyword = YOUTUBER.channelname
     lastUpdate = lastupdate
     keywords = NECESSARY_WORD[0]
@@ -502,14 +503,14 @@ def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
     page = 1
     MORE_PAGES = True
     MORE_DATES = True
-    
+
     DEFAULT_MAX = 6  # 6이면, 6 * 50 인 300개 검색
     MAX_page = DEFAULT_MAX
-    
+
     while MORE_PAGES and MORE_DATES:
         if page >= MAX_page:
             MORE_PAGES = False
-        
+
         params = {
             'query': searchKeyword,
             'sort': 'recency',
@@ -526,7 +527,8 @@ def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
             response = requests.get(URL, headers=headers, params=params)
             response_dict = json.loads(response.text)
             if response.status_code == 200:
-                total_count = response_dict.get('meta').get('total_count') # 검색 결과 수
+                total_count = response_dict.get(
+                    'meta').get('total_count')  # 검색 결과 수
                 break
         else:
             # 모든 API_KEY를 다 썼을 경우
@@ -535,7 +537,7 @@ def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
         MAX_page = min(DEFAULT_MAX, total_count // 50)
 
         documents = response_dict.get('documents')  # 가져온 글들의 모든 목록
-        
+
         if (response.status_code == 200):
             for document in documents:
                 contents = document.get('contents')
@@ -543,11 +545,11 @@ def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
                     for keyword in keywords:
                         if keyword in contents:
                             community = Community.objects.create(
-                                yno = YOUTUBER,
-                                articletitle = document.get('title'),
-                                articlelink = document.get('url'),
-                                articledescription = document.get('contents'),
-                                articledate = document.get('datetime')[:10],
+                                yno=YOUTUBER,
+                                articletitle=document.get('title'),
+                                articlelink=document.get('url'),
+                                articledescription=document.get('contents'),
+                                articledate=document.get('datetime')[:10],
                             )
                             community.save()
                             break
@@ -556,13 +558,14 @@ def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
                     break
         page += 1
 
+
 def insert_naver_data_lab(youtuber):
     result = ''
     client_id = config("NAVER_DATALAB_CLIENT_ID")
     client_secret = config("NAVER_DATALAB_CLIENT_SECRET")
-    url = "https://openapi.naver.com/v1/datalab/search";
-    startDate = (datetime.datetime.utcnow() + datetime.timedelta(days=-365)).strftime("%Y-%m-%d")
-    endDate = datetime.datetime.utcnow().strftime("%Y-%m-%d") 
+    url = "https://openapi.naver.com/v1/datalab/search"
+    startDate = (datetime.datetime.now() + datetime.timedelta(days=-365)).strftime("%Y-%m-%d")
+    endDate = datetime.datetime.utcnow().strftime("%Y-%m-%d")
     timeUnit = 'week'
     keyword = youtuber.channelname
 
@@ -571,35 +574,34 @@ def insert_naver_data_lab(youtuber):
         "endDate": endDate,
         "timeUnit": timeUnit,
         "keywordGroups": [
-                {
-                    "groupName": keyword, 
-                    "keywords": [
-                            keyword
-                        ]
-                }
-            ]
+            {
+                "groupName": keyword,
+                "keywords": [
+                    keyword
+                ]
+            }
+        ]
     }
 
     body = str(body).replace("'", '\"')
 
-
     request = urllib.request.Request(url)
-    request.add_header("X-Naver-Client-Id",client_id)
-    request.add_header("X-Naver-Client-Secret",client_secret)
-    request.add_header("Content-Type","application/json")
+    request.add_header("X-Naver-Client-Id", client_id)
+    request.add_header("X-Naver-Client-Secret", client_secret)
+    request.add_header("Content-Type", "application/json")
 
     response = urllib.request.urlopen(request, data=body.encode("utf-8"))
     rescode = response.getcode()
-    if(rescode==200):
+    if(rescode == 200):
         response_body = response.read().decode('utf-8')
-        data = json.loads(response_body).get('results')[0].get('data') 
-        result = json.dumps(data) # result를 DB data에 담는다.
+        data = json.loads(response_body).get('results')[0].get('data')
+        result = json.dumps(data)  # result를 DB data에 담는다.
         Naverdatalab.objects.create(
-            yno = youtuber,
-            searchkeyword = keyword,
-            startdate = startDate,
-            enddate = endDate,
-            data = data
+            yno=youtuber,
+            searchkeyword=keyword,
+            startdate=startDate,
+            enddate=endDate,
+            data=data
         )
     else:
         print("Error Code:" + rescode)
