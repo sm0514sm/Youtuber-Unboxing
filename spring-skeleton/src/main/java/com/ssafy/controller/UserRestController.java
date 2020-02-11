@@ -32,7 +32,7 @@ public class UserRestController {
 	}
 	
 	@ApiOperation("userID, userName, userEmail | 회원 등록")
-	@PostMapping("/user/insert/{userID}_{userName}_{userEmail}")
+	@PostMapping("/user/insert/{userID}&{userName}&{userEmail}")
 	public ResponseEntity<Map<String, Object>> insertUser(@PathVariable String userID, @PathVariable String userName, @PathVariable String userEmail){
 		User user = new User();
 		user.setUserID(userID);
