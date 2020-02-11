@@ -3,7 +3,7 @@
 from django.shortcuts import render, HttpResponse
 import threading
 import datetime
-from dataServer.models import Youtuber, Trend, Video, Community, CategoryYoutubeRelation, Category, News, Naverdatalab
+from dataServer.models import Youtuber, Trend, Video, Community, CategoryYoutubeRelation, Category, News, Naverdatalab, Stat
 from dataServer.function import get_channel_other_sites
 import time
 from decouple import config
@@ -15,6 +15,7 @@ from django.utils import timezone
 from IPython import embed
 import requests
 from dataServer.function import date_is_valid
+from dataServer.stat import get_influence, get_activity3, get_views, get_trend, get_charm, get_grade
 
 
 GOOGLE_KEY_LIST = [config('GOOGLEAPIKEY5'), config('GOOGLEAPIKEY7'), config('GOOGLEAPIKEY6'), config('GOOGLEAPIKEY8'), config('GOOGLEAPIKEY1'), config('GOOGLEAPIKEY2'), config('GOOGLEAPIKEY3'), config('GOOGLEAPIKEY4'), config('GOOGLEAPIKEY9')]
@@ -58,7 +59,7 @@ class updateThread:
         global NECESSARY_WORD, MONTH
         
         print("------------- update is started!")        
-        youtubers = Youtuber.objects.all()[:1] # 일단은 한 명만 하는 중
+        youtubers = Youtuber.objects.all() # 일단은 한 명만 하는 중
         left_google_api_keys = len(GOOGLE_KEY_LIST)
         for  youtuber in youtubers:
             print("------------- youtuber {}'s update is started!".format(youtuber.yno))
@@ -461,8 +462,38 @@ class updateThread:
                     NAVER_DATA_ID_INDEX %= len(NAVER_ID_LIST)
                     left_NAVER_DATA_ID -= 1            
             print("------------- youtuber {}'s naver datalab update is done!".format(youtuber.yno))
+        
+        
+            ########### 스탯 업데이트
+            print("------------- youtuber {}'s stat update is started!".format(youtuber.yno))
+            Stat.objects.filter(yno=youtuber).delete()
+            video_list = Video.objects.filter(yno=youtuber)
+            video_detail_list = [] # good, bad, reddate
+            for video in video_list:
+                temp = {}
+                temp['regDate'] = video.regdate
+                temp['good'] = video.good
+                temp['bad'] = video.bad
+                video_detail_list.append(temp)
             
-            
+            now = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=9)
+            trends = Trend.objects.filter(yno=youtuber).order_by('-recorddate')
+            last_month_trend = None
+            for trend in trends:
+                last_month_trend = trend
+                if (now - trend.recorddate).days >= 30:
+                    break
+            today_trend = trends[0]
+
+            youtuber.influence = get_influence(youtuber)
+            youtuber.activity = get_activity3(youtuber, video_detail_list)
+            youtuber.viewcounttrend = get_views(youtuber, last_month_trend, today_trend)
+            youtuber.subscribercounttrend = get_trend(youtuber, last_month_trend, today_trend)
+            youtuber.charm = get_charm(video_detail_list)
+            youtuber.grade = get_grade(youtuber, youtuber.influence, youtuber.activity, youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm)
+            youtuber.save()
+            print('| %9d | %9d | %9d | %9d | %9d | %9d |' % (youtuber.yno, youtuber.influence, youtuber.activity, youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm))
+            print("------------- youtuber {}'s stat update is done!".format(youtuber.yno))
         
         ########## 모두 끝나고, 업데이트 주기 다시 실행!
         # threading.Timer(86000, self.threadOpen).start()
