@@ -48,7 +48,7 @@ def is_youtube_channel_url(url):
 
 def get_channel_id_from_url(url):
     html = urlopen(url).read()
-    soup = bs(html, "html.parser", from_encoding='utf-8')
+    soup = bs(html, "lxml", from_encoding='utf-8')
     ff = soup.find("button", attrs={'class': "yt-uix-button yt-uix-button-size-default "
                                     "yt-uix-button-subscribe-branded yt-uix-button-has-icon "
                                     "no-icon-markup yt-uix-subscription-button yt-can-buffer"})
@@ -56,7 +56,8 @@ def get_channel_id_from_url(url):
 
 
 def get_yno_from_channel_id(channel_id):
-    for youtuber in Youtuber.objects.all():
+    ylist = Youtuber.objects.filter(channelid=channel_id)
+    for youtuber in ylist:
         if channel_id == youtuber.channelid:
             return youtuber.yno
     return -1
@@ -65,7 +66,7 @@ def get_yno_from_channel_id(channel_id):
 def get_channel_other_sites(input_url):
     other_link_list = []
     html = urlopen(input_url).read()
-    soup = bs(html, "html.parser", from_encoding='utf-8')
+    soup = bs(html, "lxml", from_encoding='utf-8')
     li_tags = soup.find_all("li", attrs={'class': "channel-links-item"})
     for li_tag in li_tags:
         before_link = li_tag.find('a').get('href')
@@ -92,9 +93,7 @@ def get_channel_info(channelID):
         key_index += 1
         key_index %= len(key_list)
         return get_channel_info(channelID)
-    string = response.read().decode('utf-8')
-    json_obj = json.loads(string)
-    info_obj = json_obj["items"][0]
+    info_obj = json.loads(response.read().decode('utf-8'))["items"][0]
 
     snippet = info_obj["snippet"]
     channel_info_dict["title"] = snippet["title"]
@@ -126,7 +125,6 @@ def get_trend_list(channel_id):
     options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko")
     driver = webdriver.Chrome('./chromedriver', options=options)
-
     url = 'https://socialblade.com/youtube/channel/' + channel_id + '/monthly'
     driver.get(url)
     el = '//*[@id="socialblade-user-content"]'
@@ -148,12 +146,8 @@ def get_trend_list(channel_id):
                     cnt += 1
                     continue
                 if cnt == 6:
-                    fin = dict()
-                    fin['pk'] = pk
                     pk += 1
-                    fin['model'] = "dataServer.trend"
-                    fin['fields'] = data
-                    temp = copy.deepcopy(fin)
+                    temp = copy.deepcopy(data)
                     orm.append(temp)
                     cnt = 0
                     continue
@@ -161,8 +155,7 @@ def get_trend_list(channel_id):
                     data['recordDate'] = line
                     cnt += 1
                 else:
-                    x = line.replace('+', "").replace(",",
-                                                      "").replace('--', '0').replace('LIVE', '')
+                    x = line.replace('+', "").replace(",", "").replace('--', '0').replace('LIVE', '')
                     total_stars = 0
                     if 'K' in x:
                         if len(x) > 1:
@@ -210,8 +203,7 @@ def get_video_list(uploads_id):
             key_index += 1
             key_index %= len(key_list)
             return get_video_list(uploads_id)
-        string = response.read().decode('utf-8')
-        json_objs = json.loads(string)
+        json_objs = json.loads(response.read().decode('utf-8'))
         for obj in json_objs['items']:
             video_id_lists.append(obj['snippet']['resourceId']['videoId'])
         #     pageToken
@@ -306,33 +298,14 @@ def get_video_detail(video_id):
         return get_video_detail(video_id)
     res_dict = json.loads(response).get('items')[0]
 
-    topic = []
-    topic_details = res_dict.get('topicDetails')
     statistics = res_dict.get('statistics')
     snippet = res_dict.get('snippet')
-    if topic_details:
-        topic_id = topic_details.get('topicIds')
-        if topic_id:
-            topic += topic_id
-        relevant_topic_id = topic_details.get('relevantTopicIds')
-        if relevant_topic_id:
-            topic += relevant_topic_id
-
-    topic = list(set(topic))
-
-    topic_result = []
-    for result in topic:
-        topic_result.append(TOPICS.get(result))
-
+    
     try:
         tags = ','.join(snippet.get('tags'))
     except:
         tags = ''
 
-    try:
-        topic = ','.join(topic_result)
-    except:
-        topic = ''
     if statistics.get('likeCount') is None:
         statistics['likeCount'] = -1
     if statistics.get('dislikeCount') is None:
@@ -341,7 +314,7 @@ def get_video_detail(video_id):
         statistics['commentCount'] = -1
     video = {
         'video_id': video_id,
-        'videoName': res_dict.get('snippet').get('title'),
+        'videoName': snippet.get('title'),
         'videoDescription': snippet.get('description'),
         'videoViewCount': statistics.get('viewCount'),
         'videoCommentCount': statistics.get('commentCount'),
@@ -351,14 +324,7 @@ def get_video_detail(video_id):
         'ycano': snippet.get('categoryId'),
         'thumbnail': snippet.get('thumbnails').get('high').get('url'),
         'tags': tags,
-        'topic': topic,
     }
-
-    # 파일 출력
-    # PATH = 'videoTableTest.json'
-    # with open("{}".format(PATH), 'w', encoding='utf-8-sig') as file:
-    #     json.dump(video, file, indent="\t", ensure_ascii=False)
-
     return video
 
 
@@ -448,7 +414,6 @@ def get_our_cano(ycano_list, video_detail_list):
         if str(ycano) in list(CANO_MAPPING.keys()):
             if CANO_MAPPING[str(ycano)] not in our_list:
                 our_list.append(CANO_MAPPING[str(ycano)])
-                print('***', CANO_MAPPING[str(ycano)], '추가')
         elif ycano == 1 or ycano == 24:
             count = 0
             for keyword in ['kids', '키즈', '어린이', '장난감', '토이']:
@@ -589,20 +554,28 @@ def insert_naver_data_lab(youtuber):
     request.add_header("X-Naver-Client-Id", client_id)
     request.add_header("X-Naver-Client-Secret", client_secret)
     request.add_header("Content-Type", "application/json")
-
-    response = urllib.request.urlopen(request, data=body.encode("utf-8"))
-    rescode = response.getcode()
-    if(rescode == 200):
-        response_body = response.read().decode('utf-8')
-        data = json.loads(response_body).get('results')[0].get('data')
-        result = json.dumps(data)  # result를 DB data에 담는다.
+    try:
+        response = urllib.request.urlopen(request, data=body.encode("utf-8"))
+        rescode = response.getcode()
+        if(rescode == 200):
+            response_body = response.read().decode('utf-8')
+            data = json.loads(response_body).get('results')[0].get('data')
+            result = json.dumps(data)  # result를 DB data에 담는다.
+            Naverdatalab.objects.create(
+                yno=youtuber,
+                searchkeyword=keyword,
+                startdate=startDate,
+                enddate=endDate,
+                data=data
+            )
+        else:
+            print("Error Code:" + rescode)
+    except:
         Naverdatalab.objects.create(
             yno=youtuber,
             searchkeyword=keyword,
             startdate=startDate,
             enddate=endDate,
-            data=data
+            data='[]'
         )
-    else:
-        print("Error Code:" + rescode)
     return result

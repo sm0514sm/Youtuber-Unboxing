@@ -275,25 +275,17 @@ class Stat(models.Model):
 class Video(models.Model):
     vno = models.AutoField(primary_key=True)
     yno = models.ForeignKey('Youtuber', models.DO_NOTHING, db_column='yno')
-    # Field name made lowercase.
     videoid = models.CharField(db_column='videoID', max_length=100)
-    # Field name made lowercase.
     videoname = models.CharField(db_column='videoName', max_length=100)
-    # Field name made lowercase.
-    videodescription = models.CharField(
-        db_column='videoDescription', max_length=10000, blank=True, null=True)
-    # Field name made lowercase.
+    videodescription = models.CharField(db_column='videoDescription', max_length=10000, blank=True, null=True)
     videoviewcount = models.IntegerField(db_column='videoViewCount')
-    # Field name made lowercase.
     videocommentcount = models.IntegerField(db_column='videoCommentCount')
     good = models.IntegerField()
     bad = models.IntegerField()
-    # Field name made lowercase.
     regdate = models.DateField(db_column='regDate')
     ycano = models.IntegerField(blank=True, null=True)
     tags = models.CharField(max_length=1000, blank=True, null=True)
     thumbnail = models.CharField(max_length=1000)
-    topic = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -343,7 +335,7 @@ class Youtuber(models.Model):
     # Field name made lowercase.
     totalvideocount = models.IntegerField(
         db_column='totalVideoCount', blank=True, null=True)
-    grade = models.CharField(max_length=10, blank=True, null=True)
+    grade = models.IntegerField(blank=True, null=True)
     influence = models.IntegerField(blank=True, null=True)
     activity = models.IntegerField(blank=True, null=True)
     # Field name made lowercase.

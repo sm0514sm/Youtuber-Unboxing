@@ -2,9 +2,11 @@ import datetime
 from .models import *
 
 
-#   - kinds = 1 파급력 ( 커뮤니티 언급수(그래프), 뉴스언급수, 조회수 ,구독자 대비 조회수)
+#   - kinds = 1 파급력 ( (커뮤니티 언급수(그래프) + 뉴스언급수), 구독자수, 조회수)
 def get_influence(youtuber):
-    value = len(Community.objects.filter(yno=youtuber.yno)) + len(News.objects.filter(yno=youtuber.yno))
+    references_cnt = len(Community.objects.filter(yno=youtuber.yno)) + len(News.objects.filter(yno=youtuber.yno))
+    score = (youtuber.subscriber * 300 + youtuber.totalviewcount) / 1000 + references_cnt
+    value = references_cnt + score
     Stat.objects.create(
         yno=youtuber,
         kinds=1,
@@ -73,12 +75,15 @@ def get_charm(video_list):
         value = int(good * 100 / (good + bad))
     return value
 
-#   - 등급 
-def get_grade(stat_influence, stat_activity, stat_trend, stat_views, stat_charm):
-    grade = 'X'
-
-    
-    return (stat_influence + stat_activity + stat_trend + stat_views + stat_charm)/5
+#   - kinds = 0 등급 
+def get_grade(youtuber, stat_influence, stat_activity, stat_trend, stat_views, stat_charm):
+    value = (stat_influence + stat_activity + stat_trend + stat_views + stat_charm*0.5)/5
+    Stat.objects.create(
+        yno=youtuber,
+        kinds=0,
+        value=float(value)
+    )
+    return get_score_from_stat(0, float(value))
 
 
 def get_score_from_stat(kinds, value):
@@ -92,7 +97,7 @@ def get_score_from_stat(kinds, value):
             break
         i += 1
     if index == -1:
-        print('***** stat에서 %d 종류의 %.2f 값을 찾을 수 없음' % (kinds, value))
+        print('* ERROR : stat에서 %d 종류의 %.2f 값을 찾을 수 없음' % (kinds, value))
     return 100 - int((n-(index))*100/n)
 
 
@@ -132,3 +137,18 @@ def get_charm2(video_list):
     else:
         value = int(good * 100 / (good + bad))
     return value
+
+def get_activity3(youtuber, video_detail_list):
+    max_num = min(len(video_detail_list), 10)
+    datetime_list = []
+    for i in range(max_num):
+        datetime_list.append(video_detail_list[i]['regDate'])
+    dif_sum = 0
+    for i in range(max_num - 1):
+        dif_sum += (datetime_list[i] - datetime_list[i+1]).days
+    Stat.objects.create(
+        yno=youtuber,
+        kinds=2,
+        value=-dif_sum/max_num
+    )
+    return get_score_from_stat(2, -dif_sum/max_num)
