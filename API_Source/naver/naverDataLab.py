@@ -5,8 +5,9 @@ from decouple import config
 import json
 from pprint import pprint
 
-client_id = config("NAVER_DATALAB_CLIENT_ID")
-client_secret = config("NAVER_DATALAB_CLIENT_SECRET")
+
+client_id = config("NAVER_DATALAB_CLIENT_ID1")
+client_secret = config("NAVER_DATALAB_CLIENT_SECRET1")
 
 url = "https://openapi.naver.com/v1/datalab/search";
 
@@ -39,12 +40,18 @@ request.add_header("Content-Type","application/json")
 
 response = urllib.request.urlopen(request, data=body.encode("utf-8"))
 rescode = response.getcode()
+
 if(rescode==200):
     response_body = response.read().decode('utf-8')
     data = json.loads(response_body).get('results')[0].get('data') 
     data = {'data': data} 
     result = json.dumps(data) # result를 DB data에 담는다.
     # print(len(result))
+    # pprint(result)
+    result = json.loads(result)
+    print(type(result))
     pprint(result)
+    # with open("naverDateLab.json", 'w', encoding='utf-8-sig') as file:
+    #     json.dump(result, file, indent="\t", ensure_ascii=False)
 else:
     print("Error Code:" + rescode)
