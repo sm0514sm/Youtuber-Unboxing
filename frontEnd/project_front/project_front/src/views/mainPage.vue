@@ -51,7 +51,6 @@ export default {
         onCategoryButtonClicked(i) {
             localStorage.setItem('currentCategory',i)
             this.$router.push("/categoryPage");
-
         },
     },
     computed: {

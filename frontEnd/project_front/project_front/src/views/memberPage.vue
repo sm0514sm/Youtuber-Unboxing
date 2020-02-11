@@ -6,7 +6,6 @@
       </v-card-title>
     </v-card>
     <v-container name="container" background-color="transparent">
-
 <template>
   <v-card flat>
     <v-card-text>
@@ -130,10 +129,9 @@
                     <v-col cols="2" class = "px-0">
                       <v-card color="#00000000"   width="50px" flat>
                         <v-responsive :aspect-ratio="1/1">
-                          <v-img class="circle" :src="(item.thumbnails+'?x='+Date.now())" flat/>
+                          <v-img class="circle" :src="item.thumbnails" flat/>
                         </v-responsive>
                       </v-card>
-
                     </v-col>
                     <v-col cols="10" class = "px-0">
                       <v-container fill-height>
@@ -145,17 +143,11 @@
                   </v-row>
                 </v-card>
               </template>
-
-
   </v-data-table>
 </template>
     </v-container>
-    
   </div>
 </template>
-
-
-
 <script>
 import axios from "axios";
   export default {
@@ -233,7 +225,6 @@ import axios from "axios";
     },
   }
 </script>
-
 <style scoped>
 .jb {
   position: absolute;
@@ -241,7 +232,6 @@ import axios from "axios";
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 .circle{
   border-radius: 50%;
 }
