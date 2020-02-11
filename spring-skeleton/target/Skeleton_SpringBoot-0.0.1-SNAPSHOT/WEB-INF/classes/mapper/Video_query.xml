@@ -8,8 +8,7 @@
 	<!-- video 고유번호 | video 정보 검색 -->
 	<select id="search" parameterType="int" resultType="video">
 		select *
-		from video v inner join youtube_category yc
-		using (ycano)
+		from video v
 		where v.vno=#{vno}
 	</select>
 	
