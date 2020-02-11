@@ -1,10 +1,12 @@
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\News.java
+C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dao\InterestDao.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\User.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\NewsServiceImpl.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\VideoServiceImpl.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\KakaoAPI.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\VideoService.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\controller\KakaoController.java
+C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\Interest.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\Community.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\service\YoutuberService.java
 C:\Users\multicampus\Desktop\1st_project\spring-skeleton\src\main\java\com\ssafy\model\dto\Category.java

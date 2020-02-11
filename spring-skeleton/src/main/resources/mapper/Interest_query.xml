@@ -4,5 +4,35 @@
 <mapper namespace="com.ssafy.model.dao.InterestDao">
 
 	<!-- 여러개가 나오더라도 resultType에는 리스트 형으로 쓰지 않는다 -->
-	
+	<!-- youtuber 고유번호, user 고유번호 | 해당 user의 즐겨찾기에 해당 youtuber가 있는지 조회 (있으면 1, 없으면 0) -->
+	<select id="searchInterestRecommend" parameterType="java.util.Map" resultType="youtuber">
+		select *
+		from youtuber
+		inner join	(select		yno
+					from		(select	distinct(yno)
+								from	favorite f
+								where	f.yno not in	(select	distinct(yno) yno
+														from	favorite
+														where	usno = #{usno})) d
+					inner join	(select		count(yno) count, yno
+								from		(select		distinct(usno)
+											from		interest_user_relation
+											<if test=" interest1 != null">
+											where		itno=#{interest1} 
+											</if>
+											<if test=" interest2 != null">
+														or itno=#{interest2}
+											</if>
+											<if test=" interest3 != null">
+														or itno=#{interest3}
+											</if>
+											) a
+								inner join	favorite b
+								using		(usno)
+								group by	b.yno) c
+					using		(yno)
+					order by	count desc
+					limit #{num}) e
+		using (yno)
+	</select>
 </mapper>

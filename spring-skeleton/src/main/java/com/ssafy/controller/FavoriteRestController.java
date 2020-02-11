@@ -64,16 +64,12 @@ public class FavoriteRestController {
 	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 youtuber를 해당 user의 즐겨찾기에서 삭제")
 	@DeleteMapping("/favorite/delete/{yno}&{usno}")
 	public ResponseEntity<Map<String, Object>> searchKeyword(@PathVariable String yno,  @PathVariable String usno){
-		System.out.println(yno);
-		System.out.println(usno);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
     	User user = userService.search(userInfo.get("id").toString());
 		
 		Map<String, Integer> map = new HashMap<>();
 		map.put("yno", Integer.parseInt(yno));
 		map.put("usno", user.getUsno());
-		System.out.println("yno: "+yno);
-		System.out.println("usno: "+user.getUsno());
 		favoriteService.deleteFavorite(map); 
 		return handleSuccess("즐겨찾기 삭제 완료");
 	}
@@ -81,16 +77,12 @@ public class FavoriteRestController {
 	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 user의 즐겨찾기에 해당 youtuber가 있는지 조회 (있으면 1, 없으면 0)")
 	@GetMapping("/favorite/select/{yno}&{usno}")
 	public ResponseEntity<Map<String, Object>> searchFavorite(@PathVariable String yno, @PathVariable String usno){
-		System.out.println(yno);
-		System.out.println(usno);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
     	User user = userService.search(userInfo.get("id").toString());
 		
 		Map<String, Integer> map = new HashMap<>();
 		map.put("yno", Integer.parseInt(yno));
 		map.put("usno", user.getUsno());
-		System.out.println("yno: "+yno);
-		System.out.println("usno: "+user.getUsno());
 		int count = favoriteService.searchFavorite(map);
 		return handleSuccess(count);
 	}
@@ -98,7 +90,6 @@ public class FavoriteRestController {
 	@ApiOperation("user 고유번호 | 해당 user가 즐겨찾기 한  youtuber 목록 검색 | 즐겨찾기 추가 날짜 기준 내림차순")
 	@GetMapping("/favorite/user/{usno}")
 	public ResponseEntity<Map<String, Object>> searchUserFavoriteYoutuber(@PathVariable String usno){
-		System.out.println(usno);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
     	User user = userService.search(userInfo.get("id").toString());
 		List<Youtuber> list = favoriteService.searchUserFavoriteYoutuber(user.getUsno()); 
