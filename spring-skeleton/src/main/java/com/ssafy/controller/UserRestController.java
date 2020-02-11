@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.model.dto.User;
 import com.ssafy.model.dto.Youtuber;
+import com.ssafy.model.service.KakaoAPI;
 import com.ssafy.model.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -25,36 +26,40 @@ import io.swagger.annotations.ApiOperation;
 public class UserRestController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private KakaoAPI kakao;
 	
 	@ExceptionHandler
 	public ResponseEntity<Map<String, Object>> handle(Exception e){
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-	@ApiOperation("userID, userName, userEmail | 회원 등록")
-	@PostMapping("/user/insert/{userID}_{userName}_{userEmail}")
-	public ResponseEntity<Map<String, Object>> insertUser(@PathVariable String userID, @PathVariable String userName, @PathVariable String userEmail){
-		User user = new User();
-		user.setUserID(userID);
-		user.setUserName(userName);
-		user.setUserEmail(userEmail);
-		userService.insertUser(user); 
-		return handleSuccess("회원 등록 성공");
-	}
+//	@ApiOperation("userID, userName, userEmail | 회원 등록")
+//	@PostMapping("/user/insert/{userID}&{userName}&{userEmail}")
+//	public ResponseEntity<Map<String, Object>> insertUser(@PathVariable String userID, @PathVariable String userName, @PathVariable String userEmail){
+//		User user = new User();
+//		user.setUserID(userID);
+//		user.setUserName(userName);
+//		user.setUserEmail(userEmail);
+//		userService.insertUser(user); 
+//		return handleSuccess("회원 등록 성공");
+//	}
 	
 	@ApiOperation("userID | userID가 일치하는 회원정보 조회")
 	@GetMapping("/user/{userID}")
 	public ResponseEntity<Map<String, Object>> search(@PathVariable String userID){
-		User user = userService.search(userID); 
+		HashMap<String, Object> userInfo = kakao.getUserInfo(userID.toString());
+    	User user = userService.search(userInfo.get("id").toString());
 		return handleSuccess(user);
 	}
 	
-//	@ApiOperation("userID | 해당 user가 즐겨찾기 한 youtuber 목록 검색")
-//	@GetMapping("/user/favorite/{userID}")
-//	public ResponseEntity<Map<String, Object>> searchUserFavoriteYoutuber(@PathVariable String userID){
-//		List<Youtuber> list = userService.searchUserFavoriteYoutuber(userID); 
-//		return handleSuccess(list);
-//	}
+	
+	@ApiOperation("userID | 해당 user가 즐겨찾기 한 youtuber 목록 검색")
+	@GetMapping("/user/favorite/{userID}")
+	public ResponseEntity<Map<String, Object>> searchUserFavoriteYoutuber(@PathVariable String userID){
+		List<Youtuber> list = userService.searchUserFavoriteYoutuber(userID); 
+		return handleSuccess(list);
+	}
 
 	@ApiOperation("userID | 해당 userID의 회원 가입 여부 조회 | 있으면 1 없으면 0")
 	@GetMapping("/user/exist/{userID}")

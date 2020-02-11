@@ -17,7 +17,7 @@
 	</select>
 	
 	<!-- userID | 해당 user가 즐겨찾기 한 youtuber 목록 검색 -->
-	<!-- <select id="searchUserFavoriteYoutuber" parameterType="String" resultType="youtuber">
+	<select id="searchUserFavoriteYoutuber" parameterType="String" resultType="youtuber">
 		select *
 		from youtuber y
 		inner join (select f.yno
@@ -26,7 +26,7 @@
 					using (usno)
 					where us.userID = #{userID}) usinfo
 		using (yno);
-	</select> -->
+	</select>
 	
 	<!-- userID | 해당 userID의 회원 가입 여부 조회 | 있으면 1 없으면 0 -->
 	<select id="searchUserExist" parameterType="String" resultType="int">

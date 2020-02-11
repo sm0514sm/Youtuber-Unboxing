@@ -62,7 +62,7 @@ public class FavoriteRestController {
 	}
 	
 	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 youtuber를 해당 user의 즐겨찾기에서 삭제")
-	@DeleteMapping("/favorite/delete/{yno}_{usno}")
+	@DeleteMapping("/favorite/delete/{yno}&{usno}")
 	public ResponseEntity<Map<String, Object>> searchKeyword(@PathVariable String yno,  @PathVariable String usno){
 		System.out.println(yno);
 		System.out.println(usno);
@@ -79,8 +79,10 @@ public class FavoriteRestController {
 	}
 	
 	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 user의 즐겨찾기에 해당 youtuber가 있는지 조회 (있으면 1, 없으면 0)")
-	@GetMapping("/favorite/select/{yno}_{usno}")
+	@GetMapping("/favorite/select/{yno}&{usno}")
 	public ResponseEntity<Map<String, Object>> searchFavorite(@PathVariable String yno, @PathVariable String usno){
+		System.out.println(yno);
+		System.out.println(usno);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
     	User user = userService.search(userInfo.get("id").toString());
 		
@@ -96,6 +98,7 @@ public class FavoriteRestController {
 	@ApiOperation("user 고유번호 | 해당 user가 즐겨찾기 한  youtuber 목록 검색 | 즐겨찾기 추가 날짜 기준 내림차순")
 	@GetMapping("/favorite/user/{usno}")
 	public ResponseEntity<Map<String, Object>> searchUserFavoriteYoutuber(@PathVariable String usno){
+		System.out.println(usno);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
     	User user = userService.search(userInfo.get("id").toString());
 		List<Youtuber> list = favoriteService.searchUserFavoriteYoutuber(user.getUsno()); 
@@ -122,4 +125,5 @@ public class FavoriteRestController {
 		resultMap.put("data", data);
 		return new ResponseEntity<Map<String,Object>>(resultMap, HttpStatus.OK);
 	}
+	
 }
