@@ -125,7 +125,7 @@ def make_new_youtuber(request, url):
             subscriber=channel_info['subscriberCount'],
             totalviewcount=channel_info['viewCount'],
             totalvideocount=channel_info['videoCount'],
-            grade='X',
+            grade=0,
             influence='0',
             activity='0',
             subscribercounttrend='0',
@@ -235,7 +235,7 @@ def make_new_youtuber(request, url):
     valid_ycano_list = []
     tmp_ycano_list = Video.objects.filter(yno=yno).values('ycano').annotate(total=Count('ycano')).order_by('total').reverse()
     for ycategory in tmp_ycano_list:
-        if ycategory['total'] >= len(video_detail_list) * 0.14:
+        if ycategory['total'] >= len(video_detail_list) * 0.11:
             valid_ycano_list.append(ycategory['ycano'])
     timer.append(timeit.default_timer())
     print('%2d. [%5.2f / %5.2f s] calculate valid ycano list' 
@@ -392,7 +392,7 @@ def update_youtuber(request, yno):
     tmp_ycano_list = Video.objects.filter(yno=yno).values('ycano').annotate(
         total=Count('ycano')).order_by('total').reverse()
     for ycategory in tmp_ycano_list:
-        if ycategory['total'] >= len(video_id_list) * 0.14:
+        if ycategory['total'] >= len(video_id_list) * 0.11:
             valid_ycano_list.append(ycategory['ycano'])
     end8_1 = timeit.default_timer() - end7
     print('8-1. calculate valid ycano list : %.2f/%.2f s' %
