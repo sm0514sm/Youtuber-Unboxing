@@ -507,8 +507,6 @@ import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
 import InfiniteLoading from "vue-infinite-loading";
 
-// import axios from "axios";
-
 export default {
   name: "youtuberPage",
   components: {
@@ -529,7 +527,7 @@ export default {
       this.loginStatus=true
       let initialUrl=this.$route.query.yno+"_"+this.$session.get('token')
       console.log(initialUrl)
-      axios.get("http://localhost:8080/favorite/select/"+initialUrl)
+      http.get("/favorite/select/"+initialUrl)
       .then(data => this.flag = data.data.data==0 ? false : true)
     }
   },
@@ -541,7 +539,7 @@ export default {
       console.log("insert")
       console.log(this.$session.get('token'))
       console.log(this.youtuber.yno)
-      axios.post('http://localhost:8080/favorite/insert', {
+      http.post('/favorite/insert', {
         yno: this.youtuber.yno,
         token: this.$session.get('token')
       })
@@ -557,8 +555,8 @@ export default {
       console.log(this.$session.get('token'))
       console.log(this.youtuber.yno)
       let par = this.youtuber.yno+"_"+this.$session.get('token')
-      let deleteUrl = "http://localhost:8080/favorite/delete/"+par
-      axios.delete(deleteUrl)
+      let deleteUrl = "/favorite/delete/"+par
+      http.delete(deleteUrl)
       .then(function (response) {
         console.log(response);
       })

@@ -149,7 +149,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import http from "../vuex/http-common";
   export default {
     data: () => ({
       headers: [
@@ -195,13 +195,13 @@ import axios from "axios";
         console.log(this.interest)
       },
       basicInfo(){
-        axios.get("http://localhost:8080/user/"+this.$session.get('token'))
+        http.get("/user/"+this.$session.get('token'))
         .then(response=>{
           this.user=response.data.data
         })
       },
       initialize () {
-        axios.get("http://localhost:8080/favorite/user/"+this.$session.get('token'))
+        http.get("/favorite/user/"+this.$session.get('token'))
         .then(response=>{
           this.fav = response.data.data
         })
@@ -210,9 +210,9 @@ import axios from "axios";
         const index = this.fav.indexOf(item)
         if(confirm('Are you sure you want to delete this item?')){
           this.fav.splice(index, 1)
-          let par = item.yno+"_"+this.$session.get('token')
-      let deleteUrl = "http://localhost:8080/favorite/delete/"+par
-      axios.delete(deleteUrl)
+          let par = item.yno+"&"+this.$session.get('token')
+      let deleteUrl = "/favorite/delete/"+par
+      http.delete(deleteUrl)
       .then(function (response) {
         console.log(response);
       })
