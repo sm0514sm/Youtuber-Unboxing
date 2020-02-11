@@ -28,38 +28,40 @@
                             >{{youtuber1.publishedDate}}</p>
                           </v-row>
                           <v-row class="mt-5" style="float: left;">
-                            <!-- instagram -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon1[0] != '' "
-                              src="../assets/instagramIcon.png"
-                              @click="openNewWindow(otherLinkIcon1[0])"
-                            />
-                            <!-- twitter -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon1[1] != '' "
-                              src="../assets/twitterIcon.png"
-                              @click="openNewWindow(otherLinkIcon1[1])"
-                            />
-                            <!-- facebook -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon1[2] != '' "
-                              src="../assets/facebookIcon.png"
-                              @click="openNewWindow(otherLinkIcon1[2])"
-                            />
-                            <!-- tiktok -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon1[3] != '' "
-                              src="../assets/tiktokIcon.png"
-                              @click="openNewWindow(otherLinkIcon1[3])"
-                            />
+                            <v-col align ="right">
+                              <!-- instagram -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon1[0] != '' "
+                                src="../assets/instagramIcon.png"
+                                @click="openNewWindow(otherLinkIcon1[0])"
+                              />
+                              <!-- twitter -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon1[1] != '' "
+                                src="../assets/twitterIcon.png"
+                                @click="openNewWindow(otherLinkIcon1[1])"
+                              />
+                              <!-- facebook -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon1[2] != '' "
+                                src="../assets/facebookIcon.png"
+                                @click="openNewWindow(otherLinkIcon1[2])"
+                              />
+                              <!-- tiktok -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon1[3] != '' "
+                                src="../assets/tiktokIcon.png"
+                                @click="openNewWindow(otherLinkIcon1[3])"
+                              />
+                            </v-col>
                           </v-row>
                         </v-col>
                         <v-col cols="5">
@@ -105,8 +107,10 @@
                         </v-col>
                         <v-col cols="7">
                           <v-row class="pl-7">
-                              <p
-                              class="font-weight-black thin ma-0 headline" style="text-align='right'">{{youtuber2.publishedDate}}</p>
+                            <p
+                              class="font-weight-black thin ma-0 headline"
+                              style="text-align='right'"
+                            >{{youtuber2.publishedDate}}</p>
                           </v-row>
                           <v-row align="center" class="mt-5" style="float: left;">
                             <!-- instagram -->
@@ -532,7 +536,7 @@ export default {
       }
 
       //otherLink
-      // this.makeOtherLinkIcon();
+      this.makeOtherLinkIcon();
     },
     setGradeColor(str) {
       if (typeof str == "undefined") {
@@ -626,6 +630,26 @@ export default {
         for (let j = 0; j < site.length; j++) {
           if (link1[i].indexOf(site[j]) != -1) {
             this.otherLinkIcon1[j] = link1[i];
+            break;
+          }
+        }
+      }
+
+      var y2 = this.youtuber2;
+      var link2 = [
+        y2.otherLink1,
+        y2.otherLink2,
+        y2.otherLink3,
+        y2.otherLink4,
+        y2.otherLink5
+      ];
+
+      this.otherLinkIcon2 = ["", "", "", ""];
+
+      for (let i = 0; i < link2.length; i++) {
+        for (let j = 0; j < site.length; j++) {
+          if (link2[i].indexOf(site[j]) != -1) {
+            this.otherLinkIcon2[j] = link2[i];
             break;
           }
         }
