@@ -59,7 +59,7 @@ class updateThread:
         global NECESSARY_WORD, MONTH
         
         print("------------- update is started!")        
-        youtubers = Youtuber.objects.all() # 일단은 한 명만 하는 중
+        youtubers = Youtuber.objects.all()[2:3] # 일단은 한 명만 하는 중
         left_google_api_keys = len(GOOGLE_KEY_LIST)
         for  youtuber in youtubers:
             print("------------- youtuber {}'s update is started!".format(youtuber.yno))
@@ -141,6 +141,7 @@ class updateThread:
             else:
                 print("------------- Yno {}'s trend table is not updated since last update is duplicate.".format(youtuber.yno))
             
+            
             ################## 새로운 영상들 가져오기
             base_url = "https://www.googleapis.com/youtube/v3/playlistItems"
             upload_id = youtuber.uploadsid
@@ -218,12 +219,13 @@ class updateThread:
                 print('new video ID {} is added to DB.'.format(new_video_id))
                 
             ###### 이전 비디오 업데이트
+            print('updating 5 videos')
             for video in needed_updated_videos: # video: id
                 part = 'statistics'
                 base_url = 'https://www.googleapis.com/youtube/v3/videos'
                 while left_google_api_keys:
                     try:
-                        response = urllib.request.urlopen(base_url + "?part={}&id={}&key={}&regionCode=KR".format(part, new_video_id, GOOGLE_KEY_LIST[GOOGLE_KEY_INDEX]))
+                        response = urllib.request.urlopen(base_url + "?part={}&id={}&key={}&regionCode=KR".format(part, video, GOOGLE_KEY_LIST[GOOGLE_KEY_INDEX]))
                         info_obj = json.loads(response.read().decode('utf-8'))
                         break
                     except:
@@ -251,15 +253,14 @@ class updateThread:
             
                         
             ############## 커뮤니티 가져오기
-            # 유튜버의 관련 키워드로 검색을 해서 가져오되, 마지막 업데이트 이후의 것들을 가져와서 넣자.
-            print("------------- youtuber {}'s community aricles update is started!".format(youtuber.yno))
+            print("------------- youtuber {}'s community articles update is started!".format(youtuber.yno))
             left_DAUM_KEY = len(DAUM_API_KEYS)
             daum_key = DAUM_API_KEYS[DAUM_API_INDEX]
             
             community_articles = Community.objects.filter(yno=youtuber).order_by('-articledate')
             
             searchKeyword = youtuber.searchkeyword if youtuber.searchkeyword else youtuber.channelname
-            lastUpdate = community_articles[0].articledate # datetime.date 타입
+            lastUpdate = community_articles[0].articledate if community_articles else datetime.date(2019, 1, 1) # datetime.date 타입
             lastUpdate = datetime.datetime(lastUpdate.year, lastUpdate.month, lastUpdate.day, 0, 0) # datetime.datetime으로 형변환
             keywords = NECESSARY_WORD[0]
             youtuber_category = [cate.cano.cano for cate in CategoryYoutubeRelation.objects.filter(yno=youtuber)]
@@ -276,7 +277,7 @@ class updateThread:
             while MORE_PAGES and MORE_DATES:
                 if page >= MAX_page:
                     MORE_PAGES = False
-                    
+                    break                    
                 params = {
                     'query': searchKeyword,
                     'sort': 'recency',
@@ -306,8 +307,7 @@ class updateThread:
                 MAX_page = min(DEFAULT_MAX, total_count // 50)
                 
                 documents = response_dict.get('documents')
-                # 모든 글들을 순서대로 탐색하되 마지막 날짜보다 낮은 게 나오면 바로 넘겨버리자
-                # 만약 마지막 날짜보다 앞서면 추가하고 아니면 끝내
+
                 for document in documents:
                     contents = document.get('contents')
                     if date_is_valid(document.get('datetime')[:10], lastUpdate):
@@ -326,7 +326,7 @@ class updateThread:
                     else:
                         MORE_DATES = False
                         break
-                print("------------- youtuber {}'s community aricles update is done!".format(youtuber.yno))
+            print("------------- youtuber {}'s community aricles update is done!".format(youtuber.yno))
             
                 
             ############## 뉴스 가져오기
@@ -363,13 +363,11 @@ class updateThread:
                     print('*--- next naver key setting ---*')
                     NAVER_ID_INDEX += 1
                     NAVER_ID_INDEX %= len(NAVER_ID_LIST)
-                    left_NAVER_API_KEYS -= 1
-                                    
+                    left_NAVER_API_KEYS -= 1                                    
             if not left_NAVER_API_KEYS:
                 print('naver key is expired during updating news articles. {} is not updated.'.format(youtuber.yno))
                 return HttpResponse('naver key is expired during updating news articles. {} is not updated.'.format(youtuber.yno))
 
-            # newses를 탐색
             for news in newses:
                 is_correct = False
                 date = datetime.datetime(int(news["pubDate"][12:16]), MONTH.index(news["pubDate"][8:11]), int(news["pubDate"][5:7]))
@@ -383,7 +381,6 @@ class updateThread:
                 if not is_correct:
                     continue
             
-                # 여기까지 통과했으면 의미있는 뉴스! 그러므로 DB에 추가
                 new_news = News.objects.create(
                     yno = youtuber,
                     newslink = news.get('link'),
@@ -433,10 +430,9 @@ class updateThread:
                     response_body = response.read().decode('utf-8')
                     data = json.loads(response_body).get('results')[0].get('data')
                     data = {'data': data}
-                    result = json.dumps(data) # 이 값을 DB에 넣는다.
-                    
+                    result = json.dumps(data)
                     datalab = Naverdatalab.objects.filter(yno=youtuber)
-                    # 있으면 수정하고 고친다.
+                    
                     if datalab:
                         datalab = datalab[0]
                         datalab.searchkeyword = keyword
