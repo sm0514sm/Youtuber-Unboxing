@@ -350,7 +350,7 @@ def make_new_youtuber(request, url):
           (stat_influence, stat_activity, stat_trend, stat_views, stat_charm))
     print('*--------------------- Grade : %3d -------------------------*\n' % grade)
 
-    youtuber.status = 100
+    youtuber.status = 99
     youtuber.save()
     # 15. 유튜버의 스텟, 등급, updatedDate 갱신
     now = datetime.datetime.now()
@@ -361,13 +361,14 @@ def make_new_youtuber(request, url):
     youtuber.charm = stat_charm
     youtuber.grade = grade
     youtuber.updateddat = now
-    youtuber.status = 100
-    youtuber.save()
+    
     print('*------------------ Total : %.2f s----------------------*' %
           (timeit.default_timer() - timer[0]))
     res['code'] = 0
     res['yno'] = yno
     time.sleep(1)
+    youtuber.status = 0
+    youtuber.save()
     return HttpResponse(json.dumps(res))
 
 #-------------------------------------------------------------------------------------------------------------------------#
