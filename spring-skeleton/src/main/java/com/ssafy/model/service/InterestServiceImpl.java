@@ -16,7 +16,7 @@ public class InterestServiceImpl implements InterestService {
 	private InterestDao dao;
 
 	@Override
-	public List<Youtuber> searchInterestRecommend(Map<String, Integer> condition) {
+	public List<Youtuber> searchInterestRecommend(Map<String, Object> condition) {
 		try {
 			return dao.searchInterestRecommend(condition);
 		} catch (Exception e) {

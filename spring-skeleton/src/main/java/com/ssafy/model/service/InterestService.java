@@ -6,5 +6,5 @@ import java.util.Map;
 import com.ssafy.model.dto.Youtuber;
 
 public interface InterestService {
-	public List<Youtuber> searchInterestRecommend(Map<String, Integer> condition);
+	public List<Youtuber> searchInterestRecommend(Map<String, Object> condition);
 }

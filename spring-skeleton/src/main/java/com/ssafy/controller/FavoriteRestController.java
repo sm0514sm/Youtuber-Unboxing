@@ -44,19 +44,15 @@ public class FavoriteRestController {
 	}
 	
 	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 youtuber를 해당 user의 즐겨찾기에 추가")
-	@PostMapping("/favorite/insert")
-	public ResponseEntity<Map<String, Object>> insertFavorite(@RequestParam Map<String, Object> fav){
-		Gson gson = new Gson(); 
-		String json = gson.toJson(fav); 
-    	JsonParser parser = new JsonParser();
-    	JsonElement element = parser.parse(json);
-    	
-    	HashMap<String, Object> userInfo = kakao.getUserInfo(element.getAsJsonObject().get("token").getAsString());
+	@PostMapping("/favorite/insert/{yno}&{usno}")
+	public ResponseEntity<Map<String, Object>> insertFavorite(@PathVariable String yno,  @PathVariable String usno){
+    	HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
     	User user = userService.search(userInfo.get("id").toString());
-		Favorite favorite = new Favorite();
-		favorite.setUsno(user.getUsno());
-		favorite.setYno(element.getAsJsonObject().get("yno").getAsInt());
 		
+    	Favorite favorite = new Favorite();
+		favorite.setUsno(user.getUsno());
+		favorite.setYno(Integer.parseInt(yno));
+
 		favoriteService.insertFavorite(favorite);
 		return handleSuccess("즐겨찾기 등록 완료");
 	}

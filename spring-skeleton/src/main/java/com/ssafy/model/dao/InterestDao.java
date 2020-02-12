@@ -9,5 +9,5 @@ import com.ssafy.model.dto.Youtuber;
 
 @Mapper
 public interface InterestDao {
-	public List<Youtuber> searchInterestRecommend(Map<String, Integer> condition);
+	public List<Youtuber> searchInterestRecommend(Map<String, Object> condition);
 }

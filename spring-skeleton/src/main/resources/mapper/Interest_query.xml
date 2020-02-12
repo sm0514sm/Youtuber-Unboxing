@@ -17,6 +17,31 @@
 					inner join	(select		count(yno) count, yno
 								from		(select		distinct(usno)
 											from		interest_user_relation
+											where		itno in
+											<foreach collection="interestList" item="item" index="index" separator="," open="(" close=")">
+												${item}
+											</foreach>
+											) a
+								inner join	favorite b
+								using		(usno)
+								group by	b.yno) c
+					using		(yno)
+					order by	count desc
+					limit #{num}) e
+		using (yno)
+	</select>
+<!-- 	<select id="searchInterestRecommend" parameterType="java.util.Map" resultType="youtuber">
+		select *
+		from youtuber
+		inner join	(select		yno
+					from		(select	distinct(yno)
+								from	favorite f
+								where	f.yno not in	(select	distinct(yno) yno
+														from	favorite
+														where	usno = #{usno})) d
+					inner join	(select		count(yno) count, yno
+								from		(select		distinct(usno)
+											from		interest_user_relation
 											<if test=" interest1 != null">
 											where		itno=#{interest1} 
 											</if>
@@ -34,5 +59,5 @@
 					order by	count desc
 					limit #{num}) e
 		using (yno)
-	</select>
+	</select> -->
 </mapper>
