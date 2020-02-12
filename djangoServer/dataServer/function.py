@@ -344,8 +344,8 @@ def get_news_list(youtuber, category, last_updated_date):
     }
 
     headers = {
-        'X-Naver-Client-Id': config('X_NAVER_CLIENT_ID'),
-        'X-Naver-Client-Secret': config('X_NAVER_CLIENT_SECRET'),
+        'X-Naver-Client-Id': config('X_NAVER_CLIENT_ID1'),
+        'X-Naver-Client-Secret': config('X_NAVER_CLIENT_SECRET1'),
     }
 
     category_keyword = NECESSARY_WORD[0]
@@ -454,7 +454,7 @@ def date_is_valid(dateStr, lastupdate):  # ex) '2019-03-16'
 
 def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
     # API_KEY를 더 넣도록 합시다.
-    API_KEYS = [config('DAUM_API_KEY')]
+    API_KEYS = [config('DAUM_API_KEY1')]
 
     # YOUTUBER를 활용해, searchKeyword, lastUpdate, category 등등을 가져온다.
     searchKeyword = YOUTUBER.channelname
@@ -526,8 +526,8 @@ def get_daumCafe_search_result(YOUTUBER, category, lastupdate):
 
 def insert_naver_data_lab(youtuber):
     result = ''
-    client_id = config("NAVER_DATALAB_CLIENT_ID")
-    client_secret = config("NAVER_DATALAB_CLIENT_SECRET")
+    client_id = config("NAVER_DATALAB_CLIENT_ID1")
+    client_secret = config("NAVER_DATALAB_CLIENT_SECRET1")
     url = "https://openapi.naver.com/v1/datalab/search"
     startDate = (datetime.datetime.now() + datetime.timedelta(days=-365)).strftime("%Y-%m-%d")
     endDate = datetime.datetime.utcnow().strftime("%Y-%m-%d")
