@@ -443,9 +443,35 @@ export default {
 
             })
         );
-
-
-
-    }
-
+    },
+    [Constant.GET_YNO_FROM_URL]: (store, payload) => {
+        function replaceAll(str, searchStr, replaceStr) {
+            return str.split(searchStr).join(replaceStr);
+        }
+        var address = replaceAll(payload.url, "/", "~")
+        axios
+            .get("http://70.12.246.59:8000/data/ynoFromUrl/" + address)
+            .then(response => {
+                // console.log('얻어온 yno:', response.data.yno)
+                store.commit(Constant.GET_YNO_FROM_URL, {
+                    yno: response.data.yno
+                });
+            })
+            .catch(exp => {
+                alert("GET_YNO_FROM_URL에 실패하였습니다\n" + exp);
+            });
+    },
+    [Constant.GET_STATUS_FROM_YNO]: (store, payload) => {
+        axios
+            .get("http://70.12.246.59:8000/data/statusFromYno/" + payload.yno)
+            .then(response => {
+                // console.log('얻어온 status:', response.data.status)
+                store.commit(Constant.GET_STATUS_FROM_YNO, {
+                    value: response.data.status
+                });
+            })
+            .catch(exp => {
+                alert("GET_STATUS_FROM_YNO에 실패하였습니다\n" + exp);
+            });
+    },
 };
