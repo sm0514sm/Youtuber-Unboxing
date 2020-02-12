@@ -923,7 +923,8 @@ export default {
       otherLinkIcon: [],
       flag: false,
       page: 0,
-      videolist: []
+      videolist: [],
+      loginStatus: false,
     };
   }
 };

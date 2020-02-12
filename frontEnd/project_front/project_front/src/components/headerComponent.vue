@@ -9,8 +9,8 @@
 
         <v-dialog v-model="dialog" persistent max-width="600px">
             <template v-if="loginStatus" v-slot:activator="{ on }">  
-                <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">LOGOUT</v-btn>
-                <v-btn class="ma-2" color="indigo" large outlined dark @click="gotoMember()">MY INFO</v-btn>
+                <v-btn class="ma-2" color="red" dark v-on="on">LOGOUT<v-icon dark right>mdi-logout</v-icon></v-btn>
+                <v-btn class="ma-2" color="green" dark @click="gotoMember()">MY INFO<v-icon dark right>mdi-account</v-icon></v-btn>
             </template>
             <v-card>
             <v-card-title>
@@ -50,7 +50,6 @@ export default {
     
     mounted(){
         console.log("loginStatus:"+this.loginStatus)
-        console.log(this.$session)
         if (!this.$session.exists()) {
             this.loginStatus=false
             console.log("no session")
@@ -63,6 +62,10 @@ export default {
             this.loginStatus=true
             console.log("token:"+this.$session.get('token'))
             this.$router.push('/')
+            var self = this
+            setTimeout(function(){
+            self.$sesssion.destroy()
+            },1000 * 60 * 60 * 4)
         }
     },
     methods: {

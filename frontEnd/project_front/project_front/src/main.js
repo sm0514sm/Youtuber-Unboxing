@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueApexCharts from 'vue-apexcharts'
 import VueSession from 'vue-session'
+import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 Vue.use(VueApexCharts)
 Vue.use(AxiosPlugin)
 
@@ -23,11 +24,13 @@ Vue.use(Router);
 Vue.use(imagePreloader)
 Vue.use(BootstrapVue)
 Vue.component('apexchart', VueApexCharts)
-
+Vue.use(vuetify, {
+    iconfont: 'mdi' // 'md' || 'mdi' || 'fa' || 'fa4'
+  })
 var sessionOptions = {
     persist: true
   }
-  Vue.use(VueSession, sessionOptions)
+Vue.use(VueSession, sessionOptions)
 
 const router = new Router({
     mode: 'history',
