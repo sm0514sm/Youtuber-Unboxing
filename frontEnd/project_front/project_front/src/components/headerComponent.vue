@@ -174,6 +174,7 @@ export default {
         { path: "/searchPage", query: { word: document.getElementById("keyword").value } },
         () => {}
       );
+      document.getElementById("keyword").vaule = ""
     },
     onScroll() {
       var scroll = window.pageYOffset;
@@ -213,7 +214,7 @@ export default {
     
     inputKeyword() {
       // Items have already been loaded
-      if (this.searchItems.length > 0) return;
+      if (this.searchItems.length > 10) return;
 
 
       // Lazily load input items

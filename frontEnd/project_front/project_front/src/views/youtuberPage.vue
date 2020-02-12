@@ -167,7 +167,7 @@
                 <v-row>
                   <v-col>
                     <v-container>
-                      <v-tabs v-model="tab" background-color="gray" dark grow>
+                      <v-tabs v-model="tab" background-color="gray" dark grow fixed>
                         <v-tab>영향력</v-tab>
                         <v-tab>활동력</v-tab>
                         <v-tab>영상조회수증감추이</v-tab>
@@ -506,7 +506,7 @@
                       <a target="_blank" :href="news[i].newsLink" v-html="news[i].newsTitle"></a>
                     </v-list-item-title>
                     <v-list-item-subtitle class="mb-3" align="right">{{news[i].newsDate}}</v-list-item-subtitle>
-                    <span v-html="news[i].newsDescription.substring(0,70).concat('...')"></span>
+                    <span v-html="news[i].newsDescription.substring(0,300).concat('...')"></span>
                   </v-list-item-content>
                 </v-card>
               </v-hover>
@@ -522,7 +522,6 @@
 import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
 import InfiniteLoading from "vue-infinite-loading";
-import axios from "axios";
 import tc from 'thousands-counter';
 
 export default {
