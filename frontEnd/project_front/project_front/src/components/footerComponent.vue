@@ -2,7 +2,7 @@
   <v-footer dark padless>
     <v-card flat tile class="indigo lighten-1 white--text text-center">
       <v-card-text>
-        <v-icon large color="white darken-2">instagram</v-icon>
+        <v-icon large color="white darken-2">mdi-twitter</v-icon>
       <v-icon large color="white darken-2">twitter</v-icon>
         <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
           <v-icon size="24px">{{ icon }}</v-icon>
@@ -49,11 +49,13 @@
 export default {
   data: () => ({
     icons: [
-      "fa-facebook",
-      "fa-twitter",
-      "fab fa-google-plus",
-      "fab fa-linkedin",
-      "fab fa-instagram"
+      "mdi-twitter",
+      "mdi-instagram",
+      "mdi-facebook",
+      "mdi-google-plus",
+      "mdi-reddit",
+      "mdi-discord",
+      "mdi-pinterest"
     ]
     // items: [
     //   {
