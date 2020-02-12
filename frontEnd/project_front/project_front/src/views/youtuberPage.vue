@@ -55,13 +55,10 @@
                         <v-icon v-if="!flag" x-large>star_border</v-icon>
                       </v-btn>
                     </v-col>
-                      <v-btn v-if="loginStatus" text icon color="red" @click="manageFav">
-                        <v-icon v-if="flag" @click="deleteFav" x-large>star</v-icon>
-                        <v-icon v-if="!flag" @click="insertFav" x-large>star_border</v-icon>
-                      </v-btn>
-                    <v-col>
-                      <v-btn rounded depressed color="#9CDCF0">임시</v-btn>
-                    </v-col>
+                    <v-btn v-if="loginStatus" text icon color="red" @click="manageFav">
+                      <v-icon v-if="flag" @click="deleteFav" x-large>star</v-icon>
+                      <v-icon v-if="!flag" @click="insertFav" x-large>star_border</v-icon>
+                    </v-btn>
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
@@ -78,7 +75,7 @@
                     <v-col>
                       <span class="font-weight-bold">구독자 수</span>
                       <br />
-                      {{youtuber.subscriber}}
+                      {{tc(youtuber.subscriber)}}
                     </v-col>
                     <v-divider vertical class="mx-3"></v-divider>
                     <v-col>
@@ -90,7 +87,7 @@
                     <v-col>
                       <span class="font-weight-bold">총 영상조회 수</span>
                       <br />
-                      {{youtuber.totalViewCount}}
+                      {{tc(youtuber.totalViewCount)}}
                     </v-col>
                     <v-divider vertical class="mx-3"></v-divider>
                     <!-- 외부링크 -->
@@ -103,6 +100,7 @@
                           v-if="otherLinkIcon[0] != '' "
                           src="../assets/instagramIcon.png"
                           @click="openNewWindow(otherLinkIcon[0])"
+                          style="cursor:pointer"
                         />
                         <!-- twitter -->
                         <v-img
@@ -111,6 +109,7 @@
                           v-if="otherLinkIcon[1] != '' "
                           src="../assets/twitterIcon.png"
                           @click="openNewWindow(otherLinkIcon[1])"
+                          style="cursor:pointer"
                         />
                         <!-- facebook -->
                         <v-img
@@ -119,6 +118,7 @@
                           v-if="otherLinkIcon[2] != '' "
                           src="../assets/facebookIcon.png"
                           @click="openNewWindow(otherLinkIcon[2])"
+                          style="cursor:pointer"
                         />
                         <!-- tiktok -->
                         <v-img
@@ -127,6 +127,7 @@
                           v-if="otherLinkIcon[3] != '' "
                           src="../assets/tiktokIcon.png"
                           @click="openNewWindow(otherLinkIcon[3])"
+                          style="cursor:pointer"
                         />
                       </v-row>
                     </v-col>
@@ -427,8 +428,14 @@
                         <v-row>
                           <v-col class="pt-0">
                             <p class="text-truncate title mb-0">{{item.videoName}}</p>
-                            <p style="font-size: 13px"> 게시일 : {{item.regDate}} / 조회수 : {{item.videoViewCount}} 회 </p>
-                            <p v-html="item.videoDescription.substring(0,120).concat('...')" class="font-weight-light" style="color:gray"></p>
+                            <p
+                              style="font-size: 13px"
+                            >게시일 : {{item.regDate}} / 조회수 : {{tc(item.videoViewCount)}} 회</p>
+                            <p
+                              v-html="item.videoDescription.substring(0,120).concat('...')"
+                              class="font-weight-light"
+                              style="color:gray"
+                            ></p>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -451,17 +458,29 @@
                       <template v-slot:activator="{ on }">
                         <v-icon v-on="on">info</v-icon>
                       </template>
-                      <span>등급산정기준은 현재 사이트 기준으로 상위 5%는<br> SS등급, 10%는 S등급, 20%는 A등급, 50%는 B등급, 80%는 C등급으로 챙적하고 있습니다.</span>
+                      <span>
+                        등급산정기준은 현재 사이트 기준으로 상위 5%는
+                        <br />SS등급, 10%는 S등급, 20%는 A등급, 50%는 B등급, 80%는 C등급으로 챙적하고 있습니다.
+                      </span>
                     </v-tooltip>
                   </v-list-item-title>
                   <v-divider></v-divider>
                 </v-col>
               </v-row>
               <transition appear name="fade">
-                <v-btn
+                <!-- <v-btn
                   fab
                   :color="setGradeColor(youtuber.grade)"
                   style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
+                >
+                  <p
+                    style="font-weight-black text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
+                  >{{setGrade(youtuber.grade)}}</p>
+                </v-btn>-->
+                <v-btn
+                  fab
+                  :color="setGradeColor(youtuber.grade)"
+                  style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 40%;"
                 >
                   <p
                     style="font-weight-black text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
@@ -481,7 +500,7 @@
               <v-hover
                 v-slot:default="{ hover }"
                 open-delay="100"
-                v-for="i in [0,1,2,3,4]"
+                v-for="i in ((news.length >= 5)?[0,1,2,3,4]:news.slice(0,news.length))"
                 :key="i"
               >
                 <v-card class="my-3 px-2" :elevation="hover ? 7 : 0">
@@ -506,8 +525,9 @@
 import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
 import InfiniteLoading from "vue-infinite-loading";
+import axios from "axios";
+import tc from 'thousands-counter';
 
-// import axios from "axios";
 
 export default {
   name: "youtuberPage",
@@ -525,46 +545,49 @@ export default {
       callback: this.render,
       failCallback: this.failCallback
     });
-    if(this.$session.exists()){
-      this.loginStatus=true
-      let initialUrl=this.$route.query.yno+"_"+this.$session.get('token')
-      console.log(initialUrl)
-      axios.get("http://localhost:8080/favorite/select/"+initialUrl)
-      .then(data => this.flag = data.data.data==0 ? false : true)
+    if (this.$session.exists()) {
+      this.loginStatus = true;
+      let initialUrl = this.$route.query.yno + "_" + this.$session.get("token");
+      console.log(initialUrl);
+      axios
+        .get("http://localhost:8080/favorite/select/" + initialUrl)
+        .then(data => (this.flag = data.data.data == 0 ? false : true));
     }
   },
   methods: {
-    manageFav(){
-      this.flag? (this.flag = false) : (this.flag = true)
+    manageFav() {
+      this.flag ? (this.flag = false) : (this.flag = true);
     },
-    insertFav(){
-      console.log("insert")
-      console.log(this.$session.get('token'))
-      console.log(this.youtuber.yno)
-      axios.post('http://localhost:8080/favorite/insert', {
-        yno: this.youtuber.yno,
-        token: this.$session.get('token')
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    insertFav() {
+      console.log("insert");
+      console.log(this.$session.get("token"));
+      console.log(this.youtuber.yno);
+      axios
+        .post("http://localhost:8080/favorite/insert", {
+          yno: this.youtuber.yno,
+          token: this.$session.get("token")
+        })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
-    deleteFav(){
-      console.log("delete")
-      console.log(this.$session.get('token'))
-      console.log(this.youtuber.yno)
-      let par = this.youtuber.yno+"_"+this.$session.get('token')
-      let deleteUrl = "http://localhost:8080/favorite/delete/"+par
-      axios.delete(deleteUrl)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    deleteFav() {
+      console.log("delete");
+      console.log(this.$session.get("token"));
+      console.log(this.youtuber.yno);
+      let par = this.youtuber.yno + "_" + this.$session.get("token");
+      let deleteUrl = "http://localhost:8080/favorite/delete/" + par;
+      axios
+        .delete(deleteUrl)
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
     render(...responses) {
       var youtuber = responses[0];
@@ -658,18 +681,18 @@ export default {
       if (typeof num == "undefined") {
         return "gray";
       }
-      if(num >= 95){
-        return "red"
-      }else  if(num >= 90){
-        return "orange"
-      }else  if(num >= 80){
-        return "yellow"
-      }else  if(num >= 50){
-        return "green"
-      }else  if(num >= 20){
-        return "blue"
-      }else {
-        return "gray"
+      if (num >= 95) {
+        return "red";
+      } else if (num >= 90) {
+        return "orange";
+      } else if (num >= 80) {
+        return "yellow";
+      } else if (num >= 50) {
+        return "green";
+      } else if (num >= 20) {
+        return "blue";
+      } else {
+        return "gray";
       }
     },
     failCallback(err) {
@@ -727,20 +750,23 @@ export default {
           }
         });
     },
-    setGrade(num){
-      if(num >= 95){
-        return "SS"
-      }else  if(num >= 90){
-        return "S"
-      }else  if(num >= 80){
-        return "A"
-      }else  if(num >= 50){
-        return "B"
-      }else  if(num >= 20){
-        return "C"
-      }else {
-        return "D"
+    setGrade(num) {
+      if (num >= 95) {
+        return "SS";
+      } else if (num >= 90) {
+        return "S";
+      } else if (num >= 80) {
+        return "A";
+      } else if (num >= 50) {
+        return "B";
+      } else if (num >= 20) {
+        return "C";
+      } else {
+        return "D";
       }
+    },
+    tc(num){
+      return tc(num)
     }
   },
   computed: {},
@@ -785,7 +811,7 @@ export default {
               colors: ["black", "black", "black", "black", "black"],
               fontFamily: "bold"
             }
-          }
+          },
         },
         yaxis: {
           show: false,

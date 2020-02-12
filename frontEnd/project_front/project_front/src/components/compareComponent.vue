@@ -9,7 +9,9 @@
     :close-delay="300"
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-btn v-bind="attrs" v-on="on" fab fixed bottom right></v-btn>
+      <v-btn v-bind="attrs" v-on="on" fab fixed bottom right color="yellow">
+        <v-icon color="green">input</v-icon>
+      </v-btn>
     </template>
 
     <v-card :elevation="20" class="px-10" shaped height="350px" width="400px" >
@@ -73,6 +75,12 @@ export default {
       this.updateyoutubers();
     },
     gotoComparePage: function() {
+      var output = localStorage.getItem("compareYoutuber");
+      var arr = JSON.parse(output);
+      if(arr.length != 2){
+        alert("2명의 유튜버를 담아주세요");
+        return;
+      }
       console.log("gotoComparePage");
       this.$router.push("/comparePage");
     },
@@ -85,7 +93,12 @@ export default {
       }
 
       if (arr.length >= 2) {
-        alert("더이상 비교할 수 있는 유튜버를 넣을 수 없습니다.");
+        alert("더이상 비교하기에 유튜버를 담을 수 없습니다.");
+        return;
+      }
+
+      if (arr.length ==1 && arr[0].yno == yno) {
+        alert("같은 유튜버는 담을 수 없습니다.");
         return;
       }
 

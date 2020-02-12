@@ -31,6 +31,20 @@ export default {
                 alert("GET_YOUTUBERS_PER_CATEGORY에 실패하였습니다\n" + exp);
             });
     },
+    [Constant.GET_ALLYOUTUBER]: (store) => {
+        console.log("action_GET_ALLYOUTUBER ");
+        http
+            .get("/youtuber/all")
+            .then(response => {
+                console.log(response.data.data[0]);
+                store.commit(Constant.GET_YOUTUBERS_PER_CATEGORY, {
+                    youtuberslist: response.data.data
+                });
+            })
+            .catch(exp => {
+                alert("GET_YOUTUBERS_PER_CATEGORY에 실패하였습니다\n" + exp);
+            });
+    },
     [Constant.GET_YOUTUBER]: (store, payload) => {
         console.log("action_GET_YOUTUBER ");
 

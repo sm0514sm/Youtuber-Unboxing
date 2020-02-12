@@ -71,6 +71,8 @@ export default {
     methods: {
         onSendButton: function () {
             this.nowPage = "loadingPage";
+            
+            console.log("**************************")
             this.$store.dispatch(Constant.INSERT_YOUTUBUER, {
                 address: this.address,
                 callback: this.processDispatch
