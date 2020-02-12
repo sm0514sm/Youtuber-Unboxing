@@ -46,8 +46,7 @@ def update_stat_all(request):
         youtuber.grade = get_grade(youtuber, youtuber.influence, youtuber.activity,
                                    youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm)
         youtuber.save()
-        print('| %9d | %9d | %9d | %9d | %9d | %9d |' % (youtuber.yno, youtuber.influence,
-                                                         youtuber.activity, youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm))
+        print('| %9d | %9d | %9d | %9d | %9d | %9d |' % (youtuber.yno, youtuber.influence, youtuber.activity, youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm))
     return HttpResponse(0)
 
 
@@ -1006,3 +1005,35 @@ def status_from_yno(request, yno):
     res['status'] = Youtuber.objects.get(yno=yno).status
     print(res)
     return HttpResponse(json.dumps(res))
+
+def update_stat_without_request():
+    youtube_list = Youtuber.objects.all()
+    print('|     yno | Influence |  Activity |     Trend |     Views |     Charm |')
+    print('*--------------------------------------------------------------------*')
+    for youtuber in youtube_list:
+        Stat.objects.filter(yno=youtuber).filter().delete()
+        video_list = Video.objects.filter(yno=youtuber)
+        video_detail_list = []  # good, bad, reddate
+        for video in video_list:
+            temp = {}
+            temp['regDate'] = video.regdate
+            temp['good'] = video.good
+            temp['bad'] = video.bad
+            video_detail_list.append(temp)
+        now = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=9)
+        trends = Trend.objects.filter(yno=youtuber).order_by('-recorddate')
+        last_month_trend = None
+        for trend in trends:
+            last_month_trend = trend
+            if (now - trend.recorddate).days >= 30:
+                break
+        today_trend = trends[0]
+
+        youtuber.influence = get_influence(youtuber)
+        youtuber.activity = get_activity3(youtuber, video_detail_list)
+        youtuber.viewcounttrend = get_views(youtuber, last_month_trend, today_trend)
+        youtuber.subscribercounttrend = get_trend(youtuber, last_month_trend, today_trend)
+        youtuber.charm = get_charm(video_detail_list)
+        youtuber.grade = get_grade(youtuber, youtuber.influence, youtuber.activity, youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm)
+        youtuber.save()
+        print('| %9d | %9d | %9d | %9d | %9d | %9d |' % (youtuber.yno, youtuber.influence, youtuber.activity, youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm))
