@@ -2,7 +2,9 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on" @click="init">유튜버 추가하기</v-btn>
+        <v-btn color="primary" dark v-on="on" @click="init"
+          >유튜버 추가하기</v-btn
+        >
       </template>
       <v-card>
         <v-card-title>
@@ -17,14 +19,18 @@
                 <v-img :src="require('@/assets/youtuberinsert.png')"></v-img>
               </v-col>
               <v-col cols="12">
-                <v-text-field label="주소" v-model="address" required></v-text-field>
+                <v-text-field
+                  label="주소"
+                  v-model="address"
+                  required
+                ></v-text-field>
               </v-col>
             </v-row>
           </v-container>
           <!--loadingPage -->
           <v-container v-else-if="nowPage == 'loadingPage'">
             <v-row>
-              <v-col cols="12">데이터 요청중입니다 ...</v-col>
+              <v-col cols="12">데이터 요청중입니다 ... [ 남은 예상 시간 : {{ Math.round(44 - value/2) }}초 ]</v-col>
             </v-row>
             <v-row>
               <v-spacer></v-spacer>
@@ -35,7 +41,8 @@
                   :width="15"
                   :value="value"
                   color="teal"
-                >{{ value }}</v-progress-circular>
+                  >{{ value }}</v-progress-circular
+                >
               </v-col>
               <v-spacer></v-spacer>
             </v-row>
@@ -47,10 +54,14 @@
                 <p
                   style="text-align: center;color: red;font-size: 20px;"
                   class="pa-0"
-                >{{completeTitle}}</p>
+                >
+                  {{ completeTitle }}
+                </p>
               </v-col>
               <v-col cols="12">
-                <p style="text-align: center;" class="pa-0">{{completeSmallTitle}}</p>
+                <p style="text-align: center;" class="pa-0">
+                  {{ completeSmallTitle }}
+                </p>
               </v-col>
             </v-row>
             <v-row>
@@ -62,7 +73,8 @@
                   color="blue darken-1"
                   text
                   @click="gotoYoutuberPage"
-                >해당 유튜버의 페이지로 이동하기</v-btn>
+                  >해당 유튜버의 페이지로 이동하기</v-btn
+                >
               </v-col>
               <v-spacer></v-spacer>
             </v-row>
@@ -70,8 +82,16 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn v-if="nowPage=='inputPage'" color="blue darken-1" text @click="onSendButton">SEND</v-btn>
+          <v-btn color="blue darken-1" text @click="dialog = false"
+            >Close</v-btn
+          >
+          <v-btn
+            v-if="nowPage == 'inputPage'"
+            color="blue darken-1"
+            text
+            @click="onSendButton"
+            >SEND</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -138,7 +158,17 @@ export default {
       });
     }
   },
-  computed: {},
+  computed: {
+    value() {
+      return this.$store.state.value;
+    },
+    myyno() {
+      return this.$store.state.yno;
+    },
+    tempValue(){
+        return this.$store.state.tempValue;
+    }
+},
   data() {
     return {
       dialog: false,
@@ -149,24 +179,50 @@ export default {
       youtuberPage: false,
       youtuberYno: "",
       interval: {},
-      value: 0
+      lastValue: 0
     };
   },
   beforeDestroy() {
     clearInterval(this.interval);
   },
   mounted() {
-    this.interval = setInterval(() => {
-      if (this.value === 100) {
-        return (this.value = 0);
-      }
-      if (this.nowPage == "loadingPage") {
-        this.value += 30;
-      }
-    }, 200);
+    this.interval1 = setInterval(() => {
+        if (this.nowPage == "loadingPage") {
+            if(this.myyno == null || this.myyno <= 0){
+                this.$store.dispatch(Constant.GET_YNO_FROM_URL, {
+                    url: this.address,
+                })
+            }
+            else{
+                clearInterval(this.interval1)
+                return;
+            }
+        }
+    }, 2000);
+    this.interval2 = setInterval(() => {
+        if(this.myyno != null && this.myyno > 0){
+            clearInterval(this.interval1)
+            this.$store.dispatch(Constant.GET_STATUS_FROM_YNO, {
+                yno: this.myyno,
+            })
+        }
+        if(this.value >= 100){
+            this.value = 100;
+            clearInterval(this.interval2)
+            return;
+        }
+    }, 500);
+    this.interval3 = setInterval(() => {
+        if(this.value >= 100){
+            clearInterval(this.interval3)
+            return;
+        }
+        if(this.myyno != null && this.myyno > 0 && this.tempValue + 40 > this.value){
+            this.$store.state.value = this.value + Math.round((Math.random() * 2.5));
+        }
+    }, 1000);
   }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
