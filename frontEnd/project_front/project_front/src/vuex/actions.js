@@ -438,6 +438,7 @@ export default {
         axios
             .get("http://70.12.246.59:8000/data/ynoFromUrl/" + address)
             .then(response => {
+                // console.log('얻어온 yno:', response.data.yno)
                 store.commit(Constant.GET_YNO_FROM_URL, {
                     yno: response.data.yno
                 });
@@ -447,10 +448,10 @@ export default {
             });
     },
     [Constant.GET_STATUS_FROM_YNO]: (store, payload) => {
-        console.log('payload.noy : ',payload.yno)
         axios
             .get("http://70.12.246.59:8000/data/statusFromYno/" + payload.yno)
             .then(response => {
+                // console.log('얻어온 status:', response.data.status)
                 store.commit(Constant.GET_STATUS_FROM_YNO, {
                     value: response.data.status
                 });
