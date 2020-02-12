@@ -21,6 +21,7 @@
         "stylus-loader": "^3.0.2",
         "thousands-counter": "^2.1.0",
         "vue": "^2.6.10",
+        "vue-animation": "^0.1.0",
         "vue-apexcharts": "^1.5.2",
         "vue-axios-cors": "^1.0.1",
         "vue-chartjs": "^3.5.0",

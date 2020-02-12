@@ -8,9 +8,7 @@
         <v-card-title align="center" class="pa-0">
           <v-row>
             <v-col class="mx-3">
-              <p class="display-2 font-weight-black italic font-italic" >
-                유튜버 추가하기
-              </p>
+              <p class="display-2 font-weight-black italic font-italic">유튜버 추가하기</p>
             </v-col>
           </v-row>
         </v-card-title>
@@ -55,12 +53,29 @@
           <!--completePage -->
           <v-container v-else-if="nowPage == 'completePage'">
             <v-row>
-              <v-col cols="12">
-                <p
-                  style="text-align: center;color: red;font-size: 20px;"
-                  class="pa-0"
-                >{{ completeTitle }}</p>
+              <!-- 추가 완료했을 때 -->
+              <v-col v-if="pageCode === 0" cols="12">
+                <animation-css :animation-type="AnimationType.TADA" v-model="animationFlag">
+                  <p style="text-align: center;color: #2196F3 ;font-size: 20px;" class="pa-0">
+                    <v-icon color="blue" x-large>mdi-human-handsup</v-icon>
+                    {{ completeTitle }}
+                    <v-icon color="blue" x-large>mdi-human-handsup</v-icon>
+                  </p>
+                </animation-css>
               </v-col>
+              <!-- 그외 에러 났을 때 -->
+              <v-col v-else cols="12">
+                
+                <animation-css :animation-type="AnimationType.HEADSHAKE" v-model="animationFlag">
+                  <p style="text-align: center;color: red ;font-size: 15px;" class="pa-0">
+                    <v-icon color="red" x-large>mdi-alert</v-icon>
+                    {{ completeTitle }}
+                    <v-icon color="red" x-large>mdi-alert</v-icon>
+                  </p>
+                </animation-css>
+                
+              </v-col>
+
               <v-col cols="12">
                 <p style="text-align: center;" class="pa-0">{{ completeSmallTitle }}</p>
               </v-col>
@@ -70,7 +85,7 @@
               <v-col>
                 <v-btn
                   large
-                  v-if="youtuberPage"
+                  v-if="pageCode == 0 || pageCode == 1"
                   color="blue darken-1"
                   text
                   @click="gotoYoutuberPage"
@@ -92,9 +107,12 @@
 
 <script>
 import Constant from "../vuex/Constant.js";
+import { AnimationCss, AnimationCssType } from "vue-animation";
 
 export default {
-  components: {},
+  components: {
+    [AnimationCss.name]: AnimationCss
+  },
   name: "inputComponent",
   methods: {
     onSendButton: function() {
@@ -112,10 +130,11 @@ export default {
       clearInterval(this.getYnoInterval);
       clearInterval(this.getValueInterval);
       clearInterval(this.addValueInterval);
-      this.address=""
+      this.address = "";
     },
     processDispatch: function(code, yno) {
       console.log("processDispatch" + code + " " + code + " " + yno);
+      this.pageCode = code;
       if (code == 1) {
         // 원래 있던 유튜버가 보여질 때
         this.completeTitle = "추가하려는 유튜버가 이미 있습니다!";
@@ -137,8 +156,9 @@ export default {
           this.completeSmallTitle = "입력한 URL이 올바르지 않습니다.";
         } else if (code == -3) {
           // 너무 인기 없는 유튜버라 지원 안함.
+          this.completeTitle = "구독자가 적은 유튜버는 지원하지 않습니다!";
           this.completeSmallTitle =
-            "구독자 10만명이하인 유튜버는 insert를 지원 하지 않습니다.";
+            "구독자 10만명이하인 유튜버는 [유튜브추가]를 지원 하지 않습니다.";
         } else {
           // 서버문제로 지원 안 함.
           this.completeSmallTitle = "서버 에러";
@@ -152,6 +172,8 @@ export default {
     },
     init: function() {
       this.nowPage = "inputPage";
+      this.animationFlag = true
+      
     },
     gotoYoutuberPage: function() {
       this.dialog = false;
@@ -229,7 +251,7 @@ export default {
     return {
       dialog: false,
       address: "",
-      nowPage: "inputPage",
+      nowPage: "insertPage",
       completeTitle: "",
       completeSmallTitle: "",
       youtuberPage: false,
@@ -238,7 +260,10 @@ export default {
       lastValue: 0,
       getYnoInterval: "",
       getValueInterval: "",
-      addValueInterval: ""
+      addValueInterval: "",
+      pageCode: 0,
+      AnimationType: AnimationCssType,
+      animationFlag : true
     };
   },
   beforeDestroy() {

@@ -2,259 +2,281 @@
   <!-- vuetify를 참고하여 작성하기
   https://vuetifyjs.com/ko/components/api-explorer
   -->
-  <v-container>
-    <h1>searchPage</h1>
-    "{{$route.query.word}}" 를 검색한 결과
-    <!--youtuber-->
-    <v-container wrap style="background : white" border class="my-3">
-      <v-row class="pt-0 pl-3">
-        <v-col>
-          <h1 class="font-weight-light mb-1">Youtuber</h1>
-          <v-divider></v-divider>
-        </v-col>
-      </v-row>
-      <v-hover
-        v-slot:default="{ hover }"
-        open-delay="50"
-        v-for="(item,i) in displayyoutuber"
-        :key="i"
-      >
-        <v-card
-          :elevation="hover ? 7 : 0"
-          outlined
-          flat
-          @click="gotoYoutuberPage(item.yno)"
-          class="my-3 mx-3"
-          shaped
-        >
-          <v-row align="center">
-            <!-- thumbnail -->
-            <v-col class="ml-3 pr-0" cols="1" align="center">
-              <v-img class="circle" :src="item.thumbnails" flat :aspect-ratio="1/1" width="200px" />
-            </v-col>
-            <v-divider vertical class="mx-3"></v-divider>
-            <!-- 유튜버 설명 -->
-            <v-col cols="9" class="pa-1">
-              <v-row align="center">
-                <v-col cols="12" class="py-1">
-                  <p
-                    class="font-weight-black thin display-1 ma-0 text-truncate"
-                  >{{item.channelName}}</p>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" class="py-0">
-                  <p
-                    class="font-weight-light thin ma-0"
-                    style="font-size:13px"
-                  >개설일 : {{item.publishedDate}}</p>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" class="py-0">
-                  <p class="font-weight-light thin ma-0">
-                    구독자 수 :
-                    <b>{{tc(item.subscriber)}}</b> / 누적조회수 :
-                    <b>{{tc(item.totalViewCount)}}</b> / 총영상수 :
-                    <b>{{item.totalVideoCount}}</b>
-                  </p>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" class="py-0">
-                  <p
-                    class="font-weight-light thin ma-0"
-                  >영향력 : {{item.influence}} / 활동력 : {{item.activity}} / 조회수력 : {{item.viewCountTrend}} / 구독자력 : {{item.subscriberCountTrend}} / 호감도 : {{item.charm}}</p>
-                </v-col>
-              </v-row>
-            </v-col>
-            <v-divider vertical class="pl"></v-divider>
-            <!-- 등급 -->
-            <v-col>
-              <v-row align="center">
-                <v-col class="py-1">
-                  <p class="font-weight-bold ma-0">&nbsp;&nbsp;GRADE</p>
-                </v-col>
-              </v-row>
-              <v-divider class="mr-10 mt-0 mb-0"></v-divider>
-              <v-row>
-                <v-col class="py-2">
-                  <v-btn
-                    class="mx-0"
-                    fab
-                    dark
-                    large
-                    :color="setGradeColor(item.grade)"
-                    height="80px"
-                    width="80px"
-                  >
-                    <v-icon dark>{{setGrade(item.grade)}}</v-icon>
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-hover>
-      <v-row>
-        <v-col align="center">
-          <v-btn text color="black" @click="youtuberPageDown">
-            <v-icon>arrow_downward</v-icon>더보기
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
 
-    <!-- video -->
-    <!-- 최신동영상 -->
-    <v-container wrap style="background : white" border class="my-3">
-      <v-row class="pt-0 pl-3">
-        <v-col>
-          <h1 class="font-weight-light mb-1">Video</h1>
-          <v-divider></v-divider>
-        </v-col>
-      </v-row>
-      <v-row class="mx-3">
+  <div>
+    <v-card>
+      <v-list-item-content
+        class="justify-center py-6"
+        style="background-color:#cdcdcd ; height : 300px"
+      >
+        <v-list-item-title class="font-weight-black display-3 font-italic" align="center"></v-list-item-title>
+        <v-list-item-title
+          class="font-weight-black display-3 font-italic"
+          align="center"
+        >SEARCH PAGE</v-list-item-title>
+        <v-list-item-title class="font-weight-bold" style="font-size:30px" align="center">
+          "{{this.$route.query.word}}" 을(를) 검색한 결과입니다.
+          <v-icon color="blue" x-large>mdi-magnify</v-icon>
+        </v-list-item-title>
+      </v-list-item-content>
+    </v-card>
+
+    <v-container>
+      <!--youtuber-->
+      <v-container wrap style="background : white" border class="my-3">
+        <v-row class="pt-0 pl-3">
+          <v-col>
+            <h1 class="font-weight-light mb-1">Youtuber</h1>
+            <v-divider></v-divider>
+          </v-col>
+        </v-row>
+
+        <v-container v-if="displayyoutuber.length == 0">
+          <v-hover v-slot:default="{ hover }" open-delay="50">
+            <v-card :elevation="hover ? 7 : 0" flat class="my-3 mx-3" shaped>
+              <v-list-item-content
+                class="justify-center py-6"
+                style="background-color:#cdcdcd ; height : 250px"
+              >
+              <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center"></v-list-item-title>
+                <v-list-item-title class="font-weight-black" align="center" style="font-size:25px">
+                  <v-icon color="red" x-large>mdi-alert-circle</v-icon>검색어에 해당하는 유튜버가 없습니다.
+                </v-list-item-title>
+                <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center">유튜버를 추가하고 싶으시나요?</v-list-item-title>
+              <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center"><inputComponent></inputComponent></v-list-item-title>
+              </v-list-item-content>
+            </v-card>
+          </v-hover>
+        </v-container>
+        <v-container v-else>
+          <v-hover
+            v-slot:default="{ hover }"
+            open-delay="50"
+            v-for="(item,i) in displayyoutuber"
+            :key="i"
+          >
+            <v-card
+              :elevation="hover ? 7 : 0"
+              outlined
+              flat
+              @click="gotoYoutuberPage(item.yno)"
+              class="my-3 mx-3"
+              shaped
+            >
+              <v-row align="center">
+                <!-- thumbnail -->
+                <v-col class="ml-3 pr-0" cols="1" align="center">
+                  <v-img
+                    class="circle"
+                    :src="item.thumbnails"
+                    flat
+                    :aspect-ratio="1/1"
+                    width="200px"
+                  />
+                </v-col>
+                <v-divider vertical class="mx-3"></v-divider>
+                <!-- 유튜버 설명 -->
+                <v-col cols="9" class="pa-1">
+                  <v-row align="center">
+                    <v-col cols="12" class="py-1">
+                      <p
+                        class="font-weight-black thin display-1 ma-0 text-truncate"
+                      >{{item.channelName}}</p>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" class="py-0">
+                      <p
+                        class="font-weight-light thin ma-0"
+                        style="font-size:13px"
+                      >개설일 : {{item.publishedDate}}</p>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" class="py-0">
+                      <p class="font-weight-light thin ma-0">
+                        구독자 수 :
+                        <b>{{tc(item.subscriber)}}</b> / 누적조회수 :
+                        <b>{{tc(item.totalViewCount)}}</b> / 총영상수 :
+                        <b>{{item.totalVideoCount}}</b>
+                      </p>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12" class="py-0">
+                      <p
+                        class="font-weight-light thin ma-0"
+                      >영향력 : {{item.influence}} / 활동력 : {{item.activity}} / 조회수력 : {{item.viewCountTrend}} / 구독자력 : {{item.subscriberCountTrend}} / 호감도 : {{item.charm}}</p>
+                    </v-col>
+                  </v-row>
+                </v-col>
+                <v-divider vertical class="pl"></v-divider>
+                <!-- 등급 -->
+                <v-col>
+                  <v-row align="center">
+                    <v-col class="py-1">
+                      <p class="font-weight-bold ma-0">&nbsp;&nbsp;GRADE</p>
+                    </v-col>
+                  </v-row>
+                  <v-divider class="mr-10 mt-0 mb-0"></v-divider>
+                  <v-row>
+                    <v-col class="py-2">
+                      <v-btn
+                        class="mx-0"
+                        fab
+                        dark
+                        large
+                        :color="setGradeColor(item.grade)"
+                        height="80px"
+                        width="80px"
+                      >
+                        <v-icon dark>{{setGrade(item.grade)}}</v-icon>
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-hover>
+        </v-container>
+        <v-row>
+          <v-col align="center">
+            <v-btn text color="black" @click="youtuberPageDown">
+              <v-icon>arrow_downward</v-icon>더보기
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+
+      <!-- video -->
+      <!-- 최신동영상 -->
+      <v-container wrap style="background : white" border class="my-3">
+        <v-row class="pt-0 pl-3">
+          <v-col>
+            <h1 class="font-weight-light mb-1">Video</h1>
+            <v-divider></v-divider>
+          </v-col>
+        </v-row>
+        <v-row class="mx-3">
+          <v-hover
+            v-slot:default="{ hover }"
+            open-delay="50"
+            v-for="(item,i) in displayvideo"
+            :key="i"
+          >
+            <v-col cols="4" class="px-1">
+              <v-card height="470px">
+                <v-container class="pa-2">
+                  <v-row>
+                    <v-col>
+                      <v-list-item-content class="py-0">
+                        <iframe
+                          :src="String('https://www.youtube.com/embed/')+item.videoID"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen
+                        ></iframe>
+                      </v-list-item-content>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col class="pt-0">
+                      <p class="text-truncate title mb-0">{{item.videoName}}</p>
+                      <p
+                        style="font-size: 13px"
+                      >게시일 : {{item.regDate}} / 조회수 : {{tc(item.videoViewCount)}} 회</p>
+                      <p
+                        v-html="item.videoDescription.substring(0,120).concat('...')"
+                        class="font-weight-light"
+                      ></p>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-btn
+                        v-for="(tag,index) in item.tags"
+                        :key="index"
+                        rounded
+                        color="#6EE3F7"
+                        dark
+                        class="ml-1 mb-1"
+                      >{{tag}}</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card>
+            </v-col>
+          </v-hover>
+        </v-row>
+
+        <v-row>
+          <v-col align="center">
+            <v-btn text color="black" @click="videoPageDown">
+              <v-icon>arrow_downward</v-icon>더보기
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+
+     
+
+      <!-- news -->
+      <v-container wrap style="background : white" border class="my-3">
+        <v-row class="pt-0 pl-3">
+          <v-col>
+            <h1 class="font-weight-light mb-1">News</h1>
+            <v-divider></v-divider>
+          </v-col>
+        </v-row>
         <v-hover
           v-slot:default="{ hover }"
           open-delay="50"
-          v-for="(item,i) in displayvideo"
+          v-for="(item,i) in displaynews"
           :key="i"
         >
-          <v-col cols="4" class="px-1">
-            <v-card height="470px">
-              <v-container class="pa-2">
+          <v-card :elevation="hover ? 7 : 0" outlined flat class="my-3 mx-3" shaped>
+            <!-- 타이틀 -->
+            <v-row>
+              <v-col class="mx-5">
                 <v-row>
-                  <v-col>
-                    <v-list-item-content class="py-0">
-                      <iframe
-                        :src="String('https://www.youtube.com/embed/')+item.videoID"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                      ></iframe>
-                    </v-list-item-content>
+                  <v-col cols="12" class="pb-0">
+                    <a
+                      target="_blank"
+                      :href="item.newsLink"
+                      v-html="item.newsTitle"
+                      class="font-weight-black thin title ma-0 text-truncate"
+                    ></a>
                   </v-col>
                 </v-row>
+                <!-- 게시 날짜 -->
                 <v-row>
-                  <v-col class="pt-0">
-                    <p class="text-truncate title mb-0">{{item.videoName}}</p>
+                  <v-col cols="12" class="py-0">
                     <p
-                      style="font-size: 13px"
-                    >게시일 : {{item.regDate}} / 조회수 : {{tc(item.videoViewCount)}} 회</p>
-                    <p
-                      v-html="item.videoDescription.substring(0,120).concat('...')"
-                      class="font-weight-light"
-                    ></p>
+                      class="font-weight-light thin ma-0"
+                      style="font-size:13px"
+                    >개설일 : {{item.newsDate}}</p>
                   </v-col>
                 </v-row>
+                <!-- 뉴스 설명 -->
                 <v-row>
-                  <v-col>
-                    <v-btn v-for ="(tag,index) in item.tags" :key="index" rounded color='#6EE3F7' dark class="ml-1 mb-1">{{tag}}</v-btn>
+                  <v-col cols="12" class="py-1">
+                    <span v-html="item.newsDescription"></span>
                   </v-col>
                 </v-row>
-              </v-container>
-            </v-card>
-          </v-col>
+              </v-col>
+            </v-row>
+          </v-card>
         </v-hover>
-      </v-row>
-
-      <v-row>
-        <v-col align="center">
-          <v-btn text color="black" @click="videoPageDown">
-            <v-icon>arrow_downward</v-icon>더보기
-          </v-btn>
-        </v-col>
-      </v-row>
+        <v-row>
+          <v-col align="center">
+            <v-btn text color="black" @click="newsPageDown">
+              <v-icon>arrow_downward</v-icon>더보기
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-container>
-
-    <!-- 
-    <v-container wrap style="background : gray">
-      <v-card v-for="(item,i) in searchedvideo.slice(0,3)" :key="i" class="ma-5">
-        <v-container>
-          <v-row>
-            videoName : {{item.videoName }}
-            <br />
-            videoDescription : {{item.videoDescription }}
-            <br />
-            videoViewCount : {{item.videoViewCount }}
-            <br />
-            videoCommentCount : {{item.videoCommentCount }}
-            <br />
-            good : {{item.good }}
-            <br />
-            bad : {{item.bad }}
-            <br />
-            regDate : {{item.regDate }}
-            <br />
-            ycano : {{item.ycano }}
-            <br />
-            tags : {{item.tags }}
-            <br />
-            thumbnail : {{item.thumbnail }}
-            <br />
-            topic : {{item.topic }}
-            <br />
-            krCategory : {{item.krCategory }}
-            <br />
-            enCategory : {{item.enCategory }}
-            <br />
-          </v-row>
-        </v-container>
-      </v-card>
-    </v-container>-->
-
-    <!-- news -->
-    <v-container wrap style="background : white" border class="my-3">
-      <v-row class="pt-0 pl-3">
-        <v-col>
-          <h1 class="font-weight-light mb-1">News</h1>
-          <v-divider></v-divider>
-        </v-col>
-      </v-row>
-      <v-hover v-slot:default="{ hover }" open-delay="50" v-for="(item,i) in displaynews" :key="i">
-        <v-card :elevation="hover ? 7 : 0" outlined flat class="my-3 mx-3" shaped>
-          <!-- 타이틀 -->
-          <v-row>
-            <v-col class="mx-5">
-              <v-row>
-                <v-col cols="12" class="pb-0">
-                  <a
-                    target="_blank"
-                    :href="item.newsLink"
-                    v-html="item.newsTitle"
-                    class="font-weight-black thin title ma-0 text-truncate"
-                  ></a>
-                </v-col>
-              </v-row>
-              <!-- 게시 날짜 -->
-              <v-row>
-                <v-col cols="12" class="py-0">
-                  <p
-                    class="font-weight-light thin ma-0"
-                    style="font-size:13px"
-                  >개설일 : {{item.newsDate}}</p>
-                </v-col>
-              </v-row>
-              <!-- 뉴스 설명 -->
-              <v-row>
-                <v-col cols="12" class="py-1">
-                  <span v-html="item.newsDescription"></span>
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-hover>
-      <v-row>
-        <v-col align="center">
-          <v-btn text color="black" @click="newsPageDown">
-            <v-icon>arrow_downward</v-icon>더보기
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-container>
+  </div>
 </template>
 
 
@@ -262,9 +284,12 @@
 import http from "../vuex/http-common";
 import axios from "axios";
 import tc from "thousands-counter";
+import inputComponent from "../components/inputComponent"
 
 export default {
-  components: {},
+  components: {
+    inputComponent
+  },
   name: "searchPage",
 
   methods: {
