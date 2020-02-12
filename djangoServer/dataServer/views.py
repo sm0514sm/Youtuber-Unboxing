@@ -380,7 +380,6 @@ def make_new_youtuber(request, url):
 
     # 15. 유튜버의 스텟, 등급, updatedDate 갱신
     try:
-        grade = 'fqwiofjqwpojfwqpojfwpqojfpqowjfpowqjpfojqwpfojwqpofjqwpojfwpqoj'
         now = datetime.datetime.now()
         youtuber.influence = stat_influence
         youtuber.activity = stat_activity
