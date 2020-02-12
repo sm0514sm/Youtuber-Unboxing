@@ -114,16 +114,16 @@
           <v-divider></v-divider>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col cols="6">
-          <v-hover
-            v-slot:default="{ hover }"
-            open-delay="50"
-            v-for="(item,i) in displaynews"
-            :key="i"
-          >
-            <v-card>
-              <v-container>
+      <v-row class="mx-3">
+        <v-hover
+          v-slot:default="{ hover }"
+          open-delay="50"
+          v-for="(item,i) in displayvideo"
+          :key="i"
+        >
+          <v-col cols="4" class="px-1">
+            <v-card height="470px">
+              <v-container class="pa-2">
                 <v-row>
                   <v-col>
                     <v-list-item-content class="py-0">
@@ -145,76 +145,28 @@
                     <p
                       v-html="item.videoDescription.substring(0,120).concat('...')"
                       class="font-weight-light"
-                      style="color:gray"
                     ></p>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col>
+                    <v-btn v-for ="(tag,index) in item.tags" :key="index" rounded color='#6EE3F7' dark class="ml-1 mb-1">{{tag}}</v-btn>
                   </v-col>
                 </v-row>
               </v-container>
             </v-card>
-          </v-hover>
-        </v-col>
+          </v-col>
+        </v-hover>
       </v-row>
 
       <v-row>
         <v-col align="center">
-          <v-btn text color="black" @click="newsPageDown">
+          <v-btn text color="black" @click="videoPageDown">
             <v-icon>arrow_downward</v-icon>더보기
           </v-btn>
         </v-col>
       </v-row>
     </v-container>
-
-    <v-col class="pa-0 pb-3">
-      <v-card outlined flat class="mr-0 my-3 pa-3">
-        <v-row class="pt-0 pl-3 pb-0">
-          <v-col>
-            <v-list-item-title class="headline font-weight-black mb-1">최신동영상</v-list-item-title>
-            <v-divider></v-divider>
-          </v-col>
-        </v-row>
-        <!-- scroll 녛기 -->
-        <v-row class="pt-0 pl-0 pb-0 ml-0 mr-1">
-          <v-col
-            v-for="(item, $index) in videolist"
-            :key="$index"
-            :data-num="$index + 1"
-            class="pa-5"
-            cols="6"
-          >
-            <v-card>
-              <v-container>
-                <v-row>
-                  <v-col>
-                    <v-list-item-content class="py-0">
-                      <iframe
-                        :src="String('https://www.youtube.com/embed/')+item.videoID"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                      ></iframe>
-                    </v-list-item-content>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col class="pt-0">
-                    <p class="text-truncate title mb-0">{{item.videoName}}</p>
-                    <p
-                      style="font-size: 13px"
-                    >게시일 : {{item.regDate}} / 조회수 : {{tc(item.videoViewCount)}} 회</p>
-                    <p
-                      v-html="item.videoDescription.substring(0,120).concat('...')"
-                      class="font-weight-light"
-                      style="color:gray"
-                    ></p>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card>
-          </v-col>
-        </v-row>
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
-      </v-card>
-    </v-col>
 
     <!-- 
     <v-container wrap style="background : gray">
@@ -302,27 +254,6 @@
         </v-col>
       </v-row>
     </v-container>
-
-    <v-container wrap style="background : gray">
-      <v-card v-for="(item,i) in searchednews.slice(0,3)" :key="i" class="ma-5">
-        <v-container>
-          <v-row>
-            newsLink : {{item.newsLink}}
-            <br />
-            newsTitle : {{item.newsTitle}}
-            <br />
-            newsDescription : {{item.newsDescription}}
-            <br />
-            newsDate : {{item.newsDate}}
-            <br />
-            pressName : {{item.pressName}}
-            <br />
-            clickCount : {{item.clickCount}}
-            <br />
-          </v-row>
-        </v-container>
-      </v-card>
-    </v-container>
   </v-container>
 </template>
 
@@ -387,7 +318,7 @@ export default {
           this.pageyoutuber * this.range
         );
       } else {
-        alert("유튜버의 검색된 결과 끝!");
+        alert("유튜버 검색 결과의 끝 페이지입니다.");
       }
     },
     newsPageDown() {
@@ -398,18 +329,19 @@ export default {
           this.pagenews * this.range
         );
       } else {
-        alert("뉴스의 검색된 결과 끝!");
+        alert("뉴스 검색 결과의 끝 페이지입니다.");
       }
     },
     videoPageDown() {
       this.pagevideo++;
-      if (this.searchednews.length + this.range > this.pagevideo * 3) {
+      console.log(this.pagevideo + " " + this.searchednews.length);
+      if (this.searchedvideo.length + this.range > this.pagevideo * 3) {
         this.displayvideo = this.searchedvideo.slice(
           0,
           this.pagevideo * this.range
         );
       } else {
-        alert("비디오의 검색된 결과 끝!");
+        alert("비디오 검색 결과의 끝 페이지입니다.");
       }
     }
   },
@@ -454,6 +386,10 @@ export default {
         this.searchednews = responses[1];
         this.displaynews = this.searchednews.slice(0, 3);
         this.searchedvideo = responses[2];
+        for (let index = 0; index < this.searchedvideo.length; index++) {
+          var tags = this.searchedvideo[index].tags.split(",", 3);
+          this.searchedvideo[index].tags = tags;
+        }
         this.displayvideo = this.searchedvideo.slice(0, 3);
 
         console.log(this.searchedyoutuber);
@@ -507,6 +443,10 @@ export default {
               this.searchednews = responses[1];
               this.displaynews = this.searchednews.slice(0, 3);
               this.searchedvideo = responses[2];
+              for (let index = 0; index < this.searchedvideo.length; index++) {
+                var tags = this.searchedvideo[index].tags.split(",", 3);
+                this.searchedvideo[index].tags = tags;
+              }
               this.displayvideo = this.searchedvideo.slice(0, 3);
               this.pageyoutuber = 1;
               this.pagenews = 1;
@@ -532,7 +472,7 @@ export default {
       pageyoutuber: 1,
       pagenews: 1,
       pagevideo: 1,
-      range: 4
+      range: 3
     };
   }
 };
