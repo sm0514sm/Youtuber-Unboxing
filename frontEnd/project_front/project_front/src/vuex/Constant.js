@@ -9,6 +9,7 @@ export default {
   GET_COMPARE_YOUTUBER: "getcompareyoutuber",
   INSERT_YOUTUBUER: "insertyoutbuer",
   GET_MANYTOP5: "getmanytop5",
+  GET_ALLYOUTUBER: "getallyoutuber",
   GET_YNO_FROM_URL: "getynofromurl",
-  GET_STATUS_FROM_YNO: "getstatusfromyno"
+  GET_STATUS_FROM_YNO: "getstatusfromyno",
 };
