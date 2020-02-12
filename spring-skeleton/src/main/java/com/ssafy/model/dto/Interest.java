@@ -6,7 +6,12 @@ public class Interest {
 	private String itName;
 	
 	private int usno;		//interest_user_relation 테이블의 컬럼
-
+	
+	public Interest(int usno, int itno) {
+		this.usno = usno;
+		this.itno = itno;
+	}
+	
 	public int getItno() {
 		return itno;
 	}
