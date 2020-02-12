@@ -368,6 +368,8 @@ def make_new_youtuber(request, url):
     res['code'] = 0
     res['yno'] = yno
     time.sleep(1)
+    youtuber.status = 0
+    youtuber.save()
     return HttpResponse(json.dumps(res))
 
 #-------------------------------------------------------------------------------------------------------------------------#
@@ -569,5 +571,4 @@ def yno_from_url(request, url):
 def status_from_yno(request, yno):
     res = {}
     res['status'] = Youtuber.objects.get(yno=yno).status
-    print(res)
     return HttpResponse(json.dumps(res))
