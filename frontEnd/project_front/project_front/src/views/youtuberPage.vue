@@ -509,7 +509,7 @@
                       <a target="_blank" :href="news[i].newsLink" v-html="news[i].newsTitle"></a>
                     </v-list-item-title>
                     <v-list-item-subtitle class="mb-3" align="right">{{news[i].newsDate}}</v-list-item-subtitle>
-                    <span v-html="news[i].newsDescription.substring(0,70).concat('...')"></span>
+                    <span v-html="news[i].newsDescription.substring(0,300).concat('...')"></span>
                   </v-list-item-content>
                 </v-card>
               </v-hover>
@@ -957,7 +957,8 @@ export default {
       otherLinkIcon: [],
       flag: false,
       page: 0,
-      videolist: []
+      videolist: [],
+      loginStatus : false
     };
   }
 };

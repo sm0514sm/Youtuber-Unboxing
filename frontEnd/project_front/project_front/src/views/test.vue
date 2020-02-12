@@ -1,37 +1,83 @@
 <template>
   <div>
-    <br />
-    <br />
-    <br />
-    <v-autocomplete
-      :items="searchItems"
-      hide-details
-      item-text="channelName"
-      item-value="channelName"
-      :search-input.sync="inputKeyword"
-      solo
-      @keyup.enter="search"
-      ref="keyword"
-      id = "keyword"
-      label="유튜버를 검색해보세요"
-      style="max-width: 300px; "
-    >
-      <template v-slot:no-data>
-        <v-list-item>
-          <v-list-item-title>검색 결과가 없습니다.</v-list-item-title>
-        </v-list-item>
-      </template>
+    <v-card
+        v-for="(item,i) in searchedyoutuber.slice(0,10)"
+        :key="i"
+        class="my-3 pa-0"
+        outlined
+        flat
+        @click="gotoYoutuberPage(item.yno)"
+      >
+        <v-container fluid class="pa-1">
+          <v-row class="px-5">
+            <!-- thumbnail -->
+            <v-col cols="2" class="pa-3">
+              <v-layout row>
+                <v-flex justify-center>
+                  <v-img class="circle" :src="item.thumbnails" flat :aspect-ratio="1/1" />
+                </v-flex>
+              </v-layout>
+            </v-col>
 
-      <template v-slot:item="{ item }">
-        <v-list-item-avatar color="red" class="headline font-weight-light white--text">
-          <img :src="item.thumbnails" alt="John" />
-        </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.channelName"></v-list-item-title>
-          <v-list-item-subtitle>{{item.subscriber}}</v-list-item-subtitle>
-        </v-list-item-content>
-      </template>
-    </v-autocomplete>
+            <!-- 기본정보 -->
+            <v-col cols="8" class="px-7">
+              <v-row>
+                <v-col class="pb-0">
+                  <p class="font-weight-black thin display-1 ma-0">{{item.channelName}}</p>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col class="pa-0 pl-3">
+                  <span class="font-weight-light">개설일 : {{item.publishedDate}} &nbsp;&nbsp;</span>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col class="ma-0 pa-0">
+                  <v-divider class="pa-0 ma-0"></v-divider>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col class="py-0">
+                  <span class="font-weight-bold">구독자 수</span>
+                  <br />
+                  {{item.subscriber}}
+                </v-col>
+                <v-divider vertical class="mx-3"></v-divider>
+                <v-col class="py-0">
+                  <span class="font-weight-bold">총 영상 수</span>
+                  <br />
+                  {{item.totalVideoCount}}
+                </v-col>
+                <v-divider vertical class="mx-3"></v-divider>
+                <v-col class="py-0">
+                  <span class="font-weight-bold">총 영상조회 수</span>
+                  <br />
+                  {{item.totalViewCount}}
+                </v-col>
+                <v-spacer></v-spacer>
+              </v-row>
+            </v-col>
+
+            <v-col cols="2" class="pa-3">
+              <v-layout row>
+                <v-flex justify-center>
+                  <v-btn
+                    fab
+                    :color="setGradeColor(item.grade)"
+                    style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
+                    
+                  >
+                    <p
+                      style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 120px;"
+                    >{{setGrade(item.grade)}}</p>
+                  </v-btn>
+                </v-flex>
+              </v-layout>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card>
   </div>
 </template>
 
