@@ -87,7 +87,7 @@
 		from youtuber y inner join video v
 		using (yno)
 		where y.yno = #{yno}
-		order by videoViewCount desc
+		order by redDate desc
 	</select>
 	
 	<!-- 유투버 상세페이지에 보여줄 커뮤니티 검색 / 언급수 높은 순으로 -->
