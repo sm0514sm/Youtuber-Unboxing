@@ -30,7 +30,7 @@
           <!--loadingPage -->
           <v-container v-else-if="nowPage == 'loadingPage'">
             <v-row>
-              <v-col cols="12">데이터 요청중입니다 ... [ 남은 예상 시간 : {{ Math.round(44 - value/2.27) }}초 ]</v-col>
+              <v-col cols="12">데이터 요청중입니다 ... [ 남은 예상 시간 : {{ Math.round(35 - value/2.86) }}초 ]</v-col>
             </v-row>
             <v-row>
               <v-spacer></v-spacer>
@@ -208,8 +208,8 @@ export default {
                 clearInterval(this.addValueInterval)
                 return;
             }
-            if(this.myyno != null && this.myyno > 0 && this.tempValue + 40 > this.value && this.value < 75 && this.value > 0){
-                this.$store.state.value = this.value + Math.round((Math.random() * 2.5));
+            if(this.myyno != null && this.myyno > 0 && this.tempValue + 40 > this.value && this.value < 73 && this.value > 0){
+                this.$store.state.value = this.value + Math.round((Math.random() * 3.5));
             }
         }, 1000);
     }
