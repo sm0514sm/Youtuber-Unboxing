@@ -165,7 +165,7 @@
             :key="i"
           >
             <v-col cols="4" class="px-1">
-              <v-card height="470px">
+              <v-card height="510px">
                 <v-container class="pa-2">
                   <v-row>
                     <v-col>
