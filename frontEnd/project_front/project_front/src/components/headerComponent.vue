@@ -43,19 +43,22 @@
       </template>
 
       <template v-slot:item="{ item }">
-        <v-list-item-avatar color="red" class="headline font-weight-light white--text">
+        <v-list-item-avatar
+          color="red"
+          class="headline font-weight-light white--text"
+        >
           <img :src="item.thumbnails" alt="John" />
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title v-text="item.channelName"></v-list-item-title>
-          <v-list-item-subtitle>{{item.subscriber}}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ item.subscriber }}</v-list-item-subtitle>
         </v-list-item-content>
       </template>
     </v-autocomplete>
 
     <!-- 카카오로그인 -->
     <v-img
-      v-if="!loginStatus"
+      v-if="loginStatus == false"
       :src="require('@/assets/kakao.png')"
       class
       contain
@@ -66,8 +69,18 @@
     />
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-if="loginStatus" v-slot:activator="{ on }">
-        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">LOGOUT</v-btn>
-        <v-btn class="ma-2" color="indigo" large outlined dark @click="gotoMember()">MY INFO</v-btn>
+        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on"
+          >LOGOUT</v-btn
+        >
+        <v-btn
+          class="ma-2"
+          color="indigo"
+          large
+          outlined
+          dark
+          @click="gotoMember()"
+          >MY INFO</v-btn
+        >
       </template>
       <v-card>
         <v-card-title>
@@ -87,26 +100,42 @@
   </v-app-bar>
 </template>
 
-
 <script>
 import inputComponent from "./inputComponent";
 import { mapGetters } from "vuex";
 import http from "../vuex/http-common";
-// import axios from "axios";
+
 export default {
   components: {
     inputComponent
   },
   computed: {
-    ...mapGetters(["links"])
+    ...mapGetters(["links"]),
+    isIdle() {
+      if (this.$session.get("token")) {
+        if (this.$store.state.idleVue.isIdle == true) {
+          alert("자동 로그아웃 되었습니다");
+          console.log("IDLE");
+          this.logout();
+        }
+      }
+
+      return this.$store.state.idleVue.isIdle;
+    }
   },
 
   mounted() {
     console.log("loginStatus:" + this.loginStatus);
     console.log(this.$session);
+    console.log(this.$session.get("token"));
+    console.log();
     if (!this.$session.exists()) {
       this.loginStatus = false;
       console.log("no session");
+    } else {
+      if (this.$session.get("token")) {
+        this.loginStatus = true;
+      }
     }
     console.log(this.$route.query);
     var token = this.$route.query.access_Token;
@@ -169,9 +198,12 @@ export default {
       return;
     },
     search: function() {
-      console.log(document.getElementById("keyword").value)
+      console.log(document.getElementById("keyword").value);
       this.$router.push(
-        { path: "/searchPage", query: { word: document.getElementById("keyword").value } },
+        {
+          path: "/searchPage",
+          query: { word: document.getElementById("keyword").value }
+        },
         () => {}
       );
     },
@@ -197,7 +229,7 @@ export default {
   },
   data() {
     return {
-      loginStatus: true,
+      loginStatus: false,
       searchWord: "",
       dialog: false,
       headerColor: "transparent",
@@ -207,14 +239,11 @@ export default {
   },
   creted() {
     this.headerColor = "#00000000";
-
   },
   watch: {
-    
     inputKeyword() {
       // Items have already been loaded
       if (this.searchItems.length > 0) return;
-
 
       // Lazily load input items
       http
@@ -224,9 +253,9 @@ export default {
         })
         .catch(err => {
           console.log(err);
-        })
+        });
     }
-  },
+  }
 };
 </script>
 

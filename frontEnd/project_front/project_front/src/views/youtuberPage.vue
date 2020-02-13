@@ -522,7 +522,6 @@
 import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
 import InfiniteLoading from "vue-infinite-loading";
-import axios from "axios";
 import tc from 'thousands-counter';
 
 export default {
