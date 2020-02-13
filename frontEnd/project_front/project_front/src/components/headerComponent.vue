@@ -55,7 +55,7 @@
 
     <!-- 카카오로그인 -->
     <v-img
-      v-if="!loginStatus"
+      v-if="loginStatus == false"
       :src="require('@/assets/kakao.png')"
       class
       contain
@@ -66,8 +66,12 @@
     />
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-if="loginStatus" v-slot:activator="{ on }">
-        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">LOGOUT</v-btn>
-        <v-btn class="ma-2" color="indigo" large outlined dark @click="gotoMember()">MY INFO</v-btn>
+        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">
+          <v-icon left>mdi-logout</v-icon>LOGOUT
+        </v-btn>
+        <v-btn class="ma-2" color="indigo" large outlined dark @click="gotoMember()">
+          <v-icon left>mdi-account</v-icon>MY INFO
+        </v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -87,7 +91,6 @@
   </v-app-bar>
 </template>
 
-
 <script>
 import inputComponent from "./inputComponent";
 import { mapGetters } from "vuex";
@@ -99,15 +102,32 @@ export default {
     inputComponent
   },
   computed: {
-    ...mapGetters(["links"])
+    ...mapGetters(["links"]),
+    isIdle() {
+      if (this.$session.get("token")) {
+        if (this.$store.state.idleVue.isIdle == true) {
+          alert("자동 로그아웃 되었습니다");
+          console.log("IDLE");
+          this.logout();
+        }
+      }
+
+      return this.$store.state.idleVue.isIdle;
+    }
   },
 
   mounted() {
     console.log("loginStatus:" + this.loginStatus);
     console.log(this.$session);
+    console.log(this.$session.get("token"));
+    console.log();
     if (!this.$session.exists()) {
       this.loginStatus = false;
       console.log("no session");
+    } else {
+      if (this.$session.get("token")) {
+        this.loginStatus = true;
+      }
     }
     console.log(this.$route.query);
     var token = this.$route.query.access_Token;
@@ -125,7 +145,7 @@ export default {
     },
     login() {
       window.location.href =
-        "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3Dcaca7722fcbd20626b2343a0f5bf4083%26redirect_uri%3Dhttp%3A%2F%2F15.165.77.1%3A8080%2FSpringBootNew%2Flogin%26response_type%3Dcode";
+        "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3Dacdd77956bf757e4be43817374c35738%26redirect_uri%3Dhttp%3A%2F%2F15.165.77.1%3A8080%2FSpringBoot%2Flogin%26response_type%3Dcode";
     },
     logout() {
       let a;
@@ -170,9 +190,12 @@ export default {
       return;
     },
     search: function() {
-      console.log(document.getElementById("keyword").value)
+      console.log(document.getElementById("keyword").value);
       this.$router.push(
-        { path: "/searchPage", query: { word: document.getElementById("keyword").value } },
+        {
+          path: "/searchPage",
+          query: { word: document.getElementById("keyword").value }
+        },
         () => {}
       );
       document.getElementById("keyword").vaule = ""
@@ -202,7 +225,7 @@ export default {
   },
   data() {
     return {
-      loginStatus: true,
+      loginStatus: false,
       searchWord: "",
       dialog: false,
       headerColor: "transparent",
@@ -212,14 +235,11 @@ export default {
   },
   creted() {
     this.headerColor = "#00000000";
-
   },
   watch: {
-    
     inputKeyword() {
       // Items have already been loaded
       if (this.searchItems.length > 10) return;
-
 
       // Lazily load input items
       http
@@ -229,9 +249,9 @@ export default {
         })
         .catch(err => {
           console.log(err);
-        })
+        });
     }
-  },
+  }
 };
 </script>
 

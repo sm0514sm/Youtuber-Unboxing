@@ -17,6 +17,7 @@
         "core-js": "^3.4.4",
         "cors": "^2.8.5",
         "jquery": "^3.4.1",
+        "idle-vue": "^2.0.5",
         "material-design-icons": "^3.0.1",
         "natural-orderby": "^2.0.3",
         "passport-kakao": "^1.0.0",
