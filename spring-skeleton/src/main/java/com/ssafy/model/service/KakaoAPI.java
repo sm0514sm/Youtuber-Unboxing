@@ -35,7 +35,7 @@ public class KakaoAPI {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=caca7722fcbd20626b2343a0f5bf4083");
+            sb.append("&client_id=acdd77956bf757e4be43817374c35738");
             sb.append("&redirect_uri=http://15.165.77.1:8080/SpringBootNew/login");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
@@ -107,11 +107,12 @@ public class KakaoAPI {
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
             
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-            String email = kakao_account.getAsJsonObject().get("email").getAsString();
             String id = element.getAsJsonObject().get("id").getAsString();
-            
+            if(kakao_account.getAsJsonObject().has("email")) {
+            	String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            	userInfo.put("email", email);
+			}
             userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
             userInfo.put("id", id);
             
         } catch (IOException e) {

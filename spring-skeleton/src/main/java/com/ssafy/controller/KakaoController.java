@@ -47,12 +47,13 @@ public class KakaoController {
 		String userID = element.getAsJsonObject().get("id").getAsString();
 		//디비에서 id 검사
 		if(userService.searchUserExist(userID)==0) {
-			String userEmail = element.getAsJsonObject().get("email").getAsString();
-			String userName = element.getAsJsonObject().get("nickname").getAsString();
-			
 			User user = new User();
+			if(element.getAsJsonObject().has("email")) {
+				String userEmail = element.getAsJsonObject().get("email").getAsString();
+				user.setUserEmail(userEmail);
+			}
+			String userName = element.getAsJsonObject().get("nickname").getAsString();
 			user.setUserID(userID);
-			user.setUserEmail(userEmail);
 			user.setUserName(userName);
 			userService.insertUser(user);
 		}
