@@ -50,4 +50,11 @@ def get_real_value(txt):
         value = float(txt.strip()[:-1]) * 1000000
     elif txt[len(txt) - 1] == 'K':
         value = float(txt.strip()[:-1]) * 1000
+    elif txt[len(txt) - 1] == 'B':
+        value = float(txt.strip()[:-1]) * 1000000000
     return round(value)
+
+
+lst = get_trend('UCbCmjCuTUZos6Inko4u57UQ')
+for i in lst:
+    print(i)
