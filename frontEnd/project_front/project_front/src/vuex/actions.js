@@ -458,7 +458,8 @@ export default {
                 });
             })
             .catch(exp => {
-                alert("GET_YNO_FROM_URL에 실패하였습니다\n" + exp);
+                exp
+                // alert("GET_YNO_FROM_URL에 실패하였습니다\n" + exp);
             });
     },
     [Constant.GET_STATUS_FROM_YNO]: (store, payload) => {
@@ -471,7 +472,8 @@ export default {
                 });
             })
             .catch(exp => {
-                alert("GET_STATUS_FROM_YNO에 실패하였습니다\n" + exp);
+                exp
+                // alert("GET_STATUS_FROM_YNO에 실패하였습니다\n" + exp);
             });
     },
 };

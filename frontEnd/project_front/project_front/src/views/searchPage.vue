@@ -42,7 +42,7 @@
                 <v-list-item-title class="font-weight-black" align="center" style="font-size:25px">
                   <v-icon color="red" x-large>mdi-alert-circle</v-icon>검색어에 해당하는 유튜버가 없습니다.
                 </v-list-item-title>
-                <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center">유튜버를 추가하고 싶으시나요?</v-list-item-title>
+                <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center">유튜버를 추가하고 싶으신가요?</v-list-item-title>
               <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center"><inputComponent></inputComponent></v-list-item-title>
               </v-list-item-content>
             </v-card>
@@ -497,7 +497,7 @@ export default {
       pageyoutuber: 1,
       pagenews: 1,
       pagevideo: 1,
-      range: 3
+      range: 6
     };
   }
 };

@@ -49,7 +49,7 @@ export default {
     name: "mainPage",
     methods: {
         onCategoryButtonClicked(i) {
-            localStorage.setItem('currentCategory',i)
+            localStorage.setItem('currentCategory',i+1)
             this.$router.push("/categoryPage");
         },
     },
