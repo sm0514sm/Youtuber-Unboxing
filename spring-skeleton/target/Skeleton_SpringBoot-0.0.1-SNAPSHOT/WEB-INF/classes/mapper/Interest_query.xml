@@ -2,7 +2,84 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.model.dao.InterestDao">
-
 	<!-- 여러개가 나오더라도 resultType에는 리스트 형으로 쓰지 않는다 -->
 	
+	<!-- user 고유번호 | 해당 user가 등록한 관심항목이 있는지 조회 (있으면 1 이상, 없으면 0) -->
+	<select id="search" parameterType="int" resultType="int">
+		select	itno
+		from	interest_user_relation
+		where	usno=#{usno}
+	</select>
+	
+	<!-- user 고유번호, 관심항목 고유변호 | 해당 user의 관심항목에 추가  -->
+	<!-- DB 제약조건으로 user 또는 interest가 없을 시 추가 안됨 -->
+	<insert id="insertInterest" parameterType="interest">
+		insert into interest_user_relation (usno, itno)
+		values (#{usno:INTEGER}, #{itno:INTEGER})
+	</insert>
+	
+	<!-- user 고유번호, 관심항목 고유변호 | 해당 user의 관심항목에서 삭제  -->
+	<!-- user 또는 interest가 삭제되면 자동으로 같이 삭제됨 (CASCADE 설정) -->
+	<!-- 관심항목관계가 삭제되는것과 user, interest는 무관함 -->
+	<delete id="deleteInterest" parameterType="int">
+		delete from interest_user_relation
+		where usno=#{usno}
+	</delete>
+	
+	<!-- user 고유번호, 관심항목 리스트 | 해당 user와 같은 관심항목을 가진 사람들이 즐겨찾기 한 youtuber 목록 조회  -->
+	<select id="searchInterestRecommend" parameterType="java.util.Map" resultType="youtuber">
+		select *
+		from youtuber
+		inner join	(select		yno
+					from		(select	distinct(yno)
+								from	favorite f
+								where	f.yno not in	(select	distinct(yno) yno
+														from	favorite
+														where	usno = #{usno})) d
+					inner join	(select		count(yno) count, yno
+								from		(select		distinct(usno)
+											from		interest_user_relation
+											where		itno in
+											<foreach collection="interestList" item="item" index="index" separator="," open="(" close=")">
+												${item}
+											</foreach>
+											) a
+								inner join	favorite b
+								using		(usno)
+								group by	b.yno) c
+					using		(yno)
+					order by	count desc
+					limit 4) e
+		using (yno)
+	</select>
+<!-- 	<select id="searchInterestRecommend" parameterType="java.util.Map" resultType="youtuber">
+		select *
+		from youtuber
+		inner join	(select		yno
+					from		(select	distinct(yno)
+								from	favorite f
+								where	f.yno not in	(select	distinct(yno) yno
+														from	favorite
+														where	usno = #{usno})) d
+					inner join	(select		count(yno) count, yno
+								from		(select		distinct(usno)
+											from		interest_user_relation
+											<if test=" interest1 != null">
+											where		itno=#{interest1} 
+											</if>
+											<if test=" interest2 != null">
+														or itno=#{interest2}
+											</if>
+											<if test=" interest3 != null">
+														or itno=#{interest3}
+											</if>
+											) a
+								inner join	favorite b
+								using		(usno)
+								group by	b.yno) c
+					using		(yno)
+					order by	count desc
+					limit #{num}) e
+		using (yno)
+	</select> -->
 </mapper>
