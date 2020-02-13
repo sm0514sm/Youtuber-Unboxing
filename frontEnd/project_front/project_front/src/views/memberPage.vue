@@ -221,10 +221,10 @@
                 Bookmark
               </v-btn>
               <v-spacer></v-spacer>
-              <v-btn text icon color="yellow">
+              <!-- <v-btn text icon color="yellow">
                 <v-icon v-if="flag" @click="deleteFav(card.yno)" x-large>mdi-star</v-icon>
                 <v-icon v-if="!flag" @click="insertFav(card.yno)" x-large>mdi-star-outline</v-icon>
-              </v-btn>
+              </v-btn> -->
             </v-card-actions>
           </v-card>
         </v-hover>
@@ -410,10 +410,13 @@ import http from "../vuex/http-common";
         http.get("/interest/search/recommend/"+link)
         .then(res=>{
           this.recommend = res.data.data
+          http.get("/interest/insert/"+link).then(res=>{
+            console.log(res)
+          })
         })
       },
       basicInfo(){
-        http.get("/user/"+this.$session.get('token'))
+        http.get("/user/search/"+this.$session.get('token'))
         .then(response=>{
           this.user=response.data.data
         })

@@ -144,7 +144,7 @@ export default {
     },
     login() {
       window.location.href =
-        "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3Dcaca7722fcbd20626b2343a0f5bf4083%26redirect_uri%3Dhttp%3A%2F%2F15.165.77.1%3A8080%2FSpringBootNew%2Flogin%26response_type%3Dcode";
+        "https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fclient_id%3Dacdd77956bf757e4be43817374c35738%26redirect_uri%3Dhttp%3A%2F%2F15.165.77.1%3A8080%2FSpringBoot%2Flogin%26response_type%3Dcode";
     },
     logout() {
       let a;
