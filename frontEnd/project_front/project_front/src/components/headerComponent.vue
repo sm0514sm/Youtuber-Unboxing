@@ -43,10 +43,7 @@
       </template>
 
       <template v-slot:item="{ item }">
-        <v-list-item-avatar
-          color="red"
-          class="headline font-weight-light white--text"
-        >
+        <v-list-item-avatar color="red" class="headline font-weight-light white--text">
           <img :src="item.thumbnails" alt="John" />
         </v-list-item-avatar>
         <v-list-item-content>
@@ -69,18 +66,12 @@
     />
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-if="loginStatus" v-slot:activator="{ on }">
-        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on"
-          >LOGOUT</v-btn
-        >
-        <v-btn
-          class="ma-2"
-          color="indigo"
-          large
-          outlined
-          dark
-          @click="gotoMember()"
-          >MY INFO</v-btn
-        >
+        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">
+          <v-icon left>mdi-logout</v-icon>LOGOUT
+        </v-btn>
+        <v-btn class="ma-2" color="indigo" large outlined dark @click="gotoMember()">
+          <v-icon left>mdi-account</v-icon>MY INFO
+        </v-btn>
       </template>
       <v-card>
         <v-card-title>
