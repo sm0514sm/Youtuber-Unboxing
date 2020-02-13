@@ -181,7 +181,7 @@
       <v-toolbar-title>추천 유튜버</v-toolbar-title>
       <v-row>
         <v-col
-          v-for="card in fav"
+          v-for="card in recommend"
           :key="card.title"
           :cols="6"
         >
@@ -193,12 +193,12 @@
             color=""
           >
             <v-list-item>
-              <v-list-item-avatar size="100"><img
+              <v-list-item-avatar size="100" @click="goTo(card.yno)"><img
                 :src="card.thumbnails"
                 alt="thumnnail"
               ></v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title class="headline" v-text="card.channelName"></v-list-item-title>
+                <v-list-item-title class="headline" v-text="card.channelName" @click="goTo(card.yno)"></v-list-item-title>
                 <v-list-item-subtitle>개설일 : {{card.publishedDate}}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -222,8 +222,8 @@
               </v-btn>
               <v-spacer></v-spacer>
               <v-btn text icon color="yellow">
-                <v-icon v-if="flag" @click="deleteFav(card.yno)" x-large>star</v-icon>
-                <v-icon v-if="!flag" @click="insertFav(card.yno)" x-large>star_border</v-icon>
+                <v-icon v-if="flag" @click="deleteFav(card.yno)" x-large>mdi-star</v-icon>
+                <v-icon v-if="!flag" @click="insertFav(card.yno)" x-large>mdi-star-outline</v-icon>
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -304,7 +304,9 @@ import http from "../vuex/http-common";
       ],
       fav: [],
       user: [],
-      interest: ['1','3'],
+      interest: [ 1,3,
+    4,
+    ],
       recommend: [],
       loader: null,
       loading: false,
@@ -322,6 +324,14 @@ import http from "../vuex/http-common";
       this.initialize()
     },
     mounted(){
+      http.get("interest/search/"+this.$session.get("token"))
+      .then(res=>{
+        var temp =[]
+        this.interest = res.data.data
+        this.interest.forEach(el=>temp.push(el+""))
+        this.interest=temp
+        this.getRecommend()
+      })
     },
 
     methods: {
@@ -397,6 +407,10 @@ import http from "../vuex/http-common";
         console.log(this.interest)
         var link = this.$session.get("token")+"&"+this.interest
         console.log(link)
+        http.get("/interest/search/recommend/"+link)
+        .then(res=>{
+          this.recommend = res.data.data
+        })
       },
       basicInfo(){
         http.get("/user/"+this.$session.get('token'))

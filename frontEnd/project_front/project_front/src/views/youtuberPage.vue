@@ -51,11 +51,10 @@
                         <b>{{category.name}}</b>
                       </v-btn>
                       <v-btn v-if="loginStatus" text icon color="yellow" @click="manageFav">
-                        <v-icon v-if="flag" @click="deleteFav" x-large>star</v-icon>
-                        <v-icon v-if="!flag" @click="insertFav" x-large>star_border</v-icon>
+                        <v-icon v-if="flag" @click="deleteFav" x-large>mdi-star</v-icon>
+                        <v-icon v-if="!flag" @click="insertFav" x-large>mdi-star-outline</v-icon>
                       </v-btn>
                     </v-col>
-                      
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
@@ -522,7 +521,7 @@
 import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
 import InfiniteLoading from "vue-infinite-loading";
-import tc from 'thousands-counter';
+import tc from "thousands-counter";
 
 export default {
   name: "youtuberPage",
@@ -540,46 +539,47 @@ export default {
       callback: this.render,
       failCallback: this.failCallback
     });
-    if(this.$session.exists()){
-      this.loginStatus=true
-      let initialUrl=this.$route.query.yno+"&"+this.$session.get('token')
-      console.log(initialUrl)
-      http.get("/favorite/select/"+initialUrl)
-      .then(data => this.flag = data.data.data==0 ? false : true)
+    if (this.$session.exists()) {
+      this.loginStatus = true;
+      let initialUrl = this.$route.query.yno + "&" + this.$session.get("token");
+      console.log(initialUrl);
+      http
+        .get("/favorite/select/" + initialUrl)
+        .then(data => (this.flag = data.data.data == 0 ? false : true));
     }
   },
   methods: {
     manageFav() {
       this.flag ? (this.flag = false) : (this.flag = true);
     },
-    insertFav(){
-      console.log("insert")
-      console.log(this.$session.get('token'))
-      console.log(this.youtuber.yno)
-      http.post('/favorite/insert', {
-        yno: this.youtuber.yno,
-        token: this.$session.get('token')
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    insertFav() {
+      console.log("insert");
+      console.log(this.$session.get("token"));
+      console.log(this.youtuber.yno);
+      let par = this.youtuber.yno + "&" + this.$session.get("token");
+      http
+        .get("/favorite/insert/" + par)
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
-    deleteFav(){
-      console.log("delete")
-      console.log(this.$session.get('token'))
-      console.log(this.youtuber.yno)
-      let par = this.youtuber.yno+"&"+this.$session.get('token')
-      let deleteUrl = "/favorite/delete/"+par
-      http.delete(deleteUrl)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    deleteFav() {
+      console.log("delete");
+      console.log(this.$session.get("token"));
+      console.log(this.youtuber.yno);
+      let par = this.youtuber.yno + "&" + this.$session.get("token");
+      let deleteUrl = "/favorite/delete/" + par;
+      http
+        .delete(deleteUrl)
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
     render(...responses) {
       var youtuber = responses[0];
@@ -757,8 +757,8 @@ export default {
         return "D";
       }
     },
-    tc(num){
-      return tc(num)
+    tc(num) {
+      return tc(num);
     }
   },
   computed: {},
@@ -803,7 +803,7 @@ export default {
               colors: ["black", "black", "black", "black", "black"],
               fontFamily: "bold"
             }
-          },
+          }
         },
         yaxis: {
           show: false,
@@ -950,7 +950,7 @@ export default {
       flag: false,
       page: 0,
       videolist: [],
-      loginStatus: false,
+      loginStatus: false
     };
   }
 };
