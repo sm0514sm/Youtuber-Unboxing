@@ -17,7 +17,7 @@ public class InterestServiceImpl implements InterestService {
 	private InterestDao dao;
 	
 	@Override
-	public int search(int usno) {
+	public List<Integer> search(int usno) {
 		try {
 			return dao.search(usno);
 		} catch (Exception e) {

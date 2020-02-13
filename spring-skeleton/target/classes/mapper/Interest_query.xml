@@ -6,7 +6,7 @@
 	
 	<!-- user 고유번호 | 해당 user가 등록한 관심항목이 있는지 조회 (있으면 1 이상, 없으면 0) -->
 	<select id="search" parameterType="int" resultType="int">
-		select	count(*)
+		select	itno
 		from	interest_user_relation
 		where	usno=#{usno}
 	</select>

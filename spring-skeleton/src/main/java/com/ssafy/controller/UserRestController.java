@@ -45,10 +45,10 @@ public class UserRestController {
 //		return handleSuccess("회원 등록 성공");
 //	}
 	
-	@ApiOperation("userID | userID가 일치하는 회원정보 조회")
-	@GetMapping("/user/{userID}")
-	public ResponseEntity<Map<String, Object>> search(@PathVariable String userID){
-		HashMap<String, Object> userInfo = kakao.getUserInfo(userID.toString());
+	@ApiOperation("usToken | usToken을 이용한 회원정보 조회")
+	@GetMapping("/user/search/{usToken}")
+	public ResponseEntity<Map<String, Object>> search(@PathVariable String usToken){
+		HashMap<String, Object> userInfo = kakao.getUserInfo(usToken.toString());
     	User user = userService.search(userInfo.get("id").toString());
 		return handleSuccess(user);
 	}
