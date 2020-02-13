@@ -18,7 +18,7 @@
           <!--inputPage -->
           <v-container v-if="nowPage == 'inputPage'">
             <v-row>
-              <v-col cols="12">원하는 유튜버의 주소를 복사해주세요.</v-col>
+              <v-col cols="12">원하는 유튜버의 주소를 복사해주세요...<a target="_blank" href="https://www.youtube.com/">> 유튜브 페이지 이동</a></v-col>
               <v-col cols="12">
                 <v-img :src="require('@/assets/youtuberinsert.png')"></v-img>
               </v-col>
@@ -65,7 +65,6 @@
               </v-col>
               <!-- 그외 에러 났을 때 -->
               <v-col v-else cols="12">
-                
                 <animation-css :animation-type="AnimationType.HEADSHAKE" v-model="animationFlag">
                   <p style="text-align: center;color: red ;font-size: 15px;" class="pa-0">
                     <v-icon color="red" x-large>mdi-alert</v-icon>

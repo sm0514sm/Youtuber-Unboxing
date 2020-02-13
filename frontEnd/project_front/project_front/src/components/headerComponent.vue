@@ -48,7 +48,7 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title v-text="item.channelName"></v-list-item-title>
-          <v-list-item-subtitle>{{item.subscriber}}</v-list-item-subtitle>
+          <v-list-item-subtitle>구독자 : {{tc(item.subscriber)}}</v-list-item-subtitle>
         </v-list-item-content>
       </template>
     </v-autocomplete>
@@ -92,6 +92,7 @@
 import inputComponent from "./inputComponent";
 import { mapGetters } from "vuex";
 import http from "../vuex/http-common";
+import tc from "thousands-counter"
 // import axios from "axios";
 export default {
   components: {
@@ -194,6 +195,9 @@ export default {
       }
 
       this.headerColor = value;
+    },
+    tc(num) {
+      return tc(num)
     }
   },
   data() {

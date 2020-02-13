@@ -59,7 +59,8 @@
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
-                      <span class="font-weight-light">개설일 : {{youtuber.publishedDate}} &nbsp;&nbsp;</span>
+                      <span class="font-weight-light mr-4">개설일 : {{youtuber.publishedDate}} </span>
+                      <v-btn x-small color="red" dark @click="openNewWindow(youtuber.channelLink)"><v-icon>mdi-play</v-icon>유튜브로 이동 </v-btn>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -693,7 +694,7 @@ export default {
       console.log(this.loading);
     },
     onCategoryButtonClicked(i) {
-      localStorage.setItem("currentCategory", i - 1);
+      localStorage.setItem("currentCategory", i);
       this.$router.push("/categoryPage");
     },
     makeOtherLinkIcon() {

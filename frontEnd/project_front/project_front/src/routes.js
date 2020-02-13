@@ -5,6 +5,8 @@ import searchPage from "./views/searchPage.vue";
 import comparePage from "./views/comparePage.vue";
 import testPage from "./views/test.vue";
 import memberPage from "./views/memberPage.vue";
+import rankPage from "./views/rankPage.vue"
+
 
 
 export default [{
@@ -41,12 +43,13 @@ export default [{
         path: "/memberPage",
         name: "memberPage",
         component: memberPage
-
-
-
-
-
     },
+    {
+        path: "/rankPage",
+        name: "rankPage",
+        component: rankPage
+    },
+
 
 
 ];

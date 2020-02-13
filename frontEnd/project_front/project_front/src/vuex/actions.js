@@ -342,7 +342,7 @@ export default {
 
 
         axios
-            .get("http://70.12.246.59:8000/data/newYoutuber/" + address)
+            .get("http://15.165.77.1:8000/data/newYoutuber/" + address)
             .then(response => {
                 var code = response.data.code
                 var yno = response.data.yno
@@ -450,7 +450,7 @@ export default {
         }
         var address = replaceAll(payload.url, "/", "~")
         axios
-            .get("http://70.12.246.59:8000/data/ynoFromUrl/" + address)
+            .get("http://15.165.77.1:8000/data/ynoFromUrl/" + address)
             .then(response => {
                 // console.log('얻어온 yno:', response.data.yno)
                 store.commit(Constant.GET_YNO_FROM_URL, {
@@ -458,12 +458,13 @@ export default {
                 });
             })
             .catch(exp => {
-                alert("GET_YNO_FROM_URL에 실패하였습니다\n" + exp);
+                exp
+                // alert("GET_YNO_FROM_URL에 실패하였습니다\n" + exp);
             });
     },
     [Constant.GET_STATUS_FROM_YNO]: (store, payload) => {
         axios
-            .get("http://70.12.246.59:8000/data/statusFromYno/" + payload.yno)
+            .get("http://15.165.77.1:8000/data/statusFromYno/" + payload.yno)
             .then(response => {
                 // console.log('얻어온 status:', response.data.status)
                 store.commit(Constant.GET_STATUS_FROM_YNO, {
@@ -471,7 +472,8 @@ export default {
                 });
             })
             .catch(exp => {
-                alert("GET_STATUS_FROM_YNO에 실패하였습니다\n" + exp);
+                exp
+                // alert("GET_STATUS_FROM_YNO에 실패하였습니다\n" + exp);
             });
     },
 };
