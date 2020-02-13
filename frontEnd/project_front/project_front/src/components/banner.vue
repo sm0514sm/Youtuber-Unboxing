@@ -47,11 +47,10 @@
                       </v-row>
                     </td>
                     <td>{{item.channelName}}</td>
-                    <td>{{item.subscriber}}</td>
-                    <td>{{item.totalViewCount}}</td>
-                    <td>{{item.totalVideoCount}}</td>
-                    <!-- <td>{{item.clickCount}}</td> -->
-                    <td>{{item.grade}}</td>
+                    <td>{{tc(item.subscriber)}}</td>
+                    <td>{{tc(item.totalViewCount)}}</td>
+                    <td>{{numberWithCommas(item.totalVideoCount)}}</td>
+                    <td>{{setGrade(item.grade)}}</td>
                   </tr>
                 </tbody>
               </template>
@@ -67,6 +66,7 @@
 <script>
 import Constant from "../vuex/Constant.js";
 import { mapGetters } from "vuex";
+import tc from "thousands-counter";
 
 export default {
   data() {
@@ -101,7 +101,28 @@ export default {
       this.$vuetify.goTo(0);
       this.$router.push({ path: "/youtuberPage", query: { yno: yno } });
       this.$vuetify.goTo(0);
-    }
+    },
+    tc(num) {
+      return tc(num);
+    },
+    numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    setGrade(num) {
+      if (num >= 95) {
+        return "SS";
+      } else if (num >= 90) {
+        return "S";
+      } else if (num >= 80) {
+        return "A";
+      } else if (num >= 50) {
+        return "B";
+      } else if (num >= 20) {
+        return "C";
+      } else {
+        return "D";
+      }
+    },
   },
   computed: {
     ...mapGetters(["manytop5list"])
