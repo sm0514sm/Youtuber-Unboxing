@@ -30,7 +30,7 @@
           <!--loadingPage -->
           <v-container v-else-if="nowPage == 'loadingPage'">
             <v-row>
-              <v-col cols="12">데이터 요청중입니다 ... [ 남은 예상 시간 : {{ Math.round(44 - value/2.27) }}초 ]</v-col>
+              <v-col cols="12">데이터 요청중입니다 ... [ 남은 예상 시간 : {{ Math.round(35 - value/2.86) }}초 ]</v-col>
             </v-row>
             <v-row>
               <v-spacer></v-spacer>
@@ -185,55 +185,49 @@ export default {
         }
       });
     },
-    intervalSetting: function() {
-      this.getYnoInterval = setInterval(() => {
-        // console.log('myyno : ', this.myyno)
-        // console.log('1. getYnoInterval 실행')
-        if (this.nowPage == "loadingPage") {
-          if (this.myyno == null || this.myyno <= 0) {
-            this.$store.dispatch(Constant.GET_YNO_FROM_URL, {
-              url: this.address
-            });
-          } else {
-            clearInterval(this.getYnoInterval);
-            return;
-          }
-        }
-        if (this.myyno > 0) {
-          clearInterval(this.getYnoInterval);
-        }
-      }, 2000);
-      this.getValueInterval = setInterval(() => {
-        // console.log('2. getValueInterval 실행')
-        if (this.myyno != null && this.myyno > 0) {
-          clearInterval(this.interval1);
-          this.$store.dispatch(Constant.GET_STATUS_FROM_YNO, {
-            yno: this.myyno
-          });
-        }
-        if (this.value >= 100) {
-          this.value = 100;
-          clearInterval(this.getValueInterval);
-          return;
-        }
-      }, 500);
-      this.addValueInterval = setInterval(() => {
-        // console.log('3. addValueInterval 실행')
-        if (this.value >= 100) {
-          clearInterval(this.addValueInterval);
-          return;
-        }
-        if (
-          this.myyno != null &&
-          this.myyno > 0 &&
-          this.tempValue + 40 > this.value &&
-          this.value < 75 &&
-          this.value > 0
-        ) {
-          this.$store.state.value =
-            this.value + Math.round(Math.random() * 2.5);
-        }
-      }, 1000);
+    intervalSetting: function(){
+        this.getYnoInterval = setInterval(() => {
+            // console.log('myyno : ', this.myyno)
+            // console.log('1. getYnoInterval 실행')
+            if (this.nowPage == "loadingPage") {
+                if(this.myyno == null || this.myyno <= 0){
+                    this.$store.dispatch(Constant.GET_YNO_FROM_URL, {
+                        url: this.address,
+                    })
+                }
+                else{
+                    clearInterval(this.getYnoInterval)
+                    return;
+                }
+            }
+            if(this.myyno > 0){
+                clearInterval(this.getYnoInterval)
+            }
+        }, 2000);
+        this.getValueInterval = setInterval(() => {
+            // console.log('2. getValueInterval 실행')
+            if(this.myyno != null && this.myyno > 0){
+                clearInterval(this.interval1)
+                this.$store.dispatch(Constant.GET_STATUS_FROM_YNO, {
+                    yno: this.myyno,
+                })
+            }
+            if(this.value >= 100){
+                this.value = 100;
+                clearInterval(this.getValueInterval)
+                return;
+            }
+        }, 500);
+        this.addValueInterval = setInterval(() => {
+            // console.log('3. addValueInterval 실행')
+            if(this.value >= 100){
+                clearInterval(this.addValueInterval)
+                return;
+            }
+            if(this.myyno != null && this.myyno > 0 && this.tempValue + 40 > this.value && this.value < 73 && this.value > 0){
+                this.$store.state.value = this.value + Math.round((Math.random() * 3.5));
+            }
+        }, 1000);
     }
   },
   computed: {
