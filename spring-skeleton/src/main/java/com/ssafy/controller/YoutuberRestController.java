@@ -47,7 +47,7 @@ public class YoutuberRestController {
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("keyword | 채널 이름,유튜버 이름,채널 설명에 keyword가 포함된 youtuber 목록 검색 | 구독자 순 내림차순 정렬")
+	@ApiOperation("keyword | 채널 이름,유튜버 이름에 keyword가 포함된 youtuber 목록 검색 | 구독자 순 내림차순 정렬")
 	@GetMapping("/youtuber/search/{keyword}")
 	public ResponseEntity<Map<String, Object>> searchKeyword(@PathVariable String keyword){
 		List<Youtuber> list = youtuberService.searchKeyword(keyword); 
