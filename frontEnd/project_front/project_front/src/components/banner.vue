@@ -9,7 +9,7 @@
               <p class="headline font-weight-black mb-1" style="color:black">{{top5list.title}} TOP5</p>
             </v-col>
             <v-col cols="1" class="pb-0 fill-height" align="center" justify="center">
-              <a target="_blank" href="">>더보기</a>
+              <a href="/rankPage">>더보기</a>
             </v-col>
           </v-row>
           <v-divider color="gray"></v-divider>
