@@ -3,7 +3,7 @@
     <header-component></header-component>
 
     <v-content>
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </v-content>
 
     <footer-component></footer-component>
