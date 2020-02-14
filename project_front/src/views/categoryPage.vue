@@ -130,10 +130,13 @@ export default {
       console.log("*************"+index)
       localStorage.setItem("currentCategory", index);
       if (index == 0) {
-        this.$store.dispatch(Constant.GET_ALLYOUTUBER);
+        this.$store.dispatch(Constant.GET_ALLYOUTUBER, {
+          failCallback : this.failCallback,
+        });
         return;
       }
       this.$store.dispatch(Constant.GET_YOUTUBERS_PER_CATEGORY, {
+        failCallback : this.failCallback,
         category: this.findCano()
       });
     },
@@ -160,7 +163,12 @@ export default {
       } else {
         return "D";
       }
-    }
+    },
+    failCallback() {
+      alert("fail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+      var random = Math.floor(Math.random() * (10 - 1) + 1);
+      this.$router.push({ path: 'categoryPage', query: {reloding : random}});
+    },
   },
   mounted() {
     this.$vuetify.goTo(0);

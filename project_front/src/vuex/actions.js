@@ -3,46 +3,49 @@ import http from "./http-common";
 import axios from "axios"
 
 export default {
-    [Constant.GET_TEST]: store => {
-        http
-            .get("/test/")
-            .then(response => {
-                console.log(response.data.data);
-                alert(response.data.data[0]);
-                store.commit(Constant.GET_TEST, {
-                    testID: response.data.data[0].id
-                });
-            })
-            .catch(exp => {
-                alert("TEST에 실패하였습니다\n" + exp);
-            });
-    },
     [Constant.GET_YOUTUBERS_PER_CATEGORY]: (store, payload) => {
         console.log("action_GET_YOUTUBERS_PER_CATEGORY " + payload.category);
+
         http
             .get("/category/" + payload.category)
             .then(response => {
-                console.log(response.data.data[0]);
+
+                //error 코드
+                var failCallback = payload.failCallback;
+                if (response.data.state != 'ok') {
+                    console.log("너 여기 들어가니?")
+                    failCallback();
+                    return;
+                }
+
                 store.commit(Constant.GET_YOUTUBERS_PER_CATEGORY, {
                     youtuberslist: response.data.data
                 });
             })
             .catch(exp => {
-                alert("GET_YOUTUBERS_PER_CATEGORY에 실패하였습니다\n" + exp);
+                alert("GET_YOUTUBERS_PER_CATEGORY에 실패하였습니다!\n" + exp);
             });
     },
-    [Constant.GET_ALLYOUTUBER]: (store) => {
+    [Constant.GET_ALLYOUTUBER]: (store, payload) => {
         console.log("action_GET_ALLYOUTUBER ");
         http
             .get("/youtuber/all")
             .then(response => {
                 console.log(response.data.data[0]);
+
+                //error 코드
+                var failCallback = payload.failCallback;
+                if (response.data.status != 'ok') {
+                    failCallback();
+                    return;
+                }
+
                 store.commit(Constant.GET_YOUTUBERS_PER_CATEGORY, {
                     youtuberslist: response.data.data
                 });
             })
             .catch(exp => {
-                alert("GET_YOUTUBERS_PER_CATEGORY에 실패하였습니다\n" + exp);
+                alert("Constant.GET_ALLYOUTUBER에 실패하였습니다\n" + exp);
             });
     },
     [Constant.GET_YOUTUBER]: (store, payload) => {
@@ -57,10 +60,7 @@ export default {
             http
                 .get("/youtuber/" + yno)
                 .then(response => {
-                    if (response.data.stata == "fail") {
-                        failCallback()
-                    }
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -74,7 +74,7 @@ export default {
             http
                 .get("/youtuber/detail/activity/videoCount/" + yno + "_" + month)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -87,7 +87,7 @@ export default {
             http
                 .get("/youtuber/detail/activity/termVideoCount/" + yno + "_" + week)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -101,7 +101,7 @@ export default {
                 .get("/youtuber/detail/charm/goodRatio/" + yno + "_" + recent)
                 .then(response => {
 
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -114,7 +114,7 @@ export default {
             http
                 .get("/youtuber/detail/charm/video/" + yno + "_" + videoCount)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -127,7 +127,7 @@ export default {
             http
                 .get("/youtuber/detail/influence/community/" + yno + "_" + term)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -140,7 +140,7 @@ export default {
             http
                 .get("/youtuber/detail/influence/news/" + yno + "_" + term)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -148,12 +148,12 @@ export default {
         });
 
         //subscriberCount,viewCount : {{num}}개의 증감추이
-        var num = 50
+        var num = 100
         const subscriberViewCount = new Promise((resolve, reject) => {
             http
                 .get("/youtuber/detail/trend/subscriberCount/" + yno + "_" + num)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -165,7 +165,7 @@ export default {
             http
                 .get("/youtuber/detail/news/" + yno)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -177,7 +177,7 @@ export default {
             http
                 .get("/youtuber/category/" + yno)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -185,20 +185,26 @@ export default {
         });
 
 
-
-
-
-
-
-
         Promise.all([BasicImpormation, videoDuringMonth, video4Weeks, entiregoodratio, goodRatioperVideo, communityCount, newsCount, subscriberViewCount, news, categoryOfYoutuber]).then(
             axios.spread((...responses) => {
 
+                var responsesNew = []
+
+                for (let index = 0; index < responses.length; index++) {
+                    if (responses[index].data.state != 'ok') {
+                        console.log("fail")
+                        failCallback();
+                        return;
+                    }
+                }
+                for (let index = 0; index < responses.length; index++) {
+                    responsesNew.push(responses[index].data.data)
+                }
 
                 for (var i = 0; i < responses.length; i++) {
-                    console.log(responses[i])
+                    console.log(responses[i].data.data)
                 }
-                callback(...responses)
+                callback(...responsesNew)
 
             })
         )
@@ -211,6 +217,14 @@ export default {
             .get("/youtuber/search/" + payload.searchWord)
             .then(response => {
                 console.log(response.data.data);
+
+                //error 코드
+                var failCallback = payload.failCallback;
+                if (response.data.status != 'ok') {
+                    failCallback();
+                    return;
+                }
+
                 store.commit(Constant.SEARCH_YOUTUBER, {
                     youtubers: response.data.data
                 });
@@ -226,15 +240,13 @@ export default {
         var yno2 = payload.yno2;
         var callback = payload.callback;
 
-
-
         //youtuber1 기본정보
         const BasicImpormation1 = new Promise((resolve, reject) => {
             http
                 .get("/youtuber/" + yno1)
                 .then(response => {
                     // if (response.data.stata == "fail") {}
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -247,7 +259,7 @@ export default {
                 .get("/youtuber/" + yno2)
                 .then(response => {
                     // if (response.data.stata == "fail") {}
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -261,7 +273,7 @@ export default {
             http
                 .get("/youtuber/detail/activity/termVideoCount/" + yno1 + "_" + week)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -274,7 +286,7 @@ export default {
             http
                 .get("/youtuber/detail/activity/termVideoCount/" + yno2 + "_" + week)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -287,7 +299,7 @@ export default {
             http
                 .get("/youtuber/detail/trend/subscriberCount/" + yno1 + "_" + num)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -301,7 +313,7 @@ export default {
             http
                 .get("/youtuber/detail/trend/subscriberCount/" + yno2 + "_" + num)
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -312,19 +324,27 @@ export default {
         Promise.all([BasicImpormation1, BasicImpormation2, video4Weeks1, video4Weeks2, subscriberViewCount1, subscriberViewCount2]).then(
             axios.spread((...responses) => {
 
+                var responsesNew = []
+
+                var failCallback = payload.failCallback
+                for (let index = 0; index < responses.length; index++) {
+                    if (responses[index].data.state != 'ok') {
+                        console.log(responses[index].data);
+                        console.log("fail");
+                        failCallback();
+                        return;
+                    }
+                }
+                for (let index = 0; index < responses.length; index++) {
+                    responsesNew.push(responses[index].data.data)
+                }
 
                 for (var i = 0; i < responses.length; i++) {
-                    console.log(responses[i])
+                    console.log(responses[i].data.data)
                 }
-                callback(...responses)
+                callback(...responsesNew);
 
-            })
-        )
-
-
-
-
-
+            }))
 
     },
 
@@ -370,7 +390,7 @@ export default {
             http
                 .get("/youtuber/rank/subscriber_5")
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -381,7 +401,7 @@ export default {
             http
                 .get("/youtuber/rank/totalViewCount_5")
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -392,7 +412,7 @@ export default {
             http
                 .get("/youtuber/rank/totalVideoCount_5")
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -403,7 +423,7 @@ export default {
             http
                 .get("/youtuber/rank/grade_5")
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -414,7 +434,7 @@ export default {
             http
                 .get("/youtuber/rank/clickCount_5")
                 .then(response => {
-                    resolve(response.data.data);
+                    resolve(response);
                 })
                 .catch(err => {
                     reject(err);
@@ -426,11 +446,20 @@ export default {
         Promise.all([subscriber, totalViewCount, totalVideoCount, grade, clickCount]).then(
             axios.spread((...responses) => {
 
+                // var failCallback = payload.failCallback
+                // for (let index = 0; index < responses.length; index++) {
+                //     if (responses[index].data.status != 'ok') {
+                //         console.log("fail")
+                //         failCallback();
+                //         return;
+                //     }
+                // }
+
                 var list = []
                 var titles = ["구독자", "총영상조회수", "총영상수", "등급", "사이트조회수"]
 
                 for (var i = 0; i < responses.length; i++) {
-                    list.push({ title: titles[i], list: responses[i] })
+                    list.push({ title: titles[i], list: responses[i].data.data })
                 }
 
                 console.log(list)

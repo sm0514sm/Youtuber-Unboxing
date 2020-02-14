@@ -58,8 +58,10 @@
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
-                      <span class="font-weight-light mr-4">개설일 : {{youtuber.publishedDate}} </span>
-                      <v-btn x-small color="red" dark @click="openNewWindow(youtuber.channelLink)"><v-icon>mdi-play</v-icon>유튜브로 이동 </v-btn>
+                      <span class="font-weight-light mr-4">개설일 : {{youtuber.publishedDate}}</span>
+                      <v-btn x-small color="red" dark @click="openNewWindow(youtuber.channelLink)">
+                        <v-icon>mdi-play</v-icon>유튜브로 이동
+                      </v-btn>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -319,7 +321,11 @@
                                     color="blue"
                                     :value="entiregoodratio*100"
                                     height="40"
-                                  ></v-progress-linear>
+                                  >
+                                    <template v-slot="{ value }">
+                                      <strong>{{ value}}%</strong>
+                                    </template>
+                                  </v-progress-linear>
                                 </v-col>
                                 <v-col cols="2">
                                   <v-icon x-large color="red">thumb_down</v-icon>
@@ -522,7 +528,7 @@
 import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
 import InfiniteLoading from "vue-infinite-loading";
-import tc from 'thousands-counter';
+import tc from "thousands-counter";
 
 export default {
   name: "youtuberPage",
@@ -652,6 +658,8 @@ export default {
       }
 
       //subscriberView Data 집어넣기
+      console.log("*************")
+      console.log(subscriberView.length)
       for (let index = 0; index < subscriberView.length; index++) {
         this.subscriberData[0]["data"].push(
           subscriberView[index]["pointSubscriber"]
@@ -688,10 +696,13 @@ export default {
         return "gray";
       }
     },
-    failCallback(err) {
-      console.log("****************" + err);
-      this.loading = "fail";
-      console.log(this.loading);
+    failCallback() {
+      alert("fail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      var random = Math.floor(Math.random() * (10 - 1) + 1);
+      this.$router.push({
+        path: "youtuberPage",
+        query: { yno: this.$route.query.yno, reloding: random }
+      });
     },
     onCategoryButtonClicked(i) {
       localStorage.setItem("currentCategory", i);

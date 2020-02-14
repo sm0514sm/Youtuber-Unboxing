@@ -32,6 +32,7 @@
                 <v-col class="py-0">
                   <v-radio-group v-model="orderGroup">
                     <v-radio label="구독자순" value="subscriber" checked></v-radio>
+                    <v-radio label="등급순" value="grade"></v-radio>
                     <v-radio label="누적조회수" value="totalViewCount"></v-radio>
                     <v-radio label="총영상수" value="totalVideoCount"></v-radio>
                     <v-radio label="영향력" value="influence"></v-radio>
@@ -240,6 +241,11 @@ export default {
       } else {
         this.sortCardPosition = 25;
       }
+    },
+    failCallback() {
+      alert("fail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+      var random = Math.floor(Math.random() * (10 - 1) + 1);
+      this.$router.push({ path: 'youtuberPage', query: {reloding : random}});
     }
   },
   mounted() {},
@@ -247,7 +253,12 @@ export default {
     http
       .get("/youtuber/all")
       .then(response => {
-        this.callback(response.data.data);
+        console.log(response.data)
+        if(response.data.state != 'ok'){
+          this.failCallback
+        }else{
+          this.callback(response.data.data);
+        }
       })
       .catch(exp => {
         alert("유튜버 로딩에 실패하였습니다\n" + exp);

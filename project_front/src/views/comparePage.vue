@@ -377,7 +377,8 @@ export default {
     this.$store.dispatch(Constant.GET_COMPARE_YOUTUBER, {
       yno1: this.youtubers[0].yno,
       yno2: this.youtubers[1].yno,
-      callback: this.callback
+      callback: this.callback,
+      failCallback : this.failCallback
     });
   },
   methods: {
@@ -658,6 +659,11 @@ export default {
       } else {
         return "D";
       }
+    },
+    failCallback(){
+      alert("fail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+      var random = Math.floor(Math.random() * (10 - 1) + 1);
+      this.$router.push({ path: 'comparePage', query: {reloding : random}});
     }
   },
   computed: {},

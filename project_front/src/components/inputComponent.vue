@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="550px">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on" @click="init">유튜버 추가하기</v-btn>
+        <v-btn color="primary" dark v-on="on" @click="init" v-if="!snackbar">유튜버 추가하기</v-btn>
       </template>
       <v-card class="pa-5">
         <v-card-title align="center" class="pa-0">
@@ -13,12 +13,14 @@
           </v-row>
         </v-card-title>
         <v-divider class="ma-0"></v-divider>
-
         <v-card-text class="pb-0">
           <!--inputPage -->
           <v-container v-if="nowPage == 'inputPage'">
             <v-row>
-              <v-col cols="12">원하는 유튜버의 주소를 복사해주세요...<a target="_blank" href="https://www.youtube.com/">> 유튜브 페이지 이동</a></v-col>
+              <v-col cols="12">
+                원하는 유튜버의 주소를 복사해주세요...
+                <a target="_blank" href="https://www.youtube.com/">> 유튜브 페이지 이동</a>
+              </v-col>
               <v-col cols="12">
                 <v-img :src="require('@/assets/youtuberinsert.png')"></v-img>
               </v-col>
@@ -72,9 +74,7 @@
                     <v-icon color="red" x-large>mdi-alert</v-icon>
                   </p>
                 </animation-css>
-                
               </v-col>
-
               <v-col cols="12">
                 <p style="text-align: center;" class="pa-0">{{ completeSmallTitle }}</p>
               </v-col>
@@ -98,16 +98,19 @@
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="onCloseButton">Close</v-btn>
           <v-btn v-if="nowPage == 'inputPage'" color="blue darken-1" text @click="onSendButton">SEND</v-btn>
+          <v-btn color="blue darken-1" text @click="test">test</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :timeout="10000">
+      <v-progress-linear v-if="snackProgress" color="teal" :buffer-value="0" :value="value" stream />
+      <div v-else>zzzzzz완성</div>
+    </v-snackbar>
   </v-row>
 </template>
-
 <script>
 import Constant from "../vuex/Constant.js";
 import { AnimationCss, AnimationCssType } from "vue-animation";
-
 export default {
   components: {
     [AnimationCss.name]: AnimationCss
@@ -123,13 +126,15 @@ export default {
         callback: this.processDispatch
       });
       this.intervalSetting();
+      this.snackbar = true;
+      this.snackProgress = true;
     },
     onCloseButton: function() {
       this.dialog = false;
-      clearInterval(this.getYnoInterval);
-      clearInterval(this.getValueInterval);
-      clearInterval(this.addValueInterval);
-      this.address = "";
+      // clearInterval(this.getYnoInterval);
+      // clearInterval(this.getValueInterval);
+      // clearInterval(this.addValueInterval);
+      // this.address = "";
     },
     processDispatch: function(code, yno) {
       console.log("processDispatch" + code + " " + code + " " + yno);
@@ -163,16 +168,18 @@ export default {
           this.completeSmallTitle = "서버 에러";
         }
       }
+      this.snackbar = false;
       clearInterval(this.getYnoInterval);
       clearInterval(this.getValueInterval);
       clearInterval(this.addValueInterval);
       this.nowPage = "completePage";
       this.$store.state.yno = 0;
+      this.snackProgress = false;
+      console.log("snackbar : ", this.snackbar);
     },
     init: function() {
       this.nowPage = "inputPage";
-      this.animationFlag = true
-      
+      this.animationFlag = true;
     },
     gotoYoutuberPage: function() {
       this.dialog = false;
@@ -184,49 +191,60 @@ export default {
         }
       });
     },
-    intervalSetting: function(){
-        this.getYnoInterval = setInterval(() => {
-            // console.log('myyno : ', this.myyno)
-            // console.log('1. getYnoInterval 실행')
-            if (this.nowPage == "loadingPage") {
-                if(this.myyno == null || this.myyno <= 0){
-                    this.$store.dispatch(Constant.GET_YNO_FROM_URL, {
-                        url: this.address,
-                    })
-                }
-                else{
-                    clearInterval(this.getYnoInterval)
-                    return;
-                }
-            }
-            if(this.myyno > 0){
-                clearInterval(this.getYnoInterval)
-            }
-        }, 2000);
-        this.getValueInterval = setInterval(() => {
-            // console.log('2. getValueInterval 실행')
-            if(this.myyno != null && this.myyno > 0){
-                clearInterval(this.interval1)
-                this.$store.dispatch(Constant.GET_STATUS_FROM_YNO, {
-                    yno: this.myyno,
-                })
-            }
-            if(this.value >= 100){
-                this.value = 100;
-                clearInterval(this.getValueInterval)
-                return;
-            }
-        }, 500);
-        this.addValueInterval = setInterval(() => {
-            // console.log('3. addValueInterval 실행')
-            if(this.value >= 100){
-                clearInterval(this.addValueInterval)
-                return;
-            }
-            if(this.myyno != null && this.myyno > 0 && this.tempValue + 40 > this.value && this.value < 73 && this.value > 0){
-                this.$store.state.value = this.value + Math.round((Math.random() * 3.5));
-            }
-        }, 1000);
+    intervalSetting: function() {
+      this.getYnoInterval = setInterval(() => {
+        // console.log('myyno : ', this.myyno)
+        // console.log('1. getYnoInterval 실행')
+        if (this.nowPage == "loadingPage") {
+          if (this.myyno == null || this.myyno <= 0) {
+            this.$store.dispatch(Constant.GET_YNO_FROM_URL, {
+              url: this.address
+            });
+          } else {
+            clearInterval(this.getYnoInterval);
+            return;
+          }
+        }
+        if (this.myyno > 0) {
+          clearInterval(this.getYnoInterval);
+        }
+      }, 2000);
+      this.getValueInterval = setInterval(() => {
+        // console.log('2. getValueInterval 실행')
+        if (this.myyno != null && this.myyno > 0) {
+          clearInterval(this.interval1);
+          this.$store.dispatch(Constant.GET_STATUS_FROM_YNO, {
+            yno: this.myyno
+          });
+        }
+        if (this.value >= 100) {
+          this.value = 100;
+          clearInterval(this.getValueInterval);
+          return;
+        }
+      }, 500);
+      this.addValueInterval = setInterval(() => {
+        // console.log('3. addValueInterval 실행')
+        if (this.value >= 100) {
+          clearInterval(this.addValueInterval);
+          return;
+        }
+        if (
+          this.myyno != null &&
+          this.myyno > 0 &&
+          this.tempValue + 40 > this.value &&
+          this.value < 73 &&
+          this.value > 0
+        ) {
+          this.$store.state.value =
+            this.value + Math.round(Math.random() * 3.5);
+        }
+      }, 1000);
+    },
+    test :function() {
+      console.log("before"+this.snackbar)
+      this.snackbar = true
+      console.log("After"+this.snackbar)
     }
   },
   computed: {
@@ -256,7 +274,12 @@ export default {
       addValueInterval: "",
       pageCode: 0,
       AnimationType: AnimationCssType,
-      animationFlag : true
+      animationFlag: true,
+      snackbar: false,
+      timeout: 2000,
+      snackProgress: false,
+      y: "top",
+      mode: ""
     };
   },
   beforeDestroy() {
@@ -270,7 +293,5 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 </style>
-
