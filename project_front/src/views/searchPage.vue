@@ -38,12 +38,18 @@
                 class="justify-center py-6"
                 style="background-color:#cdcdcd ; height : 250px"
               >
-              <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center"></v-list-item-title>
+                <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center"></v-list-item-title>
                 <v-list-item-title class="font-weight-black" align="center" style="font-size:25px">
                   <v-icon color="red" x-large>mdi-alert-circle</v-icon>검색어에 해당하는 유튜버가 없습니다.
                 </v-list-item-title>
-                <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center">유튜버를 추가하고 싶으신가요?</v-list-item-title>
-              <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center"><inputComponent></inputComponent></v-list-item-title>
+                <v-list-item-title
+                  class="font-weight-ligth"
+                  style="font-size:20px"
+                  align="center"
+                >유튜버를 추가하고 싶으신가요?</v-list-item-title>
+                <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center">
+                  <inputComponent></inputComponent>
+                </v-list-item-title>
               </v-list-item-content>
             </v-card>
           </v-hover>
@@ -192,7 +198,7 @@
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col>
+                    <v-col v-if ="item.tags.length != 1">
                       <v-btn
                         v-for="(tag,index) in item.tags"
                         :key="index"
@@ -217,8 +223,6 @@
           </v-col>
         </v-row>
       </v-container>
-
-     
 
       <!-- news -->
       <v-container wrap style="background : white" border class="my-3">
@@ -275,6 +279,7 @@
           </v-col>
         </v-row>
       </v-container>
+
     </v-container>
   </div>
 </template>
@@ -284,7 +289,7 @@
 import http from "../vuex/http-common";
 import axios from "axios";
 import tc from "thousands-counter";
-import inputComponent from "../components/inputComponent"
+import inputComponent from "../components/inputComponent";
 
 export default {
   components: {
@@ -368,14 +373,19 @@ export default {
       } else {
         alert("비디오 검색 결과의 끝 페이지입니다.");
       }
-    }
+    },
+    failCallback() {
+      var random = Math.floor(Math.random() * (10 - 1) + 1);
+      this.$router.push({ path: 'youtuberPage', query: { word : this.$route.query.word , reloding : random}});
+    },
   },
   mounted() {
+    this.$vuetify.goTo(0);
     const youtuberSearch = new Promise((resolve, reject) => {
       http
         .get("/youtuber/search/" + this.$route.query.word)
         .then(response => {
-          resolve(response.data.data);
+          resolve(response);
         })
         .catch(err => {
           reject(err);
@@ -386,7 +396,7 @@ export default {
       http
         .get("/news/search/" + this.$route.query.word)
         .then(response => {
-          resolve(response.data.data);
+          resolve(response);
         })
         .catch(err => {
           reject(err);
@@ -397,7 +407,7 @@ export default {
       http
         .get("/video/search/" + this.$route.query.word)
         .then(response => {
-          resolve(response.data.data);
+          resolve(response);
         })
         .catch(err => {
           reject(err);
@@ -406,11 +416,21 @@ export default {
 
     Promise.all([youtuberSearch, newsSearch, videoSearch]).then(
       axios.spread((...responses) => {
-        this.searchedyoutuber = responses[0];
+        console.log("***************")
+        console.log(responses)
+        for (let index = 0; index < responses.length; index++) {
+          if (responses[index].data.state != "ok") {
+            console.log("fail");
+            this.failCallback();
+            return;
+          }
+        }
+
+        this.searchedyoutuber = responses[0].data.data;
         this.displayyoutuber = this.searchedyoutuber.slice(0, 3);
-        this.searchednews = responses[1];
+        this.searchednews = responses[1].data.data;
         this.displaynews = this.searchednews.slice(0, 3);
-        this.searchedvideo = responses[2];
+        this.searchedvideo = responses[2].data.data;
         for (let index = 0; index < this.searchedvideo.length; index++) {
           var tags = this.searchedvideo[index].tags.split(",", 3);
           this.searchedvideo[index].tags = tags;
@@ -425,66 +445,14 @@ export default {
   },
   computed: {},
   watch: {
-    $route(to, from) {
-      this.$vuetify.goTo(0);
-      if (to.path === "/searchPage") {
-        if (to.query.word != from.query.word) {
-          const youtuberSearch = new Promise((resolve, reject) => {
-            http
-              .get("/youtuber/search/" + to.query.word)
-              .then(response => {
-                resolve(response.data.data);
-              })
-              .catch(err => {
-                reject(err);
-              });
-          });
-
-          const newsSearch = new Promise((resolve, reject) => {
-            http
-              .get("/news/search/" + to.query.word)
-              .then(response => {
-                resolve(response.data.data);
-              })
-              .catch(err => {
-                reject(err);
-              });
-          });
-
-          const videoSearch = new Promise((resolve, reject) => {
-            http
-              .get("/video/search/" + to.query.word)
-              .then(response => {
-                resolve(response.data.data);
-              })
-              .catch(err => {
-                reject(err);
-              });
-          });
-          Promise.all([youtuberSearch, newsSearch, videoSearch]).then(
-            axios.spread((...responses) => {
-              this.searchedyoutuber = responses[0];
-              this.displayyoutuber = this.searchedyoutuber.slice(0, 3);
-              this.searchednews = responses[1];
-              this.displaynews = this.searchednews.slice(0, 3);
-              this.searchedvideo = responses[2];
-              for (let index = 0; index < this.searchedvideo.length; index++) {
-                var tags = this.searchedvideo[index].tags.split(",", 3);
-                this.searchedvideo[index].tags = tags;
-              }
-              this.displayvideo = this.searchedvideo.slice(0, 3);
-              this.pageyoutuber = 1;
-              this.pagenews = 1;
-              this.pagevideo = 1;
-
-              console.log(this.searchedyoutuber);
-              console.log(this.searchednews);
-              console.log(this.searchedvideo);
-            })
-          );
-        }
-      }
-    }
+    // $route(to, from) {
+    //   this.$vuetify.goTo(0);
+    //   if (to.path === "/searchPage") {
+    //     if (to.query.word != from.query.word) {
+          
+    //     }
+    //   }
+    // }
   },
   data() {
     return {

@@ -6,88 +6,112 @@
     elevate-on-scroll
     scroll-threshold="500"
     v-scroll="onScroll"
+    class="pa-0"
   >
-    <v-img
-      :src="require('@/assets/logo.png')"
-      class
-      contain
-      height="48"
-      width="48"
-      max-width="48"
-      @click="gotoHome"
-    />
-
-    <v-spacer />
-    <!-- 유튜버 추가 -->
-    <input-component></input-component>
-
+    <!-- 로고 -->
+    <v-col class="pa-0">
+      <v-img
+        :src="require('@/assets/logo.png')"
+        class
+        contain
+        height="60"
+        width="185"
+        max-width="185"
+        @click="gotoHome"
+      />
+    </v-col>
+    <!-- 메뉴 -->
+    <v-col cols="5">
+      <v-row>
+        <input-component></input-component>
+        <v-col cols="3" align="center">
+          <v-btn depressed>test</v-btn>
+        </v-col>
+        <v-col cols="3" align="center">
+          <v-btn depressed>
+            <b>test</b>
+          </v-btn>
+        </v-col>
+        <v-col cols="3" align="center">
+          <v-btn depressed>
+            <i>test</i>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-col>
+    <!-- 텍스트필드 -->
     <!-- 검색 -->
-    <v-autocomplete
-      :items="searchItems"
-      :search-input.sync="inputKeyword"
-      hide-details
-      item-text="channelName"
-      item-value="channelName"
-      @keyup.enter="search"
-      ref="keyword"
-      id="keyword"
-      label="유튜버를 검색해보세요"
-      style="max-width: 300px; "
-      solo-inverted
-      flat
-    >
-      <template v-slot:no-data>
-        <v-list-item>
-          <v-list-item-title>검색 결과가 없습니다.</v-list-item-title>
-        </v-list-item>
-      </template>
 
-      <template v-slot:item="{ item }">
-        <v-list-item-avatar color="red" class="headline font-weight-light white--text">
-          <img :src="item.thumbnails" alt="John" />
-        </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.channelName"></v-list-item-title>
-          <v-list-item-subtitle>구독자 : {{tc(item.subscriber)}}</v-list-item-subtitle>
-        </v-list-item-content>
-      </template>
-    </v-autocomplete>
+    <v-col v-if="this.$route.path =='/'"></v-col>
 
-    <!-- 카카오로그인 -->
-    <v-img
-      v-if="loginStatus == false"
-      :src="require('@/assets/kakao.png')"
-      class
-      contain
-      height="100"
-      width="100"
-      max-width="100"
-      @click="login()"
-    />
-    <v-dialog v-model="dialog" persistent max-width="600px">
-      <template v-if="loginStatus" v-slot:activator="{ on }">
-        <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">
-          <v-icon left>mdi-logout</v-icon>LOGOUT
-        </v-btn>
-        <v-btn class="ma-2" color="indigo" large outlined dark @click="gotoMember()">
-          <v-icon left>mdi-account</v-icon>MY INFO
-        </v-btn>
-      </template>
-      <v-card>
-        <v-card-title>
-          <span class="headline">LogoutModal</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>정말로 로그아웃 하겠습니까?</v-container>
-          <small>*indicates required field</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">No</v-btn>
-          <v-btn color="blue darken-1" text @click="logout()">Yes</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <v-col align="right">
+      <v-img
+        v-if="loginStatus == false"
+        :src="require('@/assets/kakao.png')"
+        class
+        contain
+        height="50"
+        width="100"
+        max-width="100"
+        @click="login()"
+      />
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <template v-if="loginStatus" v-slot:activator="{ on }">
+          <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">
+            <v-icon left>mdi-logout</v-icon>LOGOUT
+          </v-btn>
+          <v-btn class="ma-2" color="indigo" large outlined dark @click="gotoMember()">
+            <v-icon left>mdi-account</v-icon>MY INFO
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline">LogoutModal</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>정말로 로그아웃 하겠습니까?</v-container>
+            <small>*indicates required field</small>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false">No</v-btn>
+            <v-btn color="blue darken-1" text @click="logout()">Yes</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-col>
+    <v-col v-if="this.$route.path !='/'">
+      <v-autocomplete
+        :items="searchItems"
+        :search-input.sync="inputKeyword"
+        hide-details
+        item-text="channelName"
+        item-value="channelName"
+        @keyup.enter="search"
+        ref="keyword"
+        id="keyword"
+        label="유튜버를 검색해보세요"
+        style="max-width: 300px; "
+        solo-inverted
+        flat
+      >
+        <template v-slot:no-data>
+          <v-list-item>
+            <v-list-item-title>검색 결과가 없습니다.</v-list-item-title>
+          </v-list-item>
+        </template>
+
+        <template v-slot:item="{ item }">
+          <v-list-item-avatar color="red" class="headline font-weight-light white--text">
+            <img :src="item.thumbnails" alt="John" />
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.channelName"></v-list-item-title>
+            <v-list-item-subtitle>구독자 : {{tc(item.subscriber)}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </template>
+      </v-autocomplete>
+    </v-col>
   </v-app-bar>
 </template>
 
@@ -95,7 +119,7 @@
 import inputComponent from "./inputComponent";
 import { mapGetters } from "vuex";
 import http from "../vuex/http-common";
-import tc from "thousands-counter"
+import tc from "thousands-counter";
 // import axios from "axios";
 export default {
   components: {
@@ -190,7 +214,7 @@ export default {
         },
         () => {}
       );
-      document.getElementById("keyword").vaule = ""
+      document.getElementById("keyword").vaule = "";
     },
     onScroll() {
       var scroll = window.pageYOffset;
@@ -212,7 +236,7 @@ export default {
       this.headerColor = value;
     },
     tc(num) {
-      return tc(num)
+      return tc(num);
     }
   },
   data() {
