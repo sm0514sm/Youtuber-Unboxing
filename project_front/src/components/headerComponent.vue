@@ -14,9 +14,9 @@
         :src="require('@/assets/logo.png')"
         class
         contain
-        height="48"
-        width="130"
-        max-width="130"
+        height="60"
+        width="185"
+        max-width="185"
         @click="gotoHome"
       />
     </v-col>
