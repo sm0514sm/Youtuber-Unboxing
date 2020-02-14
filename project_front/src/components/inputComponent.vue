@@ -104,10 +104,12 @@
       </v-card>
     </v-dialog>
 
-    <!-- <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :timeout="10000">
-      <v-progress-linear v-if="snackProgress" color="teal" :buffer-value="0" :value="value" stream />
-      <div v-else>zzzzzz완성</div>
-    </v-snackbar>  -->
+    <div class="text-center">
+      <v-snackbar v-model="snackbar" :absolute="true" color='blue-grey lighten-3' :timeout="100000">
+        <v-progress-linear v-if="snackProgress" color="blue-grey" :buffer-value="0" :value="value" stream />
+        <v-icon large dark @click="snackbar = false">clear</v-icon>
+      </v-snackbar>
+    </div>
   </v-row>
   
 </template>
@@ -280,6 +282,7 @@ export default {
       mode: '',
       loader: null,
       loading: false,
+      ffalse: false
     };
   },
   beforeDestroy() {
@@ -302,5 +305,8 @@ export default {
 </script>
 
 <style scoped>
+.v-snack--bottom {
+    bottom: -650px;
+}
 </style>
 
