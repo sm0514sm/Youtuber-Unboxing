@@ -117,25 +117,18 @@ export default {
   },
 
   mounted() {
-    console.log("loginStatus:" + this.loginStatus);
-    console.log(this.$session);
-    console.log(this.$session.get("token"));
-    console.log();
     if (!this.$session.exists()) {
       this.loginStatus = false;
-      console.log("no session");
     } else {
       if (this.$session.get("token")) {
         this.loginStatus = true;
       }
     }
-    console.log(this.$route.query);
     var token = this.$route.query.access_Token;
     if (token != undefined) {
       this.$session.start();
       this.$session.set("token", token);
       this.loginStatus = true;
-      console.log("token:" + this.$session.get("token"));
       this.$router.push("/");
     }
   },
@@ -156,7 +149,6 @@ export default {
             a = response.data.data.responseCode;
             if (a == "200") {
               this.$session.destroy();
-              console.log(this.$route.query);
               if (this.$route.path == "/memberPage") {
                 this.$router.push("/");
               }

@@ -1,95 +1,70 @@
 <template>
-  <v-footer dark padless>
-    <v-card flat tile class="indigo lighten-1 white--text text-center">
-      <v-card-text>
-        <v-icon large color="white darken-2">mdi-twitter</v-icon>
-      <v-icon large color="white darken-2">twitter</v-icon>
-        <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
-          <v-icon size="24px">{{ icon }}</v-icon>
-        </v-btn>
-      </v-card-text>
-      
-      <v-card-text class="white--text pt-0">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </v-card-text>
-
-      <v-divider></v-divider>
-
-      <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} —
-        <strong>쌒피 1반 8조</strong>
-      </v-card-text>
-    </v-card>
-  </v-footer>
-  <!-- <v-footer
-    class="py-4"
-    dark
-    height="auto"
-  >
-    <v-container mx-auto>
-      <v-layout wrap>
-        <v-flex xs9>
-            <i class="font-weight-black ">김주희, 김태민, 박진홍, 이상민, 홍기환</i>
-        </v-flex>
-        <v-spacer />
-        <v-btn
-          class="mr-0"
-          square
-          
-          @click="$vuetify.goTo(0)"
-        >
-          <v-icon>mdi-chevron-up</v-icon>
-        </v-btn>
-      </v-layout>
-    </v-container>
-  </v-footer>-->
+  <!-- Footer -->
+  <mdb-footer color="unique-color-dark" class="page-footer font-small pt-0">
+    <div style="backgroundColor: #6351ce">
+      <mdb-container class="text-center">
+      </mdb-container>
+    </div>
+    <mdb-container class="mt-5 mb-4 text-center text-md-left">
+      <div>
+      <mdb-row class="mt-3">
+        <mdb-col md="4" lg="3" xl="4" class="mb-4">
+          <h6 class="text-uppercase font-weight-bold"><strong>Company name</strong></h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
+          <h6 class="text-uppercase font-weight-bold"><strong>SSAFY First Project</strong></h6>
+          <br>
+          <h6 class="text-uppercase font-weight-bold"><strong>Class 1 Group 8</strong></h6>
+          <br>
+          <h6 class="text-uppercase font-weight-bold"><strong>Web / Mobile Application</strong></h6>
+        </mdb-col>
+        <mdb-col md="4" lg="3" xl="2" class="mb-4">
+          <h6 class="text-uppercase font-weight-bold"><strong>Members</strong></h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
+          <h6 class="text-uppercase font-weight-bold"><strong>김주희</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>김태민</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>박진홍</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>이상민</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>홍기환</strong></h6>
+        </mdb-col>
+        <mdb-col md="4" lg="3" xl="3" class="mb-4">
+          <h6 class="text-uppercase font-weight-bold"><strong>Position</strong></h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
+          <h6 class="text-uppercase font-weight-bold"><strong>Rest api</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>Front-end</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>Data-collect</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>Data/Server</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>Back/Front</strong></h6>
+        </mdb-col>
+        <mdb-col md="4" lg="3" xl="3" class="mb-4">
+          <h6 class="text-uppercase font-weight-bold"><strong>Contact</strong></h6>
+          <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
+          <h6 class="text-uppercase font-weight-bold"><strong>Seoul, Gangnam-gu</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>Yeoksam-dong</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>212 Teheran-ro</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>8AM - 6PM</strong></h6>
+          <h6 class="text-uppercase font-weight-bold"><strong>+82) 1588 - 3357</strong></h6>
+        </mdb-col>
+      </mdb-row>
+      </div>
+    </mdb-container>
+    <div class="footer-copyright text-center py-3">
+      <mdb-container fluid>
+        &copy; 2020 Copyright: <a href="http://localhost:3000"> Youtuber Unboxing </a>
+      </mdb-container>
+    </div>
+  </mdb-footer>
+  <!-- Footer -->
 </template>
 
 <script>
-export default {
-  data: () => ({
-    icons: [
-      "mdi-twitter",
-      "mdi-instagram",
-      "mdi-facebook",
-      "mdi-google-plus",
-      "mdi-reddit",
-      "mdi-discord",
-      "mdi-pinterest"
-    ]
-    // items: [
-    //   {
-    //     href: "#!",
-    //     icon: "mdi-twitter"
-    //   },
-    //   {
-    //     href: "#!",
-    //     icon: "mdi-instagram"
-    //   },
-    //   {
-    //     href: "#!",
-    //     icon: "mdi-facebook"
-    //   },
-    //   {
-    //     href: "#!",
-    //     icon: "mdi-google-plus"
-    //   },
-    //   {
-    //     href: "#!",
-    //     icon: "mdi-reddit"
-    //   },
-    //   {
-    //     href: "#!",
-    //     icon: "mdi-discord"
-    //   },
-    //   {
-    //     href: "#!",
-    //     icon: "mdi-pinterest"
-    //   }
-    // ]
-  })
-};
+  import { mdbFooter, mdbContainer, mdbRow, mdbCol } from 'mdbvue';
+  export default {
+    name: 'FooterPage',
+    components: {
+      mdbFooter,
+      mdbContainer,
+      mdbRow,
+      mdbCol
+    }
+  }
 </script>
-
-<style scoped>
-</style>
