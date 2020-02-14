@@ -2,7 +2,9 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="550px">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on" @click="init">유튜버 추가하기</v-btn>
+        <v-btn class="ma-2" v-on="on" :loading="loading" :disabled="loading" color="primary" @click="init">
+          유튜버 추가하기
+        </v-btn>
       </template>
       <v-card class="pa-5">
         <v-card-title align="center" class="pa-0">
@@ -101,7 +103,13 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <!-- <v-snackbar v-model="snackbar" :bottom="y === 'bottom'" :timeout="10000">
+      <v-progress-linear v-if="snackProgress" color="teal" :buffer-value="0" :value="value" stream />
+      <div v-else>zzzzzz완성</div>
+    </v-snackbar>  -->
   </v-row>
+  
 </template>
 
 <script>
@@ -110,7 +118,7 @@ import { AnimationCss, AnimationCssType } from "vue-animation";
 
 export default {
   components: {
-    [AnimationCss.name]: AnimationCss
+    [AnimationCss.name]: AnimationCss, 
   },
   name: "inputComponent",
   methods: {
@@ -123,13 +131,16 @@ export default {
         callback: this.processDispatch
       });
       this.intervalSetting();
+      this.snackbar = true
+      this.snackProgress = true
+      this.loader = 'loading'
     },
     onCloseButton: function() {
       this.dialog = false;
-      clearInterval(this.getYnoInterval);
-      clearInterval(this.getValueInterval);
-      clearInterval(this.addValueInterval);
-      this.address = "";
+      // clearInterval(this.getYnoInterval);
+      // clearInterval(this.getValueInterval);
+      // clearInterval(this.addValueInterval);
+      // this.address = "";
     },
     processDispatch: function(code, yno) {
       console.log("processDispatch" + code + " " + code + " " + yno);
@@ -163,16 +174,22 @@ export default {
           this.completeSmallTitle = "서버 에러";
         }
       }
+      this.snackbar = false
+      this.loader = null
+      this.loading = false
       clearInterval(this.getYnoInterval);
       clearInterval(this.getValueInterval);
       clearInterval(this.addValueInterval);
       this.nowPage = "completePage";
       this.$store.state.yno = 0;
+      this.snackProgress = false
+      console.log('snackbar : ', this.snackbar)
     },
     init: function() {
+      
       this.nowPage = "inputPage";
       this.animationFlag = true
-      
+      console.log(this.nowPage)
     },
     gotoYoutuberPage: function() {
       this.dialog = false;
@@ -256,7 +273,13 @@ export default {
       addValueInterval: "",
       pageCode: 0,
       AnimationType: AnimationCssType,
-      animationFlag : true
+      animationFlag : true,
+      snackbar: false,
+      snackProgress: false,
+      y: 'top',
+      mode: '',
+      loader: null,
+      loading: false,
     };
   },
   beforeDestroy() {
@@ -267,7 +290,14 @@ export default {
     clearInterval(this.getYnoInterval);
     clearInterval(this.getValueInterval);
     clearInterval(this.addValueInterval);
-  }
+  },
+  watch: {
+    loader () {
+      const l = this.loader
+      this[l] = !this[l]
+      this.loader = null
+    },
+  },
 };
 </script>
 
