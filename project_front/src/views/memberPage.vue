@@ -18,10 +18,11 @@
     <v-list-item three-line>
       
       <v-list-item-avatar
-        tile
-        size="80"
-        color="grey"
-      ></v-list-item-avatar>
+        :size="100"
+
+      >
+      <v-icon :size="75">mdi-account-box</v-icon>
+      </v-list-item-avatar>
       <v-list-item-content>
         <v-list-item-title class="headline mb-1"><v-chip
       class="ma-2"
@@ -29,7 +30,7 @@
       text-color="white"
     >
       <v-avatar left>
-        <v-icon>mdi-account-circle</v-icon>
+        <v-icon>mdi-pencil</v-icon>
       </v-avatar>
       닉네임
     </v-chip>{{user.userName}}</v-list-item-title>
@@ -49,9 +50,6 @@
 
     </v-list-item>
 
-    <v-card-actions>
-      <v-btn color="error" text @click="logout2">Logout</v-btn>
-    </v-card-actions>
   </v-card>
   </v-hover>
 </template>
@@ -68,9 +66,6 @@
         <template v-if='interest.length>2'>
           <div>
             <span class="red--text">최대 3개 제한</span>
-          </div>
-          <div>
-            <span class="red--text">{{ interest }}</span>
           </div>
         </template>
         <v-row>
@@ -171,71 +166,73 @@
 
 
 
-
 <template>
-  
-  <v-card
-    class="mx-auto"
-  >
+  <v-card class="mx-auto">
     <v-container fluid>
       <v-toolbar-title>추천 유튜버</v-toolbar-title>
       <v-row>
-        <v-col
-          v-for="card in recommend"
-          :key="card.title"
-          :cols="6"
-        >
-        <v-hover v-slot:default="{ hover }" open-delay="100">
-          <v-card
-          :elevation="hover ? 9 : 3"
-            class="mx-auto"
-            height="100%"
-            color=""
-          >
-            <v-list-item>
-              <v-list-item-avatar size="100" @click="goTo(card.yno)"><img
-                :src="card.thumbnails"
-                alt="thumnnail"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="headline" v-text="card.channelName" @click="goTo(card.yno)"></v-list-item-title>
-                <v-list-item-subtitle>개설일 : {{card.publishedDate}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+        <v-col v-for="card in recommend" :key="card.title" :cols="6">
+          <v-hover v-slot:default="{ hover }" open-delay="100">
+            <v-card
+              :elevation="hover ? 9 : 3"
+              class="mx-auto"
+              height="100%"
+              color
+              @click="goTo(card.yno)"
+            >
+              <v-list-item>
+                <v-list-item-avatar size="100">
+                  <img :src="card.thumbnails" alt="thumnnail" />
+                </v-list-item-avatar>
+                <v-list-item-content>
+                  <v-list-item-title class="headline" v-text="card.channelName"></v-list-item-title>
+                  <v-list-item-subtitle>개설일 : {{card.publishedDate}}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
 
-            <v-card-text>
-              {{card.channelDescription}}
-            </v-card-text>
-            
-            <v-card-actions >
-              <v-btn
-                text
-                color="deep-purple accent-4"
-              >
-                Read
-              </v-btn>
-              <v-btn
-                text
-                color="deep-purple accent-4"
-              >
-                Bookmark
-              </v-btn>
-              <v-spacer></v-spacer>
-              <!-- <v-btn text icon color="yellow">
-                <v-icon v-if="flag" @click="deleteFav(card.yno)" x-large>mdi-star</v-icon>
-                <v-icon v-if="!flag" @click="insertFav(card.yno)" x-large>mdi-star-outline</v-icon>
-              </v-btn> -->
-            </v-card-actions>
-          </v-card>
-        </v-hover>
+              <v-card-text>{{card.channelDescription | truncate(100," ...")}}</v-card-text>
+
+              <v-card-actions>
+                <v-chip class="ma-2" color="#30A9DE" text-color="white">
+                  <v-icon left>mdi-account-multiple-outline</v-icon>
+
+                  {{tc(card.subscriber)}}
+                </v-chip>
+                <v-chip class="ma-2" color="#EFDC05" text-color="white">
+                  <v-icon left>mdi-play-outline</v-icon>
+
+                  {{tc(card.totalViewCount)}}
+                </v-chip>
+
+                <v-chip class="ma-2" color="#E53A40" text-color="white">
+                  <v-icon left>mdi-youtube-subscription</v-icon>
+
+                  {{card.totalVideoCount}}
+                </v-chip>
+
+                <v-spacer></v-spacer>
+                <v-icon
+                  v-if="!flag(card.yno)"
+                  text
+                  color="red"
+                  size="50"
+                  @click.stop="insertFav(card.yno)"
+                >mdi-heart-outline</v-icon>
+                <v-icon
+                  v-if="flag(card.yno)"
+                  text
+                  color="red"
+                  size="50"
+                  @click.stop="deleteItem(card)"
+                >mdi-heart</v-icon>
+              </v-card-actions>
+            </v-card>
+          </v-hover>
         </v-col>
       </v-row>
     </v-container>
   </v-card>
 </template>
-
-
-
 
 
 
@@ -261,6 +258,14 @@
         ></v-divider>
       </v-toolbar>
     </template>
+
+    <template v-slot:item.subscriber="{ item }">
+      {{tc(item.subscriber)}}
+    </template>
+     <template v-slot:item.totalViewCount="{ item }">
+      {{tc(item.totalViewCount)}}
+    </template>
+
     <template v-slot:item.action="{ item }">
       <v-icon small @click="deleteItem(item)" color="red">
         delete
@@ -290,9 +295,9 @@
 
 <script>
 import http from "../vuex/http-common";
+import tc from 'thousands-counter';
   export default {
     data: () => ({
-      flag: false,
       headers: [
         {text: '', value:'thumbnail', sortable:false},
         { text: '채널 이름', value:'channelName', sortable:false},
@@ -304,10 +309,9 @@ import http from "../vuex/http-common";
       ],
       fav: [],
       user: [],
-      interest: [ 1,3,
-    4,
-    ],
+      interest: [],
       recommend: [],
+      cat: [],
       loader: null,
       loading: false,
     }),
@@ -335,65 +339,48 @@ import http from "../vuex/http-common";
     },
 
     methods: {
-      logout2(){
-        let a
-            let result = new Promise((resolve, reject)=>{
-                http
-                .get("/logout/" + this.$session.get('token'))
-                .then(response => { 
-                    a=response.data.data.responseCode
-                    if(a=='200'){
-                        this.$session.destroy()
-                        console.log(this.$route.query)
-                        if(this.$route.path=='/memberPage'){
-                            this.$router.push('/')
-                        }
-                        window.location.reload()
-                    }
-                    resolve(response);
-                })
-                .catch(err => {
-                    reject(err);
-                });
-            })
-            console.log(result)
-            this.$session.destroy()
-            if(this.$route.path=='/memberPage'){
-                this.$router.push('/')
+      tc(num) {
+      return tc(num)
+    },
+      flag(yno){
+        let found = false
+        for(var i = 0; i < this.fav.length; i++) {
+            if (this.fav[i].yno == yno) {
+                found = true;
+                break;
             }
-            window.location.reload()
-
+        }
+        return found
       },
     insertFav(yno){
       console.log("insert")
-      console.log(this.$session.get('token'))
+      console.log(yno)
       http.get('/favorite/insert/'+yno+"&"+this.$session.get('token'))
-      .then(function (response) {
-        console.log(response);
-        this.flag=true
-        this.initialize()
+      .then(response=> {
+        console.log(response)
+        http.get("/youtuber/"+yno)
+        .then(response=>{
+          this.fav.push(response.data.data)
+        })
       })
-      .catch(function (error) {
+      .catch(error=> {
         console.log(error);
       });
     },
     deleteFav(yno){
       console.log("delete")
-      console.log(this.$session.get('token'))
+      console.log(yno)
       let par = yno+"&"+this.$session.get('token')
       let deleteUrl = "/favorite/delete/"+par
       http.delete(deleteUrl)
-      .then(function (response) {
+      .then(response=> {
         console.log(response);
-        this.flag=false
-        this.initialize()
       })
-      .catch(function (error) {
+      .catch(error=> {
         console.log(error);
       });
     },
       goTo(yno){
-        console.log(yno)
         let link = 'youtuberPage?yno='+yno
         this.$router.push(link)
       },
@@ -403,10 +390,7 @@ import http from "../vuex/http-common";
         }else return false
       },
       getRecommend(){
-        console.log("recommed")
-        console.log(this.interest)
         var link = this.$session.get("token")+"&"+this.interest
-        console.log(link)
         http.get("/interest/search/recommend/"+link)
         .then(res=>{
           this.recommend = res.data.data
@@ -428,19 +412,22 @@ import http from "../vuex/http-common";
         })
       },
       deleteItem (item) {
-        console.log(item)
         const index = this.fav.indexOf(item)
-        if(confirm('Are you sure you want to delete this item?')){
-          this.fav.splice(index, 1)
+        console.log("delete")
+        console.log(index)
+        console.log(item.yno)
+        if(confirm('즐겨찾기에서 해당 유튜버를 삭제하겠습니까?')){
           let par = item.yno+"&"+this.$session.get('token')
-      let deleteUrl = "/favorite/delete/"+par
-      http.delete(deleteUrl)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+          let deleteUrl = "/favorite/delete/"+par
+          http.delete(deleteUrl)
+          .then(response=>{
+            console.log(response);
+            this.initialize()
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          
         }
       },
       

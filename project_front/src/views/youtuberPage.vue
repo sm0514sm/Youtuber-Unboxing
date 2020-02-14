@@ -50,9 +50,9 @@
                       >
                         <b>{{category.name}}</b>
                       </v-btn>
-                      <v-btn v-if="loginStatus" text icon color="yellow" @click="manageFav">
-                        <v-icon v-if="flag" @click="deleteFav" x-large>mdi-star</v-icon>
-                        <v-icon v-if="!flag" @click="insertFav" x-large>mdi-star-outline</v-icon>
+                      <v-btn v-if="loginStatus" text icon color="red" @click="manageFav">
+                        <v-icon v-if="flag" @click="deleteFav" x-large>mdi-heart</v-icon>
+                        <v-icon v-if="!flag" @click="insertFav" x-large>mdi-heart-outline</v-icon>
                       </v-btn>
                     </v-col>
                   </v-row>

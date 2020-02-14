@@ -19,6 +19,7 @@
         "idle-vue": "^2.0.5",
         "jquery": "^3.4.1",
         "material-design-icons": "^3.0.1",
+        "mdbvue": "^6.4.0",
         "natural-orderby": "^2.0.3",
         "passport-kakao": "^1.0.0",
         "stylus-loader": "^3.0.2",
