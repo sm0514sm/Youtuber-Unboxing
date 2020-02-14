@@ -59,9 +59,7 @@
                   <v-row>
                     <v-col class="pt-0">
                       <span class="font-weight-light mr-4">개설일 : {{youtuber.publishedDate}}</span>
-                      <v-btn x-small color="red" dark @click="openNewWindow(youtuber.channelLink)">
-                        <v-icon>mdi-play</v-icon>유튜브로 이동
-                      </v-btn>
+                      
                     </v-col>
                   </v-row>
                   <v-row>
@@ -90,8 +88,16 @@
                     </v-col>
                     <v-divider vertical class="mx-3"></v-divider>
                     <!-- 외부링크 -->
-                    <v-col>
+                    <v-col cols="4">
                       <v-row align="center" style="float: left;">
+                        <!--youtuber -->
+                        <v-img
+                          width="32px"
+                          class="ml-2 mr-2 my-3"
+                          src="../assets/youtubeIcon.png"
+                          @click="openNewWindow(youtuber.channelLink)"
+                          style="cursor:pointer"
+                        />
                         <!-- instagram -->
                         <v-img
                           width="32px"
@@ -658,7 +664,6 @@ export default {
       }
 
       //subscriberView Data 집어넣기
-      console.log("*************")
       console.log(subscriberView.length)
       for (let index = 0; index < subscriberView.length; index++) {
         this.subscriberData[0]["data"].push(
@@ -697,7 +702,6 @@ export default {
       }
     },
     failCallback() {
-      alert("fail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       var random = Math.floor(Math.random() * (10 - 1) + 1);
       this.$router.push({
         path: "youtuberPage",

@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+<v-col cols="3" align="center">
     <v-dialog v-model="dialog" persistent max-width="550px">
       <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on" @click="init" v-if="!snackbar">유튜버 추가하기</v-btn>
@@ -98,7 +98,6 @@
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="onCloseButton">Close</v-btn>
           <v-btn v-if="nowPage == 'inputPage'" color="blue darken-1" text @click="onSendButton">SEND</v-btn>
-          <v-btn color="blue darken-1" text @click="test">test</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -106,7 +105,7 @@
       <v-progress-linear v-if="snackProgress" color="teal" :buffer-value="0" :value="value" stream />
       <div v-else>zzzzzz완성</div>
     </v-snackbar>
-  </v-row>
+</v-col>
 </template>
 <script>
 import Constant from "../vuex/Constant.js";
