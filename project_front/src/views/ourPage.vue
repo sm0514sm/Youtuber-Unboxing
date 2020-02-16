@@ -1,0 +1,245 @@
+<template>
+  <div>
+    <v-card>
+      <v-card-title class="justify-center py-6" style="background-color:#cdcdcd ; height : 300px">
+        <i class="font-weight-black display-3">OurPage</i>
+      </v-card-title>
+    </v-card>
+    <v-container class="pa-0">
+      <!--기본정보-->
+      <div v-for="(cardinfo, index) in dummyData" :key="index">
+        <v-card class="my-3" outlined flat>
+          <v-container fluid>
+            <v-row>
+              <!-- thumbnail -->
+              <v-col cols="2" class="pa-3">
+                <v-avatar class="circle" color="indigo" flat :aspect-ratio="1/1">
+                  <v-icon dark>mdi-account-circle</v-icon>
+                </v-avatar>
+              </v-col>
+
+              <!-- 기본정보 -->
+              <v-col cols="10">
+                <v-row>
+                  <v-col class="pb-0">
+                    <span class="font-weight-black thin display-3 ma-0">{{ cardinfo.name }}</span>
+                    <v-btn rounded color="blue" justify="center" class="ml-2">
+                      <b>{{cardinfo.position}}</b>
+                    </v-btn>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col class="pt-0">
+                    <span class="font-weight-light mr-4">탄신일 : {{cardinfo.birth}}</span>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col class="ma-0 pa-0">
+                    <v-divider class="pa-0 ma-0"></v-divider>
+                  </v-col>
+                </v-row>
+
+                <v-row>
+                  <v-col>
+                    <span class="font-weight-bold">STACK</span>
+                    <br />
+                    {{cardinfo.stack}}
+                  </v-col>
+                  <v-divider vertical class="mx-3"></v-divider>
+                  <v-col>
+                    <span class="font-weight-bold">FEATURE</span>
+                    <br />
+                    {{cardinfo.feat}}
+                  </v-col>
+                  <v-divider vertical class="mx-3"></v-divider>
+                  <v-col>
+                    <span class="font-weight-bold">총 영상조회 수</span>
+                    <br />147
+                  </v-col>
+                  <v-divider vertical class="mx-3"></v-divider>
+                  <!-- 외부링크 -->
+                  <v-col cols="4">
+                    <v-row align="center" style="float: left;">
+                      <!--youtuber -->
+                      <v-img
+                        v-if="cardinfo.git"
+                        width="32px"
+                        class="ml-2 mr-2 my-3"
+                        src="../assets/githubIcon.png"
+                        style="cursor:pointer"
+                        @click="gitLink(cardinfo.git)"
+                      />
+                      <v-img
+                        v-if="cardinfo.insta"
+                        width="32px"
+                        class="ml-2 mr-2 my-3"
+                        src="../assets/instagramIcon.png"
+                        @click="instaLink(cardinfo.insta)"
+                        style="cursor:pointer"
+                      />
+                      <v-img
+                        v-if="cardinfo.youtube"
+                        width="32px"
+                        class="ml-2 mr-2 my-3"
+                        src="../assets/youtubeIcon.png"
+                        @click="youLink(cardinfo.youtube)"
+                        style="cursor:pointer"
+                      />
+                      <v-img
+                        v-if="cardinfo.tistory"
+                        width="40px"
+                        class="ml-2 mr-2 my-3"
+                        src="../assets/tistoryIcon.png"
+                        @click="tiLink(cardinfo.tistory)"
+                        style="cursor:pointer"
+                      />
+                      <v-img
+                        v-if="cardinfo.blog"
+                        width="50px"
+                        class="ml-2 mr-2 my-3"
+                        src="../assets/blogIcon.png"
+                        @click="blogLink(cardinfo.tistory)"
+                        style="cursor:pointer"
+                      />
+                    </v-row>
+                  </v-col>
+                  <v-spacer></v-spacer>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
+      </div>
+    </v-container>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "ourPage",
+  components: {},
+  beforecreated() {},
+  created() {},
+  mounted() {},
+  methods: {
+    blogLink(link) {
+      console.log(link);
+    },
+    tiLink(link) {
+      var ti = "https://" + link + ".tistory.com/";
+      window.open(ti);
+    },
+    gitLink(link) {
+      var git = "https://github.com/" + link;
+      window.open(git);
+    },
+    instaLink(link) {
+      var insta = "https://www.instagram.com/" + link;
+      window.open(insta);
+    },
+    youLink(link) {
+      var you = "https://www.youtube.com/" + link;
+      window.open(you);
+    }
+  },
+  computed: {},
+  data() {
+    return {
+      dummyData: [
+        {
+          name: "김주희",
+          position: "Rest Api",
+          image: "../assets/profile/",
+          birth: "",
+          git: "",
+          insta: "",
+          stack: "spring",
+          feat: "Rest"
+        },
+        {
+          name: "김태민",
+          position: "Front End",
+          image: "../assets/profile/",
+          birth: "",
+          git: "",
+          insta: "",
+          stack: "vue",
+          feat: "Main Page"
+        },
+        {
+          name: "박진홍",
+          position: "Data Collect",
+          image: "../assets/profile/",
+          birth: "",
+          git: "",
+          insta: "",
+          blog: "asd",
+          stack: "django",
+          feat: "Server / Data"
+        },
+        {
+          name: "이상민",
+          position: "Data / Server",
+          image: "../assets/profile/",
+          birth: "",
+          git: "sm0514sm",
+          insta: "lifaon_sm",
+          youtube: "channel/UC5cGDQN2ZYw4GAZGUIkwjcw",
+          tistory: "lifaon",
+          stack: "django",
+          feat: "Server Deploy"
+        },
+        {
+          name: "홍기환",
+          position: "Back / Front",
+          image: "../assets/profile/",
+          birth: "1994-11-02",
+          git: "airaider",
+          insta: "hongki772",
+          stack: "",
+          feat: "Login / Front"
+        }
+      ]
+    };
+  }
+};
+</script>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 2s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(100px);
+  opacity: 0;
+}
+.circle {
+  border-radius: 50%;
+}
+.jb {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 3s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* number of lines to show */
+}
+</style>
