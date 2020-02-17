@@ -634,9 +634,9 @@
                   margin-left="2"
                   margin-right="2"
                   :rotate="rotate"
+                  :fontSize="fontsize"
                   font="Jua"
                   />
-                  <!-- :fontSize="fontsize" -->
               </v-row>
             </v-card>
 
@@ -785,20 +785,31 @@ export default {
       var viewCountTrend = this.youtuber.viewCountTrend;
       var subscriberCountTrend = this.youtuber.subscriberCountTrend;
       var charm = this.youtuber.charm;
-      console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
-      console.log(this.youtuber.tagCloud)
 
       var tagsDict = JSON.parse(this.youtuber.tagCloud);
+      var size = Object.keys(tagsDict).length + 2;
+      var tagsList = Object.values(tagsDict).sort().reverse();
+      tagsList.push(100)
+      tagsList.push(0)
       for(var n in tagsDict){
         var tempDict = {}
+        var index = -1
         tempDict['name'] = n;
-        tempDict['value'] = tagsDict[n];
-        console.log(tempDict)
+        for(var i in tagsList){
+          if(tagsList[i] == tagsDict[n]){
+            index = i+1;
+            break;
+          }
+        }
+        tempDict['value'] = (size-(index))*100/size;
         this.tagCloud.push(tempDict);
       }
-      console.log('########################################')
-      console.log(this.tagCloud)
-      console.log('########################################')
+      var temp = {}
+      temp['name'] = ''
+      temp['value'] = '100'
+      this.tagCloud.push(temp)
+      temp['value'] = '0'
+      this.tagCloud.push(temp)
       this.mainData = [
         {
           name: " ",
@@ -1227,7 +1238,7 @@ export default {
       myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
       tagCloud : [],
       rotate: { from: 0, to: 0, numOfOrientation: 5 },
-      fontsize: [10, 70],
+      fontsize: [15, 54],
     };
   }
 };
