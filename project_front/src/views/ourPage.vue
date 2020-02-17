@@ -3,9 +3,12 @@
     <v-card>
       <v-card-title
         class="justify-center py-6"
-        style="background-color:#cdcdcd ; height : 300px"
+        style="background-color:#ff68b4 ; height : 300px"
       >
-        <i class="font-weight-black display-3">OurPage</i>
+        <v-icon size="70" class="mr-2" color="white">mdi-account-group</v-icon>
+        <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white"
+          >ABOUT US</span
+        >
       </v-card-title>
     </v-card>
     <v-container class="pa-0">
