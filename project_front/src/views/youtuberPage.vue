@@ -615,28 +615,32 @@
             <!-- 태그 클라우드 -->
             <v-card outlined flat class="pa-4 pt-0 mb-3">
               <v-row>
-                <v-col class="ma-5 mx-0">
+                <v-col class="ma-2 ma-3 mx-0 mx-0">
                   <v-list-item-title class="headline font-weight-black mb-1">
                     <v-icon color="pink lighten-3">mdi-weather-cloudy</v-icon>태그 클라우드
                   </v-list-item-title>
                   <v-divider></v-divider>
                 </v-col>
               </v-row>
-              <v-row>
-                <wordcloud
+              <v-row align="center">
+                <wordcloud 
                   :data="tagCloud"
                   nameKey="name"
                   valueKey="value"
                   :showTooltip="false"
                   :wordClick="wordClickHandler"
-                  margin-top="2"
-                  margin-bottom="2"
-                  margin-left="2"
-                  margin-right="2"
+                  margin-top="0"
+                  margin-bottom="0"
+                  margin-left="0"
+                  margin-right="0"
                   :rotate="rotate"
                   :fontSize="fontsize"
                   font="Jua"
+                  v-if="tagCloud.length > 0"
                   />
+                  <v-alert type="info" dense outlined style="margin-left: auto; margin-right: auto;">
+                    태그가 없습니다!
+                  </v-alert>
               </v-row>
             </v-card>
 
@@ -651,22 +655,27 @@
                   <v-divider></v-divider>
                 </v-col>
               </v-row>
-              <v-hover
-                v-slot:default="{ hover }"
-                open-delay="100"
-                v-for="i in ((news.length >= 5)?[0,1,2,3,4]:news.slice(0,news.length))"
-                :key="i"
-              >
-                <v-card class="my-3 px-2" :elevation="hover ? 7 : 0">
-                  <v-list-item-content class="px-3">
-                    <v-list-item-title class="mb-1 text-truncate">
-                      <a target="_blank" :href="news[i].newsLink" v-html="news[i].newsTitle"></a>
-                    </v-list-item-title>
-                    <v-list-item-subtitle class="mb-3" align="right">{{news[i].newsDate}}</v-list-item-subtitle>
-                    <span v-html="news[i].newsDescription.substring(0,100).concat('...')"></span>
-                  </v-list-item-content>
-                </v-card>
-              </v-hover>
+              <v-row v-if="news.length > 0">
+                <v-hover
+                  v-slot:default="{ hover }"
+                  open-delay="100"
+                  v-for="i in ((news.length >= 5)?[0,1,2,3,4]:news.slice(0,news.length))"
+                  :key="i"
+                >
+                  <v-card class="my-3 px-2" :elevation="hover ? 7 : 0">
+                    <v-list-item-content class="px-3">
+                      <v-list-item-title class="mb-1 text-truncate">
+                        <a target="_blank" :href="news[i].newsLink" v-html="news[i].newsTitle"></a>
+                      </v-list-item-title>
+                      <v-list-item-subtitle class="mb-3" align="right">{{news[i].newsDate}}</v-list-item-subtitle>
+                      <span v-html="news[i].newsDescription.substring(0,100).concat('...')"></span>
+                    </v-list-item-content>
+                  </v-card>
+                </v-hover>
+              </v-row>
+              <v-row>
+                없당 ㅋㅋ
+              </v-row>
             </v-card>
           </v-col>
         </v-row>
@@ -787,29 +796,31 @@ export default {
       var charm = this.youtuber.charm;
 
       var tagsDict = JSON.parse(this.youtuber.tagCloud);
-      var size = Object.keys(tagsDict).length + 2;
-      var tagsList = Object.values(tagsDict).sort().reverse();
-      tagsList.push(100)
-      tagsList.push(0)
-      for(var n in tagsDict){
-        var tempDict = {}
-        var index = -1
-        tempDict['name'] = n;
-        for(var i in tagsList){
-          if(tagsList[i] == tagsDict[n]){
-            index = i+1;
-            break;
+      if(tagsDict != null){
+        var size = Object.keys(tagsDict).length + 2;
+        var tagsList = Object.values(tagsDict).sort().reverse();
+        tagsList.push(100)
+        tagsList.push(0)
+        for(var n in tagsDict){
+          var tempDict = {}
+          var index = -1
+          tempDict['name'] = n;
+          for(var i in tagsList){
+            if(tagsList[i] == tagsDict[n]){
+              index = i+1;
+              break;
+            }
           }
+          tempDict['value'] = (size-(index))*100/size;
+          this.tagCloud.push(tempDict);
         }
-        tempDict['value'] = (size-(index))*100/size;
-        this.tagCloud.push(tempDict);
+        var temp = {}
+        temp['name'] = ''
+        temp['value'] = '100'
+        this.tagCloud.push(temp)
+        temp['value'] = '0'
+        this.tagCloud.push(temp)
       }
-      var temp = {}
-      temp['name'] = ''
-      temp['value'] = '100'
-      this.tagCloud.push(temp)
-      temp['value'] = '0'
-      this.tagCloud.push(temp)
       this.mainData = [
         {
           name: " ",
