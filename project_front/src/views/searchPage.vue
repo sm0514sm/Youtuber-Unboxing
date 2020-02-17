@@ -47,9 +47,11 @@
                   style="font-size:20px"
                   align="center"
                 >유튜버를 추가하고 싶으신가요?</v-list-item-title>
-                <v-list-item-title class="font-weight-ligth" style="font-size:20px" align="center">
+                <v-row align="center">
+                  <v-spacer></v-spacer>
                   <inputComponent></inputComponent>
-                </v-list-item-title>
+                  <v-spacer></v-spacer>
+                </v-row>
               </v-list-item-content>
             </v-card>
           </v-hover>
@@ -198,7 +200,7 @@
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col v-if ="item.tags.length != 1">
+                    <v-col>
                       <v-btn
                         v-for="(tag,index) in item.tags"
                         :key="index"
@@ -279,7 +281,6 @@
           </v-col>
         </v-row>
       </v-container>
-
     </v-container>
   </div>
 </template>
@@ -375,9 +376,13 @@ export default {
       }
     },
     failCallback() {
+      alert("fail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       var random = Math.floor(Math.random() * (10 - 1) + 1);
-      this.$router.push({ path: 'youtuberPage', query: { word : this.$route.query.word , reloding : random}});
-    },
+      this.$router.push({
+        path: "youtuberPage",
+        query: { word: this.$route.query.word, reloding: random }
+      });
+    }
   },
   mounted() {
     this.$vuetify.goTo(0);
@@ -416,8 +421,6 @@ export default {
 
     Promise.all([youtuberSearch, newsSearch, videoSearch]).then(
       axios.spread((...responses) => {
-        console.log("***************")
-        console.log(responses)
         for (let index = 0; index < responses.length; index++) {
           if (responses[index].data.state != "ok") {
             console.log("fail");
@@ -449,7 +452,56 @@ export default {
     //   this.$vuetify.goTo(0);
     //   if (to.path === "/searchPage") {
     //     if (to.query.word != from.query.word) {
-          
+    //       const youtuberSearch = new Promise((resolve, reject) => {
+    //         http
+    //           .get("/youtuber/search/" + to.query.word)
+    //           .then(response => {
+    //             resolve(response.data.data);
+    //           })
+    //           .catch(err => {
+    //             reject(err);
+    //           });
+    //       });
+    //       const newsSearch = new Promise((resolve, reject) => {
+    //         http
+    //           .get("/news/search/" + to.query.word)
+    //           .then(response => {
+    //             resolve(response.data.data);
+    //           })
+    //           .catch(err => {
+    //             reject(err);
+    //           });
+    //       });
+    //       const videoSearch = new Promise((resolve, reject) => {
+    //         http
+    //           .get("/video/search/" + to.query.word)
+    //           .then(response => {
+    //             resolve(response.data.data);
+    //           })
+    //           .catch(err => {
+    //             reject(err);
+    //           });
+    //       });
+    //       Promise.all([youtuberSearch, newsSearch, videoSearch]).then(
+    //         axios.spread((...responses) => {
+    //           this.searchedyoutuber = responses[0];
+    //           this.displayyoutuber = this.searchedyoutuber.slice(0, 3);
+    //           this.searchednews = responses[1];
+    //           this.displaynews = this.searchednews.slice(0, 3);
+    //           this.searchedvideo = responses[2];
+    //           for (let index = 0; index < this.searchedvideo.length; index++) {
+    //             var tags = this.searchedvideo[index].tags.split(",", 3);
+    //             this.searchedvideo[index].tags = tags;
+    //           }
+    //           this.displayvideo = this.searchedvideo.slice(0, 3);
+    //           this.pageyoutuber = 1;
+    //           this.pagenews = 1;
+    //           this.pagevideo = 1;
+    //           console.log(this.searchedyoutuber);
+    //           console.log(this.searchednews);
+    //           console.log(this.searchedvideo);
+    //         })
+    //       );
     //     }
     //   }
     // }
