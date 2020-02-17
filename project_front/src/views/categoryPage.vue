@@ -1,8 +1,14 @@
 <template>
   <div>
     <v-card>
-      <v-card-title class="justify-center py-6" style="background-color:#F29661 ; height : 300px">
-        <i class="font-weight-black" style="font-size : 100px">CATEGORY</i>
+      <v-card-title
+        class="justify-center py-6"
+        style="background-color:#ffb468 ; height : 300px"
+      >
+        <v-icon size="70" color="white">mdi-widgets-outline</v-icon>
+        <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white"
+          >CATEGORY</span
+        >
       </v-card-title>
     </v-card>
     <v-container name="container" background-color="transparent">
@@ -44,10 +50,14 @@
                 class="mr-5 mb-5"
               ></v-text-field>
             </v-card-title>
-            <v-data-table :headers="headers" :items="youtubersPerCategory" :search="search">
+            <v-data-table
+              :headers="headers"
+              :items="youtubersPerCategory"
+              :search="search"
+            >
               <template v-slot:item.insertCompare="{ item }">
                 <v-btn
-                  @click="onClikcedinsertCompare(item.yno,item.channelName)"
+                  @click="onClikcedinsertCompare(item.yno, item.channelName)"
                   text
                   color="green"
                   :disabled="disabledButtonFlag"
@@ -61,7 +71,7 @@
                 <v-card
                   color="#00000000"
                   flat
-                  :to="{ path: 'youtuberPage', query: { yno : item.yno}}"
+                  :to="{ path: 'youtuberPage', query: { yno: item.yno } }"
                 >
                   <v-row>
                     <v-col cols="2" class="px-0">
@@ -75,7 +85,9 @@
                       <v-container fill-height>
                         <v-layout align-center>
                           <v-flex xs12 text-xs-center>
-                            <div class="font-weight-light">{{item.channelName}}</div>
+                            <div class="font-weight-light">
+                              {{ item.channelName }}
+                            </div>
                           </v-flex>
                         </v-layout>
                       </v-container>
@@ -83,13 +95,17 @@
                   </v-row>
                 </v-card>
               </template>
-              <template v-slot:item.subscriber="{ item }">{{tc(item.subscriber)}}</template>
-              <template v-slot:item.grade="{ item }">{{setGrade(item.grade)}}</template>
+              <template v-slot:item.subscriber="{ item }">{{
+                tc(item.subscriber)
+              }}</template>
+              <template v-slot:item.grade="{ item }">{{
+                setGrade(item.grade)
+              }}</template>
             </v-data-table>
           </v-card>
         </v-tab-item>
 
-        <v-tab-item v-for="(item,index) in categories" :key="index+1">
+        <v-tab-item v-for="(item, index) in categories" :key="index + 1">
           <v-card flat class="pa-3" color="#FAFAFA">
             <v-card-title class="pa-0" style="background-color : white">
               <v-spacer></v-spacer>
@@ -114,7 +130,7 @@
             >
               <template v-slot:item.insertCompare="{ item }">
                 <v-btn
-                  @click="onClikcedinsertCompare(item.yno,item.channelName)"
+                  @click="onClikcedinsertCompare(item.yno, item.channelName)"
                   text
                   color="green"
                   :disabled="disabledButtonFlag"
@@ -128,12 +144,12 @@
                 <v-card
                   color="#00000000"
                   flat
-                  :to="{ path: 'youtuberPage', query: { yno : item.yno}}"
+                  :to="{ path: 'youtuberPage', query: { yno: item.yno } }"
                 >
                   <v-row>
                     <v-col cols="2" class="px-0">
                       <v-card color="#00000000" width="50px" flat>
-                        <v-responsive :aspect-ratio="1/1">
+                        <v-responsive :aspect-ratio="1 / 1">
                           <v-img class="circle" :src="item.thumbnails" flat />
                         </v-responsive>
                       </v-card>
@@ -142,7 +158,9 @@
                       <v-container fill-height>
                         <v-layout align-center>
                           <v-flex xs12 text-xs-center>
-                            <div class="font-weight-light">{{item.channelName}}</div>
+                            <div class="font-weight-light">
+                              {{ item.channelName }}
+                            </div>
                           </v-flex>
                         </v-layout>
                       </v-container>
@@ -151,9 +169,13 @@
                 </v-card>
               </template>
 
-              <template v-slot:item.subscriber="{ item }">{{tc(item.subscriber)}}</template>
+              <template v-slot:item.subscriber="{ item }">{{
+                tc(item.subscriber)
+              }}</template>
 
-              <template v-slot:item.grade="{ item }">{{setGrade(item.grade)}}</template>
+              <template v-slot:item.grade="{ item }">{{
+                setGrade(item.grade)
+              }}</template>
             </v-data-table>
           </v-card>
         </v-tab-item>
@@ -161,7 +183,6 @@
     </v-container>
   </div>
 </template>
-
 
 <script>
 import { mapGetters } from "vuex";
