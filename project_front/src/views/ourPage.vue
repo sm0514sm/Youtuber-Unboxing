@@ -1,7 +1,10 @@
 <template>
   <div>
     <v-card>
-      <v-card-title class="justify-center py-6" style="background-color:#cdcdcd ; height : 300px">
+      <v-card-title
+        class="justify-center py-6"
+        style="background-color:#cdcdcd ; height : 300px"
+      >
         <i class="font-weight-black display-3">OurPage</i>
       </v-card-title>
     </v-card>
@@ -15,9 +18,9 @@
               <v-col cols="2" class="pa-3">
                 <v-img
                   class="circle"
-                  :src="require('@/assets/'+cardinfo.image+'.png')"
+                  :src="require('@/assets/' + cardinfo.image + '.png')"
                   flat
-                  :aspect-ratio="1/1"
+                  :aspect-ratio="1 / 1"
                 />
               </v-col>
 
@@ -25,15 +28,19 @@
               <v-col cols="10">
                 <v-row>
                   <v-col class="pb-0">
-                    <span class="font-weight-black thin display-3 ma-0">{{ cardinfo.name }}</span>
+                    <span class="font-weight-black thin display-3 ma-0">{{
+                      cardinfo.name
+                    }}</span>
                     <v-btn rounded color="blue" justify="center" class="ml-2">
-                      <b>{{cardinfo.position}}</b>
+                      <b>{{ cardinfo.position }}</b>
                     </v-btn>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col class="pt-0">
-                    <span class="font-weight-light mr-4">탄신일 : {{cardinfo.birth}}</span>
+                    <span class="font-weight-light mr-4"
+                      >탄신일 : {{ cardinfo.birth }}</span
+                    >
                   </v-col>
                 </v-row>
                 <v-row>
@@ -50,7 +57,7 @@
                         <v-img
                           width="50px"
                           class="ml-2 mr-7 my-3"
-                          :src="require('@/assets/'+stack+'.png')"
+                          :src="require('@/assets/' + stack + '.png')"
                         />
                       </v-row>
                     </div>
@@ -59,7 +66,9 @@
                   <v-col>
                     <span class="font-weight-bold">POSITION</span>
                     <br />
-                    <div v-for="feat in cardinfo.feat" :key="feat">{{feat}}</div>
+                    <div v-for="feat in cardinfo.feat" :key="feat">
+                      {{ feat }}
+                    </div>
                   </v-col>
                   <v-divider vertical class="mx-3"></v-divider>
                   <!-- 외부링크 -->
@@ -182,7 +191,7 @@ export default {
           git: "taemtaemKim",
           gitlab: "taemin",
           insta: "merona_mango",
-          stacks: ["vue"],
+          stacks: ["css", "vue"],
           feat: ["VUE MASTER"]
         },
         {
