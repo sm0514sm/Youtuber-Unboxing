@@ -72,7 +72,7 @@
             </div>
             <div class="categorySet">
                 <v-icon @click="onCategoryButtonClicked(3)" class="material-icons">mdi-palette</v-icon>
-                <div class="categoryName">노하우</div>
+                <div class="categoryName">스타일</div>
             </div>
             <div class="categorySet">
                 <v-icon @click="onCategoryButtonClicked(4)" class="material-icons">mdi-weight-lifter</v-icon>
