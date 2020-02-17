@@ -13,9 +13,12 @@
             <v-row>
               <!-- thumbnail -->
               <v-col cols="2" class="pa-3">
-                <v-avatar class="circle" color="indigo" flat :aspect-ratio="1/1">
-                  <v-icon dark>mdi-account-circle</v-icon>
-                </v-avatar>
+                <v-img
+                  class="circle"
+                  :src="require('@/assets/'+cardinfo.image+'.png')"
+                  flat
+                  :aspect-ratio="1/1"
+                />
               </v-col>
 
               <!-- 기본정보 -->
@@ -42,19 +45,21 @@
                 <v-row>
                   <v-col>
                     <span class="font-weight-bold">STACK</span>
-                    <br />
-                    {{cardinfo.stack}}
+                    <div v-for="stack in cardinfo.stacks" :key="stack">
+                      <v-row align="center" style="float: left;">
+                        <v-img
+                          width="50px"
+                          class="ml-2 mr-7 my-3"
+                          :src="require('@/assets/'+stack+'.png')"
+                        />
+                      </v-row>
+                    </div>
                   </v-col>
                   <v-divider vertical class="mx-3"></v-divider>
                   <v-col>
-                    <span class="font-weight-bold">FEATURE</span>
+                    <span class="font-weight-bold">POSITION</span>
                     <br />
-                    {{cardinfo.feat}}
-                  </v-col>
-                  <v-divider vertical class="mx-3"></v-divider>
-                  <v-col>
-                    <span class="font-weight-bold">총 영상조회 수</span>
-                    <br />147
+                    <div v-for="feat in cardinfo.feat" :key="feat">{{feat}}</div>
                   </v-col>
                   <v-divider vertical class="mx-3"></v-divider>
                   <!-- 외부링크 -->
@@ -68,6 +73,14 @@
                         src="../assets/githubIcon.png"
                         style="cursor:pointer"
                         @click="gitLink(cardinfo.git)"
+                      />
+                      <v-img
+                        v-if="cardinfo.gitlab"
+                        width="36px"
+                        class="ml-2 mr-2 my-3"
+                        src="../assets/gitlab.png"
+                        @click="gitlabLink(cardinfo.gitlab)"
+                        style="cursor:pointer"
                       />
                       <v-img
                         v-if="cardinfo.insta"
@@ -98,7 +111,7 @@
                         width="50px"
                         class="ml-2 mr-2 my-3"
                         src="../assets/blogIcon.png"
-                        @click="blogLink(cardinfo.tistory)"
+                        @click="blogLink(cardinfo.blog)"
                         style="cursor:pointer"
                       />
                     </v-row>
@@ -123,11 +136,15 @@ export default {
   mounted() {},
   methods: {
     blogLink(link) {
-      console.log(link);
+      window.open(link);
     },
     tiLink(link) {
       var ti = "https://" + link + ".tistory.com/";
       window.open(ti);
+    },
+    gitlabLink(link) {
+      var git = "https://lab.ssafy.com/" + link;
+      window.open(git);
     },
     gitLink(link) {
       var git = "https://github.com/" + link;
@@ -149,55 +166,60 @@ export default {
         {
           name: "김주희",
           position: "Rest Api",
-          image: "../assets/profile/",
-          birth: "",
-          git: "",
-          insta: "",
-          stack: "spring",
-          feat: "Rest"
+          image: "rest",
+          birth: "1994-02-09",
+          git: "juheekimm",
+          gitlab: "juheekim",
+          insta: "sally_0607",
+          stacks: ["spring", "rest"],
+          feat: ["REST API", "DATABASE"]
         },
         {
           name: "김태민",
           position: "Front End",
-          image: "../assets/profile/",
-          birth: "",
-          git: "",
-          insta: "",
-          stack: "vue",
-          feat: "Main Page"
+          image: "vue",
+          birth: "1996-11-15",
+          git: "taemtaemKim",
+          gitlab: "taemin",
+          insta: "merona_mango",
+          stacks: ["vue"],
+          feat: ["VUE MASTER"]
         },
         {
           name: "박진홍",
           position: "Data Collect",
-          image: "../assets/profile/",
-          birth: "",
-          git: "",
-          insta: "",
-          blog: "asd",
-          stack: "django",
-          feat: "Server / Data"
+          image: "django",
+          birth: "1993-04-21",
+          git: "porciuscato",
+          gitlab: "mpcato",
+          insta: "__jin__hong__",
+          blog: "https://porciuscato.github.io/",
+          stacks: ["aws", "django"],
+          feat: ["YOUTUBE API", "SERVER AUTOMATION"]
         },
         {
           name: "이상민",
           position: "Data / Server",
-          image: "../assets/profile/",
+          image: "aws",
           birth: "",
           git: "sm0514sm",
+          gitlab: "lifaon",
           insta: "lifaon_sm",
           youtube: "channel/UC5cGDQN2ZYw4GAZGUIkwjcw",
           tistory: "lifaon",
-          stack: "django",
-          feat: "Server Deploy"
+          stacks: ["aws", "django"],
+          feat: ["YOUTUBE API", "GIT MASTER", "AWS"]
         },
         {
           name: "홍기환",
           position: "Back / Front",
-          image: "../assets/profile/",
+          image: "githubIcon",
           birth: "1994-11-02",
           git: "airaider",
+          gitlab: "airaider",
           insta: "hongki772",
-          stack: "",
-          feat: "Login / Front"
+          stacks: ["spring", "vue"],
+          feat: ["TEAM LEADER", "LOGIN"]
         }
       ]
     };
