@@ -7,9 +7,9 @@
     scroll-threshold="500"
     v-scroll="onScroll"
   >
-    <v-col cols="2" class="pa-0">
+    <v-col cols="2" class="pa-0 pt-2 pb-1">
       <v-img
-        :src="require('@/assets/logo.png')"
+        :src="require('@/assets/logo4.png')"
         contain
         height="60"
         width="185"
@@ -21,27 +21,42 @@
     <v-col cols="6">
       <v-row>
         <v-col cols="2" class="mr-5">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/categoryPage')">
+          <v-btn
+            dark
+            text
+            style="font-size: 20px;"
+            @click="gotoPage('/categoryPage')"
+          >
             <span style="text-shadow: 0 0 2px #000;">Category</span>
           </v-btn>
         </v-col>
         <v-col cols="2" class="ml-3">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/rankPage')">
+          <v-btn
+            dark
+            text
+            style="font-size: 20px;"
+            @click="gotoPage('/rankPage')"
+          >
             <span style="text-shadow: 0 0 2px #000;">RANK</span>
           </v-btn>
         </v-col>
         <v-col cols="2" class="mr-0 ml-0">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/ourPage')">
+          <v-btn
+            dark
+            text
+            style="font-size: 20px;"
+            @click="gotoPage('/ourPage')"
+          >
             <span style="text-shadow: 0 0 2px #000;">ABOUT US</span>
           </v-btn>
         </v-col>
-        <v-col class="ml-3 my-0 py-0">
+        <v-col cols="2" class="ml-5 my-0 py-0">
           <input-component></input-component>
         </v-col>
       </v-row>
     </v-col>
 
-    <v-col cols="4" class="pr-0" align="right">
+    <v-col cols="4" class="pa-0" align="right">
       <v-flex>
         <v-layout align-center justify-end row fill-height>
           <v-autocomplete
@@ -68,12 +83,19 @@
             </template>
 
             <template v-slot:item="{ item }">
-              <v-list-item-avatar color="red" class="headline font-weight-light white--text">
+              <v-list-item-avatar
+                color="red"
+                class="headline font-weight-light white--text"
+              >
                 <img :src="item.thumbnails" alt="John" />
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title v-text="item.channelName"></v-list-item-title>
-                <v-list-item-subtitle>구독자 : {{tc(item.subscriber)}}</v-list-item-subtitle>
+                <v-list-item-title
+                  v-text="item.channelName"
+                ></v-list-item-title>
+                <v-list-item-subtitle
+                  >구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle
+                >
               </v-list-item-content>
             </template>
           </v-autocomplete>
@@ -91,27 +113,35 @@
           <!-- 카카오로그인 -->
           <v-btn
             @click="login()"
-            class="ma-2 font-weight-black"
+            class="btnFont"
             large
-            dark
             color="#F8E211"
             v-if="loginStatus == false"
           >
-            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그인
+            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img
+            >로그인
           </v-btn>
-          <v-dialog v-if="loginStatus" v-model="dialog" persistent max-width="600px">
+          <v-dialog
+            v-if="loginStatus"
+            v-model="dialog"
+            persistent
+            max-width="600px"
+          >
             <template v-slot:activator="{ on }">
-              <v-btn class="ma-2 font-weight-black" color="#F8E211" large dark v-on="on">
-                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그아웃
+              <v-btn class="btnFont" color="#F8E211" large v-on="on">
+                <v-img
+                  :src="require('@/assets/kakaologo.png')"
+                  class="mr-2"
+                ></v-img
+                >로그아웃
               </v-btn>
               <v-btn
-                class="ma-2 font-weight-black"
+                class="ma-2 btnFont"
                 color="#F8E211"
                 large
-                dark
                 @click="gotoPage('/memberPage')"
               >
-                <v-icon left>mdi-account</v-icon>회원정보
+                <v-icon large left>mdi-account</v-icon>회원정보
               </v-btn>
             </template>
             <v-card>
@@ -124,7 +154,9 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">No</v-btn>
+                <v-btn color="blue darken-1" text @click="dialog = false"
+                  >No</v-btn
+                >
                 <v-btn color="blue darken-1" text @click="logout()">Yes</v-btn>
               </v-card-actions>
             </v-card>
@@ -244,9 +276,9 @@ export default {
       var value = "#FF6868";
       var position = 250;
       if (scroll >= position) {
-        value += "ff";
+        value += "AA";
       } else {
-        var tmp = Math.round((scroll / position) * parseInt("FF", 16)).toString(
+        var tmp = Math.round((scroll / position) * parseInt("AA", 16)).toString(
           16
         );
         if (tmp.length == 1) {
@@ -295,6 +327,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|Noto+Sans+KR&display=swap");
 #header {
   background-color: #999999;
   position: absolute;
@@ -312,5 +345,9 @@ export default {
 
 .disable-events {
   pointer-events: none;
+}
+.btnFont {
+  font-size: 1em;
+  font-family: "Noto Sans KR", sans-serif;
 }
 </style>

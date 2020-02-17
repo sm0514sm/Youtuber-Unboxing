@@ -5,7 +5,7 @@
   <div>
     <video
       class="bgvideo"
-      src="@/assets/iu2.webm"
+      src="@/assets/bg2.mp4"
       alt="main-picture"
       width="100%"
       autoplay
@@ -17,11 +17,11 @@
     :src="require('@/assets/coolcat.png')">
     </image-preloader>-->
 
-    <div
-      style="position: absolute; top: 10%; left: 30%; font-size: 56px; font-weight: 400; color: white; text-shadow: -1px 0 rgba(0, 0, 0, 0.1), 0 1px  rgba(0, 0, 0, 0.1), 1px 0 rgba(0, 0, 0, 0.1), 0 -1px  rgba(0, 0, 0, 0.1);"
-    >
-      {{typo}}
-      <div style="display: inline; color: rgba(255, 255, 255, 0.8)">{{cursor}}</div>
+    <div class="websiteName">
+      {{ typo }}
+      <div style="display: inline; color: rgba(255, 255, 255, 0.8)">
+        {{ cursor }}
+      </div>
     </div>
 
     <div style="position: absolute; top: 14.5%; left: 37%; width: 300px;">
@@ -46,12 +46,17 @@
         </template>
 
         <template v-slot:item="{ item }">
-          <v-list-item-avatar color="red" class="headline font-weight-light white--text">
+          <v-list-item-avatar
+            color="red"
+            class="headline font-weight-light white--text"
+          >
             <img :src="item.thumbnails" alt="John" />
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title v-text="item.channelName"></v-list-item-title>
-            <v-list-item-subtitle>구독자 : {{tc(item.subscriber)}}</v-list-item-subtitle>
+            <v-list-item-subtitle
+              >구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle
+            >
           </v-list-item-content>
         </template>
       </v-autocomplete>
@@ -64,7 +69,8 @@
           @click="onCategoryButtonClicked(0)"
           class="material-icons"
           color="red"
-        >mdi-widgets-outline</v-icon>
+          >mdi-widgets-outline</v-icon
+        >
         <!-- </v-btn> -->
         <div class="categoryName" @click="onCategoryButtonClicked(0)">전체</div>
       </div>
@@ -73,7 +79,8 @@
           @click="onCategoryButtonClicked(1)"
           class="material-icons"
           color="pink"
-        >mdi-gamepad-variant</v-icon>
+          >mdi-gamepad-variant</v-icon
+        >
         <div class="categoryName" @click="onCategoryButtonClicked(1)">게임</div>
       </div>
       <div class="categorySet">
@@ -81,7 +88,8 @@
           @click="onCategoryButtonClicked(2)"
           class="material-icons"
           color="purple"
-        >mdi-television-classic</v-icon>
+          >mdi-television-classic</v-icon
+        >
         <div class="categoryName" @click="onCategoryButtonClicked(2)">엔터</div>
       </div>
       <div class="categorySet">
@@ -89,19 +97,28 @@
           @click="onCategoryButtonClicked(3)"
           class="material-icons"
           color="deep-purple"
-        >mdi-palette</v-icon>
-        <div class="categoryName" @click="onCategoryButtonClicked(3)">스타일</div>
+          >mdi-palette</v-icon
+        >
+        <div class="categoryName" @click="onCategoryButtonClicked(3)">
+          스타일
+        </div>
       </div>
       <div class="categorySet">
         <v-icon
           @click="onCategoryButtonClicked(4)"
           class="material-icons"
           color="indigo"
-        >mdi-weight-lifter</v-icon>
+          >mdi-weight-lifter</v-icon
+        >
         <div class="categoryName" @click="onCategoryButtonClicked(4)">운동</div>
       </div>
       <div class="categorySet">
-        <v-icon @click="onCategoryButtonClicked(5)" class="material-icons" color="blue">mdi-food</v-icon>
+        <v-icon
+          @click="onCategoryButtonClicked(5)"
+          class="material-icons"
+          color="blue"
+          >mdi-food</v-icon
+        >
         <div class="categoryName" @click="onCategoryButtonClicked(5)">음식</div>
       </div>
       <div class="categorySet">
@@ -109,11 +126,17 @@
           @click="onCategoryButtonClicked(6)"
           class="material-icons"
           color="cyan"
-        >mdi-baby-face-outline</v-icon>
+          >mdi-baby-face-outline</v-icon
+        >
         <div class="categoryName" @click="onCategoryButtonClicked(6)">키즈</div>
       </div>
       <div class="categorySet">
-        <v-icon @click="onCategoryButtonClicked(7)" class="material-icons" color="teal">mdi-dog</v-icon>
+        <v-icon
+          @click="onCategoryButtonClicked(7)"
+          class="material-icons"
+          color="teal"
+          >mdi-dog</v-icon
+        >
         <div class="categoryName" @click="onCategoryButtonClicked(7)">동물</div>
       </div>
       <div class="categorySet">
@@ -121,7 +144,8 @@
           @click="onCategoryButtonClicked(8)"
           class="material-icons"
           color="green"
-        >mdi-camera-outline</v-icon>
+          >mdi-camera-outline</v-icon
+        >
         <div class="categoryName" @click="onCategoryButtonClicked(8)">일상</div>
       </div>
       <div class="categorySet">
@@ -129,14 +153,17 @@
           @click="onCategoryButtonClicked(9)"
           class="material-icons"
           color="yellow"
-        >mdi-cellphone-iphone</v-icon>
+          >mdi-cellphone-iphone</v-icon
+        >
         <div class="categoryName" @click="onCategoryButtonClicked(9)">기술</div>
       </div>
     </div>
 
     <!-- <v-img :src="require('@/assets/giphy2.gif')" width="100%"></v-img> -->
 
-    <div style="margin: 0; padding: 0; background-color: antiquewhite; height: 30px;" />
+    <!-- <div
+      style="margin: 0; padding: 0; background-color: antiquewhite; height: 30px;"
+    /> -->
     <br />
     <br />
 
@@ -145,8 +172,7 @@
         <h1 style="margin-top: 15%; font-weight: bold;">강력한 검색 기능</h1>
         <h3>
           원하는 유튜버를 검색해 볼 수 있습니다.
-          <br />만약 내가 찾는 유튜버가 없다면?
-          <br />자유롭게 추가하세요
+          <br />만약 내가 찾는 유튜버가 없다면? <br />자유롭게 추가하세요
           <br />
         </h3>
         <input-component></input-component>
@@ -168,11 +194,12 @@
         <v-img :src="require('@/assets/main2.gif')" width="500px"></v-img>
       </div>
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">완벽한 비교하기 기능</h1>
+        <h1 style="margin-top: 15%; font-weight: bold;">
+          완벽한 비교하기 기능
+        </h1>
         <h3>
           번거롭게 하나하나 비교할 필요 없이
-          <br />한 화면에서 두 유튜버를 비교할 수
-          <br />있습니다.
+          <br />한 화면에서 두 유튜버를 비교할 수 <br />있습니다.
         </h3>
       </div>
     </div>
@@ -185,11 +212,12 @@
 
     <div style="display: flex; width: 100%;">
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">간편한 즐겨찾기 기능</h1>
+        <h1 style="margin-top: 15%; font-weight: bold;">
+          간편한 즐겨찾기 기능
+        </h1>
         <h3>
           마음에 드는 유튜버가 있다면
-          <br />클릭 한 번으로 추가하고
-          <br />언제든지 모아보세요
+          <br />클릭 한 번으로 추가하고 <br />언제든지 모아보세요
         </h3>
       </div>
 
@@ -209,11 +237,12 @@
         <v-img :src="require('@/assets/7.png')" width="300px"></v-img>
       </div>
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">완벽한 유튜버 추천 기능</h1>
+        <h1 style="margin-top: 15%; font-weight: bold;">
+          완벽한 유튜버 추천 기능
+        </h1>
         <h3>
           나와 관심항목이 같은 사람들이
-          <br />즐겨찾는 유튜버를 추천해 드립니다
-          <br />바로 확인해 보세요
+          <br />즐겨찾는 유튜버를 추천해 드립니다 <br />바로 확인해 보세요
         </h3>
       </div>
     </div>
@@ -407,7 +436,9 @@ div {
   left: 50%;
   transform: translateX(-50%);
   width: 780px;
-  background-color: #e3dada66;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5%;
+  /* background-color: #e3dada66; */
 }
 .material-icons {
   font-size: 52px;
@@ -429,5 +460,15 @@ div {
   padding: 0px 2px;
   width: 66px;
   color: white;
+  text-shadow: rgb(0, 0, 0) 0px 0px 2px;
+}
+.websiteName {
+  position: absolute;
+  top: 10%;
+  left: 33%;
+  font-size: 56px;
+  font-weight: 400;
+  color: white;
+  text-shadow: rgb(0, 0, 0) 0px 0px 2px;
 }
 </style>
