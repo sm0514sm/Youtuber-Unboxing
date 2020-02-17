@@ -42,19 +42,21 @@
                 <v-row>
                   <v-col>
                     <span class="font-weight-bold">STACK</span>
-                    <br />
-                    {{cardinfo.stack}}
+                    <div v-for="stack in cardinfo.stacks" :key="stack">
+                      <v-row align="center" style="float: left;">
+                        <v-img
+                          width="50px"
+                          class="ml-2 mr-7 my-3"
+                          :src="require('@/assets/'+stack+'.png')"
+                        />
+                      </v-row>
+                    </div>
                   </v-col>
                   <v-divider vertical class="mx-3"></v-divider>
                   <v-col>
-                    <span class="font-weight-bold">FEATURE</span>
+                    <span class="font-weight-bold">POSITION</span>
                     <br />
-                    {{cardinfo.feat}}
-                  </v-col>
-                  <v-divider vertical class="mx-3"></v-divider>
-                  <v-col>
-                    <span class="font-weight-bold">총 영상조회 수</span>
-                    <br />147
+                    <div v-for="feat in cardinfo.feat" :key="feat">{{feat}}</div>
                   </v-col>
                   <v-divider vertical class="mx-3"></v-divider>
                   <!-- 외부링크 -->
@@ -68,6 +70,14 @@
                         src="../assets/githubIcon.png"
                         style="cursor:pointer"
                         @click="gitLink(cardinfo.git)"
+                      />
+                      <v-img
+                        v-if="cardinfo.gitlab"
+                        width="36px"
+                        class="ml-2 mr-2 my-3"
+                        src="../assets/gitlab.png"
+                        @click="gitlabLink(cardinfo.gitlab)"
+                        style="cursor:pointer"
                       />
                       <v-img
                         v-if="cardinfo.insta"
@@ -129,6 +139,10 @@ export default {
       var ti = "https://" + link + ".tistory.com/";
       window.open(ti);
     },
+    gitlabLink(link) {
+      var git = "https://lab.ssafy.com/" + link;
+      window.open(git);
+    },
     gitLink(link) {
       var git = "https://github.com/" + link;
       window.open(git);
@@ -152,19 +166,21 @@ export default {
           image: "../assets/profile/",
           birth: "",
           git: "",
+          gitlab: "",
           insta: "",
-          stack: "spring",
-          feat: "Rest"
+          stacks: ["spring", "rest"],
+          feat: ["REST API", "DATABASE"]
         },
         {
           name: "김태민",
           position: "Front End",
           image: "../assets/profile/",
-          birth: "",
-          git: "",
+          birth: "1996-11-15",
+          git: "taemtaemKim",
+          gitlab: "taemin",
           insta: "",
-          stack: "vue",
-          feat: "Main Page"
+          stacks: ["vue"],
+          feat: ["VUE MASTER"]
         },
         {
           name: "박진홍",
@@ -172,10 +188,11 @@ export default {
           image: "../assets/profile/",
           birth: "",
           git: "",
+          gitlab: "",
           insta: "",
           blog: "asd",
-          stack: "django",
-          feat: "Server / Data"
+          stacks: ["aws", "django"],
+          feat: ["SERVER AUTOMATION"]
         },
         {
           name: "이상민",
@@ -183,11 +200,12 @@ export default {
           image: "../assets/profile/",
           birth: "",
           git: "sm0514sm",
+          gitlab: "",
           insta: "lifaon_sm",
           youtube: "channel/UC5cGDQN2ZYw4GAZGUIkwjcw",
           tistory: "lifaon",
-          stack: "django",
-          feat: "Server Deploy"
+          stacks: ["aws", "django"],
+          feat: ["YOUTUBE API", "AWS"]
         },
         {
           name: "홍기환",
@@ -195,9 +213,10 @@ export default {
           image: "../assets/profile/",
           birth: "1994-11-02",
           git: "airaider",
+          gitlab: "airaider",
           insta: "hongki772",
-          stack: "",
-          feat: "Login / Front"
+          stacks: ["spring", "vue"],
+          feat: ["TEAM LEADER", "LOGIN"]
         }
       ]
     };
