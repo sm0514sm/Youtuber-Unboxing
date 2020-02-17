@@ -166,7 +166,7 @@ export default {
         {
           name: "김주희",
           position: "Rest Api",
-          image: "rest",
+          image: "KJH",
           birth: "1994-02-09",
           git: "juheekimm",
           gitlab: "juheekim",
@@ -177,7 +177,7 @@ export default {
         {
           name: "김태민",
           position: "Front End",
-          image: "vue",
+          image: "KTM",
           birth: "1996-11-15",
           git: "taemtaemKim",
           gitlab: "taemin",
@@ -188,7 +188,7 @@ export default {
         {
           name: "박진홍",
           position: "Data Collect",
-          image: "django",
+          image: "PJH",
           birth: "1993-04-21",
           git: "porciuscato",
           gitlab: "mpcato",
@@ -200,8 +200,8 @@ export default {
         {
           name: "이상민",
           position: "Data / Server",
-          image: "aws",
-          birth: "",
+          image: "LSM",
+          birth: "1995-05-14",
           git: "sm0514sm",
           gitlab: "lifaon",
           insta: "lifaon_sm",
@@ -213,7 +213,7 @@ export default {
         {
           name: "홍기환",
           position: "Back / Front",
-          image: "githubIcon",
+          image: "HKH",
           birth: "1994-11-02",
           git: "airaider",
           gitlab: "airaider",
