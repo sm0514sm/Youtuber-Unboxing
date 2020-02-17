@@ -50,17 +50,16 @@
                       >
                         <b>{{category.name}}</b>
                       </v-btn>
-                    </v-col>
-
-                    <v-col cols="1" class="pt-5">
-                      <v-flex>
-                        <v-layout align-center justify-center row>
-                          <v-btn v-if="loginStatus" text icon color="red" @click="manageFav">
-                            <v-icon v-if="flag" @click="deleteFav" x-large>mdi-heart</v-icon>
-                            <v-icon v-if="!flag" @click="insertFav" x-large>mdi-heart-outline</v-icon>
-                          </v-btn>
-                        </v-layout>
-                      </v-flex>
+                      <v-btn rounded color="#fab1ce" v-if="loginStatus" @click="manageFav">
+                        <b>즐겨찾기</b>
+                        <v-icon color="red" v-if="flag" @click="deleteFav" x-large>mdi-heart</v-icon>
+                        <v-icon
+                          color="red"
+                          v-if="!flag"
+                          @click="insertFav"
+                          x-large
+                        >mdi-heart-outline</v-icon>
+                      </v-btn>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -156,7 +155,9 @@
               <v-card outlined flat>
                 <v-row>
                   <v-col class="ma-5">
-                    <v-list-item-title class="headline font-weight-black mb-1">능력치</v-list-item-title>
+                    <v-list-item-title class="headline font-weight-black mb-1">
+                      <v-icon color="blue" class="mr-1">mdi-chart-gantt</v-icon>능력치
+                    </v-list-item-title>
                     <v-divider></v-divider>
                   </v-col>
                 </v-row>
@@ -175,24 +176,38 @@
               <v-card outlined flat>
                 <v-row>
                   <v-col class="ma-5 pb-0 mb-0">
-                    <v-list-item-title class="headline font-weight-black mb-1">각능력치</v-list-item-title>
+                    <v-list-item-title class="headline font-weight-black mb-1smd">
+                      <v-icon color="purple" class="mr-1">mdi-tag-multiple-outline</v-icon>각능력치
+                    </v-list-item-title>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col>
                     <v-container>
                       <v-tabs v-model="tab" background-color="gray" dark grow fixed>
-                        <v-tab>영향력</v-tab>
-                        <v-tab>활동력</v-tab>
-                        <v-tab>영상조회수증감추이</v-tab>
-                        <v-tab>구독자증감추이</v-tab>
-                        <v-tab>호감도</v-tab>
+                        <v-tab color="red">
+                          <v-icon>mdi-earth</v-icon>영향력
+                        </v-tab>
+                        <v-tab>
+                          <v-icon>mdi-newspaper-variant-multiple-outline</v-icon>활동력
+                        </v-tab>
+                        <v-tab>
+                          <v-icon>mdi-chart-bar</v-icon>영상조회수증감추이
+                        </v-tab>
+                        <v-tab>
+                          <v-icon>mdi-chart-line</v-icon>구독자증감추이
+                        </v-tab>
+                        <v-tab>
+                          <v-icon>mdi-heart-multiple-outline</v-icon>호감도
+                        </v-tab>
                       </v-tabs>
 
                       <v-tabs-items v-model="tab">
                         <!-- 영향력 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-icon>mdi-earth</v-icon>영향력 :
+                            <b>언급수(커뮤니티 + 뉴스), 구독자수, 조회수</b>에 의해 결정됩니다.
                             <v-list-item-subtitle
                               text-align="center"
                             >{{youtuber.channelName}}의 영향력은 상위 "{{100-mainData[0]["data"][0]}}%"입니다.</v-list-item-subtitle>
@@ -242,6 +257,8 @@
                         <!-- 활동력 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-icon>mdi-newspaper-variant-multiple-outline</v-icon>활동력 :
+                            <b>최근 영상 주기</b>에 의해 결정됩니다.
                             <v-list-item-subtitle
                               text-align="center"
                             >{{youtuber.channelName}}의 활동력은 상위 "{{100-mainData[0]["data"][1]}}%"입니다.</v-list-item-subtitle>
@@ -273,6 +290,8 @@
                         <!-- 영상조회수증감추이 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-icon>mdi-chart-bar</v-icon>영상조회수증감추이 :
+                            <b>한 달전의 조회수 변화 비율과 구독자 수</b>에 의해 결정됩니다.
                             <v-list-item-subtitle
                               text-align="center"
                             >{{youtuber.channelName}}의 영상조회수증감추이는 상위 "{{100-mainData[0]["data"][2]}}%"입니다.</v-list-item-subtitle>
@@ -323,6 +342,8 @@
                         <!-- 구독자증감추이 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-icon>mdi-chart-line</v-icon>구독자증감추이 :
+                            <b>한 달전의 구독자 변화 비율과 구독자 수</b>에 의해 결정됩니다.
                             <v-list-item-subtitle
                               text-align="center"
                             >{{youtuber.channelName}}의 구독자증감추이는 상위 "{{100-mainData[0]["data"][3]}}%"입니다.</v-list-item-subtitle>
@@ -372,6 +393,8 @@
                         <!-- 호감도 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-icon>mdi-heart-multiple-outline</v-icon>호감도 :
+                            <b>최근 영상 10개의 좋아요, 싫어요 비율</b>에 의해 결정됩니다.
                             <v-list-item-subtitle
                               text-align="center"
                             >{{youtuber.channelName}}의 호감도는 상위 "{{100-mainData[0]["data"][4]}}%"입니다.</v-list-item-subtitle>
@@ -478,7 +501,9 @@
               <v-card outlined flat class="mr-0 my-3 pa-3">
                 <v-row class="pt-0 pl-3 pb-0">
                   <v-col>
-                    <v-list-item-title class="headline font-weight-black mb-1">최신동영상</v-list-item-title>
+                    <v-list-item-title class="headline font-weight-black mb-1">
+                      <v-icon color="red" class="mr-1">mdi-library-video</v-icon>최신동영상
+                    </v-list-item-title>
                     <v-divider></v-divider>
                   </v-col>
                 </v-row>
@@ -533,7 +558,7 @@
               <v-row>
                 <v-col class="ma-5 mx-0">
                   <v-list-item-title class="headline font-weight-black mb-1">
-                    등급
+                    <v-icon color="#FFBC42">mdi-medal-outline</v-icon>등급
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on }">
                         <v-icon v-on="on">info</v-icon>
@@ -565,7 +590,9 @@
             <v-card outlined flat class="pa-4 pt-0">
               <v-row>
                 <v-col class="ma-5 mx-0 mb-0 pb-0">
-                  <v-list-item-title class="headline font-weight-black mb-1">최신뉴스</v-list-item-title>
+                  <v-list-item-title class="headline font-weight-black mb-1">
+                    <v-icon color="green" class="mr-1">mdi-newspaper-variant-outline</v-icon>최신뉴스
+                  </v-list-item-title>
                   <v-divider></v-divider>
                 </v-col>
               </v-row>

@@ -111,8 +111,10 @@
                         </v-col>
                         <v-col cols="7">
                           <v-row class="pl-7">
-                              <p
-                              class="font-weight-black thin ma-0 headline" style="text-align='right'">{{youtuber2.publishedDate}}</p>
+                            <p
+                              class="font-weight-black thin ma-0 headline"
+                              style="text-align='right'"
+                            >{{youtuber2.publishedDate}}</p>
                           </v-row>
                           <v-row align="center" class="mt-5" style="float: left;">
                             <!-- instagram -->
@@ -174,7 +176,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1">수치별비교</v-list-item-title>
+                <v-list-item-title class="headline font-weight-black mb-1">수치별 비교</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -217,6 +219,233 @@
                 </v-simple-table>
               </v-col>
             </v-row>
+          </v-card>
+        </v-hover>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <!-- 기본 수치 비교 -->
+      <v-col cols="6">
+        <v-hover v-slot:default="{ hover }" open-delay="100">
+          <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
+            <v-row>
+              <v-col class="ma-0 mt-5 pb-0">
+                <v-list-item-title class="headline font-weight-black mb-1">기본 수치 비교</v-list-item-title>
+                <v-divider></v-divider>
+              </v-col>
+            </v-row>
+            <!--구독자 -->
+            <v-row>
+              <v-col class="py-0">
+                <apexchart
+                  type="bar"
+                  height="200"
+                  :options="getChartOption('구독자')"
+                  :series="subscriberData"
+                ></apexchart>
+              </v-col>
+            </v-row>
+            <!-- totalViewCount -->
+            <v-row>
+              <v-col class="py-0">
+                <apexchart
+                  type="bar"
+                  height="200"
+                  :options="getChartOption('총영상조회수')"
+                  :series="totalViewCountData"
+                ></apexchart>
+              </v-col>
+            </v-row>
+            <!-- totalVideoCount -->
+            <v-row>
+              <v-col class="py-0">
+                <apexchart
+                  type="bar"
+                  height="200"
+                  :options="getChartOption('총영상수')"
+                  :series="totalVideoCountData"
+                ></apexchart>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-hover>
+      </v-col>
+      <v-col cols="6">
+        <v-hover v-slot:default="{ hover }" open-delay="100">
+          <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
+            <v-divider></v-divider>
+            <v-row>
+              <v-col class="py-0">
+                <v-badge color="#269ffb" bordered overlap>
+                  <v-avatar>
+                    <v-img :src="youtuber1.thumbnails"></v-img>
+                  </v-avatar>
+                </v-badge>
+                <v-chip
+                  class="ma-2"
+                  color="#269ffb"
+                  outlined
+                  pill
+                  text-color="black"
+                >{{youtuber1.channelName}}</v-chip>
+              </v-col>
+            </v-row>
+            <v-row v-if="status.y1_sub">
+              <v-chip class="ma-2" color="#30A9DE" text-color="white">
+                <v-icon left>mdi-account-multiple-outline</v-icon>
+                구독자 {{status.sub_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+            <v-row v-if="status.y1_view">
+              <v-chip class="ma-2" color="#EFDC05" text-color="white">
+                <v-icon left>mdi-animation-play-outline</v-icon>
+                총조회수 {{status.view_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+            <v-row v-if="status.y1_video">
+              <v-chip class="ma-2" color="#E53A40" text-color="white">
+                <v-icon left>mdi-youtube-subscription</v-icon>
+                영상수 {{status.video_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+
+            <v-row v-if="status.y1_charm">
+              <v-chip class="ma-2" color="#f349eb" text-color="white">
+                <v-icon left>mdi-heart-multiple-outline</v-icon>
+                호감도 {{status.charm_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+            <v-row v-if="status.y1_influence">
+              <v-chip class="ma-2" color="#7200da" text-color="white">
+                <v-icon left>mdi-earth</v-icon>
+                영향력 {{status.influence_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+            <v-row v-if="status.y1_activity">
+              <v-chip class="ma-2" color="#75D701" text-color="white">
+                <v-icon left>mdi-newspaper-variant-multiple-outline</v-icon>
+                활동력 {{status.activity_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+
+            <v-divider></v-divider>
+            <v-row>
+              <v-col class="py-0">
+                <v-badge color="#26e7a5" bordered overlap>
+                  <v-avatar>
+                    <v-img :src="youtuber2.thumbnails"></v-img>
+                  </v-avatar>
+                </v-badge>
+                <v-chip
+                  class="ma-2"
+                  color="#26e7a5"
+                  outlined
+                  pill
+                  text-color="black"
+                >{{youtuber2.channelName}}</v-chip>
+              </v-col>
+            </v-row>
+
+            <v-row v-if="status.y2_sub">
+              <v-chip class="ma-2" color="#30A9DE" text-color="white">
+                <v-icon left>mdi-account-multiple-outline</v-icon>
+                구독자 {{status.sub_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+            <v-row v-if="status.y2_view">
+              <v-chip class="ma-2" color="#EFDC05" text-color="white">
+                <v-icon left>mdi-animation-play-outline</v-icon>
+                총조회수 {{status.view_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+            <v-row v-if="status.y2_video">
+              <v-chip class="ma-2" color="#E53A40" text-color="white">
+                <v-icon left>mdi-youtube-subscription</v-icon>
+                영상수 {{status.video_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+
+            <v-row v-if="status.y2_charm">
+              <v-chip class="ma-2" color="#f349eb" text-color="white">
+                <v-icon left>mdi-heart-multiple-outline</v-icon>
+                호감도 {{status.charm_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+            <v-row v-if="status.y2_influence">
+              <v-chip class="ma-2" color="#7200da" text-color="white">
+                <v-icon left>mdi-earth</v-icon>
+                영향력 {{status.influence_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+            <v-row v-if="status.y2_activity">
+              <v-chip class="ma-2" color="#75D701" text-color="white">
+                <v-icon left>mdi-newspaper-variant-multiple-outline</v-icon>
+                활동력 {{status.activity_stat}}%
+                <v-icon>mdi-arrow-up-thick</v-icon>
+              </v-chip>
+            </v-row>
+
+            <v-divider></v-divider>
+            <v-list-item-title class="headline font-weight-black mb-1">종합 비교</v-list-item-title>
+            <v-row>
+              <v-badge v-if="!status.same_grade" :color="status.color" bordered overlap size="125">
+                <v-card>
+                  <div class="d-flex flex-no-wrap justify-space-between">
+                    <div>
+                      <v-card-title class="headline">
+                        <v-icon x-large color="yellow">mdi-crown-outline</v-icon>
+                        <v-chip
+                          class="ma-2"
+                          color="yellow"
+                          outlined
+                          pill
+                          text-color="black"
+                        >{{status.winner}}</v-chip>채널이 종합 수치
+                        <v-chip class="ma-2" color="indigo darken-3" outlined>
+                          <v-icon left>mdi-fire</v-icon>
+                          {{status.stat}}%
+                        </v-chip>우위에 있습니다.
+                      </v-card-title>
+                    </div>
+
+                    <v-avatar class="ma-3" size="125">
+                      <v-img :src="status.thumbnail"></v-img>
+                    </v-avatar>
+                  </div>
+                </v-card>
+              </v-badge>
+              <v-card v-if="status.same_grade" color="#F5F5F5">
+                <v-card-title class="justify-center" align="center">
+                  <v-badge color="#269ffb" bordered overlap>
+                    <v-avatar size="75">
+                      <v-img :src="youtuber1.thumbnails"></v-img>
+                    </v-avatar>
+                  </v-badge>
+                  <v-chip class="ma-2">
+                    <v-icon>mdi-equal</v-icon>
+                  </v-chip>
+                  <v-badge color="#26e7a5" bordered overlap>
+                    <v-avatar size="75" border>
+                      <v-img :src="youtuber2.thumbnails"></v-img>
+                    </v-avatar>
+                  </v-badge>
+                </v-card-title>
+                <v-card-title class="headline">채널 종합 수치가 동률 입니다</v-card-title>
+              </v-card>
+            </v-row>
+            <v-divider></v-divider>
           </v-card>
         </v-hover>
       </v-col>
@@ -292,67 +521,6 @@
         </v-hover>
       </v-col>
     </v-row>
-
-    <v-row>
-      <!-- 기본 수치 비교 -->
-      <v-col cols="6">
-        <v-hover v-slot:default="{ hover }" open-delay="100">
-          <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
-            <v-row>
-              <v-col class="ma-0 mt-5 pb-0">
-                <v-list-item-title class="headline font-weight-black mb-1">기본 수치 비교</v-list-item-title>
-                <v-divider></v-divider>
-              </v-col>
-            </v-row>
-            <!--구독자 -->
-            <v-row>
-              <v-col class="py-0">
-                <apexchart
-                  type="bar"
-                  height="200"
-                  :options="getChartOption('구독자')"
-                  :series="subscriberData"
-                ></apexchart>
-              </v-col>
-            </v-row>
-            <!-- totalViewCount -->
-            <v-row>
-              <v-col class="py-0">
-                <apexchart
-                  type="bar"
-                  height="200"
-                  :options="getChartOption('총영상조회수')"
-                  :series="totalViewCountData"
-                ></apexchart>
-              </v-col>
-            </v-row>
-            <!-- totalVideoCount -->
-            <v-row>
-              <v-col class="py-0">
-                <apexchart
-                  type="bar"
-                  height="200"
-                  :options="getChartOption('총영상수')"
-                  :series="totalVideoCountData"
-                ></apexchart>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-hover>
-      </v-col>
-      <v-col cols="6">
-        <v-hover v-slot:default="{ hover }" open-delay="100">
-          <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
-            <v-row>
-              <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1">수치별비교</v-list-item-title>
-                <v-divider></v-divider>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-hover>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 
@@ -378,10 +546,174 @@ export default {
       yno1: this.youtubers[0].yno,
       yno2: this.youtubers[1].yno,
       callback: this.callback,
-      failCallback : this.failCallback
+      failCallback: this.failCallback
     });
   },
   methods: {
+    check() {
+      console.log(this.youtuber1);
+      console.log(this.youtuber2);
+
+      if (this.youtuber1.grade > this.youtuber2.grade) {
+        this.status["winner"] = this.youtuber1.channelName;
+        this.status["thumbnail"] = this.youtuber1.thumbnails;
+        this.status["color"] = "#269ffb";
+        this.status["same_grade"] = false;
+        this.status["stat"] = Math.round(
+          ((this.youtuber1.grade - this.youtuber2.grade) /
+            this.youtuber2.grade) *
+            100
+        );
+      } else if (this.youtuber1.grade == this.youtuber2.grade) {
+        this.status["same_grade"] = true;
+      } else {
+        this.status["winner"] = this.youtuber2.channelName;
+        this.status["thumbnail"] = this.youtuber2.thumbnails;
+        this.status["color"] = "#26e7a5";
+        this.status["same_grade"] = false;
+        this.status["stat"] = Math.round(
+          ((this.youtuber2.grade - this.youtuber1.grade) /
+            this.youtuber1.grade) *
+            100
+        );
+      }
+      if (this.youtuber1.subscriber > this.youtuber2.subscriber) {
+        this.status["y1_sub"] = true;
+        this.status["y2_sub"] = false;
+        this.status["sub_stat"] = Math.round(
+          ((this.youtuber1.subscriber - this.youtuber2.subscriber) /
+            this.youtuber2.subscriber) *
+            100
+        );
+      } else if (
+        this.youtuber1.totalViewCount == this.youtuber2.totalViewCount
+      ) {
+        this.status["y1_sub"] = false;
+        this.status["y2_sub"] = false;
+        this.status["sub_stat"] = 0;
+      } else {
+        this.status["y1_sub"] = false;
+        this.status["y2_sub"] = true;
+        this.status["sub_stat"] = Math.round(
+          ((this.youtuber2.subscriber - this.youtuber1.subscriber) /
+            this.youtuber1.subscriber) *
+            100
+        );
+      }
+      if (this.youtuber1.totalVideoCount > this.youtuber2.totalVideoCount) {
+        this.status["y1_video"] = true;
+        this.status["y2_video"] = false;
+        this.status["video_stat"] = Math.round(
+          ((this.youtuber1.totalVideoCount - this.youtuber2.totalVideoCount) /
+            this.youtuber2.totalVideoCount) *
+            100
+        );
+      } else if (
+        this.youtuber1.totalViewCount == this.youtuber2.totalViewCount
+      ) {
+        this.status["y1_video"] = false;
+        this.status["y2_video"] = false;
+        this.status["video_stat"] = 0;
+      } else {
+        this.status["y1_video"] = false;
+        this.status["y2_video"] = true;
+        this.status["video_stat"] = Math.round(
+          ((this.youtuber2.totalVideoCount - this.youtuber1.totalVideoCount) /
+            this.youtuber1.totalVideoCount) *
+            100
+        );
+      }
+      if (this.youtuber1.totalViewCount > this.youtuber2.totalViewCount) {
+        this.status["y1_view"] = true;
+        this.status["y2_view"] = false;
+        this.status["view_stat"] = Math.round(
+          ((this.youtuber1.totalViewCount - this.youtuber2.totalViewCount) /
+            this.youtuber2.totalViewCount) *
+            100
+        );
+      } else if (
+        this.youtuber1.totalViewCount == this.youtuber2.totalViewCount
+      ) {
+        this.status["y1_view"] = false;
+        this.status["y2_view"] = false;
+        this.status["view_stat"] = 0;
+      } else {
+        this.status["y1_view"] = false;
+        this.status["y2_view"] = true;
+        this.status["view_stat"] = Math.round(
+          ((this.youtuber2.totalViewCount - this.youtuber1.totalViewCount) /
+            this.youtuber1.totalViewCount) *
+            100
+        );
+      }
+
+      if (this.youtuber1.charm > this.youtuber2.charm) {
+        this.status["y1_charm"] = true;
+        this.status["y2_charm"] = false;
+        this.status["charm_stat"] = Math.round(
+          ((this.youtuber1.charm - this.youtuber2.charm) /
+            this.youtuber2.charm) *
+            100
+        );
+      } else if (this.youtuber1.charm == this.youtuber2.charm) {
+        this.status["y1_charm"] = false;
+        this.status["y2_charm"] = false;
+        this.status["charm_stat"] = 0;
+      } else {
+        this.status["y1_charm"] = false;
+        this.status["y2_charm"] = true;
+        this.status["charm_stat"] = Math.round(
+          ((this.youtuber2.charm - this.youtuber1.charm) /
+            this.youtuber1.charm) *
+            100
+        );
+      }
+      if (this.youtuber1.influence > this.youtuber2.influence) {
+        this.status["y1_influence"] = true;
+        this.status["y2_influence"] = false;
+        this.status["influence_stat"] = Math.round(
+          ((this.youtuber1.influence - this.youtuber2.influence) /
+            this.youtuber2.influence) *
+            100
+        );
+      } else if (this.youtuber1.influence == this.youtuber2.influence) {
+        this.status["y1_influence"] = false;
+        this.status["y2_influence"] = false;
+        this.status["influence_stat"] = 0;
+      } else {
+        this.status["y1_influence"] = false;
+        this.status["y2_influence"] = true;
+        this.status["influence_stat"] = Math.round(
+          ((this.youtuber2.influence - this.youtuber1.influence) /
+            this.youtuber1.influence) *
+            100
+        );
+      }
+
+      if (this.youtuber1.activity > this.youtuber2.activity) {
+        this.status["y1_activity"] = true;
+        this.status["y2_activity"] = false;
+        this.status["activity_stat"] = Math.round(
+          ((this.youtuber1.activity - this.youtuber2.activity) /
+            this.youtuber2.activity) *
+            100
+        );
+      } else if (this.youtuber1.activity == this.youtuber2.activity) {
+        this.status["y1_activity"] = false;
+        this.status["y2_activity"] = false;
+        this.status["activity_stat"] = 0;
+      } else {
+        this.status["y1_activity"] = false;
+        this.status["y2_activity"] = true;
+        this.status["activity_stat"] = Math.round(
+          ((this.youtuber2.activity - this.youtuber1.activity) /
+            this.youtuber1.activity) *
+            100
+        );
+      }
+
+      console.log(this.status);
+    },
     callback(...responses) {
       var youtuber1 = responses[0];
       var youtuber2 = responses[1];
@@ -544,6 +876,8 @@ export default {
 
       //otherLink
       // this.makeOtherLinkIcon();
+
+      this.check();
     },
     setGradeColor(num) {
       if (typeof num == "undefined") {
@@ -667,6 +1001,7 @@ export default {
   computed: {},
   data() {
     return {
+      status: {},
       youtubers: [],
       youtuber1: {},
       youtuber2: {},

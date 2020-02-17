@@ -21,7 +21,7 @@
         :size="100"
 
       >
-      <v-icon :size="75">mdi-account-box</v-icon>
+      <v-icon :size="100" color="black">mdi-account-circle</v-icon>
       </v-list-item-avatar>
       <v-list-item-content>
         <v-list-item-title class="headline mb-1"><v-chip
@@ -33,7 +33,14 @@
         <v-icon>mdi-pencil</v-icon>
       </v-avatar>
       닉네임
-    </v-chip>{{user.userName}}</v-list-item-title>
+    </v-chip><v-chip
+      class="ma-2"
+      color="indigo"
+      outlined
+      text-color="black"
+    >
+      {{user.userName}}
+    </v-chip></v-list-item-title>
     <div v-if="user.userEmail">
     <v-list-item-title class="headline mb-1"><v-chip
       class="ma-2"
@@ -44,7 +51,14 @@
         <v-icon>mdi-email</v-icon>
       </v-avatar>
       이메일
-    </v-chip>{{user.userEmail}}</v-list-item-title>
+    </v-chip><v-chip
+      class="ma-2"
+      color="green  "
+      outlined
+      text-color="black"
+    >
+      {{user.userEmail}}
+    </v-chip></v-list-item-title>
     </div>
       </v-list-item-content>
 
@@ -58,110 +72,141 @@
 
 <template>
   <v-hover v-slot:default="{ hover }" open-delay="100">
-  <v-card flat :elevation="hover ? 7 : 1">
-    <v-card-text>
-      <v-container fluid>
-
-        <v-toolbar-title>관심 항목 설정</v-toolbar-title>
-        <template v-if='interest.length>2'>
-          <div>
-            <span class="red--text">최대 3개 제한</span>
-          </div>
-        </template>
-        <v-row>
-          <v-col cols="12" sm="4" md="4">
-            <v-switch
-              v-model="interest"
-              :disabled="check('0')"
-              label="패션"
+    <v-card flat :elevation="hover ? 7 : 1">
+      <v-card-text>
+        <v-container fluid>
+          <v-toolbar-title>
+            <h4>추천 항목</h4>
+            <v-chip class="ma-2" color="white" text-color="black" outlined>
+              <v-icon class="mr-1">mdi-cursor-default-click</v-icon>나와 관심 항목이 일치하는 유저들이 즐겨찾기한 유튜버들을 추천해 드립니다
+            </v-chip>
+          </v-toolbar-title>
+          <template >
+            <v-chip class="ma-2" color="white" outlined text-color="black">
+              <v-icon class="mr-1">mdi-thumb-up</v-icon>관심 항목 설정
+            </v-chip>
+            <v-chip
+            v-if="interest.length>2"
+              class="ma-2"
               color="red"
-              value='0'
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="interest"
-              :disabled="check('1')"
-              label="화장품/뷰티"
-              color="pink"
-              value='1'
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="interest"
-              :disabled="check('2')"
-              label="디지털/가전"
-              color="purple"
-              value="2"
-              hide-details
-            ></v-switch>
-          </v-col>
-          <v-col cols="12" sm="4" md="4">
-            <v-switch
-              v-model="interest"
-              :disabled="check('3')"
-              label="식품"
-              color="indigo"
-              value="3"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="interest"
-              :disabled="check('4')"
-              label="출산/육아"
-              color="blue"
-              value="4"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="interest"
-              :disabled="check('5')"
-              label="생활/건강"
-              color="cyan"
-              value="5"
-              hide-details
-            ></v-switch>
-          </v-col>
-          <v-col cols="12" sm="4" md="4">
-            <v-switch
-              v-model="interest"
-              :disabled="check('6')"
-              label="공연/레저/문화"
-              color="green"
-              value="6"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="interest"
-              :disabled="check('7')"
-              label="스포츠/레저"
-              color="yellow"
-              value="7"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="interest"
-              :disabled="check('8')"
-              label="여행"
-              color="orange"
-              value="8"
-              hide-details
-            ></v-switch>
-          </v-col>
-        </v-row>
-        <v-btn class="ma-2" :loading="loading" :disabled="loading" color="info" @click="loader = 'loading'; getRecommend()">
-      유튜버 추천 받기
-      <template v-slot:loader>
-        <span class="custom-loader">
-          <v-icon light>cached</v-icon>
-        </span>
-      </template>
-    </v-btn>
-      </v-container>
-    </v-card-text>
-  </v-card>
+              outlined
+              pill
+            >
+              최대 3개 제한
+              <v-icon right>mdi-cancel</v-icon>
+            </v-chip>
+          </template>
+          <v-row>
+            <v-col cols="12" sm="4" md="4">
+              <v-switch
+                v-model="interest"
+                :disabled="check('0')"
+                label="패션"
+                prepend-icon="mdi-shoe-heel"
+                color="red"
+                value="0"
+                hide-details
+              ></v-switch>
+              <v-switch
+                v-model="interest"
+                :disabled="check('1')"
+                label="화장품/뷰티"
+                prepend-icon="mdi-mirror"
+                color="pink"
+                value="1"
+                hide-details
+              ></v-switch>
+              <v-switch
+                v-model="interest"
+                :disabled="check('2')"
+                label="디지털/가전"
+                prepend-icon="mdi-cellphone-iphone"
+                color="purple"
+                value="2"
+                hide-details
+              ></v-switch>
+            </v-col>
+            <v-col cols="12" sm="4" md="4">
+              <v-switch
+                v-model="interest"
+                :disabled="check('3')"
+                label="식품"
+                prepend-icon="mdi-food"
+                color="indigo"
+                value="3"
+                hide-details
+              ></v-switch>
+              <v-switch
+                v-model="interest"
+                :disabled="check('4')"
+                label="출산/육아"
+                prepend-icon="mdi-baby-carriage"
+                color="blue"
+                value="4"
+                hide-details
+              ></v-switch>
+              <v-switch
+                v-model="interest"
+                :disabled="check('5')"
+                label="생활/건강"
+                prepend-icon="mdi-hospital-box-outline"
+                color="cyan"
+                value="5"
+                hide-details
+              ></v-switch>
+            </v-col>
+            <v-col cols="12" sm="4" md="4">
+              <v-switch
+                v-model="interest"
+                :disabled="check('6')"
+                label="공연/레저/문화"
+                prepend-icon="mdi-microphone-variant"
+                color="green"
+                value="6"
+                hide-details
+              ></v-switch>
+              <v-switch
+                v-model="interest"
+                :disabled="check('7')"
+                label="스포츠/레저"
+                prepend-icon="mdi-soccer"
+                color="yellow"
+                value="7"
+                hide-details
+              ></v-switch>
+              <v-switch
+                v-model="interest"
+                :disabled="check('8')"
+                label="여행"
+                prepend-icon="mdi-airplane-takeoff"
+                color="orange"
+                value="8"
+                hide-details
+              ></v-switch>
+            </v-col>
+          </v-row>
+          <v-btn
+            class="ma-2"
+            outlined
+            :loading="loading"
+            :disabled="loading"
+            rounded
+            color="red"
+            @click="loader = 'loading'; getRecommend()"
+          >
+          <v-icon>mdi-youtube</v-icon>
+            유튜버 추천 받기
+            <template v-slot:loader>
+              <span class="custom-loader">
+                <v-icon light>mdi-youtube</v-icon>
+              </span>
+            </template>
+          </v-btn>
+        </v-container>
+      </v-card-text>
+    </v-card>
   </v-hover>
 </template>
-
 
 
 
@@ -196,18 +241,18 @@
                 <v-chip class="ma-2" color="#30A9DE" text-color="white">
                   <v-icon left>mdi-account-multiple-outline</v-icon>
 
-                  {{tc(card.subscriber)}}
+                  구독자 {{tc(card.subscriber)}}
                 </v-chip>
                 <v-chip class="ma-2" color="#EFDC05" text-color="white">
-                  <v-icon left>mdi-play-outline</v-icon>
+                  <v-icon left>mdi-animation-play-outline</v-icon>
 
-                  {{tc(card.totalViewCount)}}
+                  시청수 {{tc(card.totalViewCount)}}
                 </v-chip>
 
                 <v-chip class="ma-2" color="#E53A40" text-color="white">
                   <v-icon left>mdi-youtube-subscription</v-icon>
 
-                  {{card.totalVideoCount}}
+                  영상수 {{card.totalVideoCount}}
                 </v-chip>
 
                 <v-spacer></v-spacer>
@@ -242,6 +287,7 @@
   <v-hover v-slot:default="{ hover }" open-delay="100">
     <v-card :elevation="hover ? 7 : 1">
   <v-data-table
+    :search="search"
     :headers="headers"
     :items="fav"
     sort-by="subscriber"
@@ -256,6 +302,13 @@
           inset
           vertical
         ></v-divider>
+         <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="검색"
+        single-line
+        hide-details
+      ></v-text-field>
       </v-toolbar>
     </template>
 
@@ -319,7 +372,7 @@ import tc from 'thousands-counter';
       loader () {
         const l = this.loader
         this[l] = !this[l]
-        setTimeout(() => (this[l] = false), 1000)
+        setTimeout(() => (this[l] = false), 700)
         this.loader = null
       },
     },
@@ -409,6 +462,9 @@ import tc from 'thousands-counter';
         http.get("/favorite/user/"+this.$session.get('token'))
         .then(response=>{
           this.fav = response.data.data
+        }).catch(error=>{
+          console.log(error)
+          console.log("ERROR")
         })
       },
       deleteItem (item) {
