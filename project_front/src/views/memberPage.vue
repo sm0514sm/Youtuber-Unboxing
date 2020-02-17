@@ -456,6 +456,9 @@ import tc from 'thousands-counter';
         http.get("/user/search/"+this.$session.get('token'))
         .then(response=>{
           this.user=response.data.data
+        }).catch(error=>{
+          console.log("ERROR")
+          console.log(error)
         })
       },
       initialize () {

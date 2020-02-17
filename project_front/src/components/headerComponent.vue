@@ -31,7 +31,7 @@
           </v-btn>
         </v-col>
         <v-col cols="2" class="mr-0 ml-0">
-          <v-btn dark text style="font-size: 20px;">
+          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/ourPage')">
             <span style="text-shadow: 0 0 2px #000;">ABOUT US</span>
           </v-btn>
         </v-col>
@@ -86,9 +86,9 @@
           </div>
           <div v-else>
             loginStatus == false
-          </div> -->
+          </div>-->
 
-            <!-- 카카오로그인 -->
+          <!-- 카카오로그인 -->
           <v-btn
             @click="login()"
             class="ma-2 font-weight-black"
@@ -104,7 +104,13 @@
               <v-btn class="ma-2 font-weight-black" color="#F8E211" large dark v-on="on">
                 <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그아웃
               </v-btn>
-              <v-btn class="ma-2 font-weight-black" color="#F8E211" large dark @click="gotoPage('/memberPage')" >
+              <v-btn
+                class="ma-2 font-weight-black"
+                color="#F8E211"
+                large
+                dark
+                @click="gotoPage('/memberPage')"
+              >
                 <v-icon left>mdi-account</v-icon>회원정보
               </v-btn>
             </template>
@@ -144,21 +150,16 @@ export default {
     ...mapGetters(["links"]),
     isIdle() {
       if (this.$session.get("token")) {
-        if (this.$store.state.idleVue.isIdle == true) {
+        if (this.$store.state.idleVue.isIdle) {
           alert("자동 로그아웃 되었습니다");
           console.log("IDLE");
           this.logout();
         }
       }
-
       return this.$store.state.idleVue.isIdle;
     }
   },
   mounted() {
-    console.log("loginStatus:" + this.loginStatus);
-    console.log(this.$session);
-    console.log(this.$session.get("token"));
-    console.log();
     if (!this.$session.exists()) {
       this.loginStatus = false;
       console.log("no session");
@@ -167,20 +168,15 @@ export default {
         this.loginStatus = true;
       }
     }
-    console.log(this.$route.query);
     var token = this.$route.query.access_Token;
     if (token != undefined) {
       this.$session.start();
       this.$session.set("token", token);
       this.loginStatus = true;
-      console.log("token:" + this.$session.get("token"));
       this.$router.push("/");
     }
   },
-  created() {
-    console.log("***********");
-    console.log();
-  },
+  created() {},
   methods: {
     gotoPage(address) {
       this.$router.push(address);

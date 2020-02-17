@@ -13,9 +13,12 @@
             <v-row>
               <!-- thumbnail -->
               <v-col cols="2" class="pa-3">
-                <v-avatar class="circle" color="indigo" flat :aspect-ratio="1/1">
-                  <v-icon dark>mdi-account-circle</v-icon>
-                </v-avatar>
+                <v-img
+                  class="circle"
+                  :src="require('@/assets/'+cardinfo.image+'.png')"
+                  flat
+                  :aspect-ratio="1/1"
+                />
               </v-col>
 
               <!-- 기본정보 -->
@@ -108,7 +111,7 @@
                         width="50px"
                         class="ml-2 mr-2 my-3"
                         src="../assets/blogIcon.png"
-                        @click="blogLink(cardinfo.tistory)"
+                        @click="blogLink(cardinfo.blog)"
                         style="cursor:pointer"
                       />
                     </v-row>
@@ -133,7 +136,7 @@ export default {
   mounted() {},
   methods: {
     blogLink(link) {
-      console.log(link);
+      window.open(link);
     },
     tiLink(link) {
       var ti = "https://" + link + ".tistory.com/";
@@ -163,54 +166,54 @@ export default {
         {
           name: "김주희",
           position: "Rest Api",
-          image: "../assets/profile/",
-          birth: "",
-          git: "",
-          gitlab: "",
-          insta: "",
+          image: "rest",
+          birth: "1994-02-09",
+          git: "juheekimm",
+          gitlab: "juheekim",
+          insta: "sally_0607",
           stacks: ["spring", "rest"],
           feat: ["REST API", "DATABASE"]
         },
         {
           name: "김태민",
           position: "Front End",
-          image: "../assets/profile/",
+          image: "vue",
           birth: "1996-11-15",
           git: "taemtaemKim",
           gitlab: "taemin",
-          insta: "",
+          insta: "merona_mango",
           stacks: ["vue"],
           feat: ["VUE MASTER"]
         },
         {
           name: "박진홍",
           position: "Data Collect",
-          image: "../assets/profile/",
-          birth: "",
-          git: "",
-          gitlab: "",
-          insta: "",
-          blog: "asd",
+          image: "django",
+          birth: "1993-04-21",
+          git: "porciuscato",
+          gitlab: "mpcato",
+          insta: "__jin__hong__",
+          blog: "https://porciuscato.github.io/",
           stacks: ["aws", "django"],
-          feat: ["SERVER AUTOMATION"]
+          feat: ["YOUTUBE API", "SERVER AUTOMATION"]
         },
         {
           name: "이상민",
           position: "Data / Server",
-          image: "../assets/profile/",
+          image: "aws",
           birth: "",
           git: "sm0514sm",
-          gitlab: "",
+          gitlab: "lifaon",
           insta: "lifaon_sm",
           youtube: "channel/UC5cGDQN2ZYw4GAZGUIkwjcw",
           tistory: "lifaon",
           stacks: ["aws", "django"],
-          feat: ["YOUTUBE API", "AWS"]
+          feat: ["YOUTUBE API", "GIT MASTER", "AWS"]
         },
         {
           name: "홍기환",
           position: "Back / Front",
-          image: "../assets/profile/",
+          image: "githubIcon",
           birth: "1994-11-02",
           git: "airaider",
           gitlab: "airaider",
