@@ -1238,7 +1238,7 @@ export default {
       myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
       tagCloud : [],
       rotate: { from: 0, to: 0, numOfOrientation: 5 },
-      fontsize: [15, 54],
+      fontsize: [10, 45],
     };
   }
 };
