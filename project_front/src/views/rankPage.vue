@@ -69,7 +69,7 @@
             <v-row class="pt-0 pl-3">
               <v-col>
                 <h1 class="font-weight-light mb-1">
-                  <v-icon color="#FFBC42" size="50">mdi-medal-outline</v-icon>
+                  <v-icon color="#b468ff" size="50">mdi-medal-outline</v-icon>
                   RANK PAGE
                 </h1>
                 <v-divider></v-divider>

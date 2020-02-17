@@ -14,29 +14,46 @@
                   <v-card
                     flat
                     elevation="0"
-                    :to="{ path: 'youtuberPage', query: { yno : youtuber1.yno}}"
+                    :to="{
+                      path: 'youtuberPage',
+                      query: { yno: youtuber1.yno }
+                    }"
                   >
                     <v-row>
-                      <v-col cols="5" class="pa-3" align="center" justify="center">
-                        <v-img class="circle" :src="youtuber1.thumbnails" flat :aspect-ratio="1/1" />
+                      <v-col
+                        cols="5"
+                        class="pa-3"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-img
+                          class="circle"
+                          :src="youtuber1.thumbnails"
+                          flat
+                          :aspect-ratio="1 / 1"
+                        />
                       </v-col>
                       <v-col cols="7" class="pb-0 pl-3">
                         <v-row style="height :45%">
                           <v-col class="px-0">
-                            <p
-                              class="font-weight-black thin ma-0 headline"
-                            >{{youtuber1.channelName}}</p>
+                            <p class="font-weight-black thin ma-0 headline">
+                              {{ youtuber1.channelName }}
+                            </p>
                           </v-col>
                         </v-row>
                         <v-divider class="ma-0"></v-divider>
                         <v-row>
                           <v-col cols="7">
                             <v-row class="pl-0">
-                              <p
-                                class="font-weight-black thin ma-0 headline"
-                              >{{youtuber1.publishedDate}}</p>
+                              <p class="font-weight-black thin ma-0 headline">
+                                {{ youtuber1.publishedDate }}
+                              </p>
                             </v-row>
-                            <v-row align="center" class="mt-5" style="float: left;">
+                            <v-row
+                              align="center"
+                              class="mt-5"
+                              style="float: left;"
+                            >
                               <!-- youtuber -->
                               <v-img
                                 width="32px"
@@ -49,7 +66,7 @@
                               <v-img
                                 width="32px"
                                 class="mx-1"
-                                v-if="otherLinkIcon1[0] != '' "
+                                v-if="otherLinkIcon1[0] != ''"
                                 src="../assets/instagramIcon.png"
                                 @click="openNewWindow(otherLinkIcon1[0])"
                                 style="cursor:pointer"
@@ -58,7 +75,7 @@
                               <v-img
                                 width="32px"
                                 class="mx-1"
-                                v-if="otherLinkIcon1[1] != '' "
+                                v-if="otherLinkIcon1[1] != ''"
                                 src="../assets/twitterIcon.png"
                                 @click="openNewWindow(otherLinkIcon1[1])"
                                 style="cursor:pointer"
@@ -67,7 +84,7 @@
                               <v-img
                                 width="32px"
                                 class="mx-1"
-                                v-if="otherLinkIcon1[2] != '' "
+                                v-if="otherLinkIcon1[2] != ''"
                                 src="../assets/facebookIcon.png"
                                 @click="openNewWindow(otherLinkIcon1[2])"
                                 style="cursor:pointer"
@@ -76,7 +93,7 @@
                               <v-img
                                 width="32px"
                                 class="mx-1"
-                                v-if="otherLinkIcon1[3] != '' "
+                                v-if="otherLinkIcon1[3] != ''"
                                 src="../assets/tiktokIcon.png"
                                 @click="openNewWindow(otherLinkIcon1[3])"
                                 style="cursor:pointer"
@@ -91,7 +108,9 @@
                             >
                               <p
                                 style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px;"
-                              >{{setGrade(youtuber1.grade)}}</p>
+                              >
+                                {{ setGrade(youtuber1.grade) }}
+                              </p>
                             </v-btn>
                           </v-col>
                         </v-row>
@@ -109,15 +128,18 @@
                   <v-card
                     flat
                     elevation="0"
-                    :to="{ path: 'youtuberPage', query: { yno : youtuber2.yno}}"
+                    :to="{
+                      path: 'youtuberPage',
+                      query: { yno: youtuber2.yno }
+                    }"
                   >
                     <v-row>
                       <v-col cols="7" class="pb-0">
                         <v-row style="height :45%">
                           <v-col align="right">
-                            <p
-                              class="font-weight-black thin ma-0 headline"
-                            >{{youtuber2.channelName}}</p>
+                            <p class="font-weight-black thin ma-0 headline">
+                              {{ youtuber2.channelName }}
+                            </p>
                           </v-col>
                         </v-row>
                         <v-divider class="ma-0"></v-divider>
@@ -130,7 +152,9 @@
                             >
                               <p
                                 style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px; text-align: right;"
-                              >{{setGrade(youtuber2.grade)}}</p>
+                              >
+                                {{ setGrade(youtuber2.grade) }}
+                              </p>
                             </v-btn>
                           </v-col>
                           <v-col cols="7">
@@ -138,9 +162,15 @@
                               <p
                                 class="font-weight-black thin ma-0 headline"
                                 style="text-align='right'"
-                              >{{youtuber2.publishedDate}}</p>
+                              >
+                                {{ youtuber2.publishedDate }}
+                              </p>
                             </v-row>
-                            <v-row align="center" class="mt-5" style="float: left;">
+                            <v-row
+                              align="center"
+                              class="mt-5"
+                              style="float: left;"
+                            >
                               <!-- youtuber -->
                               <v-img
                                 width="32px"
@@ -153,7 +183,7 @@
                               <v-img
                                 width="32px"
                                 class="mx-1"
-                                v-if="otherLinkIcon2[0] != '' "
+                                v-if="otherLinkIcon2[0] != ''"
                                 src="../assets/instagramIcon.png"
                                 @click="openNewWindow(otherLinkIcon2[0])"
                                 style="cursor:pointer"
@@ -162,7 +192,7 @@
                               <v-img
                                 width="32px"
                                 class="mx-1"
-                                v-if="otherLinkIcon2[1] != '' "
+                                v-if="otherLinkIcon2[1] != ''"
                                 src="../assets/twitterIcon.png"
                                 @click="openNewWindow(otherLinkIcon2[1])"
                                 style="cursor:pointer"
@@ -171,7 +201,7 @@
                               <v-img
                                 width="32px"
                                 class="mx-1"
-                                v-if="otherLinkIcon2[2] != '' "
+                                v-if="otherLinkIcon2[2] != ''"
                                 src="../assets/facebookIcon.png"
                                 @click="openNewWindow(otherLinkIcon2[2])"
                                 style="cursor:pointer"
@@ -180,7 +210,7 @@
                               <v-img
                                 width="32px"
                                 class="mx-1"
-                                v-if="otherLinkIcon2[3] != '' "
+                                v-if="otherLinkIcon2[3] != ''"
                                 src="../assets/tiktokIcon.png"
                                 @click="openNewWindow(otherLinkIcon2[3])"
                                 style="cursor:pointer"
@@ -189,8 +219,18 @@
                           </v-col>
                         </v-row>
                       </v-col>
-                      <v-col cols="5" class="pa-3" align="center" justify="center">
-                        <v-img class="circle" :src="youtuber2.thumbnails" flat :aspect-ratio="1/1" />
+                      <v-col
+                        cols="5"
+                        class="pa-3"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-img
+                          class="circle"
+                          :src="youtuber2.thumbnails"
+                          flat
+                          :aspect-ratio="1 / 1"
+                        />
                       </v-col>
                     </v-row>
                   </v-card>
@@ -311,6 +351,10 @@
         <v-hover v-slot:default="{ hover }" open-delay="100">
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-divider></v-divider>
+            <v-list-item-title class="headline font-weight-black mb-1"
+              >상호 수치 비교</v-list-item-title
+            >
+            <v-divider></v-divider>
             <v-row>
               <v-col class="py-0">
                 <v-badge color="#269ffb" bordered overlap>
@@ -319,12 +363,13 @@
                   </v-avatar>
                 </v-badge>
                 <v-chip
+                  style="border-width: medium"
                   class="ma-2"
                   color="#269ffb"
                   outlined
                   pill
                   text-color="black"
-                  ><b>{{ youtuber1.channelName }}</b></v-chip
+                  ><b>{{youtuber1.channelName | truncate(8,"..")}}</b></v-chip
                 >
               </v-col>
               <v-col class="py-0">
@@ -334,12 +379,13 @@
                   </v-avatar>
                 </v-badge>
                 <v-chip
+                  style="border-width: medium"
                   class="ma-2"
                   color="#26e7a5"
                   outlined
                   pill
                   text-color="black"
-                  ><b>{{ youtuber2.channelName }}</b></v-chip
+                  ><b>{{youtuber2.channelName | truncate(8,"..")}}</b></v-chip
                 >
               </v-col>
             </v-row>
@@ -509,7 +555,6 @@
             </v-row>
             <v-divider></v-divider>
 
-            <v-divider></v-divider>
             <v-list-item-title class="headline font-weight-black mb-1"
               >종합 비교</v-list-item-title
             >
@@ -662,7 +707,9 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1">누적 조회수 증감 추이</v-list-item-title>
+                <v-list-item-title class="headline font-weight-black mb-1"
+                  >누적 조회수 증감 추이</v-list-item-title
+                >
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -1046,12 +1093,8 @@ export default {
       ];
 
       for (let index = 0; index < subscriberView1.length; index++) {
-        this.totalViewDiffData[0]["data"].push(
-          subscriberView1[index].difView
-        );
-        this.totalViewDiffData[1]["data"].push(
-          subscriberView2[index].difView
-        );
+        this.totalViewDiffData[0]["data"].push(subscriberView1[index].difView);
+        this.totalViewDiffData[1]["data"].push(subscriberView2[index].difView);
         this.totalViewDiffOptions["xaxis"]["categories"].push(
           subscriberView1[index].recordDate.substring(5, 10)
         );
@@ -1082,141 +1125,139 @@ export default {
       }
     },
     getChartOption(str) {
-      if(str == "총영상수"){
+      if (str == "총영상수") {
         return {
-        chart: {
-          type: "bar",
-          height: 180,
-          toolbar: {
-            show: false
-          }
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            dataLabels: {
-              position: "top"
+          chart: {
+            type: "bar",
+            height: 180,
+            toolbar: {
+              show: false
             }
-          }
-        },
-        dataLabels: {
-          enabled: true,
-          offsetX: -6,
-          style: {
-            fontSize: "12px",
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              dataLabels: {
+                position: "top"
+              }
+            }
+          },
+          dataLabels: {
+            enabled: true,
+            offsetX: -6,
+            style: {
+              fontSize: "12px",
+              colors: ["#fff"]
+            },
+            formatter: value => {
+              return tc(value);
+            }
+          },
+          stroke: {
+            show: true,
+            width: 1,
             colors: ["#fff"]
           },
-          formatter: value => {
-            return tc(value);
-          }
-        },
-        stroke: {
-          show: true,
-          width: 1,
-          colors: ["#fff"]
-        },
-        xaxis: {
-          labels: {
+          xaxis: {
+            labels: {
+              show: false
+            },
+            categories: [str]
+          },
+          yaxis: {
             show: false
           },
-          categories: [str]
-        },
-        yaxis: {
-          show: false
-        },
-        legend: {
-          show: true
-        },
-        title: {
-          text: str,
-          align: "center",
-          margin: 0,
-          offsetX: 0,
-          offsetY: 0,
-          floating: false,
-          style: {
-            fontSize: "17px",
-            fontWeight: "bold",
-            color: "black"
-          }
-        },
-        tooltip: {
-          y: {
-            formatter: function(x) {
-              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          legend: {
+            show: true
+          },
+          title: {
+            text: str,
+            align: "center",
+            margin: 0,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+              fontSize: "17px",
+              fontWeight: "bold",
+              color: "black"
+            }
+          },
+          tooltip: {
+            y: {
+              formatter: function(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              }
             }
           }
-        }
-      };
-
-      }else{
+        };
+      } else {
         return {
-        chart: {
-          type: "bar",
-          height: 150,
-          toolbar: {
-            show: false
-          }
-        },
-        plotOptions: {
-          bar: {
-            horizontal: true,
-            dataLabels: {
-              position: "top"
+          chart: {
+            type: "bar",
+            height: 150,
+            toolbar: {
+              show: false
             }
-          }
-        },
-        dataLabels: {
-          enabled: true,
-          offsetX: -6,
-          style: {
-            fontSize: "12px",
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              dataLabels: {
+                position: "top"
+              }
+            }
+          },
+          dataLabels: {
+            enabled: true,
+            offsetX: -6,
+            style: {
+              fontSize: "12px",
+              colors: ["#fff"]
+            },
+            formatter: value => {
+              return tc(value);
+            }
+          },
+          stroke: {
+            show: true,
+            width: 1,
             colors: ["#fff"]
           },
-          formatter: value => {
-            return tc(value);
-          }
-        },
-        stroke: {
-          show: true,
-          width: 1,
-          colors: ["#fff"]
-        },
-        xaxis: {
-          labels: {
+          xaxis: {
+            labels: {
+              show: false
+            },
+            categories: [str]
+          },
+          yaxis: {
             show: false
           },
-          categories: [str]
-        },
-        yaxis: {
-          show: false
-        },
-        legend: {
-          show: false
-        },
-        title: {
-          text: str,
-          align: "center",
-          margin: 0,
-          offsetX: 0,
-          offsetY: 0,
-          floating: false,
-          style: {
-            fontSize: "17px",
-            fontWeight: "bold",
-            color: "black"
-          }
-        },
-        tooltip: {
-          y: {
-            formatter: function(x) {
-              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          legend: {
+            show: false
+          },
+          title: {
+            text: str,
+            align: "center",
+            margin: 0,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+              fontSize: "17px",
+              fontWeight: "bold",
+              color: "black"
+            }
+          },
+          tooltip: {
+            y: {
+              formatter: function(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              }
             }
           }
-        }
-      };
+        };
       }
-      
     },
     makeOtherLinkIcon() {
       console.log("sdfsdfsdf**************dfsdf**");
@@ -1484,7 +1525,7 @@ export default {
       },
       otherLinkIcon1: [],
       otherLinkIcon2: [],
-      totalViewDiffData : [],
+      totalViewDiffData: [],
       totalViewDiffOptions: {
         series: [],
         chart: {
@@ -1530,8 +1571,7 @@ export default {
             }
           }
         }
-      },
-
+      }
     };
   }
 };
