@@ -28,6 +28,5 @@ public interface YoutuberDao {
 	public List<Integer> searchTermVideoCount(Map<String, Integer> condition);
 	public List<Integer> searchCommunityMentionCount(Map<String, Integer> condition);
 	public List<Integer> searchNewsMentionCount(Map<String, Integer> condition);
-	public List<Trend> searchViewCountDif(Map<String, Integer> condition);
 	public List<Trend> searchSubscriberCountDif(Map<String, Integer> condition);
 }

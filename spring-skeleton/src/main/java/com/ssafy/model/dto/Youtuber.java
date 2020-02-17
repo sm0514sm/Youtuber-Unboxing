@@ -32,6 +32,7 @@ public class Youtuber {
 	private String uploadsID;
 	private String searchKeyword;
 	private int status;
+	private String tagCloud;
 	
 	public int getYno() {
 		return yno;
@@ -206,5 +207,11 @@ public class Youtuber {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getTagCloud() {
+		return tagCloud;
+	}
+	public void setTagCloud(String tagCloud) {
+		this.tagCloud = tagCloud;
 	}
 }
