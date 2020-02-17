@@ -376,12 +376,7 @@ export default {
       }
     },
     failCallback() {
-      alert("fail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      var random = Math.floor(Math.random() * (10 - 1) + 1);
-      this.$router.push({
-        path: "youtuberPage",
-        query: { word: this.$route.query.word, reloding: random }
-      });
+      window.location.reload();
     }
   },
   mounted() {

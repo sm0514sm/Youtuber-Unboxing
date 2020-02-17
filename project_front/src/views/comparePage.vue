@@ -661,8 +661,7 @@ export default {
       }
     },
     failCallback(){
-      var random = Math.floor(Math.random() * (10 - 1) + 1);
-      this.$router.push({ path: 'comparePage', query: {reloding : random}});
+      window.location.reload();
     }
   },
   computed: {},

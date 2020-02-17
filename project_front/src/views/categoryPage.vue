@@ -162,8 +162,8 @@ export default {
 
   methods: {
     onCategoryButtonClicked(index) {
-      console.log("*************" + index);
       localStorage.setItem("currentCategory", index);
+      console.log("*************" + index);
       if (index == 0) {
         this.$store.dispatch(Constant.GET_ALLYOUTUBER, {
           failCallback: this.failCallback
@@ -200,9 +200,7 @@ export default {
       }
     },
     failCallback() {
-      alert("fail!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      var random = Math.floor(Math.random() * (10 - 1) + 1);
-      this.$router.push({ path: "categoryPage", query: { reloding: random } });
+      window.location.reload();
     }
   },
   mounted() {
@@ -232,7 +230,7 @@ export default {
   data() {
     return {
       headers: [
-        { text: "", value: "", sortable: false, width: "5%" },
+        { text: "", value: "", sortable: false, width: "%" },
         { text: "", value: "channelName", sortable: false, width: "25%" },
         { text: "구독자수", value: "subscriber" },
         { text: "영향력", value: "influence" },
