@@ -1,20 +1,28 @@
 <template>
   <div>
     <v-card>
-      <v-card-title class="justify-center py-6" style="background-color:#cdcdcd ; height : 300px">
-        <i class="font-weight-black display-3">MemberPage</i>
+      <v-card-title
+        class="justify-center py-6"
+        style="background-color:#269ffb; height : 300px"
+      >
+        <v-icon size="70" color="white">mdi-account-heart-outline</v-icon>
+        <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white"
+          >MY PAGE</span
+        >
       </v-card-title>
     </v-card>
+
+
     <v-container name="container" background-color="transparent">
 
       <template>
         <v-hover v-slot:default="{ hover }" open-delay="100">
-  <v-card
-  :elevation="hover ? 7 : 1" 
-    class="mx-auto"
-    outlined
-  >
-  
+      <v-card
+      :elevation="hover ? 7 : 1" 
+        class="mx-auto"
+        outlined
+      >
+      
     <v-list-item three-line>
       
       <v-list-item-avatar
@@ -38,6 +46,7 @@
       color="indigo"
       outlined
       text-color="black"
+      style="border-width: medium"
     >
       {{user.userName}}
     </v-chip></v-list-item-title>
@@ -46,6 +55,7 @@
       class="ma-2"
       color="green"
       text-color="white"
+      
     >
       <v-avatar left>
         <v-icon>mdi-email</v-icon>
@@ -56,6 +66,7 @@
       color="green  "
       outlined
       text-color="black"
+      style="border-width: medium"
     >
       {{user.userEmail}}
     </v-chip></v-list-item-title>
@@ -91,6 +102,7 @@
               color="red"
               outlined
               pill
+              style="border-width: medium"
             >
               최대 3개 제한
               <v-icon right>mdi-cancel</v-icon>
@@ -186,6 +198,7 @@
             </v-col>
           </v-row>
           <v-btn
+          style="border-width: medium"
             class="ma-2"
             outlined
             :loading="loading"
@@ -195,7 +208,7 @@
             @click="loader = 'loading'; getRecommend()"
           >
           <v-icon>mdi-youtube</v-icon>
-            유튜버 추천 받기
+            <b>유튜버 추천 받기</b>
             <template v-slot:loader>
               <span class="custom-loader">
                 <v-icon light>mdi-youtube</v-icon>
@@ -237,20 +250,20 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-card-text class="my-3">{{card.channelDescription | truncate(100," ...")}}</v-card-text>
+              <v-card-text class="my-1">{{card.channelDescription | truncate(100," ...")}}</v-card-text>
 
               <v-card-actions class="card-actions">
-                <v-chip class="ma-2" color="#30A9DE" text-color="white">
-                  <v-icon left>mdi-account-multiple-outline</v-icon>
-                  구독자 {{tc(card.subscriber)}}
+                <v-chip class="ma-2" color="#30A9DE" text-color="black" outlined style="border-width: medium">
+                  <v-icon left color="#30A9DE">mdi-account-multiple</v-icon>
+                  <b>구독자 {{tc(card.subscriber)}}</b>
                 </v-chip>
-                <v-chip class="ma-2" color="#EFDC05" text-color="white">
-                  <v-icon left>mdi-animation-play-outline</v-icon>
-                  시청수 {{tc(card.totalViewCount)}}
+                <v-chip class="ma-2" color="#EFDC05" text-color="black" outlined style="border-width: medium">
+                  <v-icon left color="#EFDC05">mdi-animation-play</v-icon>
+                  <b>시청수 {{tc(card.totalViewCount)}}</b>
                 </v-chip>
-                <v-chip class="ma-2" color="#E53A40" text-color="white">
-                  <v-icon left>mdi-youtube-subscription</v-icon>
-                  영상수 {{card.totalVideoCount}}
+                <v-chip class="ma-2" color="#E53A40" text-color="black" outlined style="border-width: medium">
+                  <v-icon left color="#E53A40">mdi-youtube-subscription</v-icon>
+                  <b>영상수 {{card.totalVideoCount}}</b>
                 </v-chip>
 
                 <v-spacer></v-spacer>
