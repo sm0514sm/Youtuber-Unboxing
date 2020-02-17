@@ -20,7 +20,7 @@
         class="elevation-15"
         rounded
       >
-        <v-icon color="green" left>input</v-icon>유튜브 비교하기
+        <v-icon color="green" left>input</v-icon>유튜버 비교하기
       </v-btn>
     </template>
 
