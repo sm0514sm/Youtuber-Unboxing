@@ -199,7 +199,7 @@
                       ></p>
                     </v-col>
                   </v-row>
-                  <v-row>
+                  <v-row justify="bottom">
                     <v-col>
                       <v-btn
                         v-for="(tag,index) in item.tags"
@@ -430,7 +430,20 @@ export default {
         this.displaynews = this.searchednews.slice(0, 3);
         this.searchedvideo = responses[2].data.data;
         for (let index = 0; index < this.searchedvideo.length; index++) {
-          var tags = this.searchedvideo[index].tags.split(",", 3);
+          var tags = [];
+          var tagss = this.searchedvideo[index].tags.split(",");
+          var count = 0;
+          for (let i = 0; i < tagss.length; i++) {
+            if(count >= 3){
+              break;
+            }
+            if(tagss[i].length > 20){
+                continue;
+            }else{
+              tags.push(tagss[i])
+              count++;
+            }
+          }
           this.searchedvideo[index].tags = tags;
         }
         this.displayvideo = this.searchedvideo.slice(0, 3);

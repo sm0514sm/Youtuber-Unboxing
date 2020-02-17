@@ -266,6 +266,7 @@
 import inputComponent from "../components/inputComponent";
 import http from "../vuex/http-common";
 import { mapGetters } from "vuex";
+import tc from "thousands-counter";
 
 export default {
   components: {
@@ -311,6 +312,9 @@ export default {
 
         this.typo = lifeCopy.slice(0, idx);
       }, 300);
+    },
+    tc(num) {
+      return tc(num);
     }
   },
   computed: {
