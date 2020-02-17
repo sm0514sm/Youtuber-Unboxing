@@ -1,9 +1,9 @@
 <template>
-<v-col cols="3" align="center">
+<v-col cols="3" align="center" >
     <v-dialog v-model="dialog" persistent max-width="550px">
       <template v-slot:activator="{ on }">
-        <v-btn class="ma-2" v-on="on" :loading="loading" :disabled="loading" color="primary" @click="init">
-          유튜버 추가하기
+        <v-btn style="font-size: 20px; text-shadow: 0 0 2px #000;" v-on="on" :loading="loading" :disabled="loading" color="white" text @click="init">
+          ADD YOUTUBER
         </v-btn>
       </template>
       <v-card class="pa-5">
@@ -105,7 +105,7 @@
     </v-dialog>
 
     <div class="text-center">
-      <v-snackbar v-model="snackbar" :absolute="true" color='blue-grey lighten-3' :timeout="100000">
+      <v-snackbar class="ml-3" v-model="snackbar" :absolute="true" color='blue-grey lighten-3' :timeout="100000">
         <v-progress-linear v-if="snackProgress" color="blue-grey" :buffer-value="0" :value="value" stream />
         <v-icon large dark @click="snackbar = false">clear</v-icon>
       </v-snackbar>
