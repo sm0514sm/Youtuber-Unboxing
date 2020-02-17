@@ -7,12 +7,24 @@
     </v-card>
     <v-container name="container" background-color="transparent">
       <v-tabs :value="currentCategory" background-color="transparent" grow>
-        <v-tab key="0" @click="onCategoryButtonClicked(0)">ALL</v-tab>
+        <v-tab key="0" @click="onCategoryButtonClicked(0)">
+          <div class="categorySet">
+            <!-- <v-btn block :aspect-ratio="1/1" @click="onCategoryButtonClicked(0)" class="categorySet"> -->
+            <v-icon class="material-icons" color="red">mdi-widgets-outline</v-icon>
+            <!-- </v-btn> -->
+            <div class="categoryName">전체</div>
+          </div>
+        </v-tab>
         <v-tab
           v-for="(item,index) in categories"
           :key="index+1"
           @click="onCategoryButtonClicked(index+1)"
-        >{{ item. nameEng}}</v-tab>
+        >
+          <div class="categorySet">
+            <v-icon class="material-icons" :color="item.iconColor">{{item.icon}}</v-icon>
+            <div class="categoryName">{{item.iconName}}</div>
+          </div>
+        </v-tab>
       </v-tabs>
 
       <v-tabs-items :value="currentCategory">
