@@ -478,54 +478,29 @@ class updateThread:
                 print("------------- youtuber {}'s naver datalab update is done!".format(youtuber.yno))
                 
                 ############## 태그 클라우드 추가하기
-                if youtuber.tagcloud:
-                    tagCloud = json.loads(youtuber.tagcloud)
-                    for new_video_id in new_videos:
-                        new_video = Video.objects.get(videoid=new_video_id)
-                        video_tags = (new_video.tags).split(',')
-                        for tag in video_tags:
-                            if tagCloud.get(tag):
-                                tagCloud[tag] += 1
-                            else:
-                                words_count[tag] = 1
-                    if tagCloud.get(''):
-                        del tagCloud['']
-                    
-                    delete_words = [] # 1개 이하를 지운다.
-                    for word, count in tagCloud.items(): 
-                        if count <= 1:
-                            delete_words.append(word)
-                    for delete_word in delete_words:
-                        del tagCloud[delete_word]
-                        
-                    result = json.dumps(tagCloud, ensure_ascii=False) if tagCloud else ''
-                    youtuber.tagcloud = result
-                    youtuber.save()
-                    print("------------- youtuber {}'s tagCloud is updated!".format(youtuber.yno))
-                else:
-                    videos = Video.objects.filter(yno=youtuber)
-                    tagCloud = {}
-                    for video in videos:
-                        tags = (video.tags).split(',')
-                        for tag in tags:
-                            if tagCloud.get(tag):
-                                tagCloud[tag] += 1
-                            else:
-                                tagCloud[tag] = 1
-                                
-                    if tagCloud.get(''):
-                        del tagCloud['']
-                    
-                    delete_words = [] # 1개 이하를 지운다.
-                    for word, count in tagCloud.items(): 
-                        if count <= 1:
-                            delete_words.append(word)
-                    for delete_word in delete_words:
-                        del tagCloud[delete_word]
-                    result = json.dumps(tagCloud, ensure_ascii=False) if tagCloud else ''
-                    youtuber.tagcloud = result
-                    youtuber.save()
-                    print("------------- youtuber {}'s tagCloud is added!".format(youtuber.yno))
+                tag_videos = Video.objects.filter(yno=youtuber)
+                tagCloud = {}
+                for video in tag_videos:
+                    tags = (video.tags).split(',')
+                    for tag in tags:
+                        if tagCloud.get(tag):
+                            tagCloud[tag] += 1
+                        else:
+                            tagCloud[tag] = 1
+                            
+                if tagCloud.get(''):
+                    del tagCloud['']
+                
+                delete_words = [] # 1개 이하를 지운다.
+                for word, count in tagCloud.items(): 
+                    if count <= 1:
+                        delete_words.append(word)
+                for delete_word in delete_words:
+                    del tagCloud[delete_word]
+                result = json.dumps(tagCloud, ensure_ascii=False) if tagCloud else ''
+                youtuber.tagcloud = result
+                youtuber.save()
+                print("------------- youtuber {}'s tagCloud is added!".format(youtuber.yno))
                 print('---- youtuber {} takes {}.'.format(youtuber.yno, datetime.datetime.now() - ONE_START))
             
             ########### 스탯 업데이트 한 꺼번에 전부
