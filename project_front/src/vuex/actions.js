@@ -35,7 +35,7 @@ export default {
 
                 //error 코드
                 var failCallback = payload.failCallback;
-                if (response.data.status != 'ok') {
+                if (response.data.state != 'ok') {
                     failCallback();
                     return;
                 }
@@ -148,7 +148,7 @@ export default {
         });
 
         //subscriberCount,viewCount : {{num}}개의 증감추이
-        var num = 100
+        var num = 50
         const subscriberViewCount = new Promise((resolve, reject) => {
             http
                 .get("/youtuber/detail/trend/subscriberCount/" + yno + "_" + num)
@@ -220,7 +220,7 @@ export default {
 
                 //error 코드
                 var failCallback = payload.failCallback;
-                if (response.data.status != 'ok') {
+                if (response.data.state != 'ok') {
                     failCallback();
                     return;
                 }

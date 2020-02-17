@@ -994,9 +994,8 @@ export default {
         return "D";
       }
     },
-    failCallback() {
-      var random = Math.floor(Math.random() * (10 - 1) + 1);
-      this.$router.push({ path: "comparePage", query: { reloding: random } });
+    failCallback(){
+      window.location.reload();
     }
   },
   computed: {},
