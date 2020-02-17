@@ -38,6 +38,7 @@
                   @click="onClikcedinsertCompare(item.yno,item.channelName)"
                   text
                   color="green"
+                  :disabled="disabledButtonFlag"
                 >
                   <v-icon dark>input</v-icon>비교담기
                 </v-btn>
@@ -51,14 +52,14 @@
                   :to="{ path: 'youtuberPage', query: { yno : item.yno}}"
                 >
                   <v-row class="ml-3">
-                    <v-col cols="2" class>
+                    <v-col cols="2">
                       <v-card color="#00000000" width="50px" flat class="ml-5">
                         <v-responsive :aspect-ratio="1/1">
                           <v-img class="circle" :src="item.thumbnails" flat />
                         </v-responsive>
                       </v-card>
                     </v-col>
-                    <v-col cols="10" class>
+                    <v-col cols="10">
                       <v-container fill-height>
                         <v-layout align-center>
                           <v-flex xs12 text-xs-center>
@@ -104,6 +105,7 @@
                   @click="onClikcedinsertCompare(item.yno,item.channelName)"
                   text
                   color="green"
+                  :disabled="disabledButtonFlag"
                 >
                   <v-icon dark>input</v-icon>비교담기
                 </v-btn>
@@ -140,7 +142,6 @@
               <template v-slot:item.subscriber="{ item }">{{tc(item.subscriber)}}</template>
 
               <template v-slot:item.grade="{ item }">{{setGrade(item.grade)}}</template>
-
             </v-data-table>
           </v-card>
         </v-tab-item>
@@ -180,6 +181,7 @@ export default {
     },
     onClikcedinsertCompare: function(yno, channelName) {
       EventBus.$emit("insertYoutuber", yno, channelName);
+      this.calculateCompareDisabled();
     },
     tc(num) {
       return tc(num);
@@ -201,6 +203,16 @@ export default {
     },
     failCallback() {
       window.location.reload();
+    },
+    calculateCompareDisabled() {
+      var output = localStorage.getItem("compareYoutuber");
+      var arr = JSON.parse(output);
+
+      if (arr.length == 2) {
+        this.disabledButtonFlag = true;
+      } else {
+        this.disabledButtonFlag = false;
+      }
     }
   },
   mounted() {
@@ -217,7 +229,12 @@ export default {
       category: this.findCano()
     });
   },
-  created() {},
+  created() {
+    EventBus.$on("deleteCompare", () => {
+      this.calculateCompareDisabled();
+    });
+    this.calculateCompareDisabled();
+  },
 
   computed: {
     ...mapGetters(["categories"]),
@@ -230,8 +247,8 @@ export default {
   data() {
     return {
       headers: [
-        { text: "", value: "", sortable: false, width: "%" },
-        { text: "", value: "channelName", sortable: false, width: "25%" },
+        { text: "", value: "", sortable: false, width: "1%" },
+        { text: "", value: "channelName", sortable: false, width: "30%" },
         { text: "구독자수", value: "subscriber" },
         { text: "영향력", value: "influence" },
         { text: "활동력", value: "activity" },
@@ -241,7 +258,8 @@ export default {
         { text: "등급", value: "grade" },
         { text: "", value: "insertCompare", sortable: false }
       ],
-      search: ""
+      search: "",
+      disabledButtonFlag: true
     };
   }
 };
