@@ -159,16 +159,6 @@ public class YoutuberRestController {
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("youtuber 고유번호, 검색 개수 | 영상들의 조회수 총합의 증감 추이 | 기록 일자 기준 오름차순")
-	@GetMapping("/youtuber/detail/trend/viewCount/{yno}_{num}")
-	public ResponseEntity<Map<String, Object>> searchViewCountDif(@PathVariable int yno, @PathVariable int num){
-		Map<String, Integer> map = new HashMap<>();
-		map.put("yno", yno);
-		map.put("num", num);
-		List<Trend> list = youtuberService.searchViewCountDif(map);
-		return handleSuccess(list);
-	}
-	
 	@ApiOperation("youtuber 고유번호, 검색 개수 | 구독자 총합의 증감 추이 | 기록 일자 기준 오름차순")
 	@GetMapping("/youtuber/detail/trend/subscriberCount/{yno}_{num}")
 	public ResponseEntity<Map<String, Object>> searchSubscriberCountDif(@PathVariable int yno, @PathVariable int num){

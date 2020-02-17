@@ -199,22 +199,16 @@
 				and date_format(date_sub(now(), INTERVAL (#{term} - 1) MONTH), '%y-%m') &lt;= date_format(T.month_date, '%y-%m')
 		order by date_format(T.month_date, '%y-%m') asc
 	</select>
-	
-	<!-- youtuber 고유번호, 검색 개수 | 영상 조회수 총합의 증감 추이 | 기록 일자 기준 오름차순 -->
-	<select id="searchViewCountDif" parameterType="java.util.Map" resultType="trend">
-		select *
-		from trend
-		where yno=#{yno}
-		order by recordDate asc
-		limit #{num}
-	</select>
-	
+
 	<!-- youtuber 고유번호, 검색 개수 | 구독자 총합의 증감 추이 | 기록 일자 기준 오름차순 -->
 	<select id="searchSubscriberCountDif" parameterType="java.util.Map" resultType="trend">
 		select *
-		from trend
-		where yno=#{yno}
+		from 
+				(select *
+				from trend
+				where yno=#{yno}
+				order by recordDate desc
+				limit #{num}) a
 		order by recordDate asc
-		limit #{num}
 	</select>
 </mapper>

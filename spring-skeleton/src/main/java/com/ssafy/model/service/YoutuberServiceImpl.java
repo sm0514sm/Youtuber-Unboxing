@@ -170,16 +170,6 @@ public class YoutuberServiceImpl implements YoutuberService {
 	}
 
 	@Override
-	public List<Trend> searchViewCountDif(Map<String, Integer> condition) {
-		try {
-			return dao.searchViewCountDif(condition);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("youtuber 상세페이지의 영상 조회수 증감 추이 조회 중 에러가 발생했습니다.");
-		}
-	}
-
-	@Override
 	public List<Trend> searchSubscriberCountDif(Map<String, Integer> condition) {
 		try {
 			return dao.searchSubscriberCountDif(condition);

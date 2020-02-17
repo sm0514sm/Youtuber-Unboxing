@@ -78,25 +78,37 @@ public class InterestRestController {
 	public ResponseEntity<Map<String, Object>> searchInterestRecommend(@PathVariable String usToken, @PathVariable String interestList){
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usToken);
     	User user = userService.search(userInfo.get("id").toString());
-		
-		//관심분야 고유번호, 관심분야 고유번호...
-		String[] itList = interestList.split(",");
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("usno", user.getUsno());
-		map.put("interestList", itList);
-		
-		List<Youtuber> list = interestService.searchInterestRecommend(map);
-		
-		if (list.size() < 4) {
-			Map<String, String> map2 = new HashMap<>();
-			map2.put("searchCondition", "totalViewCount");
-			map2.put("num", (4 - list.size()) + "");
-			List<Youtuber> temp = youtuberService.searchRanking(map2);
-			for (Youtuber youtuber : temp) {
-				list.add(youtuber);
-			}
-		}
+    	List<Youtuber> list;
+    	
+    	//관심분야가 아예 없는 경우, 추천동영상 4개 전체를 인기유튜버(총조회수합 기준)로 채움
+    	if (interestList == null || interestList.equals("")) {
+    		Map<String, String> map = new HashMap<>();
+			map.put("searchCondition", "totalViewCount");
+			map.put("num", "4");
+			list = youtuberService.searchRanking(map);
+			
+    	} else {
+    		//관심분야 고유번호는 ,로 구분되어서(공백없이) String 형태로 들어옴
+    		String[] itList = interestList.split(",");
+    		
+    		Map<String, Object> map = new HashMap<>();
+    		map.put("usno", user.getUsno());
+    		map.put("interestList", itList);
+    		
+    		//사용자가 체크한 관심분야를 기준으로 추천동영상을 검색
+    		list = interestService.searchInterestRecommend(map);
+    		
+    		//만약 추천동영상의 개수가 4개 미만이라면, 인기유튜버(총조회수합 기준)로 나머지 빈 자리를 채움
+    		if (list.size() < 4) {
+    			Map<String, String> map2 = new HashMap<>();
+    			map2.put("searchCondition", "totalViewCount");
+    			map2.put("num", (4 - list.size()) + "");
+    			
+    			List<Youtuber> temp = youtuberService.searchRanking(map2);
+    			for (Youtuber youtuber : temp)
+    				list.add(youtuber);
+    		}
+    	}
 		return handleSuccess(list);
 	}
 
