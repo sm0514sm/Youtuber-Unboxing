@@ -156,7 +156,7 @@
                 <v-row>
                   <v-col class="ma-5">
                     <v-list-item-title class="headline font-weight-black mb-1">
-                      능력치
+                      <v-icon color="blue" class="mr-1">mdi-chart-gantt</v-icon>능력치
                       <v-dialog v-model="dialog" width="600">
                         <template v-slot:activator="{ on }">
                           <v-btn class="ma-2" outlined x-small fab color="pink" v-on="on" ><v-icon>mdi-help</v-icon></v-btn>
@@ -612,12 +612,12 @@
               </transition>
             </v-card>
 
-            <!-- 워드 클라우드 -->
+            <!-- 태그 클라우드 -->
             <v-card outlined flat class="pa-4 pt-0 mb-3">
               <v-row>
                 <v-col class="ma-5 mx-0">
                   <v-list-item-title class="headline font-weight-black mb-1">
-                    <v-icon color="pink lighten-3">mdi-weather-cloudy</v-icon>워드 클라우드
+                    <v-icon color="pink lighten-3">mdi-weather-cloudy</v-icon>태그 클라우드
                   </v-list-item-title>
                   <v-divider></v-divider>
                 </v-col>
@@ -633,10 +633,10 @@
                   margin-bottom="2"
                   margin-left="2"
                   margin-right="2"
-                  :fontSize="fontsize"
                   :rotate="rotate"
                   font="Jua"
                   />
+                  <!-- :fontSize="fontsize" -->
               </v-row>
             </v-card>
 
@@ -711,6 +711,7 @@ export default {
   methods: {
     wordClickHandler(name, value, vm) {
       console.log('wordClickHandler', name, value, vm);
+      this.$router.push({ path: "searchPage", query: { word: name } });
     },
     manageFav() {
       this.flag ? (this.flag = false) : (this.flag = true);
