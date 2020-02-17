@@ -51,15 +51,15 @@
                   flat
                   :to="{ path: 'youtuberPage', query: { yno : item.yno}}"
                 >
-                  <v-row class="ml-3">
-                    <v-col cols="2">
-                      <v-card color="#00000000" width="50px" flat class="ml-5">
+                  <v-row>
+                    <v-col cols="2" class="px-0">
+                      <v-card color="#00000000" width="50px" flat>
                         <v-responsive :aspect-ratio="1/1">
                           <v-img class="circle" :src="item.thumbnails" flat />
                         </v-responsive>
                       </v-card>
                     </v-col>
-                    <v-col cols="10">
+                    <v-col cols="10" class="px-0">
                       <v-container fill-height>
                         <v-layout align-center>
                           <v-flex xs12 text-xs-center>
