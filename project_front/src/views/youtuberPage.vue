@@ -7,7 +7,7 @@
         </v-row>
         <v-row>
           <v-spacer></v-spacer>
-          <v-col>
+          <v-col align="center">
             <v-progress-circular :size="200" :width="50" color="blue" indeterminate></v-progress-circular>
           </v-col>
           <v-spacer></v-spacer>
@@ -50,16 +50,22 @@
                       >
                         <b>{{category.name}}</b>
                       </v-btn>
-                      <v-btn v-if="loginStatus" text icon color="red" @click="manageFav">
-                        <v-icon v-if="flag" @click="deleteFav" x-large>mdi-heart</v-icon>
-                        <v-icon v-if="!flag" @click="insertFav" x-large>mdi-heart-outline</v-icon>
-                      </v-btn>
+                    </v-col>
+
+                    <v-col cols="1" class="pt-5">
+                      <v-flex>
+                        <v-layout align-center justify-center row>
+                          <v-btn v-if="loginStatus" text icon color="red" @click="manageFav">
+                            <v-icon v-if="flag" @click="deleteFav" x-large>mdi-heart</v-icon>
+                            <v-icon v-if="!flag" @click="insertFav" x-large>mdi-heart-outline</v-icon>
+                          </v-btn>
+                        </v-layout>
+                      </v-flex>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
                       <span class="font-weight-light mr-4">개설일 : {{youtuber.publishedDate}}</span>
-                      
                     </v-col>
                   </v-row>
                   <v-row>
@@ -187,13 +193,16 @@
                         <!-- 영향력 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-list-item-subtitle
+                              text-align="center"
+                            >{{youtuber.channelName}}의 영향력은 상위 "{{100-mainData[0]["data"][0]}}%"입니다.</v-list-item-subtitle>
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
-                                <v-col>
+                                <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
                                   >지난 12개월간 커뮤니티 언급수</v-list-item-title>
-                                  <v-divider></v-divider>
+                                  <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
                               <v-row>
@@ -202,13 +211,14 @@
                                     :options="influenceCommunityOption"
                                     :series="influenceCommunityData"
                                     style="width:100%"
+                                    height="200px"
                                   ></apexchart>
                                 </v-col>
                               </v-row>
                             </v-card>
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
-                                <v-col>
+                                <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
                                   >지난 12개월간 뉴스 언급수</v-list-item-title>
@@ -221,6 +231,7 @@
                                     :options="influenceNewsOption"
                                     :series="influenceNewsData"
                                     style="width:100%"
+                                    height="200px"
                                   ></apexchart>
                                 </v-col>
                               </v-row>
@@ -231,14 +242,17 @@
                         <!-- 활동력 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-list-item-subtitle
+                              text-align="center"
+                            >{{youtuber.channelName}}의 활동력은 상위 "{{100-mainData[0]["data"][1]}}%"입니다.</v-list-item-subtitle>
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
-                                <v-col>
+                                <v-col class="pb-0">
                                   <v-list-item-title class="headline font-weight-black mb-1">
                                     한달간 영상의 수는
                                     <b style="color: red">{{activityDuringMonth}}개</b> 입니다.
                                   </v-list-item-title>
-                                  <v-divider></v-divider>
+                                  <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
                               <v-row class="mr-10">
@@ -248,6 +262,7 @@
                                     :series="activity4weeksData"
                                     ref="activityChart"
                                     style="width:100%"
+                                    height="200px"
                                   ></apexchart>
                                 </v-col>
                               </v-row>
@@ -258,13 +273,17 @@
                         <!-- 영상조회수증감추이 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-list-item-subtitle
+                              text-align="center"
+                            >{{youtuber.channelName}}의 영상조회수증감추이는 상위 "{{100-mainData[0]["data"][2]}}%"입니다.</v-list-item-subtitle>
+
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
-                                <v-col>
+                                <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
                                   >지난 영상조회수증감추이</v-list-item-title>
-                                  <v-divider></v-divider>
+                                  <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
                               <v-row>
@@ -273,6 +292,27 @@
                                     :options="subscriberViewOption"
                                     :series="viewData"
                                     style="width:100%"
+                                    height="200px"
+                                  ></apexchart>
+                                </v-col>
+                              </v-row>
+                            </v-card>
+                            <v-card outlined flat class="mr-10 my-3 pa-5">
+                              <v-row class="pt-0 pl-3">
+                                <v-col class="pb-0">
+                                  <v-list-item-title
+                                    class="headline font-weight-black mb-1"
+                                  >조회수차이 그래프</v-list-item-title>
+                                  <v-divider class="mb-0"></v-divider>
+                                </v-col>
+                              </v-row>
+                              <v-row>
+                                <v-col>
+                                  <apexchart
+                                    :options="subscriberViewOption"
+                                    :series="viewDiffData"
+                                    style="width:100%"
+                                    height="200px"
                                   ></apexchart>
                                 </v-col>
                               </v-row>
@@ -283,13 +323,16 @@
                         <!-- 구독자증감추이 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-list-item-subtitle
+                              text-align="center"
+                            >{{youtuber.channelName}}의 구독자증감추이는 상위 "{{100-mainData[0]["data"][3]}}%"입니다.</v-list-item-subtitle>
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
-                                <v-col>
+                                <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
                                   >지난 구독자증감추이</v-list-item-title>
-                                  <v-divider></v-divider>
+                                  <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
                               <v-row>
@@ -298,6 +341,27 @@
                                     :options="subscriberViewOption"
                                     :series="subscriberData"
                                     style="width:100%"
+                                    height="200px"
+                                  ></apexchart>
+                                </v-col>
+                              </v-row>
+                            </v-card>
+                            <v-card outlined flat class="mr-10 my-3 pa-5">
+                              <v-row class="pt-0 pl-3">
+                                <v-col class="pb-0">
+                                  <v-list-item-title
+                                    class="headline font-weight-black mb-1"
+                                  >구독자 증감 차이그래프</v-list-item-title>
+                                  <v-divider class="mb-0"></v-divider>
+                                </v-col>
+                              </v-row>
+                              <v-row>
+                                <v-col>
+                                  <apexchart
+                                    :options="subscriberViewOption"
+                                    :series="subscriberDiffData"
+                                    style="width:100%"
+                                    height="200px"
                                   ></apexchart>
                                 </v-col>
                               </v-row>
@@ -308,13 +372,16 @@
                         <!-- 호감도 -->
                         <v-tab-item>
                           <v-container class="ma-5">
+                            <v-list-item-subtitle
+                              text-align="center"
+                            >{{youtuber.channelName}}의 호감도는 상위 "{{100-mainData[0]["data"][4]}}%"입니다.</v-list-item-subtitle>
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
-                                <v-col>
+                                <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
                                   >최근 10개 동영상 좋아요/싫어요 비율</v-list-item-title>
-                                  <v-divider></v-divider>
+                                  <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
                               <v-row class="ma-5">
@@ -329,7 +396,7 @@
                                     height="40"
                                   >
                                     <template v-slot="{ value }">
-                                      <strong>{{ value}}%</strong>
+                                      <strong>{{ value.toFixed(2)}}%</strong>
                                     </template>
                                   </v-progress-linear>
                                 </v-col>
@@ -341,11 +408,11 @@
 
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3 pb-0">
-                                <v-col>
+                                <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
                                   >최근 3개의 동영상 좋아요비율</v-list-item-title>
-                                  <v-divider></v-divider>
+                                  <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
                               <v-row v-for="(video,i) in recentVideoList" :key="i" class="pa-1">
@@ -357,7 +424,7 @@
                                     allowfullscreen
                                   ></iframe>
                                 </v-col>
-                                <v-col cols="6">
+                                <v-col cols="6" class="px-0">
                                   <v-card outlined>
                                     <v-container>
                                       <v-list-item-content>
@@ -371,20 +438,24 @@
                                       <v-row>
                                         <v-col
                                           class="pa-1"
-                                          cols="2"
+                                          cols="3"
                                           style="text-align : center"
                                         >{{video.good}}</v-col>
                                         <v-col class="pa-1">
                                           <v-progress-linear
                                             background-color="red"
                                             color="blue"
-                                            :value="video.goodRatio==0 ? 50 : video.goodRatio*100"
+                                            :value="video.good/(video.good+video.bad)*100"
                                             height="30"
-                                          ></v-progress-linear>
+                                          >
+                                            <template v-slot="{ value }">
+                                              <strong>{{ value.toFixed(2)}}%</strong>
+                                            </template>
+                                          </v-progress-linear>
                                         </v-col>
                                         <v-col
                                           class="pa-1"
-                                          cols="2"
+                                          cols="3"
                                           style="text-align : center"
                                         >{{video.bad}}</v-col>
                                       </v-row>
@@ -420,7 +491,7 @@
                     class="pa-5"
                     cols="6"
                   >
-                    <v-card>
+                    <v-card height="400px">
                       <v-container>
                         <v-row>
                           <v-col>
@@ -468,8 +539,9 @@
                         <v-icon v-on="on">info</v-icon>
                       </template>
                       <span>
-                        등급산정기준은 현재 사이트 기준으로 상위 5%는
-                        <br />SS등급, 10%는 S등급, 20%는 A등급, 50%는 B등급, 80%는 C등급으로 챙적하고 있습니다.
+                        등급산정기준은 현재 사이트 기준으로
+                        <br />상위 5%는 SS등급, 10%는 S등급,
+                        <br />20%는 A등급, 50%는 B등급, 80%는 C등급으로 책정하고 있습니다.
                       </span>
                     </v-tooltip>
                   </v-list-item-title>
@@ -477,15 +549,6 @@
                 </v-col>
               </v-row>
               <transition appear name="fade">
-                <!-- <v-btn
-                  fab
-                  :color="setGradeColor(youtuber.grade)"
-                  style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
-                >
-                  <p
-                    style="font-weight-black text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
-                  >{{setGrade(youtuber.grade)}}</p>
-                </v-btn>-->
                 <v-btn
                   fab
                   :color="setGradeColor(youtuber.grade)"
@@ -513,12 +576,12 @@
                 :key="i"
               >
                 <v-card class="my-3 px-2" :elevation="hover ? 7 : 0">
-                  <v-list-item-content>
+                  <v-list-item-content class="px-3">
                     <v-list-item-title class="mb-1 text-truncate">
                       <a target="_blank" :href="news[i].newsLink" v-html="news[i].newsTitle"></a>
                     </v-list-item-title>
                     <v-list-item-subtitle class="mb-3" align="right">{{news[i].newsDate}}</v-list-item-subtitle>
-                    <span v-html="news[i].newsDescription.substring(0,300).concat('...')"></span>
+                    <span v-html="news[i].newsDescription.substring(0,100).concat('...')"></span>
                   </v-list-item-content>
                 </v-card>
               </v-hover>
@@ -664,16 +727,25 @@ export default {
       }
 
       //subscriberView Data 집어넣기
-      console.log(subscriberView.length)
+      console.log(subscriberView.length);
       for (let index = 0; index < subscriberView.length; index++) {
         this.subscriberData[0]["data"].push(
           subscriberView[index]["pointSubscriber"]
         );
+        this.subscriberDiffData[0]["data"].push(
+          subscriberView[index]["difSubscriber"]
+        );
         this.viewData[0]["data"].push(subscriberView[index]["pointView"]);
+        this.viewDiffData[0]["data"].push(subscriberView[index]["difView"]);
         this.subscriberViewOption["xaxis"]["categories"].push(
           subscriberView[index]["recordDate"]
         );
       }
+      this.viewData[0]["name"] = "";
+      this.subscriberData[0]["name"] = "";
+
+      console.log("*************");
+      console.log(this.subscriberData);
 
       this.makeOtherLinkIcon();
       this.loading = "success";
@@ -702,11 +774,13 @@ export default {
       }
     },
     failCallback() {
-      var random = Math.floor(Math.random() * (10 - 1) + 1);
-      this.$router.push({
-        path: "youtuberPage",
-        query: { yno: this.$route.query.yno, reloding: random }
-      });
+      window.location.reload();
+
+      // var random = Math.floor(Math.random() * (10 - 1) + 1);
+      // this.$router.push({
+      //   path: "youtuberPage",
+      //   query: { yno: this.$route.query.yno, reloding: random }
+      // });
     },
     onCategoryButtonClicked(i) {
       localStorage.setItem("currentCategory", i);
@@ -775,6 +849,9 @@ export default {
     },
     tc(num) {
       return tc(num);
+    },
+    comma(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
   computed: {},
@@ -843,17 +920,21 @@ export default {
           type: "line",
           zoom: {
             enabled: false
+          },
+          toolbar: {
+            show: false
           }
         },
+        colors: ["#ff0000"],
         dataLabels: {
           enabled: true
         },
         stroke: {
-          width: 7,
-          curve: "smooth"
+          width: 3
+          // curve: "smooth"
         },
         title: {
-          text: "동영상",
+          text: "",
           align: "center"
         },
         grid: {
@@ -872,14 +953,18 @@ export default {
           type: "line",
           zoom: {
             enabled: false
+          },
+          toolbar: {
+            show: false
           }
         },
         dataLabels: {
           enabled: true
         },
+        colors: ["#ff0000"],
         stroke: {
-          width: 7,
-          curve: "smooth"
+          width: 3
+          // curve: "smooth"
         },
         title: {
           align: "center"
@@ -900,15 +985,19 @@ export default {
           type: "line",
           zoom: {
             enabled: false
+          },
+          toolbar: {
+            show: false
           }
         },
         dataLabels: {
           enabled: true
         },
         stroke: {
-          width: 7,
-          curve: "smooth"
+          width: 3
+          // curve: "smooth"
         },
+        colors: ["#ff0000"],
         title: {
           align: "center"
         },
@@ -928,14 +1017,21 @@ export default {
           type: "line",
           zoom: {
             enabled: false
+          },
+          toolbar: {
+            show: false
           }
         },
+        colors: ["#ff0000"],
         dataLabels: {
-          enabled: false
+          enabled: false,
+          formatter: function(x) {
+            return tc(x);
+          }
         },
         stroke: {
-          width: 7,
-          curve: "smooth"
+          width: 3
+          // curve: "smooth"
         },
         title: {
           align: "center"
@@ -947,7 +1043,23 @@ export default {
           }
         },
         xaxis: {
+          type: "datetime",
           categories: []
+        },
+        tooltip: {
+          y: {
+            formatter: function(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+          }
+        },
+        yaxis: {
+          labels: {
+            show: true,
+            formatter: value => {
+              return tc(value);
+            }
+          }
         }
       },
       activityDuringMonth: 0,
@@ -959,7 +1071,9 @@ export default {
       influenceCommunityData: [{ data: [] }],
       influenceNewsData: [{ data: [] }],
       subscriberData: [{ data: [] }],
+      subscriberDiffData: [{ data: [] }],
       viewData: [{ data: [] }],
+      viewDiffData: [{ data: [] }],
       news: [],
       categoryOfYoutuber: [],
       otherLinkIcon: [],

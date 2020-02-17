@@ -9,15 +9,16 @@
     :close-delay="300"
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-btn v-bind="attrs" v-on="on" fab fixed bottom right color="yellow">
-        <v-icon color="green">input</v-icon>
+      <v-btn v-bind="attrs" v-on="on" x-large fixed bottom right color="white" class="elevation-15" rounded>
+        <v-icon color="green" left>input</v-icon> 유튜브 비교하기
       </v-btn>
     </template>
 
-    <v-card :elevation="20" class="px-10" shaped height="350px" width="400px" >
+    <v-card :elevation="20" class="px-10" shaped height="375px" width="400px" >
       <v-row>
         <v-col class="ma-0 mt-5">
           <v-list-item-title class="headline font-weight-black mb-1">유튜버 비교하기</v-list-item-title>
+          <v-list-item-subtitle class="mb-1">카테고리페이지에서 [비교담기]로 담아주세요</v-list-item-subtitle>
           <v-divider></v-divider>
         </v-col>
       </v-row>
