@@ -159,28 +159,35 @@
                       <v-icon color="blue" class="mr-1">mdi-chart-gantt</v-icon>능력치
                       <v-dialog v-model="dialog" width="600">
                         <template v-slot:activator="{ on }">
-                          <v-btn class="ma-2" outlined x-small fab color="pink" v-on="on" ><v-icon>mdi-help</v-icon></v-btn>
+                          <v-btn class="ma-2" outlined x-small fab color="pink" v-on="on">
+                            <v-icon>mdi-help</v-icon>
+                          </v-btn>
                         </template>
 
                         <v-card>
-                          <v-card-title class="headline grey lighten-2"  primary-title >
+                          <v-card-title class="headline grey lighten-2" primary-title>
                             <v-icon>mdi-information</v-icon>능력치 측정 기준
                           </v-card-title>
-                          <v-card-text><br>
-                            *영향력:<b>언급수 (커뮤니티 + 뉴스), 구독자수, 조회수</b>에 의해 결정됩니다
-                            <br><br>
-                            *활동력:<b>최근 영상 주기</b>에 의해 결정됩니다
-                            <br><br>
-                            *영상조회수증감추이:<b>한 달전의 조회수 변화 비율과 구독자 수</b>에 의해 결정됩니다
-                            <br><br>
-                            *구독자증감추이:<b>한 달전의 구독자 변화 비율과 구독자 수</b>에 의해 결정됩니다
-                            <br><br>
-                            *호감도:<b>최근 영상 10개의 좋아요, 싫어요 비율</b>에 의해 결정됩니다
+                          <v-card-text>
+                            <br />*영향력:
+                            <b>언급수 (커뮤니티 + 뉴스), 구독자수, 조회수</b>에 의해 결정됩니다
+                            <br />
+                            <br />*활동력:
+                            <b>최근 영상 주기</b>에 의해 결정됩니다
+                            <br />
+                            <br />*영상조회수증감추이:
+                            <b>한 달전의 조회수 변화 비율과 구독자 수</b>에 의해 결정됩니다
+                            <br />
+                            <br />*구독자증감추이:
+                            <b>한 달전의 구독자 변화 비율과 구독자 수</b>에 의해 결정됩니다
+                            <br />
+                            <br />*호감도:
+                            <b>최근 영상 10개의 좋아요, 싫어요 비율</b>에 의해 결정됩니다
                           </v-card-text>
                           <v-divider></v-divider>
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="primary" text @click="dialog = false" >닫기</v-btn>
+                            <v-btn color="primary" text @click="dialog = false">닫기</v-btn>
                           </v-card-actions>
                         </v-card>
                       </v-dialog>
@@ -615,31 +622,37 @@
             <!-- 태그 클라우드 -->
             <v-card outlined flat class="pa-4 pt-0 mb-3">
               <v-row>
-                <v-col class="ma-5 mx-0">
+                <v-col class="ma-2 ma-3 mx-0 mx-0">
                   <v-list-item-title class="headline font-weight-black mb-1">
                     <v-icon color="pink lighten-3">mdi-weather-cloudy</v-icon>태그 클라우드
                   </v-list-item-title>
                   <v-divider></v-divider>
                 </v-col>
               </v-row>
-              <v-row>
+              <v-row align="center">
                 <wordcloud
                   :data="tagCloud"
                   nameKey="name"
                   valueKey="value"
                   :showTooltip="false"
                   :wordClick="wordClickHandler"
-                  margin-top="2"
-                  margin-bottom="2"
-                  margin-left="2"
-                  margin-right="2"
+                  margin-top="0"
+                  margin-bottom="0"
+                  margin-left="0"
+                  margin-right="0"
                   :rotate="rotate"
                   :fontSize="fontsize"
                   font="Jua"
-                  />
+                  v-if="tagCloud.length > 0"
+                />
+                <v-alert
+                  type="info"
+                  dense
+                  outlined
+                  style="margin-left: auto; margin-right: auto;"
+                >태그가 없습니다!</v-alert>
               </v-row>
             </v-card>
-
 
             <!-- 최신뉴스 -->
             <v-card outlined flat class="pa-4 pt-0">
@@ -651,22 +664,32 @@
                   <v-divider></v-divider>
                 </v-col>
               </v-row>
-              <v-hover
-                v-slot:default="{ hover }"
-                open-delay="100"
-                v-for="i in ((news.length >= 5)?[0,1,2,3,4]:news.slice(0,news.length))"
-                :key="i"
-              >
-                <v-card class="my-3 px-2" :elevation="hover ? 7 : 0">
-                  <v-list-item-content class="px-3">
-                    <v-list-item-title class="mb-1 text-truncate">
-                      <a target="_blank" :href="news[i].newsLink" v-html="news[i].newsTitle"></a>
-                    </v-list-item-title>
-                    <v-list-item-subtitle class="mb-3" align="right">{{news[i].newsDate}}</v-list-item-subtitle>
-                    <span v-html="news[i].newsDescription.substring(0,100).concat('...')"></span>
-                  </v-list-item-content>
-                </v-card>
-              </v-hover>
+              <v-row v-if="news.length > 0">
+                <v-hover
+                  v-slot:default="{ hover }"
+                  open-delay="100"
+                  v-for="i in ((news.length >= 5)?[0,1,2,3,4]:news.slice(0,news.length))"
+                  :key="i"
+                >
+                  <v-card class="my-3 px-2" :elevation="hover ? 7 : 0">
+                    <v-list-item-content class="px-3">
+                      <v-list-item-title class="mb-1 text-truncate">
+                        <a target="_blank" :href="news[i].newsLink" v-html="news[i].newsTitle"></a>
+                      </v-list-item-title>
+                      <v-list-item-subtitle class="mb-3" align="right">{{news[i].newsDate}}</v-list-item-subtitle>
+                      <span v-html="news[i].newsDescription.substring(0,100).concat('...')"></span>
+                    </v-list-item-content>
+                  </v-card>
+                </v-hover>
+              </v-row>
+              <v-row>
+                <v-alert
+                  type="info"
+                  dense
+                  outlined
+                  style="margin-left: auto; margin-right: auto;"
+                >뉴스가 없습니다!</v-alert>
+              </v-row>
             </v-card>
           </v-col>
         </v-row>
@@ -680,7 +703,7 @@ import http from "../vuex/http-common";
 import Constant from "../vuex/Constant";
 import InfiniteLoading from "vue-infinite-loading";
 import tc from "thousands-counter";
-import wordcloud from 'vue-wordcloud'
+import wordcloud from "vue-wordcloud";
 
 export default {
   name: "youtuberPage",
@@ -710,7 +733,7 @@ export default {
   },
   methods: {
     wordClickHandler(name, value, vm) {
-      console.log('wordClickHandler', name, value, vm);
+      console.log("wordClickHandler", name, value, vm);
       this.$router.push({ path: "searchPage", query: { word: name } });
     },
     manageFav() {
@@ -787,29 +810,33 @@ export default {
       var charm = this.youtuber.charm;
 
       var tagsDict = JSON.parse(this.youtuber.tagCloud);
-      var size = Object.keys(tagsDict).length + 2;
-      var tagsList = Object.values(tagsDict).sort().reverse();
-      tagsList.push(100)
-      tagsList.push(0)
-      for(var n in tagsDict){
-        var tempDict = {}
-        var index = -1
-        tempDict['name'] = n;
-        for(var i in tagsList){
-          if(tagsList[i] == tagsDict[n]){
-            index = i+1;
-            break;
+      if (tagsDict != null) {
+        var size = Object.keys(tagsDict).length + 2;
+        var tagsList = Object.values(tagsDict)
+          .sort()
+          .reverse();
+        tagsList.push(100);
+        tagsList.push(0);
+        for (var n in tagsDict) {
+          var tempDict = {};
+          var index = -1;
+          tempDict["name"] = n;
+          for (var i in tagsList) {
+            if (tagsList[i] == tagsDict[n]) {
+              index = i + 1;
+              break;
+            }
           }
+          tempDict["value"] = ((size - index) * 100) / size;
+          this.tagCloud.push(tempDict);
         }
-        tempDict['value'] = (size-(index))*100/size;
-        this.tagCloud.push(tempDict);
+        var temp = {};
+        temp["name"] = "";
+        temp["value"] = "100";
+        this.tagCloud.push(temp);
+        temp["value"] = "0";
+        this.tagCloud.push(temp);
       }
-      var temp = {}
-      temp['name'] = ''
-      temp['value'] = '100'
-      this.tagCloud.push(temp)
-      temp['value'] = '0'
-      this.tagCloud.push(temp)
       this.mainData = [
         {
           name: " ",
@@ -818,7 +845,7 @@ export default {
             activity,
             viewCountTrend,
             subscriberCountTrend,
-            charm,
+            charm
           ]
         }
       ];
@@ -1027,46 +1054,49 @@ export default {
         animations: {
           enabled: false
         },
-        tooltip:{
+        tooltip: {
           // shared: false,
           intersect: true,
           enabled: true,
           followCursor: true,
           fillSeriesColor: true,
-          marker:{
+          marker: {
             show: true
           },
           // onDatasetHover: {
           //   highlightDataSeries: true,
           // },
-          custom: function({series, seriesIndex, dataPointIndex}) {
-            
-            var result = '<div class="arrow_box"><span>'
+          custom: function({ series, seriesIndex, dataPointIndex }) {
+            var result = '<div class="arrow_box"><span>';
             switch (dataPointIndex) {
               case 0: // 영향력
-                result += '영향력은 <b>"언급수 (커뮤니티 + 뉴스), 구독자수, 조회수"</b>에 의해 결정됩니다.'
+                result +=
+                  '영향력은 <b>"언급수 (커뮤니티 + 뉴스), 구독자수, 조회수"</b>에 의해 결정됩니다.';
                 break;
               case 1: // 활동력
-                result += '활동력은 <b>"최근 영상 주기"</b>에 의해 결정됩니다.'
+                result += '활동력은 <b>"최근 영상 주기"</b>에 의해 결정됩니다.';
                 break;
               case 2: // 영상조회수증감추이
-                result += '영상조회수증감추이는 <b>"한 달전의 조회수 변화 비율과 구독자 수"</b>에 의해 결정됩니다.'
+                result +=
+                  '영상조회수증감추이는 <b>"한 달전의 조회수 변화 비율과 구독자 수"</b>에 의해 결정됩니다.';
                 break;
               case 3: // 구독자증감추이
-                result += '구독자증감추이는 <b>"한 달전의 구독자 변화 비율과 구독자 수"</b>에 의해 결정됩니다.'
+                result +=
+                  '구독자증감추이는 <b>"한 달전의 구독자 변화 비율과 구독자 수"</b>에 의해 결정됩니다.';
                 break;
               case 4: // 호감도
-                result += '호감도는 <b>"최근 영상 10개의 좋아요, 싫어요 비율"</b>에 의해 결정됩니다.'
+                result +=
+                  '호감도는 <b>"최근 영상 10개의 좋아요, 싫어요 비율"</b>에 의해 결정됩니다.';
                 break;
               default:
-                console.log(series, seriesIndex)
+                console.log(series, seriesIndex);
             }
-            return result + '</span></div>'
+            return result + "</span></div>";
           },
-          x:{
-            show:true
+          x: {
+            show: true
           }
-        },
+        }
       },
       activityOptions: {
         series: [],
@@ -1235,10 +1265,10 @@ export default {
       page: 0,
       videolist: [],
       loginStatus: false,
-      myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
-      tagCloud : [],
+      myColors: ["#1f77b4", "#629fc9", "#94bedb", "#c9e0ef"],
+      tagCloud: [],
       rotate: { from: 0, to: 0, numOfOrientation: 5 },
-      fontsize: [15, 54],
+      fontsize: [10, 45]
     };
   }
 };
