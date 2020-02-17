@@ -651,6 +651,7 @@
                   dense
                   outlined
                   style="margin-left: auto; margin-right: auto;"
+                  v-else
                 >태그가 없습니다!</v-alert>
               </v-row>
             </v-card>
@@ -683,7 +684,7 @@
                   </v-card>
                 </v-hover>
               </v-row>
-              <v-row>
+              <v-row v-else>
                 <v-alert
                   type="info"
                   dense
