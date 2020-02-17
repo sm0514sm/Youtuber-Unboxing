@@ -6,111 +6,126 @@
     elevate-on-scroll
     scroll-threshold="500"
     v-scroll="onScroll"
-    class="pa-0"
   >
-    <!-- 로고 -->
-    <v-col class="pa-0">
+    <v-col cols="2" class="pa-0">
       <v-img
         :src="require('@/assets/logo.png')"
-        class
         contain
         height="60"
         width="185"
         max-width="185"
         @click="gotoHome"
+        style="cursor:pointer"
       />
     </v-col>
-    <!-- 메뉴 -->
-    <v-col cols="5">
+    <v-col cols="6">
       <v-row>
-        <input-component></input-component>
-        <v-col cols="3" align="center">
-          <v-btn depressed>test</v-btn>
-        </v-col>
-        <v-col cols="3" align="center">
-          <v-btn depressed>
-            <b>test</b>
+        <v-col cols="2" class="mr-5">
+          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/categoryPage')">
+            <span style="text-shadow: 0 0 2px #000;">Category</span>
           </v-btn>
         </v-col>
-        <v-col cols="3" align="center">
-          <v-btn depressed>
-            <i>test</i>
+        <v-col cols="2" class="ml-3">
+          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/rankPage')">
+            <span style="text-shadow: 0 0 2px #000;">RANK</span>
           </v-btn>
+        </v-col>
+        <v-col cols="2" class="mr-0 ml-0">
+          <v-btn dark text style="font-size: 20px;">
+            <span style="text-shadow: 0 0 2px #000;">ABOUT US</span>
+          </v-btn>
+        </v-col>
+        <v-col class="ml-3 my-0 py-0">
+          <input-component></input-component>
         </v-col>
       </v-row>
     </v-col>
-    <!-- 텍스트필드 -->
-    <!-- 검색 -->
 
-    <v-col v-if="this.$route.path =='/'"></v-col>
+    <v-col cols="4" class="pr-0" align="right">
+      <v-flex>
+        <v-layout align-center justify-end row fill-height>
+          <v-autocomplete
+            :items="searchItems"
+            :search-input.sync="inputKeyword"
+            hide-details
+            item-text="channelName"
+            item-value="channelName"
+            @keyup.enter="search"
+            ref="keyword"
+            id="keyword"
+            label="유튜버를 검색해보세요"
+            style="max-width: 210px; "
+            solo-inverted
+            flat
+            v-if="$route.path != '/'"
+            align="center"
+            class="justify-center"
+          >
+            <template v-slot:no-data>
+              <v-list-item>
+                <v-list-item-title>검색 결과가 없습니다!</v-list-item-title>
+              </v-list-item>
+            </template>
 
-    <v-col align="right">
-      <v-img
-        v-if="loginStatus == false"
-        :src="require('@/assets/kakao.png')"
-        class
-        contain
-        height="50"
-        width="100"
-        max-width="100"
-        @click="login()"
-      />
-      <v-dialog v-model="dialog" persistent max-width="600px">
-        <template v-if="loginStatus" v-slot:activator="{ on }">
-          <v-btn class="ma-2" color="indigo" large outlined dark v-on="on">
-            <v-icon left>mdi-logout</v-icon>LOGOUT
+            <template v-slot:item="{ item }">
+              <v-list-item-avatar color="red" class="headline font-weight-light white--text">
+                <img :src="item.thumbnails" alt="John" />
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.channelName"></v-list-item-title>
+                <v-list-item-subtitle>구독자 : {{tc(item.subscriber)}}</v-list-item-subtitle>
+              </v-list-item-content>
+            </template>
+          </v-autocomplete>
+
+          <!-- <div v-if="loginStatus == true">
+            loginStatus == true
+            <v-btn class="ma-2" color="white" large outlined dark v-on="on">
+                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그아웃
+              </v-btn>
+          </div>
+          <div v-else>
+            loginStatus == false
+          </div> -->
+
+            <!-- 카카오로그인 -->
+          <v-btn
+            @click="login()"
+            class="ma-2 font-weight-black"
+            large
+            dark
+            color="#F8E211"
+            v-if="loginStatus == false"
+          >
+            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그인
           </v-btn>
-          <v-btn class="ma-2" color="indigo" large outlined dark @click="gotoMember()">
-            <v-icon left>mdi-account</v-icon>MY INFO
-          </v-btn>
-        </template>
-        <v-card>
-          <v-card-title>
-            <span class="headline">LogoutModal</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>정말로 로그아웃 하겠습니까?</v-container>
-            <small>*indicates required field</small>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">No</v-btn>
-            <v-btn color="blue darken-1" text @click="logout()">Yes</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-col>
-    <v-col v-if="this.$route.path !='/'">
-      <v-autocomplete
-        :items="searchItems"
-        :search-input.sync="inputKeyword"
-        hide-details
-        item-text="channelName"
-        item-value="channelName"
-        @keyup.enter="search"
-        ref="keyword"
-        id="keyword"
-        label="유튜버를 검색해보세요"
-        style="max-width: 300px; "
-        solo-inverted
-        flat
-      >
-        <template v-slot:no-data>
-          <v-list-item>
-            <v-list-item-title>검색 결과가 없습니다.</v-list-item-title>
-          </v-list-item>
-        </template>
-
-        <template v-slot:item="{ item }">
-          <v-list-item-avatar color="red" class="headline font-weight-light white--text">
-            <img :src="item.thumbnails" alt="John" />
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.channelName"></v-list-item-title>
-            <v-list-item-subtitle>구독자 : {{tc(item.subscriber)}}</v-list-item-subtitle>
-          </v-list-item-content>
-        </template>
-      </v-autocomplete>
+          <v-dialog v-if="loginStatus" v-model="dialog" persistent max-width="600px">
+            <template v-slot:activator="{ on }">
+              <v-btn class="ma-2 font-weight-black" color="#F8E211" large dark v-on="on">
+                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그아웃
+              </v-btn>
+              <v-btn class="ma-2 font-weight-black" color="#F8E211" large dark @click="gotoPage('/memberPage')" >
+                <v-icon left>mdi-account</v-icon>회원정보
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="headline">LogoutModal</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container>정말로 로그아웃 하겠습니까?</v-container>
+                <small>*indicates required field</small>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="dialog = false">No</v-btn>
+                <v-btn color="blue darken-1" text @click="logout()">Yes</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-layout>
+      </v-flex>
+      <!-- 검색 -->
     </v-col>
   </v-app-bar>
 </template>
@@ -139,26 +154,36 @@ export default {
       return this.$store.state.idleVue.isIdle;
     }
   },
-
   mounted() {
+    console.log("loginStatus:" + this.loginStatus);
+    console.log(this.$session);
+    console.log(this.$session.get("token"));
+    console.log();
     if (!this.$session.exists()) {
       this.loginStatus = false;
+      console.log("no session");
     } else {
       if (this.$session.get("token")) {
         this.loginStatus = true;
       }
     }
+    console.log(this.$route.query);
     var token = this.$route.query.access_Token;
     if (token != undefined) {
       this.$session.start();
       this.$session.set("token", token);
       this.loginStatus = true;
+      console.log("token:" + this.$session.get("token"));
       this.$router.push("/");
     }
   },
+  created() {
+    console.log("***********");
+    console.log();
+  },
   methods: {
-    gotoMember() {
-      this.$router.push("/memberPage");
+    gotoPage(address) {
+      this.$router.push(address);
     },
     login() {
       window.location.href =
@@ -166,6 +191,7 @@ export default {
     },
     logout() {
       let a;
+
       let result = new Promise((resolve, reject) => {
         http
           .get("/logout/" + this.$session.get("token"))
@@ -173,6 +199,7 @@ export default {
             a = response.data.data.responseCode;
             if (a == "200") {
               this.$session.destroy();
+              console.log(this.$route.query);
               if (this.$route.path == "/memberPage") {
                 this.$router.push("/");
               }
@@ -218,7 +245,7 @@ export default {
     },
     onScroll() {
       var scroll = window.pageYOffset;
-      var value = "#cdcdcd";
+      var value = "#FF6868";
       var position = 250;
       if (scroll >= position) {
         value += "ff";
