@@ -90,7 +90,7 @@
           class="material-icons"
           color="deep-purple"
         >mdi-palette</v-icon>
-        <div class="categoryName" @click="onCategoryButtonClicked(3)">노하우</div>
+        <div class="categoryName" @click="onCategoryButtonClicked(3)">스타일</div>
       </div>
       <div class="categorySet">
         <v-icon

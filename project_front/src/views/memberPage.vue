@@ -220,11 +220,13 @@
           <v-hover v-slot:default="{ hover }" open-delay="100">
             <v-card
               :elevation="hover ? 9 : 3"
-              class="mx-auto"
+              class="card-outter"
               height="100%"
               color
               @click="goTo(card.yno)"
             >
+            <v-img :src="card.bannerImageLink" class="my-3">
+            </v-img>
               <v-list-item>
                 <v-list-item-avatar size="100">
                   <img :src="card.thumbnails" alt="thumnnail" />
@@ -235,23 +237,19 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-card-text>{{card.channelDescription | truncate(100," ...")}}</v-card-text>
+              <v-card-text class="my-3">{{card.channelDescription | truncate(100," ...")}}</v-card-text>
 
-              <v-card-actions>
+              <v-card-actions class="card-actions">
                 <v-chip class="ma-2" color="#30A9DE" text-color="white">
                   <v-icon left>mdi-account-multiple-outline</v-icon>
-
                   구독자 {{tc(card.subscriber)}}
                 </v-chip>
                 <v-chip class="ma-2" color="#EFDC05" text-color="white">
                   <v-icon left>mdi-animation-play-outline</v-icon>
-
                   시청수 {{tc(card.totalViewCount)}}
                 </v-chip>
-
                 <v-chip class="ma-2" color="#E53A40" text-color="white">
                   <v-icon left>mdi-youtube-subscription</v-icon>
-
                   영상수 {{card.totalVideoCount}}
                 </v-chip>
 
@@ -447,6 +445,7 @@ import tc from 'thousands-counter';
         http.get("/interest/search/recommend/"+link)
         .then(res=>{
           this.recommend = res.data.data
+          console.log(this.recommend)
           http.get("/interest/insert/"+link).then(res=>{
             console.log(res)
           })
@@ -499,6 +498,14 @@ import tc from 'thousands-counter';
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.card-actions {
+  position: absolute;
+  bottom: 0;
+}
+.card-outter {
+  position: relative;
+  padding-bottom: 50px;
 }
 .circle{
   border-radius: 50%;
