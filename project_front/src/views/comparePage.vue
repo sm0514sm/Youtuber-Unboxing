@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!--main하고 합니다-->
     <h1>comparePage</h1>
     <!-- header -->
     <v-row>
@@ -10,77 +11,93 @@
               <v-row>
                 <!-- youtuber1 기본정보-->
                 <v-col cols="5.5">
-                  <v-row>
-                    <v-col cols="5" class="pa-3" align="center" justify="center">
-                      <v-img class="circle" :src="youtuber1.thumbnails" flat :aspect-ratio="1/1" />
-                    </v-col>
-                    <v-col cols="7" class="pb-0">
-                      <v-row style="height :45%">
-                        <v-col class="px-0">
-                          <p class="font-weight-black thin ma-0 headline">{{youtuber1.channelName}}</p>
-                        </v-col>
-                      </v-row>
-                      <v-divider class="ma-0"></v-divider>
-                      <v-row>
-                        <v-col cols="7">
-                          <v-row>
+                  <v-card
+                    flat
+                    elevation="0"
+                    :to="{ path: 'youtuberPage', query: { yno : youtuber1.yno}}"
+                  >
+                    <v-row>
+                      <v-col cols="5" class="pa-3" align="center" justify="center">
+                        <v-img class="circle" :src="youtuber1.thumbnails" flat :aspect-ratio="1/1" />
+                      </v-col>
+                      <v-col cols="7" class="pb-0 pl-3">
+                        <v-row style="height :45%">
+                          <v-col class="px-0">
                             <p
                               class="font-weight-black thin ma-0 headline"
-                            >{{youtuber1.publishedDate}}</p>
-                          </v-row>
-                          <v-row class="mt-5" style="float: left;">
-                            <!-- instagram -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon1[0] != '' "
-                              src="../assets/instagramIcon.png"
-                              @click="openNewWindow(otherLinkIcon1[0])"
-                              style="cursor:pointer"
-                            />
-                            <!-- twitter -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon1[1] != '' "
-                              src="../assets/twitterIcon.png"
-                              @click="openNewWindow(otherLinkIcon1[1])"
-                              style="cursor:pointer"
-                            />
-                            <!-- facebook -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon1[2] != '' "
-                              src="../assets/facebookIcon.png"
-                              @click="openNewWindow(otherLinkIcon1[2])"
-                              style="cursor:pointer"
-                            />
-                            <!-- tiktok -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon1[3] != '' "
-                              src="../assets/tiktokIcon.png"
-                              @click="openNewWindow(otherLinkIcon1[3])"
-                              style="cursor:pointer"
-                            />
-                          </v-row>
-                        </v-col>
-                        <v-col cols="5">
-                          <v-btn
-                            fab
-                            :color="setGradeColor(youtuber1.grade)"
-                            style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
-                          >
-                            <p
-                              style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px;"
-                            >{{setGrade(youtuber1.grade)}}</p>
-                          </v-btn>
-                        </v-col>
-                      </v-row>
-                    </v-col>
-                  </v-row>
+                            >{{youtuber1.channelName}}</p>
+                          </v-col>
+                        </v-row>
+                        <v-divider class="ma-0"></v-divider>
+                        <v-row>
+                          <v-col cols="7">
+                            <v-row class="pl-0">
+                              <p
+                                class="font-weight-black thin ma-0 headline"
+                              >{{youtuber1.publishedDate}}</p>
+                            </v-row>
+                            <v-row align="center" class="mt-5" style="float: left;">
+                              <!-- youtuber -->
+                              <v-img
+                                width="32px"
+                                class="ml-1 mr-1 my-3"
+                                src="../assets/youtubeIcon.png"
+                                @click="openNewWindow(youtuber1.channelLink)"
+                                style="cursor:pointer"
+                              />
+                              <!-- instagram -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon1[0] != '' "
+                                src="../assets/instagramIcon.png"
+                                @click="openNewWindow(otherLinkIcon1[0])"
+                                style="cursor:pointer"
+                              />
+                              <!-- twitter -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon1[1] != '' "
+                                src="../assets/twitterIcon.png"
+                                @click="openNewWindow(otherLinkIcon1[1])"
+                                style="cursor:pointer"
+                              />
+                              <!-- facebook -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon1[2] != '' "
+                                src="../assets/facebookIcon.png"
+                                @click="openNewWindow(otherLinkIcon1[2])"
+                                style="cursor:pointer"
+                              />
+                              <!-- tiktok -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon1[3] != '' "
+                                src="../assets/tiktokIcon.png"
+                                @click="openNewWindow(otherLinkIcon1[3])"
+                                style="cursor:pointer"
+                              />
+                            </v-row>
+                          </v-col>
+                          <v-col cols="5">
+                            <v-btn
+                              fab
+                              :color="setGradeColor(youtuber1.grade)"
+                              style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
+                            >
+                              <p
+                                style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px;"
+                              >{{setGrade(youtuber1.grade)}}</p>
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-col>
+                    </v-row>
+                  </v-card>
                 </v-col>
 
                 <v-col cols="1" align="center">
@@ -89,78 +106,94 @@
 
                 <!-- youtuber2 기본정보-->
                 <v-col cols="5.5">
-                  <v-row>
-                    <v-col cols="7" class="pb-0">
-                      <v-row style="height :45%">
-                        <v-col align="right">
-                          <p class="font-weight-black thin ma-0 headline">{{youtuber2.channelName}}</p>
-                        </v-col>
-                      </v-row>
-                      <v-divider class="ma-0"></v-divider>
-                      <v-row>
-                        <v-col cols="5">
-                          <v-btn
-                            fab
-                            :color="setGradeColor(youtuber2.grade)"
-                            style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
-                          >
-                            <p
-                              style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px; text-align: right;"
-                            >{{setGrade(youtuber2.grade)}}</p>
-                          </v-btn>
-                        </v-col>
-                        <v-col cols="7">
-                          <v-row class="pl-7">
+                  <v-card
+                    flat
+                    elevation="0"
+                    :to="{ path: 'youtuberPage', query: { yno : youtuber2.yno}}"
+                  >
+                    <v-row>
+                      <v-col cols="7" class="pb-0">
+                        <v-row style="height :45%">
+                          <v-col align="right">
                             <p
                               class="font-weight-black thin ma-0 headline"
-                              style="text-align='right'"
-                            >{{youtuber2.publishedDate}}</p>
-                          </v-row>
-                          <v-row align="center" class="mt-5" style="float: left;">
-                            <!-- instagram -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon2[0] != '' "
-                              src="../assets/instagramIcon.png"
-                              @click="openNewWindow(otherLinkIcon2[0])"
-                              style="cursor:pointer"
-                            />
-                            <!-- twitter -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon2[1] != '' "
-                              src="../assets/twitterIcon.png"
-                              @click="openNewWindow(otherLinkIcon2[1])"
-                              style="cursor:pointer"
-                            />
-                            <!-- facebook -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon2[2] != '' "
-                              src="../assets/facebookIcon.png"
-                              @click="openNewWindow(otherLinkIcon2[2])"
-                              style="cursor:pointer"
-                            />
-                            <!-- tiktok -->
-                            <v-img
-                              width="32px"
-                              class="mx-1"
-                              v-if="otherLinkIcon2[3] != '' "
-                              src="../assets/tiktokIcon.png"
-                              @click="openNewWindow(otherLinkIcon2[3])"
-                              style="cursor:pointer"
-                            />
-                          </v-row>
-                        </v-col>
-                      </v-row>
-                    </v-col>
-                    <v-col cols="5" class="pa-3" align="center" justify="center">
-                      <v-img class="circle" :src="youtuber2.thumbnails" flat :aspect-ratio="1/1" />
-                    </v-col>
-                  </v-row>
+                            >{{youtuber2.channelName}}</p>
+                          </v-col>
+                        </v-row>
+                        <v-divider class="ma-0"></v-divider>
+                        <v-row>
+                          <v-col cols="5">
+                            <v-btn
+                              fab
+                              :color="setGradeColor(youtuber2.grade)"
+                              style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 50%;"
+                            >
+                              <p
+                                style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px; text-align: right;"
+                              >{{setGrade(youtuber2.grade)}}</p>
+                            </v-btn>
+                          </v-col>
+                          <v-col cols="7">
+                            <v-row class="pl-7">
+                              <p
+                                class="font-weight-black thin ma-0 headline"
+                                style="text-align='right'"
+                              >{{youtuber2.publishedDate}}</p>
+                            </v-row>
+                            <v-row align="center" class="mt-5" style="float: left;">
+                              <!-- youtuber -->
+                              <v-img
+                                width="32px"
+                                class="ml-1 mr-1 my-3"
+                                src="../assets/youtubeIcon.png"
+                                @click="openNewWindow(youtuber2.channelLink)"
+                                style="cursor:pointer"
+                              />
+                              <!-- instagram -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon2[0] != '' "
+                                src="../assets/instagramIcon.png"
+                                @click="openNewWindow(otherLinkIcon2[0])"
+                                style="cursor:pointer"
+                              />
+                              <!-- twitter -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon2[1] != '' "
+                                src="../assets/twitterIcon.png"
+                                @click="openNewWindow(otherLinkIcon2[1])"
+                                style="cursor:pointer"
+                              />
+                              <!-- facebook -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon2[2] != '' "
+                                src="../assets/facebookIcon.png"
+                                @click="openNewWindow(otherLinkIcon2[2])"
+                                style="cursor:pointer"
+                              />
+                              <!-- tiktok -->
+                              <v-img
+                                width="32px"
+                                class="mx-1"
+                                v-if="otherLinkIcon2[3] != '' "
+                                src="../assets/tiktokIcon.png"
+                                @click="openNewWindow(otherLinkIcon2[3])"
+                                style="cursor:pointer"
+                              />
+                            </v-row>
+                          </v-col>
+                        </v-row>
+                      </v-col>
+                      <v-col cols="5" class="pa-3" align="center" justify="center">
+                        <v-img class="circle" :src="youtuber2.thumbnails" flat :aspect-ratio="1/1" />
+                      </v-col>
+                    </v-row>
+                  </v-card>
                 </v-col>
               </v-row>
             </v-card>
@@ -176,7 +209,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1">수치별 비교</v-list-item-title>
+                <v-list-item-title class=" mb-1">수치별 비교</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -521,11 +554,37 @@
         </v-hover>
       </v-col>
     </v-row>
+
+    <!-- 누적조회수 증감 추이 -->
+    <v-row>
+      <v-col>
+        <v-hover v-slot:default="{ hover }" open-delay="100">
+          <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
+            <v-row>
+              <v-col class="ma-0 mt-5">
+                <v-list-item-title class="headline font-weight-black mb-1">누적 조회수 증감 추이</v-list-item-title>
+                <v-divider></v-divider>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <apexchart
+                  height="200"
+                  :options="totalViewDiffOptions"
+                  :series="totalViewDiffData"
+                ></apexchart>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-hover>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import Constant from "../vuex/Constant";
+import tc from "thousands-counter";
 
 export default {
   components: {},
@@ -874,8 +933,33 @@ export default {
         );
       }
 
+      //viewDiff
+      this.totalViewDiffData = [
+        {
+          name: this.youtuber1.channelName,
+          data: []
+        },
+        {
+          name: this.youtuber2.channelName,
+          data: []
+        }
+      ];
+
+      for (let index = 0; index < subscriberView1.length; index++) {
+        this.totalViewDiffData[0]["data"].push(
+          subscriberView1[index].difView
+        );
+        this.totalViewDiffData[1]["data"].push(
+          subscriberView2[index].difView
+        );
+        this.totalViewDiffOptions["xaxis"]["categories"].push(
+          subscriberView1[index].recordDate.substring(5, 10)
+        );
+      }
+
       //otherLink
-      // this.makeOtherLinkIcon();
+      this.makeOtherLinkIcon();
+      console.log("6666");
 
       this.check();
     },
@@ -898,7 +982,75 @@ export default {
       }
     },
     getChartOption(str) {
-      return {
+      if(str == "총영상수"){
+        return {
+        chart: {
+          type: "bar",
+          height: 180,
+          toolbar: {
+            show: false
+          }
+        },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            dataLabels: {
+              position: "top"
+            }
+          }
+        },
+        dataLabels: {
+          enabled: true,
+          offsetX: -6,
+          style: {
+            fontSize: "12px",
+            colors: ["#fff"]
+          },
+          formatter: value => {
+            return tc(value);
+          }
+        },
+        stroke: {
+          show: true,
+          width: 1,
+          colors: ["#fff"]
+        },
+        xaxis: {
+          labels: {
+            show: false
+          },
+          categories: [str]
+        },
+        yaxis: {
+          show: false
+        },
+        legend: {
+          show: true
+        },
+        title: {
+          text: str,
+          align: "center",
+          margin: 0,
+          offsetX: 0,
+          offsetY: 0,
+          floating: false,
+          style: {
+            fontSize: "17px",
+            fontWeight: "bold",
+            color: "black"
+          }
+        },
+        tooltip: {
+          y: {
+            formatter: function(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+          }
+        }
+      };
+
+      }else{
+        return {
         chart: {
           type: "bar",
           height: 150,
@@ -920,6 +1072,9 @@ export default {
           style: {
             fontSize: "12px",
             colors: ["#fff"]
+          },
+          formatter: value => {
+            return tc(value);
           }
         },
         stroke: {
@@ -951,10 +1106,20 @@ export default {
             fontWeight: "bold",
             color: "black"
           }
+        },
+        tooltip: {
+          y: {
+            formatter: function(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+          }
         }
       };
+      }
+      
     },
     makeOtherLinkIcon() {
+      console.log("sdfsdfsdf**************dfsdf**");
       var site = ["instagram", "twitter", "facebook", "tiktok"];
       var y1 = this.youtuber1;
       var link1 = [
@@ -971,6 +1136,26 @@ export default {
         for (let j = 0; j < site.length; j++) {
           if (link1[i].indexOf(site[j]) != -1) {
             this.otherLinkIcon1[j] = link1[i];
+            break;
+          }
+        }
+      }
+
+      var y2 = this.youtuber2;
+      var link2 = [
+        y2.otherLink1,
+        y2.otherLink2,
+        y2.otherLink3,
+        y2.otherLink4,
+        y2.otherLink5
+      ];
+
+      this.otherLinkIcon2 = ["", "", "", ""];
+
+      for (let i = 0; i < link2.length; i++) {
+        for (let j = 0; j < site.length; j++) {
+          if (link2[i].indexOf(site[j]) != -1) {
+            this.otherLinkIcon2[j] = link2[i];
             break;
           }
         }
@@ -994,8 +1179,14 @@ export default {
         return "D";
       }
     },
-    failCallback(){
+    failCallback() {
       window.location.reload();
+    },
+    tc(num) {
+      return tc(num);
+    },
+    comma(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
   computed: {},
@@ -1127,6 +1318,21 @@ export default {
         },
         xaxis: {
           categories: []
+        },
+        tooltip: {
+          y: {
+            formatter: function(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+          }
+        },
+        yaxis: {
+          labels: {
+            show: true,
+            formatter: value => {
+              return tc(value);
+            }
+          }
         }
       },
       totalViewPeriodData: [],
@@ -1144,6 +1350,13 @@ export default {
         dataLabels: {
           enabled: false
         },
+        tooltip: {
+          y: {
+            formatter: function(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+          }
+        },
         stroke: {
           width: 3,
           curve: "smooth"
@@ -1159,10 +1372,66 @@ export default {
         },
         xaxis: {
           categories: []
+        },
+        yaxis: {
+          labels: {
+            show: true,
+            formatter: value => {
+              return tc(value);
+            }
+          }
         }
       },
       otherLinkIcon1: [],
-      otherLinkIcon2: []
+      otherLinkIcon2: [],
+      totalViewDiffData : [],
+      totalViewDiffOptions: {
+        series: [],
+        chart: {
+          type: "line",
+          zoom: {
+            enabled: false
+          },
+          toolbar: {
+            show: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        tooltip: {
+          y: {
+            formatter: function(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+          }
+        },
+        stroke: {
+          width: 3,
+          curve: "smooth"
+        },
+        title: {
+          align: "center"
+        },
+        grid: {
+          row: {
+            colors: ["#f3f3f3", "transparent"],
+            opacity: 0.5
+          }
+        },
+        xaxis: {
+          categories: []
+        },
+        yaxis: {
+          labels: {
+            show: true,
+            formatter: value => {
+              return tc(value);
+            }
+          }
+        }
+      },
+
     };
   }
 };

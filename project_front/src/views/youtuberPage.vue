@@ -47,6 +47,7 @@
                         color="blue"
                         @click="onCategoryButtonClicked(category.cano)"
                         justify="center"
+                        class="mr-1"
                       >
                         <b>{{category.name}}</b>
                       </v-btn>
