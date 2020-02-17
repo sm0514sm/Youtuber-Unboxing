@@ -3,9 +3,10 @@
                       https://vuetifyjs.com/ko/components/api-explorer
   -->
   <div>
+    <!-- :src="require('@/assets/twice.webm')" -->
     <video
+      :src="require('@/assets/bg' + bgNum + '.mp4')"
       class="bgvideo"
-      src="@/assets/bg2.mp4"
       alt="main-picture"
       width="100%"
       autoplay
@@ -329,7 +330,6 @@ export default {
     },
     startTypo() {
       const lifeCopy = "Youtuber Unboxing... ";
-      // const lifeCopy = '샤이니 이상해 나 배고파 배고파... ';
       let isRight = true;
       let idx = 9;
       setInterval(() => {
@@ -361,9 +361,10 @@ export default {
       inputKeyword: null
     };
   },
-  mounted() {
+  created() {
     this.startTypo();
     this.startCursor();
+    this.bgNum = Math.floor(Math.random() * 5 + 1);
   },
   watch: {
     inputKeyword() {
