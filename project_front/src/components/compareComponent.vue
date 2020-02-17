@@ -40,6 +40,10 @@
       </v-card>
       <v-row>
         <v-col align="right">
+          <v-btn @click="deleteAll" dark color="red" rounded class="mr-2">
+            전체삭제
+            <v-icon right>mdi-delete</v-icon>
+          </v-btn>
           <v-btn @click="gotoComparePage" color="primary" rounded>
             비교하기
             <v-icon right>near_me</v-icon>
@@ -74,6 +78,13 @@ export default {
       if (idx > -1) arr.splice(idx, 1);
       localStorage.setItem("compareYoutuber", JSON.stringify(arr));
       this.updateyoutubers();
+      EventBus.$emit("deleteCompare");
+    },
+    deleteAll: function() {
+      localStorage.setItem("compareYoutuber", "[]");
+      this.updateyoutubers();
+      EventBus.$emit("deleteCompare");
+
     },
     gotoComparePage: function() {
       var output = localStorage.getItem("compareYoutuber");

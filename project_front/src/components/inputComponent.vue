@@ -1,16 +1,24 @@
 <template>
-<v-col cols="3" align="center" >
+  <v-col cols="3" align="center">
     <v-dialog v-model="dialog" persistent max-width="550px">
       <template v-slot:activator="{ on }">
-        <v-btn style="font-size: 20px; text-shadow: 0 0 2px #000;" v-on="on" :loading="loading" :disabled="loading" color="white" text @click="init">
-          ADD YOUTUBER
-        </v-btn>
+        <v-btn
+          style="font-size: 20px; text-shadow: 0 0 2px #000;"
+          v-on="on"
+          :loading="loading"
+          :disabled="loading"
+          color="white"
+          text
+          @click="init"
+        >ADD YOUTUBER</v-btn>
       </template>
       <v-card class="pa-5">
         <v-card-title align="center" class="pa-0">
           <v-row>
-            <v-col class="mx-3">
-              <p class="display-2 font-weight-black italic font-italic">유튜버 추가하기</p>
+            <v-col class="mx-1">
+              <p class="display-2 font-weight-black">
+                <v-icon color="red" size="40">mdi-youtube</v-icon>유튜버 추가하기
+              </p>
             </v-col>
           </v-row>
         </v-card-title>
@@ -20,8 +28,11 @@
           <v-container v-if="nowPage == 'inputPage'">
             <v-row>
               <v-col cols="12">
-                원하는 유튜버의 주소를 복사해주세요...
-                <a target="_blank" href="https://www.youtube.com/">> 유튜브 페이지 이동</a>
+                원하는 유튜버의 채널 주소를 복사해주세요!
+                <br />
+                <a target="_blank" href="https://www.youtube.com/">
+                  <v-icon>mdi-youtube</v-icon>유튜브 페이지 이동
+                </a>
               </v-col>
               <v-col cols="12">
                 <v-img :src="require('@/assets/youtuberinsert.png')"></v-img>
@@ -98,26 +109,38 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="onCloseButton">Close</v-btn>
-          <v-btn v-if="nowPage == 'inputPage'" color="blue darken-1" text @click="onSendButton">SEND</v-btn>
+          <v-btn color="blue darken-1" text @click="onCloseButton">닫기</v-btn>
+          <v-btn v-if="nowPage == 'inputPage'" color="blue darken-1" text @click="onSendButton">추가하기</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
     <div class="text-center">
-      <v-snackbar class="ml-3" v-model="snackbar" :absolute="true" color='blue-grey lighten-3' :timeout="100000">
-        <v-progress-linear v-if="snackProgress" color="blue-grey" :buffer-value="0" :value="value" stream />
+      <v-snackbar
+        class="ml-3"
+        v-model="snackbar"
+        :absolute="true"
+        color="blue-grey lighten-3"
+        :timeout="100000"
+      >
+        <v-progress-linear
+          v-if="snackProgress"
+          color="blue-grey"
+          :buffer-value="0"
+          :value="value"
+          stream
+        />
         <v-icon large dark @click="snackbar = false">clear</v-icon>
       </v-snackbar>
     </div>
-</v-col>
+  </v-col>
 </template>
 <script>
 import Constant from "../vuex/Constant.js";
 import { AnimationCss, AnimationCssType } from "vue-animation";
 export default {
   components: {
-    [AnimationCss.name]: AnimationCss, 
+    [AnimationCss.name]: AnimationCss
   },
   name: "inputComponent",
   methods: {
@@ -130,9 +153,9 @@ export default {
         callback: this.processDispatch
       });
       this.intervalSetting();
-      this.snackbar = true
-      this.snackProgress = true
-      this.loader = 'loading'
+      this.snackbar = true;
+      this.snackProgress = true;
+      this.loader = "loading";
     },
     onCloseButton: function() {
       this.dialog = false;
@@ -173,22 +196,21 @@ export default {
           this.completeSmallTitle = "서버 에러";
         }
       }
-      this.snackbar = false
-      this.loader = null
-      this.loading = false
+      this.snackbar = false;
+      this.loader = null;
+      this.loading = false;
       clearInterval(this.getYnoInterval);
       clearInterval(this.getValueInterval);
       clearInterval(this.addValueInterval);
       this.nowPage = "completePage";
       this.$store.state.yno = 0;
-      this.snackProgress = false
-      console.log('snackbar : ', this.snackbar)
+      this.snackProgress = false;
+      console.log("snackbar : ", this.snackbar);
     },
     init: function() {
-      
       this.nowPage = "inputPage";
-      this.animationFlag = true
-      console.log(this.nowPage)
+      this.animationFlag = true;
+      console.log(this.nowPage);
     },
     gotoYoutuberPage: function() {
       this.dialog = false;
@@ -250,10 +272,10 @@ export default {
         }
       }, 1000);
     },
-    test :function() {
-      console.log("before"+this.snackbar)
-      this.snackbar = true
-      console.log("After"+this.snackbar)
+    test: function() {
+      console.log("before" + this.snackbar);
+      this.snackbar = true;
+      console.log("After" + this.snackbar);
     }
   },
   computed: {
@@ -283,11 +305,11 @@ export default {
       addValueInterval: "",
       pageCode: 0,
       AnimationType: AnimationCssType,
-      animationFlag : true,
+      animationFlag: true,
       snackbar: false,
       snackProgress: false,
-      y: 'top',
-      mode: '',
+      y: "top",
+      mode: "",
       loader: null,
       loading: false,
       ffalse: false
@@ -303,17 +325,17 @@ export default {
     clearInterval(this.addValueInterval);
   },
   watch: {
-    loader () {
-      const l = this.loader
-      this[l] = !this[l]
-      this.loader = null
-    },
-  },
+    loader() {
+      const l = this.loader;
+      this[l] = !this[l];
+      this.loader = null;
+    }
+  }
 };
 </script>
 <style scoped>
 .v-snack--bottom {
-    bottom: -650px;
+  bottom: -650px;
 }
 </style>
 
