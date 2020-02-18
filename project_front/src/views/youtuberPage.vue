@@ -51,7 +51,7 @@
                       >
                         <b>{{ category.name }}</b>
                       </v-btn>
-                      <v-btn rounded color="#fab1ce" v-if="loginStatus" @click="manageFav">
+                      <v-btn rounded color="#FF9A9A" v-if="loginStatus" @click="manageFav">
                         <b>즐겨찾기</b>
                         <v-icon color="red" v-if="flag" @click="deleteFav" x-large>mdi-heart</v-icon>
                         <v-icon
@@ -173,27 +173,24 @@
                           <v-card-text>
                             <br />
                             <v-icon class="mr-2">mdi-earth</v-icon>영향력 :
-                            <b>언급수 (커뮤니티 + 뉴스), 구독자수, 조회수</b>에
-                            의해 결정됩니다
+                            <b>언급수 (커뮤니티 + 뉴스), 구독자수, 영상 총 조회수</b>
+
                             <br />
                             <br />
                             <v-icon class="mr-2">mdi-newspaper-variant-multiple-outline</v-icon>활동력 :
-                            <b>최근 영상 주기</b>에 의해 결정됩니다
+                            <b>최근 영상 10개의 업로드 주기</b>
                             <br />
                             <br />
-                            <v-icon class="mr-2">mdi-chart-bar</v-icon>영상조회수증감추이 :
-                            <b>한 달전의 조회수 변화 비율과 구독자 수</b>에 의해
-                            결정됩니다
+                            <v-icon class="mr-2">mdi-chart-bar</v-icon>영상 조회수 증감 추이 :
+                            <b>한 달전의 조회수 변화 비율과 구독자 수</b>
                             <br />
                             <br />
-                            <v-icon class="mr-2">mdi-chart-line</v-icon>구독자증감추이 :
-                            <b>한 달전의 구독자 변화 비율과 구독자 수</b>에 의해
-                            결정됩니다
+                            <v-icon class="mr-2">mdi-chart-line</v-icon>구독자 증감 추이 :
+                            <b>한 달전의 구독자 변화 비율과 구독자 수</b>
                             <br />
                             <br />
                             <v-icon class="mr-2">mdi-heart-multiple-outline</v-icon>호감도 :
-                            <b>최근 영상 10개의 좋아요, 싫어요 비율</b>에 의해
-                            결정됩니다
+                            <b>최근 영상 10개의 좋아요, 싫어요 비율</b>
                           </v-card-text>
                           <v-divider></v-divider>
                           <v-card-actions>
@@ -237,10 +234,10 @@
                           <v-icon>mdi-newspaper-variant-multiple-outline</v-icon>활동력
                         </v-tab>
                         <v-tab>
-                          <v-icon>mdi-chart-bar</v-icon>영상조회수증감추이
+                          <v-icon>mdi-chart-bar</v-icon>영상 조회수 누적 추이
                         </v-tab>
                         <v-tab>
-                          <v-icon>mdi-chart-line</v-icon>구독자증감추이
+                          <v-icon>mdi-chart-line</v-icon>구독자 증감 추이
                         </v-tab>
                         <v-tab>
                           <v-icon>mdi-heart-multiple-outline</v-icon>호감도
@@ -251,14 +248,21 @@
                         <!-- 영향력 -->
                         <v-tab-item>
                           <v-container class="ma-5">
-                            <v-icon>mdi-earth</v-icon>영향력 :
-                            <b>언급수(커뮤니티 + 뉴스), 구독자수, 조회수</b>에
-                            의해 결정됩니다.
-                            <v-list-item-subtitle text-align="center">
-                              {{ youtuber.channelName }}의 영향력은 상위 "{{
-                              100 - mainData[0]["data"][0]
-                              }}%"입니다.
-                            </v-list-item-subtitle>
+                            <v-chip color="white" text-color="black" outlined>
+                              <v-icon>mdi-earth</v-icon>영향력 :
+                              <b>언급수 (커뮤니티 + 뉴스), 구독자수, 영상 총 조회수</b>에
+                              의해 결정됩니다.
+                            </v-chip>
+                            <br />
+                            <v-chip color="white" text-color="black" outlined>
+                              <b>{{ youtuber.channelName }}</b>의 영향력은 상위 "
+                              <b style="color:red">
+                                {{
+                                100 - mainData[0]["data"][0]
+                                }}%
+                              </b>"입니다.
+                            </v-chip>
+
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
                                 <v-col class="pb-0">
@@ -307,13 +311,20 @@
                         <!-- 활동력 -->
                         <v-tab-item>
                           <v-container class="ma-5">
-                            <v-icon>mdi-newspaper-variant-multiple-outline</v-icon>활동력 :
-                            <b>최근 영상 주기</b>에 의해 결정됩니다.
-                            <v-list-item-subtitle text-align="center">
-                              {{ youtuber.channelName }}의 활동력은 상위 "{{
-                              100 - mainData[0]["data"][1]
-                              }}%"입니다.
-                            </v-list-item-subtitle>
+                            <v-chip color="white" text-color="black" outlined>
+                              <v-icon>mdi-newspaper-variant-multiple-outline</v-icon>활동력 :
+                              <b>최근 영상 10개의 업로드 주기</b>에 의해 결정됩니다.
+                            </v-chip>
+                            <br />
+                            <v-chip color="white" text-color="black" outlined>
+                              <b>{{ youtuber.channelName }}</b>의 활동력은 상위 "
+                              <b style="color:red">
+                                {{
+                                100 - mainData[0]["data"][1]
+                                }}%
+                              </b>"입니다.
+                            </v-chip>
+
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
                                 <v-col class="pb-0">
@@ -343,22 +354,28 @@
                         <!-- 영상조회수증감추이 -->
                         <v-tab-item>
                           <v-container class="ma-5">
-                            <v-icon>mdi-chart-bar</v-icon>영상조회수증감추이 :
-                            <b>한 달전의 조회수 변화 비율과 구독자 수</b>에 의해
-                            결정됩니다.
-                            <v-list-item-subtitle text-align="center">
-                              {{ youtuber.channelName }}의 영상조회수증감추이는
-                              상위 "{{
-                              100 - mainData[0]["data"][2]
-                              }}%"입니다.
-                            </v-list-item-subtitle>
+                            <v-chip color="white" text-color="black" outlined>
+                              <v-icon>mdi-chart-bar</v-icon>영상 조회수 누적 추이 :
+                              <b>한 달전의 조회수 변화 비율과 구독자 수</b>에 의해
+                              결정됩니다.
+                            </v-chip>
+                            <br />
+                            <v-chip color="white" text-color="black" outlined>
+                              <b>{{ youtuber.channelName }}</b>의 영상 조회수 누적 추이는
+                              상위 "
+                              <b style="color:red">
+                                {{
+                                100 - mainData[0]["data"][2]
+                                }}%
+                              </b>"입니다.
+                            </v-chip>
 
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
                                 <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
-                                  >지난 영상조회수증감추이</v-list-item-title>
+                                  >지난 영상 조회수 증감 추이</v-list-item-title>
                                   <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
@@ -378,7 +395,7 @@
                                 <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
-                                  >조회수차이 그래프</v-list-item-title>
+                                  >조회수 차이 그래프</v-list-item-title>
                                   <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
@@ -399,21 +416,28 @@
                         <!-- 구독자증감추이 -->
                         <v-tab-item>
                           <v-container class="ma-5">
-                            <v-icon>mdi-chart-line</v-icon>구독자증감추이 :
-                            <b>한 달전의 구독자 변화 비율과 구독자 수</b>에 의해
-                            결정됩니다.
-                            <v-list-item-subtitle text-align="center">
-                              {{ youtuber.channelName }}의 구독자증감추이는
-                              상위 "{{
-                              100 - mainData[0]["data"][3]
-                              }}%"입니다.
-                            </v-list-item-subtitle>
+                            <v-chip color="white" text-color="black" outlined>
+                              <v-icon>mdi-chart-line</v-icon>구독자 증감 추이 :
+                              <b>한 달전의 구독자 변화 비율과 구독자 수</b>에 의해
+                              결정됩니다.
+                            </v-chip>
+                            <br />
+                            <v-chip color="white" text-color="black" outlined>
+                              <b>{{ youtuber.channelName }}</b>의 구독자 증감 추이는
+                              상위 "
+                              <b style="color:red">
+                                {{
+                                100 - mainData[0]["data"][3]
+                                }}%
+                              </b>"입니다.
+                            </v-chip>
+
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
                                 <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
-                                  >지난 구독자증감추이</v-list-item-title>
+                                  >지난 구독자 증감 추이</v-list-item-title>
                                   <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
@@ -454,14 +478,20 @@
                         <!-- 호감도 -->
                         <v-tab-item>
                           <v-container class="ma-5">
-                            <v-icon>mdi-heart-multiple-outline</v-icon>호감도 :
-                            <b>최근 영상 10개의 좋아요, 싫어요 비율</b>에 의해
-                            결정됩니다.
-                            <v-list-item-subtitle text-align="center">
-                              {{ youtuber.channelName }}의 호감도는 상위 "{{
-                              100 - mainData[0]["data"][4]
-                              }}%"입니다.
-                            </v-list-item-subtitle>
+                            <v-chip color="white" text-color="black" outlined>
+                              <v-icon>mdi-heart-multiple-outline</v-icon>호감도 :
+                              <b>최근 영상 10개의 좋아요, 싫어요 비율</b>에 의해
+                              결정됩니다.
+                            </v-chip>
+                            <br />
+                            <v-chip color="white" text-color="black" outlined>
+                              <b>{{ youtuber.channelName }}</b>의 호감도는 상위 "
+                              <b style="color:red">
+                                {{
+                                100 - mainData[0]["data"][4]
+                                }}%
+                              </b>"입니다.
+                            </v-chip>
                             <v-card outlined flat class="mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
                                 <v-col class="pb-0">
@@ -1094,7 +1124,7 @@ export default {
           categories: [
             "영향력",
             "활동력",
-            "영상조회수증감추이",
+            "영상조회수누적추이",
             "구독자증감추이",
             "호감도"
           ],
