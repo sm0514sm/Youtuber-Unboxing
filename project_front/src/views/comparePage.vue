@@ -592,7 +592,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1">누적 조회수 증감 추이</v-list-item-title>
+                <v-list-item-title class="headline font-weight-black mb-1">조회수 증가 추이</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -620,6 +620,11 @@ export default {
     this.$vuetify.goTo(0);
     var output = localStorage.getItem("compareYoutuber");
     var arr = JSON.parse(output);
+    if(arr.length != 2){
+      this.istwoyoutuber = false
+      this.$router.push({ path: "notFound" });
+      return;
+    }
     var list = [];
     list.push(arr[0]);
     list.push(arr[1]);
@@ -1617,7 +1622,8 @@ export default {
             }
           }
         }
-      }
+      },
+      istwoyoutuber : true
     };
   }
 };

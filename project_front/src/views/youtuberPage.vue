@@ -158,47 +158,27 @@
                   <v-col class="ma-5">
                     <v-list-item-title class="headline font-weight-black mb-1">
                       <v-icon color="blue" class="mr-1">mdi-chart-gantt</v-icon>능력치
-                      <v-dialog v-model="dialog" width="600">
+                      <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
-                          <v-btn class="ma-2" outlined x-small fab color="blue" v-on="on">
-                            <v-icon color="blue">mdi-help</v-icon>
-                          </v-btn>
+                          <v-icon v-on="on" color="blue">mdi-information-outline</v-icon>
                         </template>
-
-                        <v-card>
-                          <v-card-title class="headline grey lighten-2" primary-title>
-                            <v-icon class="mr-2">mdi-information</v-icon>
-                            <b>능력치 측정 기준</b>
-                          </v-card-title>
-                          <v-card-text>
-                            <br />
-                            <v-icon class="mr-2">mdi-earth</v-icon>영향력 :
-                            <b>언급수 (커뮤니티 + 뉴스), 구독자수, 영상 총 조회수</b>
-
-                            <br />
-                            <br />
-                            <v-icon class="mr-2">mdi-newspaper-variant-multiple-outline</v-icon>활동력 :
-                            <b>최근 영상 10개의 업로드 주기</b>
-                            <br />
-                            <br />
-                            <v-icon class="mr-2">mdi-chart-bar</v-icon>영상 조회수 증감 추이 :
-                            <b>한 달전의 조회수 변화 비율과 구독자 수</b>
-                            <br />
-                            <br />
-                            <v-icon class="mr-2">mdi-chart-line</v-icon>구독자 증감 추이 :
-                            <b>한 달전의 구독자 변화 비율과 구독자 수</b>
-                            <br />
-                            <br />
-                            <v-icon class="mr-2">mdi-heart-multiple-outline</v-icon>호감도 :
-                            <b>최근 영상 10개의 좋아요, 싫어요 비율</b>
-                          </v-card-text>
-                          <v-divider></v-divider>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="primary" text @click="dialog = false">닫기</v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-dialog>
+                        <span>
+                          <v-icon class="mr-2">mdi-earth</v-icon>영향력 :
+                          <b>언급수 (커뮤니티 + 뉴스), 구독자수, 영상 총 조회수</b>
+                          <br />
+                          <v-icon class="mr-2">mdi-newspaper-variant-multiple-outline</v-icon>활동력 :
+                          <b>최근 영상 10개의 업로드 주기</b>
+                          <br />
+                          <v-icon class="mr-2">mdi-chart-bar</v-icon>영상 조회수 증감 추이 :
+                          <b>한 달전의 조회수 변화 비율과 구독자 수</b>
+                          <br />
+                          <v-icon class="mr-2">mdi-chart-line</v-icon>구독자 증감 추이 :
+                          <b>한 달전의 구독자 변화 비율과 구독자 수</b>
+                          <br />
+                          <v-icon class="mr-2">mdi-heart-multiple-outline</v-icon>호감도 :
+                          <b>최근 영상 10개의 좋아요, 싫어요 비율</b>
+                        </span>
+                      </v-tooltip>
                     </v-list-item-title>
                     <v-divider></v-divider>
                   </v-col>
@@ -395,7 +375,7 @@
                                 <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
-                                  >조회수 차이 그래프</v-list-item-title>
+                                  >조회수 변화량 그래프</v-list-item-title>
                                   <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
@@ -814,6 +794,10 @@ export default {
     this.loading = "loading";
   },
   mounted() {
+    if(this.$route.query.yno == undefined){
+      this.$router.push({ path: "notFound" });
+      return;
+    }
     this.$store.dispatch(Constant.GET_YOUTUBER, {
       yno: this.$route.query.yno,
       callback: this.render,
