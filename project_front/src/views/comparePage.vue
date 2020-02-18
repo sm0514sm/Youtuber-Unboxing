@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <!--main하고 합니다-->
-    <h1>comparePage</h1>
+    <v-row class="my-5">
+    </v-row>
     <!-- header -->
     <v-row>
       <v-col>
@@ -20,12 +21,7 @@
                     }"
                   >
                     <v-row>
-                      <v-col
-                        cols="5"
-                        class="pa-3"
-                        align="center"
-                        justify="center"
-                      >
+                      <v-col cols="5" class="pa-3" align="center" justify="center">
                         <v-img
                           class="circle"
                           :src="youtuber1.thumbnails"
@@ -36,24 +32,20 @@
                       <v-col cols="7" class="pb-0 pl-3">
                         <v-row style="height :45%">
                           <v-col class="px-0">
-                            <p class="font-weight-black thin ma-0 headline">
-                              {{ youtuber1.channelName }}
-                            </p>
+                            <p
+                              class="font-weight-black thin ma-0 headline"
+                            >{{ youtuber1.channelName }}</p>
                           </v-col>
                         </v-row>
                         <v-divider class="ma-0"></v-divider>
                         <v-row>
                           <v-col cols="7">
                             <v-row class="pl-0">
-                              <p class="font-weight-black thin ma-0 headline">
-                                {{ youtuber1.publishedDate }}
-                              </p>
+                              <p
+                                class="font-weight-black thin ma-0 headline"
+                              >{{ youtuber1.publishedDate }}</p>
                             </v-row>
-                            <v-row
-                              align="center"
-                              class="mt-5"
-                              style="float: left;"
-                            >
+                            <v-row align="center" class="mt-5" style="float: left;">
                               <!-- youtuber -->
                               <v-img
                                 width="32px"
@@ -108,9 +100,7 @@
                             >
                               <p
                                 style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px;"
-                              >
-                                {{ setGrade(youtuber1.grade) }}
-                              </p>
+                              >{{ setGrade(youtuber1.grade) }}</p>
                             </v-btn>
                           </v-col>
                         </v-row>
@@ -137,9 +127,9 @@
                       <v-col cols="7" class="pb-0">
                         <v-row style="height :45%">
                           <v-col align="right">
-                            <p class="font-weight-black thin ma-0 headline">
-                              {{ youtuber2.channelName }}
-                            </p>
+                            <p
+                              class="font-weight-black thin ma-0 headline"
+                            >{{ youtuber2.channelName }}</p>
                           </v-col>
                         </v-row>
                         <v-divider class="ma-0"></v-divider>
@@ -152,9 +142,7 @@
                             >
                               <p
                                 style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px; text-align: right;"
-                              >
-                                {{ setGrade(youtuber2.grade) }}
-                              </p>
+                              >{{ setGrade(youtuber2.grade) }}</p>
                             </v-btn>
                           </v-col>
                           <v-col cols="7">
@@ -162,15 +150,9 @@
                               <p
                                 class="font-weight-black thin ma-0 headline"
                                 style="text-align='right'"
-                              >
-                                {{ youtuber2.publishedDate }}
-                              </p>
+                              >{{ youtuber2.publishedDate }}</p>
                             </v-row>
-                            <v-row
-                              align="center"
-                              class="mt-5"
-                              style="float: left;"
-                            >
+                            <v-row align="center" class="mt-5" style="float: left;">
                               <!-- youtuber -->
                               <v-img
                                 width="32px"
@@ -219,12 +201,7 @@
                           </v-col>
                         </v-row>
                       </v-col>
-                      <v-col
-                        cols="5"
-                        class="pa-3"
-                        align="center"
-                        justify="center"
-                      >
+                      <v-col cols="5" class="pa-3" align="center" justify="center">
                         <v-img
                           class="circle"
                           :src="youtuber2.thumbnails"
@@ -249,7 +226,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class=" mb-1">수치별 비교</v-list-item-title>
+                <v-list-item-title class="mb-1">수치별 비교</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -304,9 +281,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5 pb-0">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >기본 수치 비교</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">기본 수치 비교</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -351,9 +326,7 @@
         <v-hover v-slot:default="{ hover }" open-delay="100">
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-divider></v-divider>
-            <v-list-item-title class="headline font-weight-black mb-1"
-              >상호 수치 비교</v-list-item-title
-            >
+            <v-list-item-title class="headline font-weight-black mb-1">상호 수치 비교</v-list-item-title>
             <v-divider></v-divider>
             <v-row>
               <v-col class="py-0">
@@ -369,8 +342,9 @@
                   outlined
                   pill
                   text-color="black"
-                  ><b>{{youtuber1.channelName | truncate(8,"..")}}</b></v-chip
                 >
+                  <b>{{youtuber1.channelName | truncate(8,"..")}}</b>
+                </v-chip>
               </v-col>
               <v-col class="py-0">
                 <v-badge color="#26e7a5" bordered overlap>
@@ -385,86 +359,53 @@
                   outlined
                   pill
                   text-color="black"
-                  ><b>{{youtuber2.channelName | truncate(8,"..")}}</b></v-chip
                 >
+                  <b>{{youtuber2.channelName | truncate(8,"..")}}</b>
+                </v-chip>
               </v-col>
             </v-row>
 
             <v-row>
               <v-col>
                 <v-row v-if="status.y1_sub">
-                  <v-chip
-                    class="ma-2"
-                    color="#26c3fb"
-                    outlined
-                    text-color="black"
-                  >
+                  <v-chip class="ma-2" color="#26c3fb" outlined text-color="black">
                     <v-icon left color="#26c3fb">mdi-account-multiple</v-icon>
                     <b>구독자 {{ status.sub_stat }}%</b>
                     <v-icon color="#26c3fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_view">
-                  <v-chip
-                    class="ma-2"
-                    color="#26b1fb"
-                    outlined
-                    text-color="black"
-                  >
+                  <v-chip class="ma-2" color="#26b1fb" outlined text-color="black">
                     <v-icon left color="#26b1fb">mdi-animation-play</v-icon>
                     <b>총조회수 {{ status.view_stat }}%</b>
                     <v-icon color="#26b1fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_video">
-                  <v-chip
-                    class="ma-2"
-                    color="#269ffb"
-                    outlined
-                    text-color="black"
-                  >
-                    <v-icon left color="#269ffb"
-                      >mdi-youtube-subscription</v-icon
-                    >
+                  <v-chip class="ma-2" color="#269ffb" outlined text-color="black">
+                    <v-icon left color="#269ffb">mdi-youtube-subscription</v-icon>
                     <b>영상수 {{ status.video_stat }}%</b>
                     <v-icon color="#269ffb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
 
                 <v-row v-if="status.y1_charm">
-                  <v-chip
-                    class="ma-2"
-                    color="#268dfb"
-                    outlined
-                    text-color="black"
-                  >
+                  <v-chip class="ma-2" color="#268dfb" outlined text-color="black">
                     <v-icon left color="#268dfb">mdi-heart-multiple</v-icon>
                     <b>호감도 {{ status.charm_stat }}%</b>
                     <v-icon color="#268dfb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_influence">
-                  <v-chip
-                    class="ma-2"
-                    color="#267cfb"
-                    outlined
-                    text-color="black"
-                  >
+                  <v-chip class="ma-2" color="#267cfb" outlined text-color="black">
                     <v-icon left color="#267cfb">mdi-earth</v-icon>
                     <b>영향력 {{ status.influence_stat }}%</b>
                     <v-icon color="#267cfb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_activity">
-                  <v-chip
-                    class="ma-2"
-                    color="#266afb"
-                    outlined
-                    text-color="black"
-                  >
-                    <v-icon left color="#266afb"
-                      >mdi-newspaper-variant-multiple</v-icon
-                    >
+                  <v-chip class="ma-2" color="#266afb" outlined text-color="black">
+                    <v-icon left color="#266afb">mdi-newspaper-variant-multiple</v-icon>
                     <b>활동력 {{ status.activity_stat }}%</b>
                     <v-icon color="#266afb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
@@ -475,78 +416,44 @@
 
               <v-col>
                 <v-row v-if="status.y2_sub">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e785"
-                    text-color="black"
-                    outlined
-                  >
+                  <v-chip class="ma-2" color="#26e785" text-color="black" outlined>
                     <v-icon left color="#26e785">mdi-account-multiple</v-icon>
                     <b>구독자 {{ status.sub_stat }}%</b>
                     <v-icon color="#26e785">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_view">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e795"
-                    text-color="black"
-                    outlined
-                  >
+                  <v-chip class="ma-2" color="#26e795" text-color="black" outlined>
                     <v-icon left color="#26e795">mdi-animation-play</v-icon>
                     <b>총조회수 {{ status.view_stat }}%</b>
                     <v-icon color="#26e795">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_video">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e7a5"
-                    text-color="black"
-                    outlined
-                  >
-                    <v-icon left color="#26e7a5"
-                      >mdi-youtube-subscription</v-icon
-                    >
+                  <v-chip class="ma-2" color="#26e7a5" text-color="black" outlined>
+                    <v-icon left color="#26e7a5">mdi-youtube-subscription</v-icon>
                     <b>영상수 {{ status.video_stat }}%</b>
                     <v-icon color="#26e7a5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
 
                 <v-row v-if="status.y2_charm">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e7b5"
-                    text-color="black"
-                    outlined
-                  >
+                  <v-chip class="ma-2" color="#26e7b5" text-color="black" outlined>
                     <v-icon left color="#26e7b5">mdi-heart-multiple</v-icon>
                     <b>호감도 {{ status.charm_stat }}%</b>
                     <v-icon color="#26e7b5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_influence">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e7c5"
-                    text-color="black"
-                    outlined
-                  >
+                  <v-chip class="ma-2" color="#26e7c5" text-color="black" outlined>
                     <v-icon left color="#26e7c5">mdi-earth</v-icon>
                     <b>영향력 {{ status.influence_stat }}%</b>
                     <v-icon color="#26e7c5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_activity">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e7d5"
-                    text-color="black"
-                    outlined
-                  >
-                    <v-icon left color="#26e7d5"
-                      >mdi-newspaper-variant-multiple</v-icon
-                    >
+                  <v-chip class="ma-2" color="#26e7d5" text-color="black" outlined>
+                    <v-icon left color="#26e7d5">mdi-newspaper-variant-multiple</v-icon>
                     <b>활동력 {{ status.activity_stat }}%</b>
                     <v-icon color="#26e7d5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
@@ -555,17 +462,9 @@
             </v-row>
             <v-divider></v-divider>
 
-            <v-list-item-title class="headline font-weight-black mb-1"
-              >종합 비교</v-list-item-title
-            >
+            <v-list-item-title class="headline font-weight-black mb-1">종합 비교</v-list-item-title>
             <v-row>
-              <v-badge
-                v-if="!status.same_grade"
-                :color="status.color"
-                bordered
-                overlap
-                size="125"
-              >
+              <v-badge v-if="!status.same_grade" :color="status.color" bordered overlap size="125">
                 <v-card>
                   <div class="d-flex flex-no-wrap justify-space-between">
                     <div>
@@ -577,12 +476,11 @@
                           outlined
                           pill
                           text-color="black"
-                          >{{ status.winner }}</v-chip
-                        >채널이 종합 수치
+                        >{{ status.winner }}</v-chip>채널이 종합 수치
                         <v-chip class="ma-2" color="indigo darken-3" outlined>
                           <v-icon left>mdi-fire</v-icon>
-                          {{ status.stat }}% </v-chip
-                        >우위에 있습니다.
+                          {{ status.stat }}%
+                        </v-chip>우위에 있습니다.
                       </v-card-title>
                     </div>
 
@@ -608,9 +506,7 @@
                     </v-avatar>
                   </v-badge>
                 </v-card-title>
-                <v-card-title class="headline"
-                  >채널 종합 수치가 동률 입니다</v-card-title
-                >
+                <v-card-title class="headline">채널 종합 수치가 동률 입니다</v-card-title>
               </v-card>
             </v-row>
             <v-divider></v-divider>
@@ -626,19 +522,13 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >영상수 주기</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">영상수 주기</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
             <v-row>
               <v-col>
-                <apexchart
-                  height="200"
-                  :options="videoPeriodOptions"
-                  :series="videoPeriodData"
-                ></apexchart>
+                <apexchart height="200" :options="videoPeriodOptions" :series="videoPeriodData"></apexchart>
               </v-col>
             </v-row>
           </v-card>
@@ -653,9 +543,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >구독자 추이</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">구독자 추이</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -680,9 +568,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >총조회수 추이</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">총조회수 추이</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -707,19 +593,13 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >누적 조회수 증감 추이</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">누적 조회수 증감 추이</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
             <v-row>
               <v-col>
-                <apexchart
-                  height="200"
-                  :options="totalViewDiffOptions"
-                  :series="totalViewDiffData"
-                ></apexchart>
+                <apexchart height="200" :options="totalViewDiffOptions" :series="totalViewDiffData"></apexchart>
               </v-col>
             </v-row>
           </v-card>
@@ -1044,16 +924,64 @@ export default {
         }
       ];
 
-      for (let index = 0; index < subscriberView1.length; index++) {
-        this.subscriberPeriodData[0]["data"].push(
-          subscriberView1[index].pointSubscriber
-        );
-        this.subscriberPeriodData[1]["data"].push(
-          subscriberView2[index].pointSubscriber
-        );
-        this.subscriberPeriodOptions["xaxis"]["categories"].push(
-          subscriberView1[index].recordDate.substring(5, 10)
-        );
+      var max = Math.max(subscriberView1.length, subscriberView2.length);
+      for (let index = 0; index < max; index++) {
+        console.log(subscriberView1[index]);
+        if (
+          subscriberView1[index] != undefined &&
+          !this.subscriberPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView1[index].recordDate
+          )
+        ) {
+          this.subscriberPeriodOptions["xaxis"]["categories"].push(
+            subscriberView1[index].recordDate
+          );
+        }
+
+        if (
+          subscriberView2[index] != undefined &&
+          !this.subscriberPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView2[index].recordDate
+          )
+        ) {
+          this.subscriberPeriodOptions["xaxis"]["categories"].push(
+            subscriberView2[index].recordDate
+          );
+        }
+      }
+
+      console.log(this.subscriberPeriodOptions["xaxis"]["categories"])
+
+      this.subscriberPeriodOptions["xaxis"]["categories"].sort();
+
+      var i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.subscriberPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView1[i].recordDate
+        ) {
+          this.subscriberPeriodData[0]["data"].push(
+            subscriberView1[i].pointSubscriber
+          );
+          i++;
+        } else {
+          this.subscriberPeriodData[0]["data"].push(null);
+        }
+      }
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.subscriberPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView2[i].recordDate
+        ) {
+          this.subscriberPeriodData[1]["data"].push(
+            subscriberView2[i].pointSubscriber
+          );
+          i++;
+        } else {
+          this.subscriberPeriodData[1]["data"].push(null);
+        }
       }
 
       //총영상수추이
@@ -1068,19 +996,70 @@ export default {
         }
       ];
 
-      for (let index = 0; index < subscriberView1.length; index++) {
-        this.totalViewPeriodData[0]["data"].push(
-          subscriberView1[index].pointView
-        );
-        this.totalViewPeriodData[1]["data"].push(
-          subscriberView2[index].pointView
-        );
-        this.totalViewPeriodOptions["xaxis"]["categories"].push(
-          subscriberView1[index].recordDate.substring(5, 10)
-        );
+
+
+      for (let index = 0; index < max; index++) {
+        console.log(subscriberView1[index]);
+        if (
+          subscriberView1[index] != undefined &&
+          !this.totalViewPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView1[index].recordDate
+          )
+        ) {
+          this.totalViewPeriodOptions["xaxis"]["categories"].push(
+            subscriberView1[index].recordDate
+          );
+        }
+
+        if (
+          subscriberView2[index] != undefined &&
+          !this.totalViewPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView2[index].recordDate
+          )
+        ) {
+          this.totalViewPeriodOptions["xaxis"]["categories"].push(
+            subscriberView2[index].recordDate
+          );
+        }
       }
 
-      //viewDiff
+      this.totalViewPeriodOptions["xaxis"]["categories"].sort()
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView1[i].recordDate
+        ) {
+          this.totalViewPeriodData[0]["data"].push(
+            subscriberView1[i].pointView
+          );
+          i++;
+        } else {
+          this.totalViewPeriodData[0]["data"].push(null);
+        }
+      }
+
+      console.log(this.totalViewPeriodData[0]["data"])
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView2[i].recordDate
+        ) {
+          this.totalViewPeriodData[1]["data"].push(
+            subscriberView2[i].pointView
+          );
+          i++;
+        } else {
+          this.totalViewPeriodData[1]["data"].push(null);
+        }
+      }
+
+      console.log(this.totalViewPeriodOptions["xaxis"]["categories"])
+
+      // viewDiff
       this.totalViewDiffData = [
         {
           name: this.youtuber1.channelName,
@@ -1092,19 +1071,80 @@ export default {
         }
       ];
 
-      for (let index = 0; index < subscriberView1.length; index++) {
-        this.totalViewDiffData[0]["data"].push(subscriberView1[index].difView);
-        this.totalViewDiffData[1]["data"].push(subscriberView2[index].difView);
-        this.totalViewDiffOptions["xaxis"]["categories"].push(
-          subscriberView1[index].recordDate.substring(5, 10)
-        );
+      for (let index = 0; index < max; index++) {
+        console.log(subscriberView1[index]);
+        if (
+          subscriberView1[index] != undefined &&
+          !this.totalViewDiffOptions["xaxis"]["categories"].includes(
+            subscriberView1[index].recordDate
+          )
+        ) {
+          this.totalViewDiffOptions["xaxis"]["categories"].push(
+            subscriberView1[index].recordDate
+          );
+        }
+
+        if (
+          subscriberView2[index] != undefined &&
+          !this.totalViewDiffOptions["xaxis"]["categories"].includes(
+            subscriberView2[index].recordDate
+          )
+        ) {
+          this.totalViewDiffOptions["xaxis"]["categories"].push(
+            subscriberView2[index].recordDate
+          );
+        }
       }
+
+      this.totalViewDiffOptions["xaxis"]["categories"].sort()
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewDiffOptions["xaxis"]["categories"][index] ==
+          subscriberView1[i].recordDate
+        ) {
+          this.totalViewDiffData[0]["data"].push(
+            subscriberView1[i].difView
+          );
+          i++;
+        } else {
+          this.totalViewDiffData[0]["data"].push(null);
+        }
+      }
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewDiffOptions["xaxis"]["categories"][index] ==
+          subscriberView2[i].recordDate
+        ) {
+          this.totalViewDiffData[1]["data"].push(
+            subscriberView2[i].difView
+          );
+          i++;
+        } else {
+          this.totalViewDiffData[1]["data"].push(null);
+        }
+      }
+
+      console.log(this.totalViewDiffOptions["xaxis"]["categories"])
+      
+
+      // for (let index = 0; index < subscriberView1.length; index++) {
+      //   this.totalViewDiffData[0]["data"].push(subscriberView1[index].difView);
+      //   this.totalViewDiffData[1]["data"].push(subscriberView2[index].difView);
+      //   this.totalViewDiffOptions["xaxis"]["categories"].push(
+      //     subscriberView1[index].recordDate.substring(5, 10)
+      //   );
+      // }
 
       //otherLink
       this.makeOtherLinkIcon();
       console.log("6666");
 
       this.check();
+
     },
     setGradeColor(num) {
       if (typeof num == "undefined") {
@@ -1458,11 +1498,15 @@ export default {
           }
         },
         xaxis: {
+          type: "datetime",
           categories: []
         },
         tooltip: {
           y: {
             formatter: function(x) {
+              if(x == null){
+                return 0;
+              }
               return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
           }
@@ -1494,6 +1538,9 @@ export default {
         tooltip: {
           y: {
             formatter: function(x) {
+              if(x == null){
+                return 0;
+              }
               return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
           }
@@ -1512,6 +1559,7 @@ export default {
           }
         },
         xaxis: {
+          type : "datetime",
           categories: []
         },
         yaxis: {
@@ -1561,6 +1609,7 @@ export default {
           }
         },
         xaxis: {
+          type: "datetime",
           categories: []
         },
         yaxis: {
