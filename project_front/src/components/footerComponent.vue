@@ -4,73 +4,54 @@
     <div style="backgroundColor: #6351ce">
       <mdb-container class="text-center"></mdb-container>
     </div>
-    <mdb-container class="mt-5 mb-4 text-center text-md-left">
+    <mdb-container
+      class="mt-5 mb-4 text-center text-md-left"
+      style="margin-left:auto; margin-right:auto"
+    >
       <div>
-        <mdb-row class="mt-3">
-          <mdb-col md="4" lg="3" xl="4" class="mb-4">
+        <mdb-row class="mt-3" style="margin-left:auto; margin-right:auto">
+          <mdb-col md="5" lg="5" xl="3" class="mb-4">
+            <h6 class="text-uppercase font-weight-bold">
+              <strong>TEAM LOGO</strong>
+            </h6>
+            <hr
+              class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px"
+            />
+            <v-img :src="require('@/assets/7.png')" width="100px"></v-img>
+          </mdb-col>
+          <mdb-col md="4" lg="3" xl="3" class="mb-4">
             <h6 class="text-uppercase font-weight-bold">
               <strong>Company name</strong>
             </h6>
-            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
+            <hr
+              class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px"
+            />
             <h6 class="text-uppercase font-weight-bold">
               <strong>SSAFY First Project</strong>
             </h6>
-            <br />
+            <h6>
+              <br />
+            </h6>
             <h6 class="text-uppercase font-weight-bold">
               <strong>Class 1 Group 8</strong>
             </h6>
-            <br />
+            <h6>
+              <br />
+            </h6>
             <h6 class="text-uppercase font-weight-bold">
               <strong>Web / Mobile Application</strong>
             </h6>
           </mdb-col>
-          <mdb-col md="4" lg="3" xl="2" class="mb-4">
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>Members</strong>
-            </h6>
-            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>김주희</strong>
-            </h6>
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>김태민</strong>
-            </h6>
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>박진홍</strong>
-            </h6>
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>이상민</strong>
-            </h6>
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>홍기환</strong>
-            </h6>
-          </mdb-col>
-          <mdb-col md="4" lg="3" xl="3" class="mb-4">
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>Position</strong>
-            </h6>
-            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>Rest api</strong>
-            </h6>
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>Front-end</strong>
-            </h6>
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>Data-collect</strong>
-            </h6>
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>Data/Server</strong>
-            </h6>
-            <h6 class="text-uppercase font-weight-bold">
-              <strong>Back/Front</strong>
-            </h6>
-          </mdb-col>
-          <mdb-col md="4" lg="3" xl="3" class="mb-4">
+          <mdb-col md="4" lg="3" xl="4" class="mb-4">
             <h6 class="text-uppercase font-weight-bold">
               <strong>Contact</strong>
             </h6>
-            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
+            <hr
+              class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px"
+            />
             <h6 class="text-uppercase font-weight-bold">
               <strong>Seoul, Gangnam-gu</strong>
             </h6>
