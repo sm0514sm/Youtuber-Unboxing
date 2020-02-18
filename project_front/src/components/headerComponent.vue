@@ -21,32 +21,17 @@
     <v-col cols="6">
       <v-row>
         <v-col cols="2" class="mr-5">
-          <v-btn
-            dark
-            text
-            style="font-size: 20px;"
-            @click="gotoPage('/categoryPage')"
-          >
+          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/categoryPage')">
             <span style="text-shadow: 0 0 2px #000;">Category</span>
           </v-btn>
         </v-col>
         <v-col cols="2" class="ml-3">
-          <v-btn
-            dark
-            text
-            style="font-size: 20px;"
-            @click="gotoPage('/rankPage')"
-          >
+          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/rankPage')">
             <span style="text-shadow: 0 0 2px #000;">RANK</span>
           </v-btn>
         </v-col>
         <v-col cols="2" class="mr-0 ml-0">
-          <v-btn
-            dark
-            text
-            style="font-size: 20px;"
-            @click="gotoPage('/ourPage')"
-          >
+          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/ourPage')">
             <span style="text-shadow: 0 0 2px #000;">ABOUT US</span>
           </v-btn>
         </v-col>
@@ -83,20 +68,14 @@
             </template>
 
             <template v-slot:item="{ item }">
-              <v-list-item-avatar
-                color="red"
-                class="headline font-weight-light white--text"
-              >
-                <img :src="item.thumbnails" alt="John" />
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title
-                  v-text="item.channelName"
-                ></v-list-item-title>
-                <v-list-item-subtitle
-                  >구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle
-                >
-              </v-list-item-content>
+              <div v-if="item.yno == -1" class="ma-0 pa-0"></div>
+                <v-list-item-avatar v-if="item.yno != -1" color="red" class="headline font-weight-light white--text">
+                  <img :src="item.thumbnails" alt="John" />
+                </v-list-item-avatar>
+                <v-list-item-content v-if="item.yno != -1">
+                  <v-list-item-title v-text="item.channelName"></v-list-item-title>
+                  <v-list-item-subtitle>구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle>
+                </v-list-item-content>
             </template>
           </v-autocomplete>
 
@@ -111,36 +90,15 @@
           </div>-->
 
           <!-- 카카오로그인 -->
-          <v-btn
-            @click="login()"
-            class="btnFont"
-            large
-            color="#F8E211"
-            v-if="loginStatus == false"
-          >
-            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img
-            >로그인
+          <v-btn @click="login()" class="btnFont" large color="#F8E211" v-if="loginStatus == false">
+            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그인
           </v-btn>
-          <v-dialog
-            v-if="loginStatus"
-            v-model="dialog"
-            persistent
-            max-width="600px"
-          >
+          <v-dialog v-if="loginStatus" v-model="dialog" persistent max-width="600px">
             <template v-slot:activator="{ on }">
               <v-btn class="btnFont" color="#F8E211" large v-on="on">
-                <v-img
-                  :src="require('@/assets/kakaologo.png')"
-                  class="mr-2"
-                ></v-img
-                >로그아웃
+                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그아웃
               </v-btn>
-              <v-btn
-                class="ma-2 btnFont"
-                color="#F8E211"
-                large
-                @click="gotoPage('/memberPage')"
-              >
+              <v-btn class="ma-2 btnFont" color="#F8E211" large @click="gotoPage('/memberPage')">
                 <v-icon large left>mdi-account</v-icon>회원정보
               </v-btn>
             </template>
@@ -154,9 +112,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false"
-                  >No</v-btn
-                >
+                <v-btn color="blue darken-1" text @click="dialog = false">No</v-btn>
                 <v-btn color="blue darken-1" text @click="logout()">Yes</v-btn>
               </v-card-actions>
             </v-card>
@@ -309,6 +265,7 @@ export default {
   },
   watch: {
     inputKeyword() {
+      console.log("*****@#$#$^#$%@#$@#$@#$***");
       // Items have already been loaded
       if (this.searchItems.length > 10) return;
 
@@ -317,6 +274,11 @@ export default {
         .get("/youtuber/all")
         .then(response => {
           this.searchItems = response.data.data;
+          var tmp = { yno: -1, channelName: [] };
+          for (let index = 0; index < response.data.data.length; index++) {
+            tmp["channelName"] += response.data.data[index].channelName;
+          }
+          this.searchItems.push(tmp);
         })
         .catch(err => {
           console.log(err);
