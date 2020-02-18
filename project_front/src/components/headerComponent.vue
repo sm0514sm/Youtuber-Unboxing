@@ -154,7 +154,9 @@ export default {
       this.$router.push("/");
     }
   },
-  created() {},
+  created() {
+    this.check;
+  },
   methods: {
     gotoPage(address) {
       this.$router.push(address);
@@ -192,7 +194,25 @@ export default {
       }
       window.location.reload();
     },
-
+    check() {
+      if (this.$session.get("token")) {
+        http
+          .get("/user/search/" + this.$session.get("token"))
+          .then(response => {
+            if (response.data.data == null) {
+              alert("자동 로그아웃 되었습니다");
+              this.$session.destroy();
+              if (this.$route.path == "/memberPage") {
+                this.$router.push("/");
+              }
+              window.location.reload();
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    },
     isDisabled() {
       return true;
     },

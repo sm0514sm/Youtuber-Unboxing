@@ -343,7 +343,7 @@
                   pill
                   text-color="black"
                 >
-                  <b>{{youtuber1.channelName | truncate(8,"..")}}</b>
+                  <b>{{youtuber1.channelName | truncate(10,"..")}}</b>
                 </v-chip>
               </v-col>
               <v-col class="py-0">
@@ -360,7 +360,7 @@
                   pill
                   text-color="black"
                 >
-                  <b>{{youtuber2.channelName | truncate(8,"..")}}</b>
+                  <b>{{youtuber2.channelName | truncate(10,"..")}}</b>
                 </v-chip>
               </v-col>
             </v-row>
@@ -370,14 +370,14 @@
                 <v-row v-if="status.y1_sub">
                   <v-chip class="ma-2" color="#26c3fb" outlined text-color="black">
                     <v-icon left color="#26c3fb">mdi-account-multiple</v-icon>
-                    <b>구독자 {{ status.sub_stat }}%</b>
+                    <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26c3fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_view">
                   <v-chip class="ma-2" color="#26b1fb" outlined text-color="black">
                     <v-icon left color="#26b1fb">mdi-animation-play</v-icon>
-                    <b>총조회수 {{ status.view_stat }}%</b>
+                    <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26b1fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
@@ -418,14 +418,14 @@
                 <v-row v-if="status.y2_sub">
                   <v-chip class="ma-2" color="#26e785" text-color="black" outlined>
                     <v-icon left color="#26e785">mdi-account-multiple</v-icon>
-                    <b>구독자 {{ status.sub_stat }}%</b>
+                    <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26e785">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_view">
                   <v-chip class="ma-2" color="#26e795" text-color="black" outlined>
                     <v-icon left color="#26e795">mdi-animation-play</v-icon>
-                    <b>총조회수 {{ status.view_stat }}%</b>
+                    <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26e795">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
@@ -663,16 +663,16 @@ export default {
             100
         );
       }
-      if (this.youtuber1.subscriber > this.youtuber2.subscriber) {
+      if (this.youtuber1.viewCountTrend > this.youtuber2.viewCountTrend) {
         this.status["y1_sub"] = true;
         this.status["y2_sub"] = false;
         this.status["sub_stat"] = Math.round(
-          ((this.youtuber1.subscriber - this.youtuber2.subscriber) /
-            this.youtuber2.subscriber) *
+          ((this.youtuber1.viewCountTrend - this.youtuber2.viewCountTrend) /
+            this.youtuber2.viewCountTrend) *
             100
         );
       } else if (
-        this.youtuber1.totalViewCount == this.youtuber2.totalViewCount
+        this.youtuber1.viewCountTrend == this.youtuber2.viewCountTrend
       ) {
         this.status["y1_sub"] = false;
         this.status["y2_sub"] = false;
@@ -681,8 +681,8 @@ export default {
         this.status["y1_sub"] = false;
         this.status["y2_sub"] = true;
         this.status["sub_stat"] = Math.round(
-          ((this.youtuber2.subscriber - this.youtuber1.subscriber) /
-            this.youtuber1.subscriber) *
+          ((this.youtuber2.viewCountTrend - this.youtuber1.viewCountTrend) /
+            this.youtuber1.viewCountTrend) *
             100
         );
       }
@@ -709,16 +709,21 @@ export default {
             100
         );
       }
-      if (this.youtuber1.totalViewCount > this.youtuber2.totalViewCount) {
+      if (
+        this.youtuber1.subscriberCountTrend >
+        this.youtuber2.subscriberCountTrend
+      ) {
         this.status["y1_view"] = true;
         this.status["y2_view"] = false;
         this.status["view_stat"] = Math.round(
-          ((this.youtuber1.totalViewCount - this.youtuber2.totalViewCount) /
-            this.youtuber2.totalViewCount) *
+          ((this.youtuber1.subscriberCountTrend -
+            this.youtuber2.subscriberCountTrend) /
+            this.youtuber2.subscriberCountTrend) *
             100
         );
       } else if (
-        this.youtuber1.totalViewCount == this.youtuber2.totalViewCount
+        this.youtuber1.subscriberCountTrend ==
+        this.youtuber2.subscriberCountTrend
       ) {
         this.status["y1_view"] = false;
         this.status["y2_view"] = false;
@@ -727,8 +732,9 @@ export default {
         this.status["y1_view"] = false;
         this.status["y2_view"] = true;
         this.status["view_stat"] = Math.round(
-          ((this.youtuber2.totalViewCount - this.youtuber1.totalViewCount) /
-            this.youtuber1.totalViewCount) *
+          ((this.youtuber2.subscriberCountTrend -
+            this.youtuber1.subscriberCountTrend) /
+            this.youtuber1.subscriberCountTrend) *
             100
         );
       }
