@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <!--main하고 합니다-->
-    <h1>comparePage</h1>
+    <v-row class="my-5"></v-row>
     <!-- header -->
     <v-row>
       <v-col>
@@ -342,7 +342,7 @@
                   pill
                   text-color="black"
                 >
-                  <b>{{youtuber1.channelName | truncate(8,"..")}}</b>
+                  <b>{{youtuber1.channelName | truncate(10,"..")}}</b>
                 </v-chip>
               </v-col>
               <v-col class="py-0">
@@ -359,7 +359,7 @@
                   pill
                   text-color="black"
                 >
-                  <b>{{youtuber2.channelName | truncate(8,"..")}}</b>
+                  <b>{{youtuber2.channelName | truncate(10,"..")}}</b>
                 </v-chip>
               </v-col>
             </v-row>
@@ -369,14 +369,14 @@
                 <v-row v-if="status.y1_sub">
                   <v-chip class="ma-2" color="#26c3fb" outlined text-color="black">
                     <v-icon left color="#26c3fb">mdi-account-multiple</v-icon>
-                    <b>구독자 {{ status.sub_stat }}%</b>
+                    <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26c3fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_view">
                   <v-chip class="ma-2" color="#26b1fb" outlined text-color="black">
                     <v-icon left color="#26b1fb">mdi-animation-play</v-icon>
-                    <b>총조회수 {{ status.view_stat }}%</b>
+                    <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26b1fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
@@ -417,14 +417,14 @@
                 <v-row v-if="status.y2_sub">
                   <v-chip class="ma-2" color="#26e785" text-color="black" outlined>
                     <v-icon left color="#26e785">mdi-account-multiple</v-icon>
-                    <b>구독자 {{ status.sub_stat }}%</b>
+                    <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26e785">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_view">
                   <v-chip class="ma-2" color="#26e795" text-color="black" outlined>
                     <v-icon left color="#26e795">mdi-animation-play</v-icon>
-                    <b>총조회수 {{ status.view_stat }}%</b>
+                    <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26e795">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
@@ -662,16 +662,16 @@ export default {
             100
         );
       }
-      if (this.youtuber1.subscriber > this.youtuber2.subscriber) {
+      if (this.youtuber1.viewCountTrend > this.youtuber2.viewCountTrend) {
         this.status["y1_sub"] = true;
         this.status["y2_sub"] = false;
         this.status["sub_stat"] = Math.round(
-          ((this.youtuber1.subscriber - this.youtuber2.subscriber) /
-            this.youtuber2.subscriber) *
+          ((this.youtuber1.viewCountTrend - this.youtuber2.viewCountTrend) /
+            this.youtuber2.viewCountTrend) *
             100
         );
       } else if (
-        this.youtuber1.totalViewCount == this.youtuber2.totalViewCount
+        this.youtuber1.viewCountTrend == this.youtuber2.viewCountTrend
       ) {
         this.status["y1_sub"] = false;
         this.status["y2_sub"] = false;
@@ -680,8 +680,8 @@ export default {
         this.status["y1_sub"] = false;
         this.status["y2_sub"] = true;
         this.status["sub_stat"] = Math.round(
-          ((this.youtuber2.subscriber - this.youtuber1.subscriber) /
-            this.youtuber1.subscriber) *
+          ((this.youtuber2.viewCountTrend - this.youtuber1.viewCountTrend) /
+            this.youtuber1.viewCountTrend) *
             100
         );
       }
@@ -708,16 +708,21 @@ export default {
             100
         );
       }
-      if (this.youtuber1.totalViewCount > this.youtuber2.totalViewCount) {
+      if (
+        this.youtuber1.subscriberCountTrend >
+        this.youtuber2.subscriberCountTrend
+      ) {
         this.status["y1_view"] = true;
         this.status["y2_view"] = false;
         this.status["view_stat"] = Math.round(
-          ((this.youtuber1.totalViewCount - this.youtuber2.totalViewCount) /
-            this.youtuber2.totalViewCount) *
+          ((this.youtuber1.subscriberCountTrend -
+            this.youtuber2.subscriberCountTrend) /
+            this.youtuber2.subscriberCountTrend) *
             100
         );
       } else if (
-        this.youtuber1.totalViewCount == this.youtuber2.totalViewCount
+        this.youtuber1.subscriberCountTrend ==
+        this.youtuber2.subscriberCountTrend
       ) {
         this.status["y1_view"] = false;
         this.status["y2_view"] = false;
@@ -726,8 +731,9 @@ export default {
         this.status["y1_view"] = false;
         this.status["y2_view"] = true;
         this.status["view_stat"] = Math.round(
-          ((this.youtuber2.totalViewCount - this.youtuber1.totalViewCount) /
-            this.youtuber1.totalViewCount) *
+          ((this.youtuber2.subscriberCountTrend -
+            this.youtuber1.subscriberCountTrend) /
+            this.youtuber1.subscriberCountTrend) *
             100
         );
       }
@@ -923,16 +929,64 @@ export default {
         }
       ];
 
-      for (let index = 0; index < subscriberView1.length; index++) {
-        this.subscriberPeriodData[0]["data"].push(
-          subscriberView1[index].pointSubscriber
-        );
-        this.subscriberPeriodData[1]["data"].push(
-          subscriberView2[index].pointSubscriber
-        );
-        this.subscriberPeriodOptions["xaxis"]["categories"].push(
-          subscriberView1[index].recordDate.substring(5, 10)
-        );
+      var max = Math.max(subscriberView1.length, subscriberView2.length);
+      for (let index = 0; index < max; index++) {
+        console.log(subscriberView1[index]);
+        if (
+          subscriberView1[index] != undefined &&
+          !this.subscriberPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView1[index].recordDate
+          )
+        ) {
+          this.subscriberPeriodOptions["xaxis"]["categories"].push(
+            subscriberView1[index].recordDate
+          );
+        }
+
+        if (
+          subscriberView2[index] != undefined &&
+          !this.subscriberPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView2[index].recordDate
+          )
+        ) {
+          this.subscriberPeriodOptions["xaxis"]["categories"].push(
+            subscriberView2[index].recordDate
+          );
+        }
+      }
+
+      console.log(this.subscriberPeriodOptions["xaxis"]["categories"]);
+
+      this.subscriberPeriodOptions["xaxis"]["categories"].sort();
+
+      var i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.subscriberPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView1[i].recordDate
+        ) {
+          this.subscriberPeriodData[0]["data"].push(
+            subscriberView1[i].pointSubscriber
+          );
+          i++;
+        } else {
+          this.subscriberPeriodData[0]["data"].push(null);
+        }
+      }
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.subscriberPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView2[i].recordDate
+        ) {
+          this.subscriberPeriodData[1]["data"].push(
+            subscriberView2[i].pointSubscriber
+          );
+          i++;
+        } else {
+          this.subscriberPeriodData[1]["data"].push(null);
+        }
       }
 
       //총영상수추이
@@ -947,19 +1001,68 @@ export default {
         }
       ];
 
-      for (let index = 0; index < subscriberView1.length; index++) {
-        this.totalViewPeriodData[0]["data"].push(
-          subscriberView1[index].pointView
-        );
-        this.totalViewPeriodData[1]["data"].push(
-          subscriberView2[index].pointView
-        );
-        this.totalViewPeriodOptions["xaxis"]["categories"].push(
-          subscriberView1[index].recordDate.substring(5, 10)
-        );
+      for (let index = 0; index < max; index++) {
+        console.log(subscriberView1[index]);
+        if (
+          subscriberView1[index] != undefined &&
+          !this.totalViewPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView1[index].recordDate
+          )
+        ) {
+          this.totalViewPeriodOptions["xaxis"]["categories"].push(
+            subscriberView1[index].recordDate
+          );
+        }
+
+        if (
+          subscriberView2[index] != undefined &&
+          !this.totalViewPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView2[index].recordDate
+          )
+        ) {
+          this.totalViewPeriodOptions["xaxis"]["categories"].push(
+            subscriberView2[index].recordDate
+          );
+        }
       }
 
-      //viewDiff
+      this.totalViewPeriodOptions["xaxis"]["categories"].sort();
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView1[i].recordDate
+        ) {
+          this.totalViewPeriodData[0]["data"].push(
+            subscriberView1[i].pointView
+          );
+          i++;
+        } else {
+          this.totalViewPeriodData[0]["data"].push(null);
+        }
+      }
+
+      console.log(this.totalViewPeriodData[0]["data"]);
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView2[i].recordDate
+        ) {
+          this.totalViewPeriodData[1]["data"].push(
+            subscriberView2[i].pointView
+          );
+          i++;
+        } else {
+          this.totalViewPeriodData[1]["data"].push(null);
+        }
+      }
+
+      console.log(this.totalViewPeriodOptions["xaxis"]["categories"]);
+
+      // viewDiff
       this.totalViewDiffData = [
         {
           name: this.youtuber1.channelName,
@@ -971,13 +1074,68 @@ export default {
         }
       ];
 
-      for (let index = 0; index < subscriberView1.length; index++) {
-        this.totalViewDiffData[0]["data"].push(subscriberView1[index].difView);
-        this.totalViewDiffData[1]["data"].push(subscriberView2[index].difView);
-        this.totalViewDiffOptions["xaxis"]["categories"].push(
-          subscriberView1[index].recordDate.substring(5, 10)
-        );
+      for (let index = 0; index < max; index++) {
+        console.log(subscriberView1[index]);
+        if (
+          subscriberView1[index] != undefined &&
+          !this.totalViewDiffOptions["xaxis"]["categories"].includes(
+            subscriberView1[index].recordDate
+          )
+        ) {
+          this.totalViewDiffOptions["xaxis"]["categories"].push(
+            subscriberView1[index].recordDate
+          );
+        }
+
+        if (
+          subscriberView2[index] != undefined &&
+          !this.totalViewDiffOptions["xaxis"]["categories"].includes(
+            subscriberView2[index].recordDate
+          )
+        ) {
+          this.totalViewDiffOptions["xaxis"]["categories"].push(
+            subscriberView2[index].recordDate
+          );
+        }
       }
+
+      this.totalViewDiffOptions["xaxis"]["categories"].sort();
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewDiffOptions["xaxis"]["categories"][index] ==
+          subscriberView1[i].recordDate
+        ) {
+          this.totalViewDiffData[0]["data"].push(subscriberView1[i].difView);
+          i++;
+        } else {
+          this.totalViewDiffData[0]["data"].push(null);
+        }
+      }
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewDiffOptions["xaxis"]["categories"][index] ==
+          subscriberView2[i].recordDate
+        ) {
+          this.totalViewDiffData[1]["data"].push(subscriberView2[i].difView);
+          i++;
+        } else {
+          this.totalViewDiffData[1]["data"].push(null);
+        }
+      }
+
+      console.log(this.totalViewDiffOptions["xaxis"]["categories"]);
+
+      // for (let index = 0; index < subscriberView1.length; index++) {
+      //   this.totalViewDiffData[0]["data"].push(subscriberView1[index].difView);
+      //   this.totalViewDiffData[1]["data"].push(subscriberView2[index].difView);
+      //   this.totalViewDiffOptions["xaxis"]["categories"].push(
+      //     subscriberView1[index].recordDate.substring(5, 10)
+      //   );
+      // }
 
       //otherLink
       this.makeOtherLinkIcon();
@@ -1337,11 +1495,15 @@ export default {
           }
         },
         xaxis: {
+          type: "datetime",
           categories: []
         },
         tooltip: {
           y: {
             formatter: function(x) {
+              if (x == null) {
+                return 0;
+              }
               return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
           }
@@ -1373,6 +1535,9 @@ export default {
         tooltip: {
           y: {
             formatter: function(x) {
+              if (x == null) {
+                return 0;
+              }
               return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
           }
@@ -1391,6 +1556,7 @@ export default {
           }
         },
         xaxis: {
+          type: "datetime",
           categories: []
         },
         yaxis: {
@@ -1440,6 +1606,7 @@ export default {
           }
         },
         xaxis: {
+          type: "datetime",
           categories: []
         },
         yaxis: {
