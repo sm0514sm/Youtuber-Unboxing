@@ -27,6 +27,7 @@
 		from youtuber
 		where channelName like concat('%', #{keyword}, '%')
 		 or youtuberName like concat('%', #{keyword}, '%')
+		 or json_keys(tagCloud) like concat('%\"', #{keyword}, '\"%')
 		<!--  or channelDescription like concat('%', #{keyword}, '%') -->
 		order by subscriber desc
 	</select>
