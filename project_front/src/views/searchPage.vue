@@ -57,7 +57,7 @@
                 >유튜버를 추가하고 싶으신가요?</v-list-item-title>
                 <v-row align="center">
                   <v-spacer></v-spacer>
-                  <inputComponent position="header" v-if="$session.get('token') != undefined"></inputComponent>
+                  <inputComponent position="search" v-if="$session.get('token') != undefined"></inputComponent>
                   <span
                     v-else
                     class="font-weight-bold"
