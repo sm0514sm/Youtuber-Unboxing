@@ -36,8 +36,7 @@
         id="keyword"
         label="유튜버를 검색해보세요"
         style="max-width: 300px; "
-        solo-inverted
-        flat
+        solo
       >
         <template v-slot:no-data>
           <v-list-item>
@@ -50,9 +49,9 @@
             color="red"
             class="headline font-weight-light white--text"
           >
-            <img :src="item.thumbnails" alt="John" />
+            <img :src="item.thumbnails"/>
           </v-list-item-avatar>
-          <v-list-item-content>
+          <v-list-item-content style="width: 100px">
             <v-list-item-title v-text="item.channelName"></v-list-item-title>
             <v-list-item-subtitle
               >구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle

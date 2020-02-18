@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <!--main하고 합니다-->
-    <h1>comparePage</h1>
+    <v-row class="my-5">
+    </v-row>
     <!-- header -->
     <v-row>
       <v-col>
@@ -929,16 +930,64 @@ export default {
         }
       ];
 
-      for (let index = 0; index < subscriberView1.length; index++) {
-        this.subscriberPeriodData[0]["data"].push(
-          subscriberView1[index].pointSubscriber
-        );
-        this.subscriberPeriodData[1]["data"].push(
-          subscriberView2[index].pointSubscriber
-        );
-        this.subscriberPeriodOptions["xaxis"]["categories"].push(
-          subscriberView1[index].recordDate.substring(5, 10)
-        );
+      var max = Math.max(subscriberView1.length, subscriberView2.length);
+      for (let index = 0; index < max; index++) {
+        console.log(subscriberView1[index]);
+        if (
+          subscriberView1[index] != undefined &&
+          !this.subscriberPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView1[index].recordDate
+          )
+        ) {
+          this.subscriberPeriodOptions["xaxis"]["categories"].push(
+            subscriberView1[index].recordDate
+          );
+        }
+
+        if (
+          subscriberView2[index] != undefined &&
+          !this.subscriberPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView2[index].recordDate
+          )
+        ) {
+          this.subscriberPeriodOptions["xaxis"]["categories"].push(
+            subscriberView2[index].recordDate
+          );
+        }
+      }
+
+      console.log(this.subscriberPeriodOptions["xaxis"]["categories"])
+
+      this.subscriberPeriodOptions["xaxis"]["categories"].sort();
+
+      var i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.subscriberPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView1[i].recordDate
+        ) {
+          this.subscriberPeriodData[0]["data"].push(
+            subscriberView1[i].pointSubscriber
+          );
+          i++;
+        } else {
+          this.subscriberPeriodData[0]["data"].push(null);
+        }
+      }
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.subscriberPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView2[i].recordDate
+        ) {
+          this.subscriberPeriodData[1]["data"].push(
+            subscriberView2[i].pointSubscriber
+          );
+          i++;
+        } else {
+          this.subscriberPeriodData[1]["data"].push(null);
+        }
       }
 
       //총영상수추이
@@ -953,19 +1002,70 @@ export default {
         }
       ];
 
-      for (let index = 0; index < subscriberView1.length; index++) {
-        this.totalViewPeriodData[0]["data"].push(
-          subscriberView1[index].pointView
-        );
-        this.totalViewPeriodData[1]["data"].push(
-          subscriberView2[index].pointView
-        );
-        this.totalViewPeriodOptions["xaxis"]["categories"].push(
-          subscriberView1[index].recordDate.substring(5, 10)
-        );
+
+
+      for (let index = 0; index < max; index++) {
+        console.log(subscriberView1[index]);
+        if (
+          subscriberView1[index] != undefined &&
+          !this.totalViewPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView1[index].recordDate
+          )
+        ) {
+          this.totalViewPeriodOptions["xaxis"]["categories"].push(
+            subscriberView1[index].recordDate
+          );
+        }
+
+        if (
+          subscriberView2[index] != undefined &&
+          !this.totalViewPeriodOptions["xaxis"]["categories"].includes(
+            subscriberView2[index].recordDate
+          )
+        ) {
+          this.totalViewPeriodOptions["xaxis"]["categories"].push(
+            subscriberView2[index].recordDate
+          );
+        }
       }
 
-      //viewDiff
+      this.totalViewPeriodOptions["xaxis"]["categories"].sort()
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView1[i].recordDate
+        ) {
+          this.totalViewPeriodData[0]["data"].push(
+            subscriberView1[i].pointView
+          );
+          i++;
+        } else {
+          this.totalViewPeriodData[0]["data"].push(null);
+        }
+      }
+
+      console.log(this.totalViewPeriodData[0]["data"])
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewPeriodOptions["xaxis"]["categories"][index] ==
+          subscriberView2[i].recordDate
+        ) {
+          this.totalViewPeriodData[1]["data"].push(
+            subscriberView2[i].pointView
+          );
+          i++;
+        } else {
+          this.totalViewPeriodData[1]["data"].push(null);
+        }
+      }
+
+      console.log(this.totalViewPeriodOptions["xaxis"]["categories"])
+
+      // viewDiff
       this.totalViewDiffData = [
         {
           name: this.youtuber1.channelName,
@@ -977,19 +1077,80 @@ export default {
         }
       ];
 
-      for (let index = 0; index < subscriberView1.length; index++) {
-        this.totalViewDiffData[0]["data"].push(subscriberView1[index].difView);
-        this.totalViewDiffData[1]["data"].push(subscriberView2[index].difView);
-        this.totalViewDiffOptions["xaxis"]["categories"].push(
-          subscriberView1[index].recordDate.substring(5, 10)
-        );
+      for (let index = 0; index < max; index++) {
+        console.log(subscriberView1[index]);
+        if (
+          subscriberView1[index] != undefined &&
+          !this.totalViewDiffOptions["xaxis"]["categories"].includes(
+            subscriberView1[index].recordDate
+          )
+        ) {
+          this.totalViewDiffOptions["xaxis"]["categories"].push(
+            subscriberView1[index].recordDate
+          );
+        }
+
+        if (
+          subscriberView2[index] != undefined &&
+          !this.totalViewDiffOptions["xaxis"]["categories"].includes(
+            subscriberView2[index].recordDate
+          )
+        ) {
+          this.totalViewDiffOptions["xaxis"]["categories"].push(
+            subscriberView2[index].recordDate
+          );
+        }
       }
+
+      this.totalViewDiffOptions["xaxis"]["categories"].sort()
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewDiffOptions["xaxis"]["categories"][index] ==
+          subscriberView1[i].recordDate
+        ) {
+          this.totalViewDiffData[0]["data"].push(
+            subscriberView1[i].difView
+          );
+          i++;
+        } else {
+          this.totalViewDiffData[0]["data"].push(null);
+        }
+      }
+
+      i = 0;
+      for (let index = 0; index < max; index++) {
+        if (
+          this.totalViewDiffOptions["xaxis"]["categories"][index] ==
+          subscriberView2[i].recordDate
+        ) {
+          this.totalViewDiffData[1]["data"].push(
+            subscriberView2[i].difView
+          );
+          i++;
+        } else {
+          this.totalViewDiffData[1]["data"].push(null);
+        }
+      }
+
+      console.log(this.totalViewDiffOptions["xaxis"]["categories"])
+      
+
+      // for (let index = 0; index < subscriberView1.length; index++) {
+      //   this.totalViewDiffData[0]["data"].push(subscriberView1[index].difView);
+      //   this.totalViewDiffData[1]["data"].push(subscriberView2[index].difView);
+      //   this.totalViewDiffOptions["xaxis"]["categories"].push(
+      //     subscriberView1[index].recordDate.substring(5, 10)
+      //   );
+      // }
 
       //otherLink
       this.makeOtherLinkIcon();
       console.log("6666");
 
       this.check();
+
     },
     setGradeColor(num) {
       if (typeof num == "undefined") {
@@ -1343,11 +1504,15 @@ export default {
           }
         },
         xaxis: {
+          type: "datetime",
           categories: []
         },
         tooltip: {
           y: {
             formatter: function(x) {
+              if(x == null){
+                return 0;
+              }
               return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
           }
@@ -1379,6 +1544,9 @@ export default {
         tooltip: {
           y: {
             formatter: function(x) {
+              if(x == null){
+                return 0;
+              }
               return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
           }
@@ -1397,6 +1565,7 @@ export default {
           }
         },
         xaxis: {
+          type : "datetime",
           categories: []
         },
         yaxis: {
@@ -1446,6 +1615,7 @@ export default {
           }
         },
         xaxis: {
+          type: "datetime",
           categories: []
         },
         yaxis: {
