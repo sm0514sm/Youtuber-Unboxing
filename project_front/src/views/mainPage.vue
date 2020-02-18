@@ -40,10 +40,15 @@
         </template>
 
         <template v-slot:item="{ item }">
-          <v-list-item-avatar color="red" class="headline font-weight-light white--text">
+          <div v-if="item.yno == -1" class="ma-0 pa-0"></div>
+          <v-list-item-avatar
+            v-if="item.yno != -1"
+            color="red"
+            class="headline font-weight-light white--text"
+          >
             <img :src="item.thumbnails" alt="John" />
           </v-list-item-avatar>
-          <v-list-item-content style="width:100px;">
+          <v-list-item-content v-if="item.yno != -1" style="width: 100px">
             <v-list-item-title v-text="item.channelName"></v-list-item-title>
             <v-list-item-subtitle>구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle>
           </v-list-item-content>
@@ -83,7 +88,7 @@
           <br />자유롭게 추가하세요
           <br />
         </h3>
-        <input-component></input-component>
+        <input-component v-if="$session.get('token') != undefined" position="main"></input-component>
       </div>
 
       <div style="display: inline-block; margin: 0 auto;" width="45%;">
@@ -245,6 +250,11 @@ export default {
         .get("/youtuber/all")
         .then(response => {
           this.searchItems = response.data.data;
+          var tmp = { yno: -1, channelName: [] };
+          for (let index = 0; index < response.data.data.length; index++) {
+            tmp["channelName"] += response.data.data[index].channelName;
+          }
+          this.searchItems.push(tmp);
         })
         .catch(err => {
           console.log(err);

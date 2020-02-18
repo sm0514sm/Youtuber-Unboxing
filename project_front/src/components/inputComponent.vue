@@ -2,7 +2,22 @@
   <v-col cols="3" align="center">
     <v-dialog v-model="dialog" persistent max-width="550px">
       <template v-slot:activator="{ on }">
+        <!-- main -->
         <v-btn
+          v-if="position == 'main'"
+          style="font-size: 20px; text-shadow: 0 0 2px #000;"
+          v-on="on"
+          :loading="loading"
+          :disabled="loading"
+          color="blue"
+          text
+          @click="init"
+        >
+        뭘 어떻게 해야 하냐
+        </v-btn>
+        <!-- header -->
+        <v-btn
+          v-else-if="position == 'header'"
           style="font-size: 20px; text-shadow: 0 0 2px #000;"
           v-on="on"
           :loading="loading"
@@ -10,8 +25,18 @@
           color="white"
           text
           @click="init"
-          >ADD YOUTUBER</v-btn
-        >
+        >ADD YOUTUBER</v-btn>
+        <!-- search -->
+        <v-btn
+          v-else-if="position == 'search'"
+          style="font-size: 20px; text-shadow: 0 0 2px #000;"
+          v-on="on"
+          :loading="loading"
+          :disabled="loading"
+          color="red"
+          text
+          @click="init"
+        >search에 있는 어떤 것</v-btn>
       </template>
       <v-card class="pa-5">
         <v-card-title align="center" class="pa-0">
@@ -40,22 +65,17 @@
                 <v-img :src="require('@/assets/youtuberinsert.png')"></v-img>
               </v-col>
               <v-col cols="12">
-                <v-text-field
-                  label="주소"
-                  v-model="address"
-                  required
-                  append-icon="language"
-                ></v-text-field>
+                <v-text-field label="주소" v-model="address" required append-icon="language"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
           <!--loadingPage -->
           <v-container v-else-if="nowPage == 'loadingPage'">
             <v-row>
-              <v-col cols="12"
-                >데이터 요청중입니다 ... [ 남은 예상 시간 :
-                {{ Math.round(35 - value / 2.86) }}초 ]</v-col
-              >
+              <v-col cols="12">
+                데이터 요청중입니다 ... [ 남은 예상 시간 :
+                {{ Math.round(35 - value / 2.86) }}초 ]
+              </v-col>
             </v-row>
             <v-row>
               <v-spacer></v-spacer>
@@ -80,14 +100,8 @@
             <v-row>
               <!-- 추가 완료했을 때 -->
               <v-col v-if="pageCode === 0" cols="12">
-                <animation-css
-                  :animation-type="AnimationType.TADA"
-                  v-model="animationFlag"
-                >
-                  <p
-                    style="text-align: center;color: #2196F3 ;font-size: 20px;"
-                    class="pa-0"
-                  >
+                <animation-css :animation-type="AnimationType.TADA" v-model="animationFlag">
+                  <p style="text-align: center;color: #2196F3 ;font-size: 20px;" class="pa-0">
                     <v-icon color="blue" x-large>mdi-human-handsup</v-icon>
                     {{ completeTitle }}
                     <v-icon color="blue" x-large>mdi-human-handsup</v-icon>
@@ -96,14 +110,8 @@
               </v-col>
               <!-- 그외 에러 났을 때 -->
               <v-col v-else cols="12">
-                <animation-css
-                  :animation-type="AnimationType.HEADSHAKE"
-                  v-model="animationFlag"
-                >
-                  <p
-                    style="text-align: center;color: red ;font-size: 15px;"
-                    class="pa-0"
-                  >
+                <animation-css :animation-type="AnimationType.HEADSHAKE" v-model="animationFlag">
+                  <p style="text-align: center;color: red ;font-size: 15px;" class="pa-0">
                     <v-icon color="red" x-large>mdi-alert</v-icon>
                     {{ completeTitle }}
                     <v-icon color="red" x-large>mdi-alert</v-icon>
@@ -111,9 +119,7 @@
                 </animation-css>
               </v-col>
               <v-col cols="12">
-                <p style="text-align: center;" class="pa-0">
-                  {{ completeSmallTitle }}
-                </p>
+                <p style="text-align: center;" class="pa-0">{{ completeSmallTitle }}</p>
               </v-col>
             </v-row>
             <v-row>
@@ -125,8 +131,7 @@
                   color="blue darken-1"
                   text
                   @click="gotoYoutuberPage"
-                  >해당 유튜버의 페이지로 이동하기</v-btn
-                >
+                >해당 유튜버의 페이지로 이동하기</v-btn>
               </v-col>
               <v-spacer></v-spacer>
             </v-row>
@@ -135,13 +140,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="onCloseButton">닫기</v-btn>
-          <v-btn
-            v-if="nowPage == 'inputPage'"
-            color="blue darken-1"
-            text
-            @click="onSendButton"
-            >추가하기</v-btn
-          >
+          <v-btn v-if="nowPage == 'inputPage'" color="blue darken-1" text @click="onSendButton">추가하기</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -173,6 +172,7 @@ export default {
   components: {
     [AnimationCss.name]: AnimationCss
   },
+  props: ["position"],
   name: "inputComponent",
   methods: {
     onSendButton: function() {
