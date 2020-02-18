@@ -42,7 +42,7 @@ const eventsHub = new Vue();
 Vue.use(IdleVue, {
   eventEmitter: eventsHub,
   store,
-  idleTime: 1000 * 60 * 60 * 3, // 3 hour,
+  idleTime: 1000 * 60 * 60 * 4, // 3 hour,
   startAtIdle: false
 });
 
@@ -53,12 +53,12 @@ new Vue({
   render: h => h(App)
 }).$mount("#app");
 
-var filter = function(text, length, clamp){
-  clamp = clamp || '...';
-  var node = document.createElement('div');
+var filter = function(text, length, clamp) {
+  clamp = clamp || "...";
+  var node = document.createElement("div");
   node.innerHTML = text;
   var content = node.textContent;
   return content.length > length ? content.slice(0, length) + clamp : content;
 };
 
-Vue.filter('truncate', filter);
+Vue.filter("truncate", filter);

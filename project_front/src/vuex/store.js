@@ -38,7 +38,7 @@ const state = {
             nameKor: "노하우/스타일",
             cano: 3,
             icon: "mdi-palette",
-            iconName: "노하우",
+            iconName: "스타일",
             iconColor: "deep-purple"
         },
         {
