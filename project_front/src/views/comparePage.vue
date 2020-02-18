@@ -1,8 +1,7 @@
 <template>
   <v-container>
     <!--main하고 합니다-->
-    <v-row class="my-5">
-    </v-row>
+    <v-row class="my-5"></v-row>
     <!-- header -->
     <v-row>
       <v-col>
@@ -961,7 +960,7 @@ export default {
         }
       }
 
-      console.log(this.subscriberPeriodOptions["xaxis"]["categories"])
+      console.log(this.subscriberPeriodOptions["xaxis"]["categories"]);
 
       this.subscriberPeriodOptions["xaxis"]["categories"].sort();
 
@@ -1007,8 +1006,6 @@ export default {
         }
       ];
 
-
-
       for (let index = 0; index < max; index++) {
         console.log(subscriberView1[index]);
         if (
@@ -1034,7 +1031,7 @@ export default {
         }
       }
 
-      this.totalViewPeriodOptions["xaxis"]["categories"].sort()
+      this.totalViewPeriodOptions["xaxis"]["categories"].sort();
 
       i = 0;
       for (let index = 0; index < max; index++) {
@@ -1051,7 +1048,7 @@ export default {
         }
       }
 
-      console.log(this.totalViewPeriodData[0]["data"])
+      console.log(this.totalViewPeriodData[0]["data"]);
 
       i = 0;
       for (let index = 0; index < max; index++) {
@@ -1068,7 +1065,7 @@ export default {
         }
       }
 
-      console.log(this.totalViewPeriodOptions["xaxis"]["categories"])
+      console.log(this.totalViewPeriodOptions["xaxis"]["categories"]);
 
       // viewDiff
       this.totalViewDiffData = [
@@ -1107,7 +1104,7 @@ export default {
         }
       }
 
-      this.totalViewDiffOptions["xaxis"]["categories"].sort()
+      this.totalViewDiffOptions["xaxis"]["categories"].sort();
 
       i = 0;
       for (let index = 0; index < max; index++) {
@@ -1115,9 +1112,7 @@ export default {
           this.totalViewDiffOptions["xaxis"]["categories"][index] ==
           subscriberView1[i].recordDate
         ) {
-          this.totalViewDiffData[0]["data"].push(
-            subscriberView1[i].difView
-          );
+          this.totalViewDiffData[0]["data"].push(subscriberView1[i].difView);
           i++;
         } else {
           this.totalViewDiffData[0]["data"].push(null);
@@ -1130,17 +1125,14 @@ export default {
           this.totalViewDiffOptions["xaxis"]["categories"][index] ==
           subscriberView2[i].recordDate
         ) {
-          this.totalViewDiffData[1]["data"].push(
-            subscriberView2[i].difView
-          );
+          this.totalViewDiffData[1]["data"].push(subscriberView2[i].difView);
           i++;
         } else {
           this.totalViewDiffData[1]["data"].push(null);
         }
       }
 
-      console.log(this.totalViewDiffOptions["xaxis"]["categories"])
-      
+      console.log(this.totalViewDiffOptions["xaxis"]["categories"]);
 
       // for (let index = 0; index < subscriberView1.length; index++) {
       //   this.totalViewDiffData[0]["data"].push(subscriberView1[index].difView);
@@ -1155,7 +1147,6 @@ export default {
       console.log("6666");
 
       this.check();
-
     },
     setGradeColor(num) {
       if (typeof num == "undefined") {
@@ -1515,7 +1506,7 @@ export default {
         tooltip: {
           y: {
             formatter: function(x) {
-              if(x == null){
+              if (x == null) {
                 return 0;
               }
               return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -1549,7 +1540,7 @@ export default {
         tooltip: {
           y: {
             formatter: function(x) {
-              if(x == null){
+              if (x == null) {
                 return 0;
               }
               return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -1570,7 +1561,7 @@ export default {
           }
         },
         xaxis: {
-          type : "datetime",
+          type: "datetime",
           categories: []
         },
         yaxis: {
