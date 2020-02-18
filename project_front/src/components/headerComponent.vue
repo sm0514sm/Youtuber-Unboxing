@@ -107,11 +107,13 @@
             </template>
             <v-card>
               <v-card-title>
-                <span class="headline">LogoutModal</span>
+                <span class="headline">
+                  <v-icon class="mr-2" color="red">mdi-youtube</v-icon>LOGOUT
+                </span>
               </v-card-title>
               <v-card-text>
                 <v-container>정말로 로그아웃 하겠습니까?</v-container>
-                <small>*indicates required field</small>
+                <v-img :src="require('@/assets/emoji.png')" max-width="50" max-height="50"></v-img>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
