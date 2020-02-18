@@ -20,6 +20,12 @@
           <b style="color:white">{{this.$route.query.word}}</b> 을(를) 검색한 결과입니다.
           <v-icon color="white" x-large>mdi-clipboard-play-multiple-outline</v-icon>
         </v-list-item-title>
+        <v-list-item-title
+          v-if="searchFlag"
+          class="font-weight-bold"
+          style="font-size:30px; color:red"
+          align="center"
+        >한글자 이상 검색해주세요!</v-list-item-title>
       </v-list-item-content>
     </v-card>
 
@@ -51,7 +57,12 @@
                 >유튜버를 추가하고 싶으신가요?</v-list-item-title>
                 <v-row align="center">
                   <v-spacer></v-spacer>
-                  <inputComponent></inputComponent>
+                  <inputComponent position="header" v-if="$session.get('token') != undefined"></inputComponent>
+                  <span
+                    v-else
+                    class="font-weight-bold"
+                    style="font-size:20px; color:red"
+                  >유튜버를 추가하고 싶으다면 로그인을 해주세요.</span>
                   <v-spacer></v-spacer>
                 </v-row>
               </v-list-item-content>
@@ -201,7 +212,7 @@
                       ></p>
                     </v-col>
                   </v-row>
-                  <v-row justify="bottom">
+                  <v-row>
                     <v-col>
                       <v-btn
                         v-for="(tag,index) in item.tags"
@@ -418,11 +429,26 @@ export default {
 
     Promise.all([youtuberSearch, newsSearch, videoSearch]).then(
       axios.spread((...responses) => {
+        if (this.$route.query.word == undefined) {
+          this.displayyoutuber = [];
+          this.displaynews = [];
+          this.displayvideo = [];
+          this.searchFlag = true;
+          return;
+        }
         for (let index = 0; index < responses.length; index++) {
           if (responses[index].data.state != "ok") {
             console.log("fail");
-            this.failCallback();
-            return;
+            if (this.$route.query.word.split(" ").join("") != "") {
+              this.failCallback();
+              return;
+            } else {
+              this.displayyoutuber = [];
+              this.displaynews = [];
+              this.displayvideo = [];
+              this.searchFlag = true;
+              return;
+            }
           }
         }
 
@@ -457,65 +483,7 @@ export default {
     );
   },
   computed: {},
-  watch: {
-    // $route(to, from) {
-    //   this.$vuetify.goTo(0);
-    //   if (to.path === "/searchPage") {
-    //     if (to.query.word != from.query.word) {
-    //       const youtuberSearch = new Promise((resolve, reject) => {
-    //         http
-    //           .get("/youtuber/search/" + to.query.word)
-    //           .then(response => {
-    //             resolve(response.data.data);
-    //           })
-    //           .catch(err => {
-    //             reject(err);
-    //           });
-    //       });
-    //       const newsSearch = new Promise((resolve, reject) => {
-    //         http
-    //           .get("/news/search/" + to.query.word)
-    //           .then(response => {
-    //             resolve(response.data.data);
-    //           })
-    //           .catch(err => {
-    //             reject(err);
-    //           });
-    //       });
-    //       const videoSearch = new Promise((resolve, reject) => {
-    //         http
-    //           .get("/video/search/" + to.query.word)
-    //           .then(response => {
-    //             resolve(response.data.data);
-    //           })
-    //           .catch(err => {
-    //             reject(err);
-    //           });
-    //       });
-    //       Promise.all([youtuberSearch, newsSearch, videoSearch]).then(
-    //         axios.spread((...responses) => {
-    //           this.searchedyoutuber = responses[0];
-    //           this.displayyoutuber = this.searchedyoutuber.slice(0, 3);
-    //           this.searchednews = responses[1];
-    //           this.displaynews = this.searchednews.slice(0, 3);
-    //           this.searchedvideo = responses[2];
-    //           for (let index = 0; index < this.searchedvideo.length; index++) {
-    //             var tags = this.searchedvideo[index].tags.split(",", 3);
-    //             this.searchedvideo[index].tags = tags;
-    //           }
-    //           this.displayvideo = this.searchedvideo.slice(0, 3);
-    //           this.pageyoutuber = 1;
-    //           this.pagenews = 1;
-    //           this.pagevideo = 1;
-    //           console.log(this.searchedyoutuber);
-    //           console.log(this.searchednews);
-    //           console.log(this.searchedvideo);
-    //         })
-    //       );
-    //     }
-    //   }
-    // }
-  },
+  watch: {},
   data() {
     return {
       searchedyoutuber: [],
@@ -527,7 +495,8 @@ export default {
       pageyoutuber: 1,
       pagenews: 1,
       pagevideo: 1,
-      range: 6
+      range: 6,
+      searchFlag: false
     };
   }
 };
