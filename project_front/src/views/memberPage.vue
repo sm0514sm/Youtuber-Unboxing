@@ -465,9 +465,22 @@ import tc from 'thousands-counter';
         })
       },
       basicInfo(){
+        console.log("BASIC")
         http.get("/user/search/"+this.$session.get('token'))
         .then(response=>{
+          console.log("RESPOSE")
           this.user=response.data.data
+          if(this.user==null){
+            alert("자동 로그아웃 되었습니다");
+            console.log("NULLL")
+            this.$session.destroy();
+            console.log(this.$route.query);
+            if (this.$route.path == "/memberPage") {
+              this.$router.push("/");
+            }
+            window.location.reload();
+          }
+          console.log(response)
         }).catch(error=>{
           console.log("ERROR")
           console.log(error)

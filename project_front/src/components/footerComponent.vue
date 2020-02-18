@@ -110,10 +110,9 @@ export default {
       if (this.$session.get("token")) {
         if (this.$store.state.idleVue.isIdle) {
           http.get("/logout/" + this.$session.get("token"));
+          alert("자동 로그아웃 되었습니다");
           this.$session.destroy();
           console.log(this.$route.path);
-          alert("자동 로그아웃 되었습니다");
-          this.$router.go("/");
         }
       }
       return this.$store.state.idleVue.isIdle;
