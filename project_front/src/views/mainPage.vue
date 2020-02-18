@@ -67,8 +67,12 @@
         :key="index+1"
         @click="onCategoryButtonClicked(index+1)"
       >
-        <v-icon class="material-icons" :color="item.iconColor">{{item.icon}}</v-icon>
-        <div class="categoryName">{{item.iconName}}</div>
+        <v-icon
+          @click="onCategoryButtonClicked(index+1)"
+          class="material-icons"
+          :color="item.iconColor"
+        >{{item.icon}}</v-icon>
+        <div class="categoryName" @click="onCategoryButtonClicked(index + 1)">{{item.iconName}}</div>
       </div>
     </div>
     <br />
@@ -76,18 +80,24 @@
 
     <div style="display: flex; width: 100%;">
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">강력한 검색 기능</h1>
+        <h1 style="margin-top: 15%; font-weight: bold;">완벽한 분석 기능</h1>
         <h3>
-          원하는 유튜버를 검색해 볼 수 있습니다.
-          <br />만약 내가 찾는 유튜버가 없다면?
-          <br />자유롭게 추가하세요
-          <br />
+          구독자 수, 조회수 같은 기본적인 정보부터
+          <br />커뮤니티, 뉴스 분석까지
+          <br />한 화면에서 모두 만나보세요.
         </h3>
         <input-component></input-component>
       </div>
 
       <div style="display: inline-block; margin: 0 auto;" width="45%;">
-        <v-img :src="require('@/assets/main1.gif')" width="500px"></v-img>
+        <video
+          :src="require('@/assets/detail.mp4')"
+          width="100%"
+          autoplay
+          loop="true"
+          muted
+          style="width: 500px;"
+        ></video>
       </div>
     </div>
 
@@ -99,36 +109,53 @@
 
     <div style="display: flex; width: 100%;">
       <div style="display: inline-block; margin: 0 auto;" width="45%;">
-        <v-img :src="require('@/assets/main2.gif')" width="500px"></v-img>
+        <video
+          :src="require('@/assets/search.mp4')"
+          width="100%"
+          autoplay
+          loop="true"
+          muted
+          style="width: 500px;"
+        ></video>
       </div>
+      <div style="display: inline-block; margin: 0 auto;" width="45%">
+        <h1 style="margin-top: 15%; font-weight: bold;">간편한 검색 기능</h1>
+        <h3>
+          원하는 유튜버를 검색해 볼 수 있습니다.
+          <br />만약 내가 찾는 유튜버가 없다면?
+          <br />자유롭게 추가하세요.
+        </h3>
+      </div>
+    </div>
+
+    <br />
+    <br />
+    <hr />
+    <br />
+    <br />
+
+    <div style="display: flex; width: 100%;">
       <div style="display: inline-block; margin: 0 auto;" width="45%">
         <h1 style="margin-top: 15%; font-weight: bold;">완벽한 비교하기 기능</h1>
         <h3>
           번거롭게 하나하나 비교할 필요 없이
-          <br />한 화면에서 두 유튜버를 비교할 수
-          <br />있습니다.
-        </h3>
-      </div>
-    </div>
-
-    <br />
-    <br />
-    <hr />
-    <br />
-    <br />
-
-    <div style="display: flex; width: 100%;">
-      <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">간편한 즐겨찾기 기능</h1>
-        <h3>
-          마음에 드는 유튜버가 있다면
+          <br />한 화면에서 손쉽게 두 유튜버를
+          <br />비교해 보세요.
+          <!-- 마음에 드는 유튜버가 있다면
           <br />클릭 한 번으로 추가하고
-          <br />언제든지 모아보세요
+          <br />언제든지 모아보세요-->
         </h3>
       </div>
 
       <div style="display: inline-block; margin: 0 auto;" width="45%;">
-        <v-img :src="require('@/assets/7.png')" width="300px"></v-img>
+        <video
+          :src="require('@/assets/compare.mp4')"
+          width="100%"
+          autoplay
+          loop="true"
+          muted
+          style="width: 500px;"
+        ></video>
       </div>
     </div>
 
@@ -140,18 +167,27 @@
 
     <div style="display: flex; width: 100%;">
       <div style="display: inline-block; margin: 0 auto;" width="45%;">
-        <v-img :src="require('@/assets/7.png')" width="300px"></v-img>
+        <video
+          :src="require('@/assets/user.mp4')"
+          width="100%"
+          autoplay
+          loop="true"
+          muted
+          style="width: 500px;"
+        ></video>
       </div>
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">완벽한 유튜버 추천 기능</h1>
+        <h1 style="margin-top: 15%; font-weight: bold;">강력한 유튜버 추천 기능</h1>
         <h3>
           나와 관심항목이 같은 사람들이
           <br />즐겨찾는 유튜버를 추천해 드립니다
-          <br />바로 확인해 보세요
+          <br />바로 확인해 보세요.
         </h3>
       </div>
     </div>
 
+    <br />
+    <br />
     <br />
     <br />
   </div>
@@ -327,5 +363,10 @@ div {
 }
 .v-label {
   padding-left: 50px;
+}
+hr {
+  border: 0.1px inherit lightgray;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 </style>

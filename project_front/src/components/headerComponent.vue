@@ -35,7 +35,7 @@
             <span style="text-shadow: 0 0 2px #000;">ABOUT US</span>
           </v-btn>
         </v-col>
-        <v-col cols="2" class="ml-5 my-0 py-0">
+        <v-col cols="2" class="ml-5my-0 py-0">
           <input-component></input-component>
         </v-col>
       </v-row>
@@ -89,16 +89,25 @@
           </div>-->
 
           <!-- 카카오로그인 -->
-          <v-btn @click="login()" class="btnFont" large color="#F8E211" v-if="loginStatus == false">
-            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그인
+          <v-btn
+            @click="login()"
+            class="btnFont mr-5 pl-2 pr-2"
+            color="#F8E211"
+            v-if="loginStatus == false"
+          >
+            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-2" width="18px"></v-img>로그인
           </v-btn>
           <v-dialog v-if="loginStatus" v-model="dialog" persistent max-width="600px">
             <template v-slot:activator="{ on }">
-              <v-btn class="btnFont" color="#F8E211" large v-on="on">
-                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그아웃
+              <v-btn class="btnFont mr-5 pl-2 pr-2" color="#F8E211" v-on="on">
+                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-2" width="18px"></v-img>로그아웃
               </v-btn>
-              <v-btn class="ma-2 btnFont" color="#F8E211" large @click="gotoPage('/memberPage')">
-                <v-icon large left>mdi-account</v-icon>회원정보
+              <v-btn
+                class="btnFont ml-3 mr-3 pl-2 pr-2"
+                color="#F8E211"
+                @click="gotoPage('/memberPage')"
+              >
+                <v-icon left class="ml-1">mdi-account</v-icon>회원정보
               </v-btn>
             </template>
             <v-card>
