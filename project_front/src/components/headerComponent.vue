@@ -95,12 +95,12 @@
             color="#F8E211"
             v-if="loginStatus == false"
           >
-            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-2" width="18px"></v-img>로그인
+            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-1" width="18px"></v-img>로그인
           </v-btn>
           <v-dialog v-if="loginStatus" v-model="dialog" persistent max-width="600px">
             <template v-slot:activator="{ on }">
               <v-btn class="btnFont mr-5 pl-2 pr-2" color="#F8E211" v-on="on">
-                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-2" width="18px"></v-img>로그아웃
+                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-1" width="18px"></v-img>로그아웃
               </v-btn>
               <v-btn
                 class="btnFont ml-3 mr-3 pl-2 pr-2"
