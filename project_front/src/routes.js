@@ -7,6 +7,7 @@ import testPage from "./views/test.vue";
 import memberPage from "./views/memberPage.vue";
 import rankPage from "./views/rankPage.vue"
 import ourPage from "./views/ourPage.vue"
+import notFound from "./views/notFound.vue"
 
 
 
@@ -54,6 +55,11 @@ export default [{
         path: "/ourPage",
         name: "ourPage",
         component: ourPage
+    },
+    {
+        path: "*",
+        name: "notFound",
+        component: notFound
     },
 
 

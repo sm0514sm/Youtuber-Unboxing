@@ -62,7 +62,7 @@
                     v-else
                     class="font-weight-bold"
                     style="font-size:20px; color:red"
-                  >유튜버를 추가하고 싶으다면 로그인을 해주세요.</span>
+                  >유튜버를 추가하고 싶으시다면 로그인을 해주세요.</span>
                   <v-spacer></v-spacer>
                 </v-row>
               </v-list-item-content>

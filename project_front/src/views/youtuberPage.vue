@@ -794,6 +794,10 @@ export default {
     this.loading = "loading";
   },
   mounted() {
+    if(this.$route.query.yno == undefined){
+      this.$router.push({ path: "notFound" });
+      return;
+    }
     this.$store.dispatch(Constant.GET_YOUTUBER, {
       yno: this.$route.query.yno,
       callback: this.render,
