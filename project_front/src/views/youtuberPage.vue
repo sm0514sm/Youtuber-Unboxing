@@ -395,7 +395,7 @@
                                 <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
-                                  >조회수 차이 그래프</v-list-item-title>
+                                  >조회수 변화량 그래프</v-list-item-title>
                                   <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
