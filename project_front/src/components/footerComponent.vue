@@ -1,12 +1,12 @@
 <template>
   <!-- Footer -->
-  <mdb-footer color="unique-color-dark" class="page-footer font-small pt-0">
+  <mdb-footer color="#222222" class="page-footer font-small pt-0">
     <!-- <hr
       class="pink mb-4 mt-0 d-inline-block mx-auto"
       style="width: -webkit-fill-available; margin-left:20px;margin-right:20px"
     />-->
     <hr
-      style="height:3px;border:none;color:#FF9A9A;background-color:#FF9A9A;margin-left:35px;margin-right:35px"
+      style="border: 1px solid lightgray; margin-left:35px; margin-right:35px; margin-bottom: 30px"
     />
     <mdb-container class="text-center text-md-left" style="margin-left:auto; margin-right:auto">
       <div>
@@ -15,14 +15,20 @@
             <h6 class="text-uppercase font-weight-bold">
               <strong>COMPANY</strong>
             </h6>
-            <hr class="pink mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
+            <hr
+              class="mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px; border: 0.5px solid #222222;"
+            />
             <v-img :src="require('@/assets/footer.png')" width="100px"></v-img>
           </mdb-col>
           <mdb-col md="4" lg="3" xl="3" class="mb-4">
             <h6 class="text-uppercase font-weight-bold">
               <strong>PROJECT NAME</strong>
             </h6>
-            <hr class="pink mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
+            <hr
+              class="mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px; border: 0.5px solid #222222;"
+            />
             <h6 class="text-uppercase font-weight-bold">
               <strong>SSAFY First Project</strong>
             </h6>
@@ -37,7 +43,10 @@
             <h6 class="text-uppercase font-weight-bold">
               <strong>Contact</strong>
             </h6>
-            <hr class="pink mb-4 mt-0 d-inline-block mx-auto" style="width: 60px" />
+            <hr
+              class="mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px; border: 0.5px solid #222222;"
+            />
             <h6 class="text-uppercase font-weight-bold">
               <strong>Seoul, Gangnam-gu, Yeoksam-dong</strong>
             </h6>
@@ -52,7 +61,7 @@
       </div>
     </mdb-container>
     <div v-if="isIdle" class="transparent"></div>
-    <div class="footer-copyright text-center py-3">
+    <div class="footer-copyright text-center pb-5">
       <mdb-container fluid>
         &copy; 2020 Copyright:
         <a href="http://15.165.77.1:3000">Youtuber Unboxing</a>

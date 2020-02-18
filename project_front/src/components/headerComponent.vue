@@ -1,12 +1,5 @@
 <template>
-  <v-app-bar
-    id="app_bar_tt"
-    :color="headerColor"
-    fixed
-    elevate-on-scroll
-    scroll-threshold="500"
-    v-scroll="onScroll"
-  >
+  <v-app-bar id="app_bar_tt" color="#222222" fixed elevate-on-scroll scroll-threshold="500" app>
     <v-col cols="2" class="pa-0 pt-2 pb-1">
       <v-img
         :src="require('@/assets/logo4.png')"
@@ -250,25 +243,25 @@ export default {
       );
       document.getElementById("keyword").vaule = "";
     },
-    onScroll() {
-      var scroll = window.pageYOffset;
-      var value = "#FF6868";
-      var position = 250;
-      if (scroll >= position) {
-        value += "AA";
-      } else {
-        var tmp = Math.round((scroll / position) * parseInt("AA", 16)).toString(
-          16
-        );
-        if (tmp.length == 1) {
-          value += "0" + tmp;
-        } else {
-          value += tmp;
-        }
-      }
+    // onScroll() {
+    //   var scroll = window.pageYOffset;
+    //   var value = "#333333";
+    //   var position = 250;
+    //   if (scroll >= position) {
+    //     value += "";
+    //   } else {
+    //     var tmp = Math.round((scroll / position) * parseInt("", 16)).toString(
+    //       16
+    //     );
+    //     if (tmp.length == 1) {
+    //       value += "0" + tmp;
+    //     } else {
+    //       value += tmp;
+    //     }
+    //   }
 
-      this.headerColor = value;
-    },
+    //   this.headerColor = value;
+    // },
     tc(num) {
       return tc(num);
     }

@@ -5,18 +5,16 @@
         <!-- main -->
         <v-btn
           v-if="position == 'main'"
-          style="font-size: 20px;"
+          style="font-size: 15px; font-family: 'Noto Sans KR', 'sans-serif;'"
           v-on="on"
           :loading="loading"
           :disabled="loading"
-          color="blue"
+          color="red"
           @click="init"
           dark
-          rounded
+          class="pl-2 pr-3 mt-2"
         >
-        <v-icon large>mdi-account-circle
-        </v-icon>
-        유튜브 추가하기
+          <v-icon class="mr-2">mdi-youtube</v-icon>유튜버 추가하기
         </v-btn>
         <!-- header -->
         <v-btn
@@ -41,9 +39,7 @@
           dark
           rounded
         >
-        <v-icon large>mdi-account-circle
-        </v-icon>
-        유튜브 추가하기
+          <v-icon large>mdi-account-circle</v-icon>유튜브 추가하기
         </v-btn>
       </template>
       <v-card class="pa-5">

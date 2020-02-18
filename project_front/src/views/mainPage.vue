@@ -82,16 +82,16 @@
     </div>
     <br />
     <br />
+    <br />
 
     <div style="display: flex; width: 100%;">
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">완벽한 분석 기능</h1>
+        <h1 style="margin-top: 12%; font-weight: bold;">완벽한 분석 기능</h1>
         <h3>
           구독자 수, 조회수 같은 기본적인 정보부터
           <br />커뮤니티, 뉴스 분석까지
           <br />한 화면에서 모두 만나보세요.
         </h3>
-        <input-component v-if="$session.get('token') != undefined" position="main"></input-component>
       </div>
 
       <div style="display: inline-block; margin: 0 auto;" width="45%;">
@@ -124,12 +124,13 @@
         ></video>
       </div>
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">간편한 검색 기능</h1>
+        <h1 style="margin-top: 5%; font-weight: bold;">간편한 검색 기능</h1>
         <h3>
           원하는 유튜버를 검색해 볼 수 있습니다.
           <br />만약 내가 찾는 유튜버가 없다면?
           <br />자유롭게 추가하세요.
         </h3>
+        <input-component v-if="$session.get('token') != undefined" position="main"></input-component>
       </div>
     </div>
 
@@ -141,7 +142,7 @@
 
     <div style="display: flex; width: 100%;">
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">완벽한 비교하기 기능</h1>
+        <h1 style="margin-top: 13%; font-weight: bold;">완벽한 비교하기 기능</h1>
         <h3>
           번거롭게 하나하나 비교할 필요 없이
           <br />한 화면에서 손쉽게 두 유튜버를
@@ -182,7 +183,7 @@
         ></video>
       </div>
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">강력한 유튜버 추천 기능</h1>
+        <h1 style="margin-top: 12%; font-weight: bold;">강력한 유튜버 추천 기능</h1>
         <h3>
           나와 관심항목이 같은 사람들이
           <br />즐겨찾는 유튜버를 추천해 드립니다
@@ -190,10 +191,6 @@
         </h3>
       </div>
     </div>
-
-    <br />
-    <br />
-    <br />
     <br />
   </div>
 </template>
@@ -375,7 +372,7 @@ div {
   padding-left: 50px;
 }
 hr {
-  border: 0.1px inherit lightgray;
+  border: 0.6px solid lightgray;
   margin-left: 30px;
   margin-right: 30px;
 }
