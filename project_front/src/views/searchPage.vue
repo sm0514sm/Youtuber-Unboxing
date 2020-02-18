@@ -7,21 +7,18 @@
     <v-card>
       <v-list-item-content
         class="justify-center py-6"
-        style="background-color:#cdcdcd ; height : 300px"
+        style="background-color:teal ; height : 300px"
       >
         <v-list-item-title class="font-weight-black display-3 font-italic" align="center"></v-list-item-title>
         <v-list-item-title
-          class="font-weight-black display-3 font-italic"
+          style="text-shadow: 0 0 2px #000;font-size: 3em;color:white"
           align="center"
-        >SEARCH PAGE</v-list-item-title>
-        <v-list-item-title
-          class="font-weight-bold"
-          style="font-size:30px"
-          align="center"
-          v-if="!searchFlag"
         >
-          "{{this.$route.query.word}}" 을(를) 검색한 결과입니다.
-          <v-icon color="blue" x-large>mdi-magnify</v-icon>
+          <v-icon size="70" class="mr-2" color="white">mdi-magnify</v-icon>SEARCH PAGE
+        </v-list-item-title>
+        <v-list-item-title class="font-weight-bold" style="font-size:30px" align="center">
+          <b style="color:white">{{this.$route.query.word}}</b> 을(를) 검색한 결과입니다.
+          <v-icon color="white" x-large>mdi-clipboard-play-multiple-outline</v-icon>
         </v-list-item-title>
         <v-list-item-title
           v-if="searchFlag"
