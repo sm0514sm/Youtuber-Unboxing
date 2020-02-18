@@ -5,15 +5,18 @@
         <!-- main -->
         <v-btn
           v-if="position == 'main'"
-          style="font-size: 20px; text-shadow: 0 0 2px #000;"
+          style="font-size: 20px;"
           v-on="on"
           :loading="loading"
           :disabled="loading"
           color="blue"
-          text
           @click="init"
+          dark
+          rounded
         >
-        뭘 어떻게 해야 하냐
+        <v-icon large>mdi-account-circle
+        </v-icon>
+        유튜브 추가하기
         </v-btn>
         <!-- header -->
         <v-btn
@@ -28,15 +31,20 @@
         >ADD YOUTUBER</v-btn>
         <!-- search -->
         <v-btn
-          v-else-if="position == 'search'"
-          style="font-size: 20px; text-shadow: 0 0 2px #000;"
+          v-if="position == 'search'"
+          style="font-size: 20px;"
           v-on="on"
           :loading="loading"
           :disabled="loading"
-          color="red"
-          text
+          color="blue"
           @click="init"
-        >search에 있는 어떤 것</v-btn>
+          dark
+          rounded
+        >
+        <v-icon large>mdi-account-circle
+        </v-icon>
+        유튜브 추가하기
+        </v-btn>
       </template>
       <v-card class="pa-5">
         <v-card-title align="center" class="pa-0">
