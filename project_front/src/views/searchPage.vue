@@ -60,7 +60,12 @@
                 >유튜버를 추가하고 싶으신가요?</v-list-item-title>
                 <v-row align="center">
                   <v-spacer></v-spacer>
-                  <inputComponent></inputComponent>
+                  <inputComponent position="header" v-if="$session.get('token') != undefined"></inputComponent>
+                  <span
+                    v-else
+                    class="font-weight-bold"
+                    style="font-size:20px; color:red"
+                  >유튜버를 추가하고 싶으다면 로그인을 해주세요.</span>
                   <v-spacer></v-spacer>
                 </v-row>
               </v-list-item-content>

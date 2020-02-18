@@ -36,7 +36,7 @@
           </v-btn>
         </v-col>
         <v-col cols="2" class="ml-5 my-0 py-0">
-          <input-component></input-component>
+          <input-component v-if="loginStatus != false" position="header"></input-component>
         </v-col>
       </v-row>
     </v-col>
@@ -78,16 +78,6 @@
                 </v-list-item-content>
             </template>
           </v-autocomplete>
-
-          <!-- <div v-if="loginStatus == true">
-            loginStatus == true
-            <v-btn class="ma-2" color="white" large outlined dark v-on="on">
-                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2"></v-img>로그아웃
-              </v-btn>
-          </div>
-          <div v-else>
-            loginStatus == false
-          </div>-->
 
           <!-- 카카오로그인 -->
           <v-btn @click="login()" class="btnFont" large color="#F8E211" v-if="loginStatus == false">
