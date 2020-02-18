@@ -1,14 +1,9 @@
 <template>
   <div>
     <v-card>
-      <v-card-title
-        class="justify-center py-6"
-        style="background-color:#ff68b4 ; height : 300px"
-      >
+      <v-card-title class="justify-center py-6" style="background-color:#ff68b4 ; height : 300px">
         <v-icon size="70" class="mr-2" color="white">mdi-account-group</v-icon>
-        <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white"
-          >ABOUT US</span
-        >
+        <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white">ABOUT US</span>
       </v-card-title>
     </v-card>
     <v-container class="pa-0">
@@ -31,9 +26,11 @@
               <v-col cols="10">
                 <v-row>
                   <v-col class="pb-0">
-                    <span class="font-weight-black thin display-3 ma-0">{{
+                    <span class="font-weight-black thin display-3 ma-0">
+                      {{
                       cardinfo.name
-                    }}</span>
+                      }}
+                    </span>
                     <v-btn rounded color="blue" justify="center" class="ml-2">
                       <b>{{ cardinfo.position }}</b>
                     </v-btn>
@@ -41,9 +38,7 @@
                 </v-row>
                 <v-row>
                   <v-col class="pt-0">
-                    <span class="font-weight-light mr-4"
-                      >탄신일 : {{ cardinfo.birth }}</span
-                    >
+                    <span class="font-weight-light mr-4">탄신일 : {{ cardinfo.birth }}</span>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -69,9 +64,7 @@
                   <v-col>
                     <span class="font-weight-bold">POSITION</span>
                     <br />
-                    <div v-for="feat in cardinfo.feat" :key="feat">
-                      {{ feat }}
-                    </div>
+                    <div v-for="feat in cardinfo.feat" :key="feat">{{ feat }}</div>
                   </v-col>
                   <v-divider vertical class="mx-3"></v-divider>
                   <!-- 외부링크 -->
@@ -194,7 +187,7 @@ export default {
           git: "taemtaemKim",
           gitlab: "taemin",
           insta: "merona_mango",
-          stacks: ["css", "vue"],
+          stacks: ["vue"],
           feat: ["VUE MASTER"]
         },
         {

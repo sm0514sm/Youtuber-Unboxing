@@ -20,12 +20,7 @@
                     }"
                   >
                     <v-row>
-                      <v-col
-                        cols="5"
-                        class="pa-3"
-                        align="center"
-                        justify="center"
-                      >
+                      <v-col cols="5" class="pa-3" align="center" justify="center">
                         <v-img
                           class="circle"
                           :src="youtuber1.thumbnails"
@@ -36,24 +31,20 @@
                       <v-col cols="7" class="pb-0 pl-3">
                         <v-row style="height :45%">
                           <v-col class="px-0">
-                            <p class="font-weight-black thin ma-0 headline">
-                              {{ youtuber1.channelName }}
-                            </p>
+                            <p
+                              class="font-weight-black thin ma-0 headline"
+                            >{{ youtuber1.channelName }}</p>
                           </v-col>
                         </v-row>
                         <v-divider class="ma-0"></v-divider>
                         <v-row>
                           <v-col cols="7">
                             <v-row class="pl-0">
-                              <p class="font-weight-black thin ma-0 headline">
-                                {{ youtuber1.publishedDate }}
-                              </p>
+                              <p
+                                class="font-weight-black thin ma-0 headline"
+                              >{{ youtuber1.publishedDate }}</p>
                             </v-row>
-                            <v-row
-                              align="center"
-                              class="mt-5"
-                              style="float: left;"
-                            >
+                            <v-row align="center" class="mt-5" style="float: left;">
                               <!-- youtuber -->
                               <v-img
                                 width="32px"
@@ -108,9 +99,7 @@
                             >
                               <p
                                 style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px;"
-                              >
-                                {{ setGrade(youtuber1.grade) }}
-                              </p>
+                              >{{ setGrade(youtuber1.grade) }}</p>
                             </v-btn>
                           </v-col>
                         </v-row>
@@ -137,9 +126,9 @@
                       <v-col cols="7" class="pb-0">
                         <v-row style="height :45%">
                           <v-col align="right">
-                            <p class="font-weight-black thin ma-0 headline">
-                              {{ youtuber2.channelName }}
-                            </p>
+                            <p
+                              class="font-weight-black thin ma-0 headline"
+                            >{{ youtuber2.channelName }}</p>
                           </v-col>
                         </v-row>
                         <v-divider class="ma-0"></v-divider>
@@ -152,9 +141,7 @@
                             >
                               <p
                                 style="text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 50px; text-align: right;"
-                              >
-                                {{ setGrade(youtuber2.grade) }}
-                              </p>
+                              >{{ setGrade(youtuber2.grade) }}</p>
                             </v-btn>
                           </v-col>
                           <v-col cols="7">
@@ -162,15 +149,9 @@
                               <p
                                 class="font-weight-black thin ma-0 headline"
                                 style="text-align='right'"
-                              >
-                                {{ youtuber2.publishedDate }}
-                              </p>
+                              >{{ youtuber2.publishedDate }}</p>
                             </v-row>
-                            <v-row
-                              align="center"
-                              class="mt-5"
-                              style="float: left;"
-                            >
+                            <v-row align="center" class="mt-5" style="float: left;">
                               <!-- youtuber -->
                               <v-img
                                 width="32px"
@@ -219,12 +200,7 @@
                           </v-col>
                         </v-row>
                       </v-col>
-                      <v-col
-                        cols="5"
-                        class="pa-3"
-                        align="center"
-                        justify="center"
-                      >
+                      <v-col cols="5" class="pa-3" align="center" justify="center">
                         <v-img
                           class="circle"
                           :src="youtuber2.thumbnails"
@@ -249,7 +225,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class=" mb-1">수치별 비교</v-list-item-title>
+                <v-list-item-title class="mb-1">수치별 비교</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -304,9 +280,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5 pb-0">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >기본 수치 비교</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">기본 수치 비교</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -351,9 +325,7 @@
         <v-hover v-slot:default="{ hover }" open-delay="100">
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-divider></v-divider>
-            <v-list-item-title class="headline font-weight-black mb-1"
-              >상호 수치 비교</v-list-item-title
-            >
+            <v-list-item-title class="headline font-weight-black mb-1">상호 수치 비교</v-list-item-title>
             <v-divider></v-divider>
             <v-row>
               <v-col class="py-0">
@@ -369,8 +341,9 @@
                   outlined
                   pill
                   text-color="black"
-                  ><b>{{youtuber1.channelName | truncate(8,"..")}}</b></v-chip
                 >
+                  <b>{{youtuber1.channelName | truncate(10,"..")}}</b>
+                </v-chip>
               </v-col>
               <v-col class="py-0">
                 <v-badge color="#26e7a5" bordered overlap>
@@ -385,86 +358,53 @@
                   outlined
                   pill
                   text-color="black"
-                  ><b>{{youtuber2.channelName | truncate(8,"..")}}</b></v-chip
                 >
+                  <b>{{youtuber2.channelName | truncate(10,"..")}}</b>
+                </v-chip>
               </v-col>
             </v-row>
 
             <v-row>
               <v-col>
                 <v-row v-if="status.y1_sub">
-                  <v-chip
-                    class="ma-2"
-                    color="#26c3fb"
-                    outlined
-                    text-color="black"
-                  >
+                  <v-chip class="ma-2" color="#26c3fb" outlined text-color="black">
                     <v-icon left color="#26c3fb">mdi-account-multiple</v-icon>
-                    <b>구독자 {{ status.sub_stat }}%</b>
+                    <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26c3fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_view">
-                  <v-chip
-                    class="ma-2"
-                    color="#26b1fb"
-                    outlined
-                    text-color="black"
-                  >
+                  <v-chip class="ma-2" color="#26b1fb" outlined text-color="black">
                     <v-icon left color="#26b1fb">mdi-animation-play</v-icon>
-                    <b>총조회수 {{ status.view_stat }}%</b>
+                    <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26b1fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_video">
-                  <v-chip
-                    class="ma-2"
-                    color="#269ffb"
-                    outlined
-                    text-color="black"
-                  >
-                    <v-icon left color="#269ffb"
-                      >mdi-youtube-subscription</v-icon
-                    >
+                  <v-chip class="ma-2" color="#269ffb" outlined text-color="black">
+                    <v-icon left color="#269ffb">mdi-youtube-subscription</v-icon>
                     <b>영상수 {{ status.video_stat }}%</b>
                     <v-icon color="#269ffb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
 
                 <v-row v-if="status.y1_charm">
-                  <v-chip
-                    class="ma-2"
-                    color="#268dfb"
-                    outlined
-                    text-color="black"
-                  >
+                  <v-chip class="ma-2" color="#268dfb" outlined text-color="black">
                     <v-icon left color="#268dfb">mdi-heart-multiple</v-icon>
                     <b>호감도 {{ status.charm_stat }}%</b>
                     <v-icon color="#268dfb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_influence">
-                  <v-chip
-                    class="ma-2"
-                    color="#267cfb"
-                    outlined
-                    text-color="black"
-                  >
+                  <v-chip class="ma-2" color="#267cfb" outlined text-color="black">
                     <v-icon left color="#267cfb">mdi-earth</v-icon>
                     <b>영향력 {{ status.influence_stat }}%</b>
                     <v-icon color="#267cfb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_activity">
-                  <v-chip
-                    class="ma-2"
-                    color="#266afb"
-                    outlined
-                    text-color="black"
-                  >
-                    <v-icon left color="#266afb"
-                      >mdi-newspaper-variant-multiple</v-icon
-                    >
+                  <v-chip class="ma-2" color="#266afb" outlined text-color="black">
+                    <v-icon left color="#266afb">mdi-newspaper-variant-multiple</v-icon>
                     <b>활동력 {{ status.activity_stat }}%</b>
                     <v-icon color="#266afb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
@@ -475,78 +415,44 @@
 
               <v-col>
                 <v-row v-if="status.y2_sub">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e785"
-                    text-color="black"
-                    outlined
-                  >
+                  <v-chip class="ma-2" color="#26e785" text-color="black" outlined>
                     <v-icon left color="#26e785">mdi-account-multiple</v-icon>
-                    <b>구독자 {{ status.sub_stat }}%</b>
+                    <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26e785">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_view">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e795"
-                    text-color="black"
-                    outlined
-                  >
+                  <v-chip class="ma-2" color="#26e795" text-color="black" outlined>
                     <v-icon left color="#26e795">mdi-animation-play</v-icon>
-                    <b>총조회수 {{ status.view_stat }}%</b>
+                    <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26e795">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_video">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e7a5"
-                    text-color="black"
-                    outlined
-                  >
-                    <v-icon left color="#26e7a5"
-                      >mdi-youtube-subscription</v-icon
-                    >
+                  <v-chip class="ma-2" color="#26e7a5" text-color="black" outlined>
+                    <v-icon left color="#26e7a5">mdi-youtube-subscription</v-icon>
                     <b>영상수 {{ status.video_stat }}%</b>
                     <v-icon color="#26e7a5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
 
                 <v-row v-if="status.y2_charm">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e7b5"
-                    text-color="black"
-                    outlined
-                  >
+                  <v-chip class="ma-2" color="#26e7b5" text-color="black" outlined>
                     <v-icon left color="#26e7b5">mdi-heart-multiple</v-icon>
                     <b>호감도 {{ status.charm_stat }}%</b>
                     <v-icon color="#26e7b5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_influence">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e7c5"
-                    text-color="black"
-                    outlined
-                  >
+                  <v-chip class="ma-2" color="#26e7c5" text-color="black" outlined>
                     <v-icon left color="#26e7c5">mdi-earth</v-icon>
                     <b>영향력 {{ status.influence_stat }}%</b>
                     <v-icon color="#26e7c5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_activity">
-                  <v-chip
-                    class="ma-2"
-                    color="#26e7d5"
-                    text-color="black"
-                    outlined
-                  >
-                    <v-icon left color="#26e7d5"
-                      >mdi-newspaper-variant-multiple</v-icon
-                    >
+                  <v-chip class="ma-2" color="#26e7d5" text-color="black" outlined>
+                    <v-icon left color="#26e7d5">mdi-newspaper-variant-multiple</v-icon>
                     <b>활동력 {{ status.activity_stat }}%</b>
                     <v-icon color="#26e7d5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
@@ -555,17 +461,9 @@
             </v-row>
             <v-divider></v-divider>
 
-            <v-list-item-title class="headline font-weight-black mb-1"
-              >종합 비교</v-list-item-title
-            >
+            <v-list-item-title class="headline font-weight-black mb-1">종합 비교</v-list-item-title>
             <v-row>
-              <v-badge
-                v-if="!status.same_grade"
-                :color="status.color"
-                bordered
-                overlap
-                size="125"
-              >
+              <v-badge v-if="!status.same_grade" :color="status.color" bordered overlap size="125">
                 <v-card>
                   <div class="d-flex flex-no-wrap justify-space-between">
                     <div>
@@ -577,12 +475,11 @@
                           outlined
                           pill
                           text-color="black"
-                          >{{ status.winner }}</v-chip
-                        >채널이 종합 수치
+                        >{{ status.winner }}</v-chip>채널이 종합 수치
                         <v-chip class="ma-2" color="indigo darken-3" outlined>
                           <v-icon left>mdi-fire</v-icon>
-                          {{ status.stat }}% </v-chip
-                        >우위에 있습니다.
+                          {{ status.stat }}%
+                        </v-chip>우위에 있습니다.
                       </v-card-title>
                     </div>
 
@@ -608,9 +505,7 @@
                     </v-avatar>
                   </v-badge>
                 </v-card-title>
-                <v-card-title class="headline"
-                  >채널 종합 수치가 동률 입니다</v-card-title
-                >
+                <v-card-title class="headline">채널 종합 수치가 동률 입니다</v-card-title>
               </v-card>
             </v-row>
             <v-divider></v-divider>
@@ -626,19 +521,13 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >영상수 주기</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">영상수 주기</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
             <v-row>
               <v-col>
-                <apexchart
-                  height="200"
-                  :options="videoPeriodOptions"
-                  :series="videoPeriodData"
-                ></apexchart>
+                <apexchart height="200" :options="videoPeriodOptions" :series="videoPeriodData"></apexchart>
               </v-col>
             </v-row>
           </v-card>
@@ -653,9 +542,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >구독자 추이</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">구독자 추이</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -680,9 +567,7 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >총조회수 추이</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">총조회수 추이</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
@@ -707,19 +592,13 @@
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
               <v-col class="ma-0 mt-5">
-                <v-list-item-title class="headline font-weight-black mb-1"
-                  >누적 조회수 증감 추이</v-list-item-title
-                >
+                <v-list-item-title class="headline font-weight-black mb-1">누적 조회수 증감 추이</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
             <v-row>
               <v-col>
-                <apexchart
-                  height="200"
-                  :options="totalViewDiffOptions"
-                  :series="totalViewDiffData"
-                ></apexchart>
+                <apexchart height="200" :options="totalViewDiffOptions" :series="totalViewDiffData"></apexchart>
               </v-col>
             </v-row>
           </v-card>
@@ -783,16 +662,16 @@ export default {
             100
         );
       }
-      if (this.youtuber1.subscriber > this.youtuber2.subscriber) {
+      if (this.youtuber1.viewCountTrend > this.youtuber2.viewCountTrend) {
         this.status["y1_sub"] = true;
         this.status["y2_sub"] = false;
         this.status["sub_stat"] = Math.round(
-          ((this.youtuber1.subscriber - this.youtuber2.subscriber) /
-            this.youtuber2.subscriber) *
+          ((this.youtuber1.viewCountTrend - this.youtuber2.viewCountTrend) /
+            this.youtuber2.viewCountTrend) *
             100
         );
       } else if (
-        this.youtuber1.totalViewCount == this.youtuber2.totalViewCount
+        this.youtuber1.viewCountTrend == this.youtuber2.viewCountTrend
       ) {
         this.status["y1_sub"] = false;
         this.status["y2_sub"] = false;
@@ -801,8 +680,8 @@ export default {
         this.status["y1_sub"] = false;
         this.status["y2_sub"] = true;
         this.status["sub_stat"] = Math.round(
-          ((this.youtuber2.subscriber - this.youtuber1.subscriber) /
-            this.youtuber1.subscriber) *
+          ((this.youtuber2.viewCountTrend - this.youtuber1.viewCountTrend) /
+            this.youtuber1.viewCountTrend) *
             100
         );
       }
@@ -829,16 +708,21 @@ export default {
             100
         );
       }
-      if (this.youtuber1.totalViewCount > this.youtuber2.totalViewCount) {
+      if (
+        this.youtuber1.subscriberCountTrend >
+        this.youtuber2.subscriberCountTrend
+      ) {
         this.status["y1_view"] = true;
         this.status["y2_view"] = false;
         this.status["view_stat"] = Math.round(
-          ((this.youtuber1.totalViewCount - this.youtuber2.totalViewCount) /
-            this.youtuber2.totalViewCount) *
+          ((this.youtuber1.subscriberCountTrend -
+            this.youtuber2.subscriberCountTrend) /
+            this.youtuber2.subscriberCountTrend) *
             100
         );
       } else if (
-        this.youtuber1.totalViewCount == this.youtuber2.totalViewCount
+        this.youtuber1.subscriberCountTrend ==
+        this.youtuber2.subscriberCountTrend
       ) {
         this.status["y1_view"] = false;
         this.status["y2_view"] = false;
@@ -847,8 +731,9 @@ export default {
         this.status["y1_view"] = false;
         this.status["y2_view"] = true;
         this.status["view_stat"] = Math.round(
-          ((this.youtuber2.totalViewCount - this.youtuber1.totalViewCount) /
-            this.youtuber1.totalViewCount) *
+          ((this.youtuber2.subscriberCountTrend -
+            this.youtuber1.subscriberCountTrend) /
+            this.youtuber1.subscriberCountTrend) *
             100
         );
       }
