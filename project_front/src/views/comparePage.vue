@@ -224,8 +224,8 @@
         <v-hover v-slot:default="{ hover }" open-delay="100">
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-row>
-              <v-col class="ma-0 mt-5">
-                <v-list-item-title class="mb-1">수치별 비교</v-list-item-title>
+              <v-col class="ma-0 mt-5 pb-0">
+                <v-list-item-title class="headline font-weight-black mb-1">수치별 비교</v-list-item-title>
                 <v-divider></v-divider>
               </v-col>
             </v-row>
