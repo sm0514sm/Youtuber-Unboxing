@@ -54,6 +54,7 @@
             v-if="$route.path != '/'"
             align="center"
             class="justify-center"
+            dense
           >
             <template v-slot:no-data>
               <v-list-item>
