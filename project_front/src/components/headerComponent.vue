@@ -111,8 +111,15 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">No</v-btn>
-                <v-btn color="blue darken-1" text @click="logout()">Yes</v-btn>
+                <v-btn color="primary" rounded class="mr-2" text @click="dialog = false">
+                  No
+                  <v-icon right>mdi-emoticon-cool-outline</v-icon>
+                </v-btn>
+                <v-btn dark color="red" rounded text @click="logout()">
+                  Yes
+                  <v-icon right>mdi-logout</v-icon>
+                </v-btn>
+                <v-text v-if="check()"></v-text>
               </v-card-actions>
             </v-card>
           </v-dialog>

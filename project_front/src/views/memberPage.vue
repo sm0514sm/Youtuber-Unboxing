@@ -302,6 +302,7 @@
     :headers="headers"
     :items="fav"
     sort-by="subscriber"
+    sort-desc
     class="elevation-1"
   >
   
