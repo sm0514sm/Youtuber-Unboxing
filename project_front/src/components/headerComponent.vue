@@ -54,6 +54,7 @@
             v-if="$route.path != '/'"
             align="center"
             class="justify-center"
+            dense
           >
             <template v-slot:no-data>
               <v-list-item>
@@ -101,16 +102,25 @@
             </template>
             <v-card>
               <v-card-title>
-                <span class="headline">LogoutModal</span>
+                <span class="headline">
+                  <v-icon class="mr-2" color="red">mdi-youtube</v-icon>LOGOUT
+                </span>
               </v-card-title>
               <v-card-text>
                 <v-container>정말로 로그아웃 하겠습니까?</v-container>
-                <small>*indicates required field</small>
+                <v-img :src="require('@/assets/emoji.png')" max-width="50" max-height="50"></v-img>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">No</v-btn>
-                <v-btn color="blue darken-1" text @click="logout()">Yes</v-btn>
+                <v-btn color="primary" rounded class="mr-2" text @click="dialog = false">
+                  No
+                  <v-icon right>mdi-emoticon-cool-outline</v-icon>
+                </v-btn>
+                <v-btn dark color="red" rounded text @click="logout()">
+                  Yes
+                  <v-icon right>mdi-logout</v-icon>
+                </v-btn>
+                <v-text v-if="check()"></v-text>
               </v-card-actions>
             </v-card>
           </v-dialog>

@@ -57,27 +57,26 @@
       <br />
     </div>
     <div class="allCategory">
-      <div class="categorySet">
+      <div class="categorySet" @click="onCategoryButtonClicked(0)" style="cursor:pointer" >
         <v-icon
-          @click="onCategoryButtonClicked(0)"
           class="material-icons"
           color="red"
         >mdi-widgets-outline</v-icon>
-        <div class="categoryName" @click="onCategoryButtonClicked(0)">전체</div>
+        <div class="categoryName">전체</div>
       </div>
 
       <div
         class="categorySet"
         v-for="(item,index) in categories"
         :key="index+1"
-        @click="onCategoryButtonClicked(index+1)"
+        @click="onCategoryButtonClicked(index+1)" 
+        style="cursor:pointer"
       >
         <v-icon
-          @click="onCategoryButtonClicked(index+1)"
           class="material-icons"
           :color="item.iconColor"
         >{{item.icon}}</v-icon>
-        <div class="categoryName" @click="onCategoryButtonClicked(index + 1)">{{item.iconName}}</div>
+        <div class="categoryName">{{item.iconName}}</div>
       </div>
     </div>
     <br />
@@ -309,7 +308,7 @@ export default {
   created() {
     this.startTypo();
     this.startCursor();
-    this.bgNum = Math.floor(Math.random() * 7 + 1);
+    this.bgNum = Math.floor(Math.random() * 12 + 1);
   },
   watch: {
     inputKeyword() {

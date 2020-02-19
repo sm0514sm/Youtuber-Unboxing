@@ -302,6 +302,7 @@
     :headers="headers"
     :items="fav"
     sort-by="subscriber"
+    sort-desc
     class="elevation-1"
   >
   
@@ -378,6 +379,7 @@ import tc from 'thousands-counter';
       cat: [],
       loader: null,
       loading: false,
+      search: ""
     }),
     watch: {
       loader () {

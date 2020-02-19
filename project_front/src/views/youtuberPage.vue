@@ -154,9 +154,9 @@
           <v-col cols="9">
             <v-col class="pa-0 pb-3">
               <v-card outlined flat>
-                <v-row>
-                  <v-col class="ma-5">
-                    <v-list-item-title class="headline font-weight-black mb-1">
+                <v-row class="mb-0">
+                  <v-col class="ma-5 mb-0 pb-0">
+                    <v-list-item-title class="headline font-weight-black mb-0">
                       <v-icon color="blue" class="mr-1">mdi-chart-gantt</v-icon>능력치
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
@@ -180,7 +180,7 @@
                         </span>
                       </v-tooltip>
                     </v-list-item-title>
-                    <v-divider></v-divider>
+                    <v-divider class ="mb-0"></v-divider>
                   </v-col>
                 </v-row>
                 <apexchart
@@ -375,7 +375,7 @@
                                 <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
-                                  >조회수 변화량 그래프</v-list-item-title>
+                                  >일별 조회수 추이</v-list-item-title>
                                   <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
@@ -437,7 +437,7 @@
                                 <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
-                                  >구독자 증감 차이그래프</v-list-item-title>
+                                  >일별 구독자 증감</v-list-item-title>
                                   <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
@@ -652,7 +652,7 @@
             <!-- 등급 -->
             <v-card outlined flat class="pa-4 pt-0 mb-3">
               <v-row>
-                <v-col class="my-5 mx-0">
+                <v-col class="my-5 mb-0 mx-0 pb-0">
                   <v-list-item-title class="headline font-weight-black mb-1">
                     <v-icon color="#FFBC42" class="mr-1">mdi-medal-outline</v-icon>등급
                     <v-tooltip bottom>
@@ -667,9 +667,10 @@
                       </span>
                     </v-tooltip>
                   </v-list-item-title>
-                  <v-divider></v-divider>
+                  <v-divider class="mb-0"></v-divider>
                 </v-col>
               </v-row>
+              <v-row style="padding:30px">
               <transition appear name="fade">
                 <v-btn
                   fab
@@ -681,6 +682,7 @@
                   >{{ setGrade(youtuber.grade) }}</p>
                 </v-btn>
               </transition>
+              </v-row>
             </v-card>
 
             <!-- 태그 클라우드 -->
