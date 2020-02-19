@@ -179,7 +179,7 @@ export default {
           // gitlab: "taemin",
           insta: "merona_mango",
           stacks: ["vue", "vuetify"],
-          feat: ["VUE MASTER", "DATABASE"]
+          feat: ["VUE MASTER", ]
         },
         {
           name: "박진홍",
@@ -215,7 +215,7 @@ export default {
           // gitlab: "airaider",
           insta: "hongki772",
           stacks: ["spring", "vue"],
-          feat: ["TEAM LEADER", "LOGIN"]
+          feat: ["TEAM LEADER", "LOGIN", "VUE"]
         }
       ]
     };
