@@ -309,7 +309,7 @@ export default {
   created() {
     this.startTypo();
     this.startCursor();
-    this.bgNum = Math.floor(Math.random() * 12 + 1);
+    this.bgNum = Math.floor(Math.random() * 13 + 1);
   },
   watch: {
     inputKeyword() {
