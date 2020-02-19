@@ -95,7 +95,7 @@ def get_trend_list(channel_id):
     url = 'https://en.noxinfluencer.com/api/youtube/detail/dimension/?channelId=' + \
         channel_id + '&startDate=' + str_date
     try:
-        r = requests.get(url)
+        r = requests.get(url=url, timeout=15)
         html = json.loads(r.text)['retData']['dom']
         if json.loads(r.text)['errorNum'] != 0:
             print('errer')
@@ -131,6 +131,8 @@ def get_trend_list(channel_id):
             trends.append(data)
     except urllib.request.HTTPError:
         print('HTTPERROR 입니당')
+    except TimeoutError:
+        print('시간 초과 되었습니다.')
     except Exception:
         print('무슨에런지 모르겠어요')
     return trends
