@@ -1,3 +1,15 @@
+node_modules
+npm-debug.log
+yarn-error.log
+testProject1
+testProject2
+testProject3
+testProject4
+
+# Editor directories and files
+.idea
+.vscode
+.vscode
 venv/
 
 
