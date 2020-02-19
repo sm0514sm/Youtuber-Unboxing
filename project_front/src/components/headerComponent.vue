@@ -1,12 +1,5 @@
 <template>
-  <v-app-bar
-    id="app_bar_tt"
-    :color="headerColor"
-    fixed
-    elevate-on-scroll
-    scroll-threshold="500"
-    v-scroll="onScroll"
-  >
+  <v-app-bar id="app_bar_tt" color="#222222" fixed elevate-on-scroll scroll-threshold="500" app>
     <v-col cols="2" class="pa-0 pt-2 pb-1">
       <v-img
         :src="require('@/assets/logo4.png')"
@@ -54,8 +47,9 @@
             ref="keyword"
             id="keyword"
             label="유튜버를 검색해보세요"
-            style="max-width: 210px; "
+            style="max-width: 230px"
             solo-inverted
+            background-color="#bbbbbb"
             flat
             v-if="$route.path != '/'"
             align="center"
@@ -76,7 +70,7 @@
               >
                 <img :src="item.thumbnails" alt="John" />
               </v-list-item-avatar>
-              <v-list-item-content v-if="item.yno != -1">
+              <v-list-item-content v-if="item.yno != -1" style="width: 100px">
                 <v-list-item-title v-text="item.channelName"></v-list-item-title>
                 <v-list-item-subtitle>구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle>
               </v-list-item-content>
@@ -90,12 +84,12 @@
             color="#F8E211"
             v-if="loginStatus == false"
           >
-            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-2" width="18px"></v-img>로그인
+            <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-1" width="18px"></v-img>로그인
           </v-btn>
           <v-dialog v-if="loginStatus" v-model="dialog" persistent max-width="600px">
             <template v-slot:activator="{ on }">
               <v-btn class="btnFont mr-5 pl-2 pr-2" color="#F8E211" v-on="on">
-                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-2" width="18px"></v-img>로그아웃
+                <v-img :src="require('@/assets/kakaologo.png')" class="mr-2 ml-1" width="18px"></v-img>로그아웃
               </v-btn>
               <v-btn
                 class="btnFont ml-3 mr-3 pl-2 pr-2"
@@ -250,25 +244,25 @@ export default {
       );
       document.getElementById("keyword").vaule = "";
     },
-    onScroll() {
-      var scroll = window.pageYOffset;
-      var value = "#FF6868";
-      var position = 250;
-      if (scroll >= position) {
-        value += "AA";
-      } else {
-        var tmp = Math.round((scroll / position) * parseInt("AA", 16)).toString(
-          16
-        );
-        if (tmp.length == 1) {
-          value += "0" + tmp;
-        } else {
-          value += tmp;
-        }
-      }
+    // onScroll() {
+    //   var scroll = window.pageYOffset;
+    //   var value = "#333333";
+    //   var position = 250;
+    //   if (scroll >= position) {
+    //     value += "";
+    //   } else {
+    //     var tmp = Math.round((scroll / position) * parseInt("", 16)).toString(
+    //       16
+    //     );
+    //     if (tmp.length == 1) {
+    //       value += "0" + tmp;
+    //     } else {
+    //       value += tmp;
+    //     }
+    //   }
 
-      this.headerColor = value;
-    },
+    //   this.headerColor = value;
+    // },
     tc(num) {
       return tc(num);
     }

@@ -2,7 +2,7 @@
   <!-- vuetify를 참고하여 작성하기
                       https://vuetifyjs.com/ko/components/api-explorer
   -->
-  <div>
+  <div v-scroll="onScroll">
     <video
       :src="require('@/assets/bg' + bgNum + '.mp4')"
       class="bgvideo"
@@ -82,16 +82,16 @@
     </div>
     <br />
     <br />
+    <br />
 
     <div style="display: flex; width: 100%;">
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">완벽한 분석 기능</h1>
+        <h1 style="margin-top: 12%; font-weight: bold;">완벽한 분석 기능</h1>
         <h3>
           구독자 수, 조회수 같은 기본적인 정보부터
           <br />커뮤니티, 뉴스 분석까지
           <br />한 화면에서 모두 만나보세요.
         </h3>
-        <input-component v-if="$session.get('token') != undefined" position="main"></input-component>
       </div>
 
       <div style="display: inline-block; margin: 0 auto;" width="45%;">
@@ -102,6 +102,7 @@
           loop="true"
           muted
           style="width: 500px;"
+          id="detail"
         ></video>
       </div>
     </div>
@@ -121,15 +122,17 @@
           loop="true"
           muted
           style="width: 500px;"
+          id="search"
         ></video>
       </div>
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">간편한 검색 기능</h1>
+        <h1 style="margin-top: 5%; font-weight: bold;">간편한 검색 기능</h1>
         <h3>
           원하는 유튜버를 검색해 볼 수 있습니다.
           <br />만약 내가 찾는 유튜버가 없다면?
           <br />자유롭게 추가하세요.
         </h3>
+        <input-component v-if="$session.get('token') != undefined" position="main"></input-component>
       </div>
     </div>
 
@@ -141,7 +144,7 @@
 
     <div style="display: flex; width: 100%;">
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">완벽한 비교하기 기능</h1>
+        <h1 style="margin-top: 13%; font-weight: bold;">완벽한 비교하기 기능</h1>
         <h3>
           번거롭게 하나하나 비교할 필요 없이
           <br />한 화면에서 손쉽게 두 유튜버를
@@ -160,6 +163,7 @@
           loop="true"
           muted
           style="width: 500px;"
+          id="compare"
         ></video>
       </div>
     </div>
@@ -179,10 +183,11 @@
           loop="true"
           muted
           style="width: 500px;"
+          id="user"
         ></video>
       </div>
       <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 15%; font-weight: bold;">강력한 유튜버 추천 기능</h1>
+        <h1 style="margin-top: 12%; font-weight: bold;">강력한 유튜버 추천 기능</h1>
         <h3>
           나와 관심항목이 같은 사람들이
           <br />즐겨찾는 유튜버를 추천해 드립니다
@@ -190,10 +195,6 @@
         </h3>
       </div>
     </div>
-
-    <br />
-    <br />
-    <br />
     <br />
   </div>
 </template>
@@ -249,6 +250,39 @@ export default {
         this.typo = lifeCopy.slice(0, idx);
       }, 300);
     },
+    onScroll() {
+      var scroll = window.pageYOffset;
+      var value = "#cdcdcd";
+      // console.log(scroll);
+      if (scroll < 500) {
+        document.getElementById("detail").pause();
+        document.getElementById("search").pause();
+        document.getElementById("compare").pause();
+        document.getElementById("user").pause();
+      } else if (scroll < 900) {
+        document.getElementById("detail").play();
+        document.getElementById("search").pause();
+        document.getElementById("compare").pause();
+        document.getElementById("user").pause();
+      } else if (scroll < 1300) {
+        document.getElementById("detail").pause();
+        document.getElementById("search").play();
+        document.getElementById("compare").pause();
+        document.getElementById("user").pause();
+      } else if (scroll < 1700) {
+        document.getElementById("detail").pause();
+        document.getElementById("search").pause();
+        document.getElementById("compare").play();
+        document.getElementById("user").pause();
+      } else {
+        document.getElementById("detail").pause();
+        document.getElementById("search").pause();
+        document.getElementById("compare").pause();
+        document.getElementById("user").play();
+      }
+
+      this.headerColor = value;
+    },
     tc(num) {
       return tc(num);
     }
@@ -275,7 +309,7 @@ export default {
   created() {
     this.startTypo();
     this.startCursor();
-    this.bgNum = Math.floor(Math.random() * 5 + 1);
+    this.bgNum = Math.floor(Math.random() * 7 + 1);
   },
   watch: {
     inputKeyword() {
@@ -375,7 +409,7 @@ div {
   padding-left: 50px;
 }
 hr {
-  border: 0.1px inherit lightgray;
+  border: 0.6px solid lightgray;
   margin-left: 30px;
   margin-right: 30px;
 }

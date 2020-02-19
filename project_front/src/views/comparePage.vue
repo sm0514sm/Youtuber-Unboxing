@@ -620,8 +620,8 @@ export default {
     this.$vuetify.goTo(0);
     var output = localStorage.getItem("compareYoutuber");
     var arr = JSON.parse(output);
-    if(arr.length != 2){
-      this.istwoyoutuber = false
+    if (arr.length != 2) {
+      this.istwoyoutuber = false;
       this.$router.push({ path: "notFound" });
       return;
     }
@@ -1623,7 +1623,7 @@ export default {
           }
         }
       },
-      istwoyoutuber : true
+      istwoyoutuber: true
     };
   }
 };

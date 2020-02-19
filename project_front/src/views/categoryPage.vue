@@ -11,14 +11,14 @@
         >
       </v-card-title>
     </v-card>
-    <v-container name="container" background-color="transparent">
-      <v-tabs :value="currentCategory" background-color="transparent" grow>
+    <v-container name="container" background-color="transparent" class="pa-1">
+      <v-tabs :value="currentCategory" background-color="transparent" grow height="60px">
         <v-tab key="0" @click="onCategoryButtonClicked(0)">
           <div class="categorySet">
             <!-- <v-btn block :aspect-ratio="1/1" @click="onCategoryButtonClicked(0)" class="categorySet"> -->
-            <v-icon class="material-icons" color="red">mdi-widgets-outline</v-icon>
+            <v-icon class="material-icons" color="red" large>mdi-widgets-outline</v-icon>
             <!-- </v-btn> -->
-            <div class="categoryName">전체</div>
+            <div class="categoryName" style="color:black; font-weight: lighter">전체</div>
           </div>
         </v-tab>
         <v-tab
@@ -27,13 +27,13 @@
           @click="onCategoryButtonClicked(index+1)"
         >
           <div class="categorySet">
-            <v-icon class="material-icons" :color="item.iconColor">{{item.icon}}</v-icon>
-            <div class="categoryName">{{item.iconName}}</div>
+            <v-icon class="material-icons" :color="item.iconColor" large>{{item.icon}}</v-icon>
+            <div class="categoryName" style="color:black; font-weight: lighter">{{item.iconName}}</div>
           </div>
         </v-tab>
       </v-tabs>
 
-      <v-tabs-items :value="currentCategory">
+      <v-tabs-items :value="currentCategory" height="60px">
         <v-tab-item key="0">
           <v-card flat class="pa-3" color="#FAFAFA">
             <v-card-title class="pa-0" style="background-color : white">
@@ -158,7 +158,7 @@
                       <v-container fill-height>
                         <v-layout align-center>
                           <v-flex xs12 text-xs-center>
-                            <div class="font-weight-light">
+                            <div>
                               {{ item.channelName }}
                             </div>
                           </v-flex>
@@ -299,7 +299,7 @@ export default {
 </script>
 
 <style scoped>
-.jb {
+/* .jb {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -308,5 +308,5 @@ export default {
 
 .circle {
   border-radius: 50%;
-}
+} */
 </style>
