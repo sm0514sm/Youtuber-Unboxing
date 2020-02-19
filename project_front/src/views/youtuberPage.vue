@@ -375,7 +375,7 @@
                                 <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
-                                  >조회수 변화량 그래프</v-list-item-title>
+                                  >일별 조회수 추이</v-list-item-title>
                                   <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
@@ -437,7 +437,7 @@
                                 <v-col class="pb-0">
                                   <v-list-item-title
                                     class="headline font-weight-black mb-1"
-                                  >구독자 증감 차이그래프</v-list-item-title>
+                                  >일별 구독자 증감</v-list-item-title>
                                   <v-divider class="mb-0"></v-divider>
                                 </v-col>
                               </v-row>
