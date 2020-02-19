@@ -241,7 +241,7 @@ export default {
       var output = localStorage.getItem("compareYoutuber");
       var arr = JSON.parse(output);
 
-      if (arr.length == 2) {
+      if (arr != null && arr.length == 2) {
         this.disabledButtonFlag = true;
       } else {
         this.disabledButtonFlag = false;
@@ -282,14 +282,14 @@ export default {
       headers: [
         { text: "", value: "", sortable: false, width: "1%" },
         { text: "", value: "channelName", sortable: false, width: "30%" },
-        { text: "구독자수", value: "subscriber" },
-        { text: "영향력", value: "influence" },
-        { text: "활동력", value: "activity" },
-        { text: "조회수력", value: "viewCountTrend" },
-        { text: "구독자력", value: "subscriberCountTrend" },
-        { text: "호감도", value: "charm" },
-        { text: "등급", value: "grade" },
-        { text: "", value: "insertCompare", sortable: false }
+        { text: "구독자수", value: "subscriber", align: 'center' },
+        { text: "영향력", value: "influence", align: 'center' },
+        { text: "활동력", value: "activity" , align: 'center'},
+        { text: "조회수력", value: "viewCountTrend" , align: 'center'},
+        { text: "구독자력", value: "subscriberCountTrend" , align: 'center' },
+        { text: "호감도", value: "charm", align: 'center'  },
+        { text: "등급", value: "grade" , align: 'center' },
+        { text: "", value: "insertCompare", sortable: false, align: 'center'  }
       ],
       search: "",
       disabledButtonFlag: true

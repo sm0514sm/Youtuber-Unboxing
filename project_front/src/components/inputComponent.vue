@@ -92,7 +92,7 @@
                   color="teal"
                 >
                   <h2>
-                    <b>{{ value }}</b>
+                    <b>{{ Math.round(value)==0?"Loading...":Math.round(value) }}</b>
                   </h2>
                 </v-progress-circular>
               </v-col>
@@ -288,7 +288,7 @@ export default {
           clearInterval(this.getValueInterval);
           return;
         }
-      }, 500);
+      }, 350);
       this.addValueInterval = setInterval(() => {
         // console.log('3. addValueInterval 실행')
         if (this.value >= 100) {
@@ -298,14 +298,19 @@ export default {
         if (
           this.myyno != null &&
           this.myyno > 0 &&
-          this.tempValue + 40 > this.value &&
-          this.value < 73 &&
-          this.value > 0
+          this.tempValue + 60 > this.value
         ) {
-          this.$store.state.value =
-            this.value + Math.round(Math.random() * 3.5);
+          if (this.value < 65 && this.value > 0) {
+            this.$store.state.value = this.value + 1;
+          } else if (this.value < 83 && this.value > 64) {
+            this.$store.state.value = this.value + 0.8;
+          } else if (this.value < 90 && this.value > 82) {
+            this.$store.state.value = this.value + 0.15;
+          }
+          // this.$store.state.value =
+          //   this.value + Math.round(Math.random() * 3.5);
         }
-      }, 1000);
+      }, 240);
     },
     test: function() {
       console.log("before" + this.snackbar);
