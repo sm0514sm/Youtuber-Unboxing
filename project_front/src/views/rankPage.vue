@@ -306,7 +306,9 @@ export default {
       window.location.reload();
     }
   },
-  mounted() {},
+  mounted() {
+    this.$vuetify.goTo(0)
+  },
   created() {
     http
       .get("/youtuber/all")

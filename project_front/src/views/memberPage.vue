@@ -390,11 +390,11 @@ import tc from 'thousands-counter';
       },
     },
     created () {
+      this.$vuetify.goTo(0)
       this.basicInfo()
       this.initialize()
     },
     mounted(){
-      this.$vuetify.goTo(0)
       http.get("interest/search/"+this.$session.get("token"))
       .then(res=>{
         var temp =[]
