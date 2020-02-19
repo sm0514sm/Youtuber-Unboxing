@@ -32,7 +32,7 @@
                     정렬 기준
                     <v-tooltip top>
                       <template v-slot:activator="{ on }">
-                        <v-icon v-on="on" color="blue">mdi-information-outline</v-icon>
+                        <v-icon v-on="on" color="#b468ff">mdi-information-outline</v-icon>
                       </template>
                       <span>
                         <v-icon class="mr-2">mdi-star-outline</v-icon>등급 :
@@ -54,14 +54,14 @@
               </v-row>
               <v-row fluid>
                 <v-col class="py-0">
-                  <v-radio-group v-model="orderGroup">
-                    <v-radio label="구독자순" value="subscriber" checked></v-radio>
-                    <v-radio label="등급순" value="grade"></v-radio>
-                    <v-radio label="누적조회수" value="totalViewCount"></v-radio>
-                    <v-radio label="총영상수" value="totalVideoCount"></v-radio>
-                    <v-radio label="영향력" value="influence"></v-radio>
-                    <v-radio label="활동력" value="activity"></v-radio>
-                    <v-radio label="호감도" value="charm"></v-radio>
+                  <v-radio-group v-model="orderGroup" color="#b468ff">
+                    <v-radio label="구독자" value="subscriber" checked color="#b468ff"></v-radio>
+                    <v-radio label="등급" value="grade" color="#b468ff"></v-radio>
+                    <v-radio label="누적조회" value="totalViewCount" color="#b468ff"></v-radio>
+                    <v-radio label="총 영상" value="totalVideoCount" color="#b468ff"></v-radio>
+                    <v-radio label="영향력" value="influence" color="#b468ff"></v-radio>
+                    <v-radio label="활동력" value="activity" color="#b468ff"></v-radio>
+                    <v-radio label="호감도" value="charm" color="#b468ff"></v-radio>
                   </v-radio-group>
                 </v-col>
               </v-row>
@@ -76,7 +76,12 @@
               <v-col>
                 <h2 class="font-weight-light mb-1">
                   <v-icon color="#b468ff" size="30">mdi-crown</v-icon>RANK
-                  <v-chip class="mb-2 mt-1" style="font-size : 30px">{{changeKoreanWord(orderGroup)}}</v-chip>
+                  <v-chip
+                    class="mb-2 mt-1"
+                    style="font-size : 20px"
+                    color="#b468ff"
+                    text-color="white"
+                  >{{changeKoreanWord(orderGroup)}}</v-chip>
                 </h2>
                 <v-divider class="mb-0 pb-0"></v-divider>
               </v-col>
@@ -133,7 +138,7 @@
                       <table style="text-align: center; width: 100%; margin-top: 15px;">
                         <tr id="th">
                           <td>구독자수</td>
-                          <td>누적 조회수</td>
+                          <td>누적조회</td>
                           <td>총 영상수</td>
                           <td>영향력</td>
                           <td>활동력</td>
@@ -288,19 +293,19 @@ export default {
     },
     changeKoreanWord(word) {
       if (word == "subscriber") {
-        return "구독자순";
+        return "구독자";
       } else if (word == "grade") {
-        return "등급순";
+        return "등급";
       } else if (word == "totalViewCount") {
-        return "누적 조회수순";
+        return "누적 조회";
       } else if (word == "totalVideoCount") {
-        return "총 비디오순";
+        return "총 영상";
       } else if (word == "influence") {
-        return "영향력순";
+        return "영향력";
       } else if (word == "activity") {
-        return "활동력순";
+        return "활동력";
       } else if (word == "charm") {
-        return "호감도순";
+        return "호감도";
       }
     }
   },
