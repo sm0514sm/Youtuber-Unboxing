@@ -28,7 +28,7 @@
               style="width: 60px; border: 0.5px solid #222222;"
             />
             <h6>
-              SSAFY 2nd FIRST PROJECT
+              SSAFY FIRST PROJECT
             </h6>
             <h6 class="text-uppercase">
               Class 1 Group 8

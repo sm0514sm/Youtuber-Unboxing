@@ -17,8 +17,8 @@
         bottom
         right
         color="white"
-        class="elevation-15"
-        rounded
+        class="elevation-15 pa-4"
+        border-radius="25%"
       >
         <v-icon color="green" left>input</v-icon>유튜버 비교하기
       </v-btn>
@@ -147,4 +147,10 @@ export default {
   })
 };
 </script>
+<style scoped>
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|Noto+Sans+KR&display=swap");
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+</style>
 

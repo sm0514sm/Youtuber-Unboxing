@@ -80,14 +80,6 @@
                         @click="gitLink(cardinfo.git)"
                       />
                       <v-img
-                        v-if="cardinfo.gitlab"
-                        width="36px"
-                        class="ml-2 mr-2 my-3"
-                        src="../assets/gitlab.png"
-                        @click="gitlabLink(cardinfo.gitlab)"
-                        style="cursor:pointer"
-                      />
-                      <v-img
                         v-if="cardinfo.insta"
                         width="32px"
                         class="ml-2 mr-2 my-3"
@@ -147,10 +139,6 @@ export default {
       var ti = "https://" + link + ".tistory.com/";
       window.open(ti);
     },
-    gitlabLink(link) {
-      var git = "https://lab.ssafy.com/" + link;
-      window.open(git);
-    },
     gitLink(link) {
       var git = "https://github.com/" + link;
       window.open(git);
@@ -174,7 +162,7 @@ export default {
           image: "KJH",
           birth: "1994-02-09",
           git: "juheekimm",
-          gitlab: "juheekim",
+          // gitlab: "juheekim",
           // insta: "sally_0607",
           tistory: "buddev",
           stacks: ["spring", "mariadb"],
@@ -186,9 +174,9 @@ export default {
           image: "KTM",
           birth: "1996-11-15",
           git: "taemtaemKim",
-          gitlab: "taemin",
+          // gitlab: "taemin",
           insta: "merona_mango",
-          stacks: ["vue", "mariadb"],
+          stacks: ["vue", "vuetify"],
           feat: ["VUE MASTER", "DATABASE"]
         },
         {
@@ -197,7 +185,7 @@ export default {
           image: "PJH",
           birth: "1993-04-21",
           git: "porciuscato",
-          gitlab: "mpcato",
+          // gitlab: "mpcato",
           insta: "__jin__hong__",
           blog: "https://porciuscato.github.io/",
           stacks: ["aws", "django"],
@@ -209,7 +197,7 @@ export default {
           image: "LSM",
           birth: "1995-05-14",
           git: "sm0514sm",
-          gitlab: "lifaon",
+          // gitlab: "lifaon",
           insta: "lifaon_sm",
           youtube: "channel/UC5cGDQN2ZYw4GAZGUIkwjcw",
           tistory: "lifaon",
@@ -222,7 +210,7 @@ export default {
           image: "HKH",
           birth: "1994-11-02",
           git: "airaider",
-          gitlab: "airaider",
+          // gitlab: "airaider",
           insta: "hongki772",
           stacks: ["spring", "vue"],
           feat: ["TEAM LEADER", "LOGIN"]

@@ -379,6 +379,7 @@ import tc from 'thousands-counter';
       cat: [],
       loader: null,
       loading: false,
+      search: ""
     }),
     watch: {
       loader () {
@@ -393,6 +394,7 @@ import tc from 'thousands-counter';
       this.initialize()
     },
     mounted(){
+      this.$vuetify.goTo(0)
       http.get("interest/search/"+this.$session.get("token"))
       .then(res=>{
         var temp =[]
