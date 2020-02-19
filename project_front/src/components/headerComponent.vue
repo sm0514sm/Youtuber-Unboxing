@@ -14,18 +14,18 @@
     <v-col cols="6">
       <v-row>
         <v-col cols="2" class="mr-5">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/categoryPage')">
-            <span style="text-shadow: 0 0 2px #000;">Category</span>
+          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/howToPage')">
+            <span style="text-shadow: 0 0 2px #000;">MANUAL</span>
           </v-btn>
         </v-col>
         <v-col cols="2" class="ml-3">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/rankPage')">
-            <span style="text-shadow: 0 0 2px #000;">RANK</span>
+          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/categoryPage')">
+            <span style="text-shadow: 0 0 2px #000;">CATEGORY</span>
           </v-btn>
         </v-col>
         <v-col cols="2" class="mr-0 ml-0">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/ourPage')">
-            <span style="text-shadow: 0 0 2px #000;">ABOUT US</span>
+          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/rankPage')">
+            <span style="text-shadow: 0 0 2px #000;">RANK</span>
           </v-btn>
         </v-col>
         <v-col cols="2" class="ml-5 my-0 py-0">
@@ -68,11 +68,15 @@
                 v-if="item.yno != -1"
                 color="red"
                 class="headline font-weight-light white--text"
-                 @click="gotoYoutuberPage(item.yno)"
+                @click="gotoYoutuberPage(item.yno)"
               >
                 <img :src="item.thumbnails" alt="John" />
               </v-list-item-avatar>
-              <v-list-item-content v-if="item.yno != -1" style="width: 100px"  @click="gotoYoutuberPage(item.yno)">
+              <v-list-item-content
+                v-if="item.yno != -1"
+                style="width: 100px"
+                @click="gotoYoutuberPage(item.yno)"
+              >
                 <v-list-item-title v-text="item.channelName"></v-list-item-title>
                 <v-list-item-subtitle>구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle>
               </v-list-item-content>
@@ -278,7 +282,7 @@ export default {
       return tc(num);
     },
     gotoYoutuberPage(yno) {
-      this.$router.push({path: 'youtuberPage', query: { yno:yno }});
+      this.$router.push({ path: "youtuberPage", query: { yno: yno } });
     }
   },
   data() {

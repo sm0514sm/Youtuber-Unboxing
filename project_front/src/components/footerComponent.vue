@@ -6,6 +6,7 @@
       style="width: -webkit-fill-available; margin-left:20px;margin-right:20px"
     />-->
     <hr
+      v-if="$route.path != '/'"
       style="border: 1px solid lightgray; margin-left:35px; margin-right:35px; margin-bottom: 30px"
     />
     <mdb-container class="text-center text-md-left" style="margin-left:auto; margin-right:auto">
@@ -32,9 +33,11 @@
               <strong>Contact</strong>
             </h5>
             <hr style="width: 60px; border: 0.5px solid #222222;" />
+            <h6 class="text-uppercase">
+              <a href="http://15.165.77.1:3000/ourPage">CONTACT US</a>
+            </h6>
             <h6 class="text-uppercase">Seoul, Gangnam-gu, Yeoksam-dong</h6>
             <h6 class="text-uppercase">212 Teheran-ro, 9AM - 6PM</h6>
-            <h6 class="text-uppercase">+82) 1588 - 3357</h6>
             <h6 class="text-uppercase">+82) 1588 - 3357</h6>
           </mdb-col>
         </mdb-row>
@@ -55,6 +58,18 @@
 import { mdbFooter, mdbContainer, mdbRow, mdbCol } from "mdbvue";
 import http from "../vuex/http-common";
 export default {
+  method: {
+    gotoHome(e) {
+      e.stopPropagation();
+      if (this.$route.path === "/") {
+        this.$vuetify.goTo(0);
+        //window.location.reload()
+        return;
+      }
+      this.$router.push("/", () => {});
+      return;
+    }
+  },
   computed: {
     isIdle() {
       if (this.$session.get("token")) {
