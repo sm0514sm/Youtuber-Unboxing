@@ -45,10 +45,11 @@
             v-if="item.yno != -1"
             color="red"
             class="headline font-weight-light white--text"
+            @click="gotoYoutuberPage(item.yno)"
           >
             <img :src="item.thumbnails" alt="John" />
           </v-list-item-avatar>
-          <v-list-item-content v-if="item.yno != -1" style="width: 100px">
+          <v-list-item-content v-if="item.yno != -1" style="width: 100px" @click="gotoYoutuberPage(item.yno)">
             <v-list-item-title v-text="item.channelName"></v-list-item-title>
             <v-list-item-subtitle>구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle>
           </v-list-item-content>
@@ -284,6 +285,9 @@ export default {
     },
     tc(num) {
       return tc(num);
+    },
+    gotoYoutuberPage(yno) {
+      this.$router.push({path: 'youtuberPage', query: { yno:yno }});
     }
   },
   mounted() {

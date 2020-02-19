@@ -71,7 +71,7 @@
                 <v-card
                   color="#00000000"
                   flat
-                  :to="{ path: 'youtuberPage', query: { yno: item.yno } }"
+                  :to="{path: 'youtuberPage', query: { yno: item.yno }}"
                 >
                   <v-row>
                     <v-col cols="2" class="px-0">
