@@ -5,22 +5,17 @@
 
   <div>
     <v-card>
-      <v-card-title
-        class="justify-center py-6"
-        style="background-color:#b468ff; height : 300px"
-      >
+      <v-card-title class="justify-center py-6" style="background-color:#b468ff; height : 300px">
         <v-icon size="70" color="white">mdi-crown</v-icon>
-        <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white"
-          >RANK</span
-        >
+        <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white">RANK</span>
       </v-card-title>
     </v-card>
 
     <v-container v-scroll="onScroll">
       <v-row>
-        <v-col cols="2" class="">
+        <v-col cols="2" class>
           <v-card
-            class=""
+            class
             top="50px"
             flat
             outlined
@@ -31,27 +26,18 @@
             }"
           >
             <v-container>
-              <v-row class="">
+              <v-row class>
                 <v-col class="pb-0">
-                  <h1 class="font-weight-light mb-1" style="font-size :30px">
-                    정렬
-                  </h1>
-                  <v-divider class=""></v-divider>
+                  <h1 class="font-weight-light mb-1" style="font-size :30px">정렬</h1>
+                  <v-divider class></v-divider>
                 </v-col>
               </v-row>
               <v-row fluid>
                 <v-col class="py-0">
                   <v-radio-group v-model="orderGroup">
-                    <v-radio
-                      label="구독자순"
-                      value="subscriber"
-                      checked
-                    ></v-radio>
+                    <v-radio label="구독자순" value="subscriber" checked></v-radio>
                     <v-radio label="등급순" value="grade"></v-radio>
-                    <v-radio
-                      label="누적조회수"
-                      value="totalViewCount"
-                    ></v-radio>
+                    <v-radio label="누적조회수" value="totalViewCount"></v-radio>
                     <v-radio label="총영상수" value="totalVideoCount"></v-radio>
                     <v-radio label="영향력" value="influence"></v-radio>
                     <v-radio label="활동력" value="activity"></v-radio>
@@ -69,8 +55,7 @@
             <v-row class="pt-0 pl-3">
               <v-col>
                 <h1 class="font-weight-light mb-1">
-                  <v-icon color="#b468ff" size="50">mdi-medal-outline</v-icon>
-                  RANK PAGE
+                  <v-icon color="#b468ff" size="50">mdi-crown</v-icon>RANK PAGE
                 </h1>
                 <v-divider></v-divider>
               </v-col>
@@ -112,9 +97,7 @@
                         <v-col cols="12" class="py-1">
                           <p
                             class="font-weight-black thin display-1 ma-0 text-truncate"
-                          >
-                            {{ item.channelName }}
-                          </p>
+                          >{{ item.channelName }}</p>
                         </v-col>
                       </v-row>
                       <v-row>
@@ -122,9 +105,7 @@
                           <p
                             class="font-weight-light thin ma-0"
                             style="font-size:13px"
-                          >
-                            개설일 : {{ item.publishedDate }}
-                          </p>
+                          >개설일 : {{ item.publishedDate }}</p>
                         </v-col>
                       </v-row>
                       <v-row>
