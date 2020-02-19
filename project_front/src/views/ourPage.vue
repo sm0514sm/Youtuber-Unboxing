@@ -130,7 +130,9 @@ export default {
   components: {},
   beforecreated() {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.$vuetify.goTo(0)
+  },
   methods: {
     blogLink(link) {
       window.open(link);

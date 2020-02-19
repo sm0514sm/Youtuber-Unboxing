@@ -287,6 +287,7 @@ export default {
     }
   },
   mounted() {
+    this.$vuetify.goTo(0);
     document.getElementById("keyword").parentElement.style.marginLeft = "12px";
     document.getElementById("keyword").parentElement.style.marginTop = "3px";
   },
