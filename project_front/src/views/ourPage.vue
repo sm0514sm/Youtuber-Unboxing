@@ -31,13 +31,13 @@
                       cardinfo.name
                       }}
                     </span>
-                    <v-btn rounded color="blue" justify="center" class="ml-2">
+                    <v-btn rounded color="blue" justify="center" class="ml-2" dark>
                       <b>{{ cardinfo.position }}</b>
                     </v-btn>
                   </v-col>
                 </v-row>
                 <v-row>
-                  <v-col class="pt-0">
+                  <v-col class="ml-1 pt-0 pl-5">
                     <span class="font-weight-light mr-4">탄신일 : {{ cardinfo.birth }}</span>
                   </v-col>
                 </v-row>
@@ -170,14 +170,15 @@ export default {
       dummyData: [
         {
           name: "김주희",
-          position: "Rest Api",
+          position: "BACK / DESIGN",
           image: "KJH",
           birth: "1994-02-09",
           git: "juheekimm",
           gitlab: "juheekim",
-          insta: "sally_0607",
-          stacks: ["spring", "rest"],
-          feat: ["REST API", "DATABASE"]
+          // insta: "sally_0607",
+          tistory: "buddev",
+          stacks: ["spring", "mariadb"],
+          feat: ["SPRING", "DATABASE", "CSS"]
         },
         {
           name: "김태민",
@@ -187,8 +188,8 @@ export default {
           git: "taemtaemKim",
           gitlab: "taemin",
           insta: "merona_mango",
-          stacks: ["vue"],
-          feat: ["VUE MASTER"]
+          stacks: ["vue", "mariadb"],
+          feat: ["VUE MASTER", "DATABASE"]
         },
         {
           name: "박진홍",

@@ -2,7 +2,7 @@
   <!-- vuetify를 참고하여 작성하기
                       https://vuetifyjs.com/ko/components/api-explorer
   -->
-  <div>
+  <div v-scroll="onScroll">
     <video
       :src="require('@/assets/bg' + bgNum + '.mp4')"
       class="bgvideo"
@@ -102,6 +102,7 @@
           loop="true"
           muted
           style="width: 500px;"
+          id="detail"
         ></video>
       </div>
     </div>
@@ -121,6 +122,7 @@
           loop="true"
           muted
           style="width: 500px;"
+          id="search"
         ></video>
       </div>
       <div style="display: inline-block; margin: 0 auto;" width="45%">
@@ -161,6 +163,7 @@
           loop="true"
           muted
           style="width: 500px;"
+          id="compare"
         ></video>
       </div>
     </div>
@@ -180,6 +183,7 @@
           loop="true"
           muted
           style="width: 500px;"
+          id="user"
         ></video>
       </div>
       <div style="display: inline-block; margin: 0 auto;" width="45%">
@@ -246,6 +250,39 @@ export default {
         this.typo = lifeCopy.slice(0, idx);
       }, 300);
     },
+    onScroll() {
+      var scroll = window.pageYOffset;
+      var value = "#cdcdcd";
+      // console.log(scroll);
+      if (scroll < 500) {
+        document.getElementById("detail").pause();
+        document.getElementById("search").pause();
+        document.getElementById("compare").pause();
+        document.getElementById("user").pause();
+      } else if (scroll < 900) {
+        document.getElementById("detail").play();
+        document.getElementById("search").pause();
+        document.getElementById("compare").pause();
+        document.getElementById("user").pause();
+      } else if (scroll < 1300) {
+        document.getElementById("detail").pause();
+        document.getElementById("search").play();
+        document.getElementById("compare").pause();
+        document.getElementById("user").pause();
+      } else if (scroll < 1700) {
+        document.getElementById("detail").pause();
+        document.getElementById("search").pause();
+        document.getElementById("compare").play();
+        document.getElementById("user").pause();
+      } else {
+        document.getElementById("detail").pause();
+        document.getElementById("search").pause();
+        document.getElementById("compare").pause();
+        document.getElementById("user").play();
+      }
+
+      this.headerColor = value;
+    },
     tc(num) {
       return tc(num);
     }
@@ -272,7 +309,7 @@ export default {
   created() {
     this.startTypo();
     this.startCursor();
-    this.bgNum = Math.floor(Math.random() * 5 + 1);
+    this.bgNum = Math.floor(Math.random() * 7 + 1);
   },
   watch: {
     inputKeyword() {

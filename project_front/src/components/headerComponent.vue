@@ -47,8 +47,9 @@
             ref="keyword"
             id="keyword"
             label="유튜버를 검색해보세요"
-            style="max-width: 210px; "
+            style="max-width: 230px"
             solo-inverted
+            background-color="#bbbbbb"
             flat
             v-if="$route.path != '/'"
             align="center"
@@ -69,7 +70,7 @@
               >
                 <img :src="item.thumbnails" alt="John" />
               </v-list-item-avatar>
-              <v-list-item-content v-if="item.yno != -1">
+              <v-list-item-content v-if="item.yno != -1" style="width: 100px">
                 <v-list-item-title v-text="item.channelName"></v-list-item-title>
                 <v-list-item-subtitle>구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle>
               </v-list-item-content>
