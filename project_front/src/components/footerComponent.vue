@@ -34,7 +34,7 @@
             </h5>
             <hr style="width: 60px; border: 0.5px solid #222222;" />
             <h6 class="text-uppercase">
-              <a href="http://15.165.77.1:3000/ourPage">CONTACT US</a>
+              <a @click="gotoPage('/ourPage')">CONTACT US</a>
             </h6>
             <h6 class="text-uppercase">Seoul, Gangnam-gu, Yeoksam-dong</h6>
             <h6 class="text-uppercase">212 Teheran-ro, 9AM - 6PM</h6>
@@ -47,7 +47,7 @@
     <div class="footer-copyright text-center pb-2 mb-5">
       <mdb-container fluid>
         &copy; 2020 Copyright:
-        <a href="http://15.165.77.1:3000">Youtuber Unboxing</a>
+        <a @click="gotoHome">Youtuber Unboxing</a>
       </mdb-container>
     </div>
   </mdb-footer>
@@ -58,7 +58,7 @@
 import { mdbFooter, mdbContainer, mdbRow, mdbCol } from "mdbvue";
 import http from "../vuex/http-common";
 export default {
-  method: {
+  methods: {
     gotoHome(e) {
       e.stopPropagation();
       if (this.$route.path === "/") {
@@ -68,6 +68,9 @@ export default {
       }
       this.$router.push("/", () => {});
       return;
+    },
+    gotoPage(name){
+      this.$router.push(name);
     }
   },
   computed: {
