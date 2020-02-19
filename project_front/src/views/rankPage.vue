@@ -127,34 +127,47 @@
                         </v-col>
                       </v-row>
                       <v-row>
-                        <v-col cols="12" class="pt-0 pb-2">
+                        <v-col cols="12" class="pt-0 pb-0">
                           <p
                             class="font-weight-light thin ma-0"
                             style="font-size:13px"
                           >개설일 : {{ item.publishedDate }}</p>
                         </v-col>
                       </v-row>
-
-                      <table style="text-align: center; width: 100%; margin-top: 15px;">
-                        <tr id="th">
-                          <td>구독자수</td>
-                          <td>누적조회수</td>
-                          <td>총 영상수</td>
-                          <td>영향력</td>
-                          <td>활동력</td>
-                          <!-- <td>조회수력</td>
-                          <td>구독자력</td>-->
-                          <td>호감도</td>
-                        </tr>
-                        <tr>
-                          <td>{{ tc(item.subscriber) }}</td>
-                          <td>{{ tc(item.totalViewCount) }}</td>
-                          <td>{{ item.totalVideoCount }}</td>
-                          <td>{{ item.influence }}</td>
-                          <td>{{ item.activity }}</td>
-                          <td>{{ item.charm }}</td>
-                        </tr>
-                      </table>
+                      <v-row>
+                        <v-col class="px-1 pl-2 py-0">
+                          <table style="text-align: center; width: 100%; margin-top: 15px;">
+                            <tr id="th1">
+                              <td>구독자수</td>
+                              <td>누적조회</td>
+                              <td>총 영상수</td>
+                            </tr>
+                            <tr>
+                              <td>{{ tc(item.subscriber) }}</td>
+                              <td>{{ tc(item.totalViewCount) }}</td>
+                              <td>{{ item.totalVideoCount }}</td>
+                            </tr>
+                          </table>
+                          <p id="subtitle" class="mt-1 mb-0"></p>
+                        </v-col>
+                        <v-col class="px-1 py-0">
+                          <table style="text-align: center; width: 100%; margin-top: 15px;">
+                            <tr id="th2">
+                              <td>영향력</td>
+                              <td>활동력</td>
+                              <!-- <td>조회수력</td>
+                              <td>구독자력</td>-->
+                              <td>호감도</td>
+                            </tr>
+                            <tr>
+                              <td>{{ item.influence }}</td>
+                              <td>{{ item.activity }}</td>
+                              <td>{{ item.charm }}</td>
+                            </tr>
+                          </table>
+                          <p id="subtitle"  class="mt-1 mb-0 ml-1">*위의 수치는 현재사이트기준 상대적 수치입니다.</p>
+                        </v-col>
+                      </v-row>
                     </v-col>
                     <v-divider vertical class="my-2 ml-5 mr-3 py-4 px-0"></v-divider>
                     <!-- 등급 -->
@@ -368,8 +381,17 @@ td {
   border: 1px solid lightgray;
 }
 
-#th {
-  background-color: #eeeeee;
+#th1 {
+  background-color: #ae51b7a6;
+  color: white;
+}
+#th2 {
+  background-color: #d9a2fa;
+  color: white
+}
+#subtitle {
+  color : gray;
+  font-size : 12px;
 }
 
 /* #sortCard{position:absolute;top:100px;} */

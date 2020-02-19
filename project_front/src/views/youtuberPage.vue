@@ -729,7 +729,15 @@
               <v-row>
                 <v-col class="ma-2 ma-3 mx-0 mx-0">
                   <v-list-item-title class="headline font-weight-black mb-1">
-                    <v-icon color="pink lighten-3" class="mr-1">mdi-cloud-print-outline</v-icon>태그 클라우드
+                    <v-icon color="pink lighten-3" class="mr-1">mdi-cloud-print</v-icon>태그 클라우드
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <v-icon v-on="on" color="pink">mdi-information-outline</v-icon>
+                      </template>
+                      <span>
+                        단어를 클릭하면 더 다양한 정보를 얻을 수 있습니다.
+                      </span>
+                    </v-tooltip>
                   </v-list-item-title>
                   <v-divider></v-divider>
                 </v-col>

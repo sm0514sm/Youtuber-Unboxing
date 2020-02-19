@@ -225,7 +225,7 @@ export default {
           // 너무 인기 없는 유튜버라 지원 안함.
           this.completeTitle = "구독자가 적은 유튜버는 지원하지 않습니다!";
           this.completeSmallTitle =
-            "구독자 10만명이하인 유튜버는 [유튜브추가]를 지원 하지 않습니다.";
+            "구독자 1000명이하인 유튜버는 [유튜브추가]를 지원 하지 않습니다.";
         } else {
           // 서버문제로 지원 안 함.
           this.completeSmallTitle = "서버 에러";

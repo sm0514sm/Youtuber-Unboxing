@@ -1,7 +1,4 @@
 <template>
-  <!-- vuetify를 참고하여 작성하기
-                      https://vuetifyjs.com/ko/components/api-explorer
-  -->
   <div v-scroll="onScroll">
     <br />
     <br />
@@ -175,24 +172,25 @@ export default {
     },
     onScroll() {
       var scroll = window.pageYOffset;
-      var value = "#cdcdcd";
-      // console.log(scroll);
-      if (scroll < 500) {
+      console.log(scroll);
+      var start = 0;
+      var range = 330;
+      if (scroll < start) {
         document.getElementById("detail").pause();
         document.getElementById("search").pause();
         document.getElementById("compare").pause();
         document.getElementById("user").pause();
-      } else if (scroll < 900) {
+      } else if (scroll <= start + range) {
         document.getElementById("detail").play();
         document.getElementById("search").pause();
         document.getElementById("compare").pause();
         document.getElementById("user").pause();
-      } else if (scroll < 1300) {
+      } else if (scroll <= start + range * 2) {
         document.getElementById("detail").pause();
         document.getElementById("search").play();
         document.getElementById("compare").pause();
         document.getElementById("user").pause();
-      } else if (scroll < 1700) {
+      } else if (scroll <= start + range * 3) {
         document.getElementById("detail").pause();
         document.getElementById("search").pause();
         document.getElementById("compare").play();
@@ -203,8 +201,6 @@ export default {
         document.getElementById("compare").pause();
         document.getElementById("user").play();
       }
-
-      this.headerColor = value;
     },
     tc(num) {
       return tc(num);
@@ -217,6 +213,11 @@ export default {
     this.$vuetify.goTo(0);
     document.getElementById("keyword").parentElement.style.marginLeft = "12px";
     document.getElementById("keyword").parentElement.style.marginTop = "3px";
+
+    //유튜버
+    document.getElementById("search").pause();
+    document.getElementById("compare").pause();
+    document.getElementById("user").pause();
   },
   computed: {
     ...mapGetters(["categories"]),

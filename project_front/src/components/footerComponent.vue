@@ -6,6 +6,7 @@
       style="width: -webkit-fill-available; margin-left:20px;margin-right:20px"
     />-->
     <hr
+      v-if="$route.path != '/'"
       style="border: 1px solid lightgray; margin-left:35px; margin-right:35px; margin-bottom: 30px"
     />
     <mdb-container class="text-center text-md-left" style="margin-left:auto; margin-right:auto">
