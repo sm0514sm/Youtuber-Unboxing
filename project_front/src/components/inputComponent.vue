@@ -39,7 +39,7 @@
           dark
           class="pl-2 pr-3 mt-2"
         >
-          <v-icon large>mdi-account-circle</v-icon>유튜브 추가하기
+          <v-icon large>mdi-youtube</v-icon>유튜브 추가하기
         </v-btn>
       </template>
       <v-card class="pa-5">
@@ -164,7 +164,7 @@
           :value="value"
           stream
         />
-        <v-icon large dark @click="snackbar = false">clear</v-icon>
+        <v-icon large dark @click="snackbar = false">mdi-close</v-icon>
       </v-snackbar>
     </div>
   </v-col>

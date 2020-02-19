@@ -163,7 +163,7 @@
         <v-row>
           <v-col align="center">
             <v-btn text color="black" @click="youtuberPageDown">
-              <v-icon>arrow_downward</v-icon>더보기
+              <v-icon>mdi-menu-down</v-icon>더보기
             </v-btn>
           </v-col>
         </v-row>
@@ -221,6 +221,7 @@
                         color="#6EE3F7"
                         dark
                         class="ml-1 mb-1"
+                        @click="search(tag)"
                       >{{tag}}</v-btn>
                     </v-col>
                   </v-row>
@@ -233,7 +234,7 @@
         <v-row>
           <v-col align="center">
             <v-btn text color="black" @click="videoPageDown">
-              <v-icon>arrow_downward</v-icon>더보기
+              <v-icon>mdi-menu-down</v-icon>더보기
             </v-btn>
           </v-col>
         </v-row>
@@ -289,7 +290,7 @@
         <v-row>
           <v-col align="center">
             <v-btn text color="black" @click="newsPageDown">
-              <v-icon>arrow_downward</v-icon>더보기
+              <v-icon>mdi-menu-down</v-icon>더보기
             </v-btn>
           </v-col>
         </v-row>
@@ -390,13 +391,24 @@ export default {
     },
     failCallback() {
       window.location.reload();
-    }
+    },
+    search: function(keyword) {
+      this.$router.push(
+        {
+          path: "/searchPage",
+          query: { word: keyword }
+        },
+        () => {}
+      );
+    },
   },
   mounted() {
     this.$vuetify.goTo(0);
+    console.log("#########################")
+    console.log(encodeURI(this.$route.query.word))
     const youtuberSearch = new Promise((resolve, reject) => {
       http
-        .get("/youtuber/search/" + this.$route.query.word)
+        .get("/youtuber/search/" + encodeURI(this.$route.query.word))
         .then(response => {
           resolve(response);
         })
@@ -407,7 +419,7 @@ export default {
 
     const newsSearch = new Promise((resolve, reject) => {
       http
-        .get("/news/search/" + this.$route.query.word)
+        .get("/news/search/" + encodeURI(this.$route.query.word))
         .then(response => {
           resolve(response);
         })
@@ -418,7 +430,7 @@ export default {
 
     const videoSearch = new Promise((resolve, reject) => {
       http
-        .get("/video/search/" + this.$route.query.word)
+        .get("/video/search/" + encodeURI(this.$route.query.word))
         .then(response => {
           resolve(response);
         })

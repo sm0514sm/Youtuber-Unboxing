@@ -62,7 +62,7 @@
                   color="green"
                   :disabled="disabledButtonFlag"
                 >
-                  <v-icon dark>input</v-icon>비교담기
+                  <v-icon dark>mdi-login-variant</v-icon>비교담기
                 </v-btn>
               </template>
 
@@ -135,7 +135,7 @@
                   color="green"
                   :disabled="disabledButtonFlag"
                 >
-                  <v-icon dark>input</v-icon>비교담기
+                  <v-icon dark>mdi-login-variant</v-icon>비교담기
                 </v-btn>
               </template>
 

@@ -20,7 +20,7 @@
         class="elevation-15 pa-4"
         border-radius="25%"
       >
-        <v-icon color="green" left>input</v-icon>유튜버 비교하기
+        <v-icon color="green" left>mdi-login-variant</v-icon>유튜버 비교하기
       </v-btn>
     </template>
 
@@ -33,7 +33,7 @@
           <v-list-item-subtitle class="mb-1">
             카테고리 페이지에서
             <br />[
-            <v-icon dark color="green">input</v-icon>비교담기 ] 로 담아주세요
+            <v-icon dark color="green">mdi-login-variant</v-icon>비교담기 ] 로 담아주세요
           </v-list-item-subtitle>
           <v-divider></v-divider>
         </v-col>
@@ -49,7 +49,7 @@
           <v-spacer></v-spacer>
           <v-col>
             <v-btn text icon color="red" @click="deleteYoutber(item.yno)">
-              <v-icon>delete</v-icon>
+              <v-icon>mdi-delete</v-icon>
             </v-btn>
           </v-col>
         </v-row>
@@ -62,7 +62,7 @@
           </v-btn>
           <v-btn @click="gotoComparePage" color="primary" rounded>
             비교하기
-            <v-icon right>near_me</v-icon>
+            <v-icon right>mdi-arrow-top-right-thick</v-icon>
           </v-btn>
         </v-col>
       </v-row>
