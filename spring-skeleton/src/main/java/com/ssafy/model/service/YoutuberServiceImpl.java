@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.model.dao.YoutuberDao;
-import com.ssafy.model.dto.Growth;
+import com.ssafy.model.dto.Category;
 import com.ssafy.model.dto.News;
+import com.ssafy.model.dto.Trend;
 import com.ssafy.model.dto.Video;
 import com.ssafy.model.dto.Youtuber;
 
@@ -25,6 +26,16 @@ public class YoutuberServiceImpl implements YoutuberService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("youtuber 고유번호 조회 중 에러가 발생했습니다.");
+		}
+	}
+	
+	@Override
+	public List<Category> searchCategoryList(int yno) {
+		try {
+			return dao.searchCategoryList(yno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 고유번호로 카테고리 번호, 카테고리명 검색  중 에러가 발생했습니다.");
 		}
 	}
 	
@@ -78,23 +89,93 @@ public class YoutuberServiceImpl implements YoutuberService {
 		}
 	}
 
+//	@Override
+//	public List<Video> searchCommunity(int yno) {
+//		try {
+//			return dao.searchCommunity(yno);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			throw new RuntimeException("youtuber 관련 카테고리 조회 중 에러가 발생했습니다.");
+//		}
+//	}
+
 	@Override
-	public List<Video> searchCommunity(int yno) {
+	public List<Trend> searchTrend(int yno) {
 		try {
-			return dao.searchCommunity(yno);
+			return dao.searchTrend(yno);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("youtuber 관련 카테고리 조회 중 에러가 발생했습니다.");
+			throw new RuntimeException("youtuber 관련 성장성 데이터 조회 중 에러가 발생했습니다.");
 		}
 	}
 
 	@Override
-	public List<Growth> searchGrowth(int yno) {
+	public List<Video> searchVideoGoodRatio(Map<String, Integer> condition) {
 		try {
-			return dao.searchGrowth(yno);
+			return dao.searchVideoGoodRatio(condition);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("youtuber 관련 성장성 데이터 조회 중 에러가 발생했습니다.");
+			throw new RuntimeException("youtuber 상세페이지의 호감도 및 영상 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public Double searchGoodRatio(Map<String, Integer> condition) {
+		try {
+			return dao.searchGoodRatio(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 호감도 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public int searchVideoCount(Map<String, Integer> condition) {
+		try {
+			return dao.searchVideoCount(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 활동지수 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Integer> searchTermVideoCount(Map<String, Integer> condition) {
+		try {
+			return dao.searchTermVideoCount(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 기간별 활동지수 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Integer> searchCommunityMentionCount(Map<String, Integer> condition) {
+		try {
+			return dao.searchCommunityMentionCount(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 커뮤니티 파급력 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Integer> searchNewsMentionCount(Map<String, Integer> condition) {
+		try {
+			return dao.searchNewsMentionCount(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 뉴스 파급력 정보 조회 중 에러가 발생했습니다.");
+		}
+	}
+
+	@Override
+	public List<Trend> searchSubscriberCountDif(Map<String, Integer> condition) {
+		try {
+			return dao.searchSubscriberCountDif(condition);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("youtuber 상세페이지의 구독자 수 증감 추이 조회 중 에러가 발생했습니다.");
 		}
 	}
 }

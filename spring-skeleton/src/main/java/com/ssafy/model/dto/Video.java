@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class Video {
 	//vidio 테이블 + youtube_category 테이블의 컬럼을 합쳐놓은 DTO
-	
 	private int vno;
 	private int yno;
 	private String videoID;
@@ -18,7 +17,7 @@ public class Video {
 	private int ycano;
 	private String tags;
 	private String thumbnail;
-	private String topic;
+	private double goodRatio;	//좋아요 싫어요 비율 계산을 위한 변수
 	
 	private String krCategory;	//youtube_category 테이블의 컬럼
 	private String enCategory;	//youtube_category 테이블의 컬럼
@@ -101,12 +100,6 @@ public class Video {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-	public String getTopic() {
-		return topic;
-	}
-	public void setTopic(String topic) {
-		this.topic = topic;
-	}
 	public String getKrCategory() {
 		return krCategory;
 	}
@@ -118,5 +111,11 @@ public class Video {
 	}
 	public void setEnCategory(String enCategory) {
 		this.enCategory = enCategory;
+	}
+	public double getGoodRatio() {
+		return goodRatio;
+	}
+	public void setGoodRatio(double goodRatio) {
+		this.goodRatio = goodRatio;
 	}
 }
