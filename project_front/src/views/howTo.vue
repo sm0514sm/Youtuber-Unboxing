@@ -172,7 +172,6 @@ export default {
     },
     onScroll() {
       var scroll = window.pageYOffset;
-      console.log(scroll);
       var start = 0;
       var range = 330;
       if (scroll < start) {
