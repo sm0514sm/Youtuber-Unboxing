@@ -220,7 +220,7 @@
                           <v-icon class="mr-2" color="cyan">mdi-chart-line</v-icon>구독자 증감 추이
                         </v-tab>
                         <v-tab>
-                          <v-icon class="mr-2" color="yellow">mdi-heart-multiple-outline</v-icon>호감도
+                          <v-icon class="mr-2" color="orange">mdi-heart-multiple-outline</v-icon>호감도
                         </v-tab>
                       </v-tabs>
 
@@ -459,7 +459,7 @@
                         <v-tab-item>
                           <v-container class="ma-5">
                             <v-chip color="white" text-color="black" outlined class="pa-0">
-                              <v-icon class="mr-1" color="yellow">mdi-heart-multiple-outline</v-icon>호감도 :
+                              <v-icon class="mr-1" color="orange">mdi-heart-multiple-outline</v-icon>호감도 :
                               <b>최근 영상 10개의 좋아요, 싫어요 비율</b>에 의해
                               결정됩니다.
                             </v-chip>
