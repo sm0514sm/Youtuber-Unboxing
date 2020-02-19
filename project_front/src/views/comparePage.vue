@@ -367,21 +367,39 @@
             <v-row>
               <v-col>
                 <v-row v-if="status.y1_sub">
-                  <v-chip class="ma-2" color="#26c3fb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#26c3fb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26c3fb">mdi-account-multiple</v-icon>
                     <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26c3fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_view">
-                  <v-chip class="ma-2" color="#26b1fb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#26b1fb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26b1fb">mdi-animation-play</v-icon>
                     <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26b1fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_video">
-                  <v-chip class="ma-2" color="#269ffb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#269ffb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#269ffb">mdi-youtube-subscription</v-icon>
                     <b>영상수 {{ status.video_stat }}%</b>
                     <v-icon color="#269ffb">mdi-arrow-up-thick</v-icon>
@@ -389,21 +407,39 @@
                 </v-row>
 
                 <v-row v-if="status.y1_charm">
-                  <v-chip class="ma-2" color="#268dfb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#268dfb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#268dfb">mdi-heart-multiple</v-icon>
                     <b>호감도 {{ status.charm_stat }}%</b>
                     <v-icon color="#268dfb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_influence">
-                  <v-chip class="ma-2" color="#267cfb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#267cfb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#267cfb">mdi-earth</v-icon>
                     <b>영향력 {{ status.influence_stat }}%</b>
                     <v-icon color="#267cfb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_activity">
-                  <v-chip class="ma-2" color="#266afb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#266afb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#266afb">mdi-newspaper-variant-multiple</v-icon>
                     <b>활동력 {{ status.activity_stat }}%</b>
                     <v-icon color="#266afb">mdi-arrow-up-thick</v-icon>
@@ -415,21 +451,39 @@
 
               <v-col>
                 <v-row v-if="status.y2_sub">
-                  <v-chip class="ma-2" color="#26e785" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e785"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e785">mdi-account-multiple</v-icon>
                     <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26e785">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_view">
-                  <v-chip class="ma-2" color="#26e795" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e795"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e795">mdi-animation-play</v-icon>
                     <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26e795">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_video">
-                  <v-chip class="ma-2" color="#26e7a5" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e7a5"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e7a5">mdi-youtube-subscription</v-icon>
                     <b>영상수 {{ status.video_stat }}%</b>
                     <v-icon color="#26e7a5">mdi-arrow-up-thick</v-icon>
@@ -437,21 +491,39 @@
                 </v-row>
 
                 <v-row v-if="status.y2_charm">
-                  <v-chip class="ma-2" color="#26e7b5" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e7b5"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e7b5">mdi-heart-multiple</v-icon>
                     <b>호감도 {{ status.charm_stat }}%</b>
                     <v-icon color="#26e7b5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_influence">
-                  <v-chip class="ma-2" color="#26e7c5" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e7c5"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e7c5">mdi-earth</v-icon>
                     <b>영향력 {{ status.influence_stat }}%</b>
                     <v-icon color="#26e7c5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_activity">
-                  <v-chip class="ma-2" color="#26e7d5" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e7d5"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e7d5">mdi-newspaper-variant-multiple</v-icon>
                     <b>활동력 {{ status.activity_stat }}%</b>
                     <v-icon color="#26e7d5">mdi-arrow-up-thick</v-icon>
@@ -475,10 +547,18 @@
                           outlined
                           pill
                           text-color="black"
-                        >{{ status.winner }}</v-chip>채널이 종합 수치
-                        <v-chip class="ma-2" color="indigo darken-3" outlined>
+                          style="border-width: medium"
+                        >
+                          <b>{{ status.winner }}</b>
+                        </v-chip>채널이 종합 수치
+                        <v-chip
+                          class="ma-2"
+                          color="indigo darken-3"
+                          outlined
+                          style="border-width: medium"
+                        >
                           <v-icon left>mdi-fire</v-icon>
-                          {{ status.stat }}%
+                          <b>{{ status.stat }}%</b>
                         </v-chip>우위에 있습니다.
                       </v-card-title>
                     </div>

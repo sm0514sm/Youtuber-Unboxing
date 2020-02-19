@@ -15,44 +15,27 @@
             <h5 class="text-uppercase">
               <strong>COMPANY</strong>
             </h5>
-            <hr
-              style="width: 60px; border: 0.5px solid #222222;"
-            />
+            <hr style="width: 60px; border: 0.5px solid #222222;" />
             <v-img :src="require('@/assets/footer.png')" width="100px"></v-img>
           </mdb-col>
           <mdb-col col="5">
             <h5 class="text-uppercase font-weight-800">
               <strong>PROJECT NAME</strong>
             </h5>
-            <hr
-              style="width: 60px; border: 0.5px solid #222222;"
-            />
-            <h6>
-              SSAFY FIRST PROJECT
-            </h6>
-            <h6 class="text-uppercase">
-              Class 1 Group 8
-            </h6>
-            <h6 class="text-uppercase">
-              Web / Mobile Application
-            </h6>
+            <hr style="width: 60px; border: 0.5px solid #222222;" />
+            <h6>SSAFY FIRST PROJECT</h6>
+            <h6 class="text-uppercase">Class 1 Group 8</h6>
+            <h6 class="text-uppercase">Web / Mobile Application</h6>
           </mdb-col>
           <mdb-col col="4">
             <h5 class="text-uppercase">
               <strong>Contact</strong>
             </h5>
-            <hr
-              style="width: 60px; border: 0.5px solid #222222;"
-            />
-            <h6 class="text-uppercase">
-              Seoul, Gangnam-gu, Yeoksam-dong
-            </h6>
-            <h6 class="text-uppercase">
-              212 Teheran-ro, 9AM - 6PM
-            </h6>
-            <h6 class="text-uppercase">
-              +82) 1588 - 3357
-            </h6>
+            <hr style="width: 60px; border: 0.5px solid #222222;" />
+            <h6 class="text-uppercase">Seoul, Gangnam-gu, Yeoksam-dong</h6>
+            <h6 class="text-uppercase">212 Teheran-ro, 9AM - 6PM</h6>
+            <h6 class="text-uppercase">+82) 1588 - 3357</h6>
+            <h6 class="text-uppercase">+82) 1588 - 3357</h6>
           </mdb-col>
         </mdb-row>
       </div>

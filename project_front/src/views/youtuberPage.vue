@@ -57,10 +57,11 @@
                         v-if="loginStatus"
                         outlined
                         style="border-width: medium"
+                        @click="manageFav()"
                       >
                         <b>즐겨찾기</b>
-                        <v-icon color="red" v-if="flag" @click="deleteFav()">mdi-heart</v-icon>
-                        <v-icon color="red" v-if="!flag" @click="insertFav()">mdi-heart-outline</v-icon>
+                        <v-icon color="red" v-if="flag">mdi-heart</v-icon>
+                        <v-icon color="red" v-if="!flag">mdi-heart-outline</v-icon>
                       </v-btn>
                     </v-col>
                   </v-row>
@@ -861,6 +862,11 @@ export default {
     }
   },
   methods: {
+    manageFav() {
+      if (this.flag) {
+        this.deleteFav();
+      } else this.insertFav();
+    },
     wordClickHandler(name, value, vm) {
       console.log("wordClickHandler", name, value, vm);
       this.$router.push({ path: "searchPage", query: { word: name } });
