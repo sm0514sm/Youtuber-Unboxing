@@ -707,7 +707,7 @@
                   :rotate="rotate"
                   :fontSize="fontsize"
                   font="Jua"
-                  v-if="tagCloud.length > 0"
+                  v-if="tagCloud.length > 2"
                 />
                 <v-alert
                   type="info"
@@ -794,7 +794,7 @@ export default {
     this.loading = "loading";
   },
   mounted() {
-    if(this.$route.query.yno == undefined){
+    if (this.$route.query.yno == undefined) {
       this.$router.push({ path: "notFound" });
       return;
     }
@@ -889,34 +889,35 @@ export default {
       var viewCountTrend = this.youtuber.viewCountTrend;
       var subscriberCountTrend = this.youtuber.subscriberCountTrend;
       var charm = this.youtuber.charm;
-
-      var tagsDict = JSON.parse(this.youtuber.tagCloud);
-      if (tagsDict != null) {
-        var size = Object.keys(tagsDict).length + 2;
-        var tagsList = Object.values(tagsDict)
-          .sort()
-          .reverse();
-        tagsList.push(100);
-        tagsList.push(0);
-        for (var n in tagsDict) {
-          var tempDict = {};
-          var index = -1;
-          tempDict["name"] = n;
-          for (var i in tagsList) {
-            if (tagsList[i] == tagsDict[n]) {
-              index = i + 1;
-              break;
+      if (this.youtuber.tagCloud != "" && this.youtuber.tagCloud != null) {
+        var tagsDict = JSON.parse(this.youtuber.tagCloud);
+        if (tagsDict != null) {
+          var size = Object.keys(tagsDict).length + 2;
+          var tagsList = Object.values(tagsDict)
+            .sort()
+            .reverse();
+          tagsList.push(100);
+          tagsList.push(0);
+          for (var n in tagsDict) {
+            var tempDict = {};
+            var index = -1;
+            tempDict["name"] = n;
+            for (var i in tagsList) {
+              if (tagsList[i] == tagsDict[n]) {
+                index = i + 1;
+                break;
+              }
             }
+            tempDict["value"] = ((size - index) * 100) / size;
+            this.tagCloud.push(tempDict);
           }
-          tempDict["value"] = ((size - index) * 100) / size;
-          this.tagCloud.push(tempDict);
+          var temp = {};
+          temp["name"] = "";
+          temp["value"] = "100";
+          this.tagCloud.push(temp);
+          temp["value"] = "0";
+          this.tagCloud.push(temp);
         }
-        var temp = {};
-        temp["name"] = "";
-        temp["value"] = "100";
-        this.tagCloud.push(temp);
-        temp["value"] = "0";
-        this.tagCloud.push(temp);
       }
       this.mainData = [
         {
