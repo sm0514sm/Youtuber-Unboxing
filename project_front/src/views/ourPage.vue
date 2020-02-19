@@ -38,7 +38,7 @@
                 </v-row>
                 <v-row>
                   <v-col class="ml-1 pt-0 pl-5">
-                    <span class="font-weight-light mr-4">탄신일 : {{ cardinfo.birth }}</span>
+                    <span class="font-weight-light mr-4">{{ cardinfo.birth }}</span>
                   </v-col>
                 </v-row>
                 <v-row>

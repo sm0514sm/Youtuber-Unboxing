@@ -55,10 +55,10 @@
               <v-row fluid>
                 <v-col class="py-0">
                   <v-radio-group v-model="orderGroup" color="#b468ff">
-                    <v-radio label="구독자" value="subscriber" checked color="#b468ff"></v-radio>
+                    <v-radio label="구독자수" value="subscriber" checked color="#b468ff"></v-radio>
                     <v-radio label="등급" value="grade" color="#b468ff"></v-radio>
-                    <v-radio label="누적조회" value="totalViewCount" color="#b468ff"></v-radio>
-                    <v-radio label="총 영상" value="totalVideoCount" color="#b468ff"></v-radio>
+                    <v-radio label="누적조회수" value="totalViewCount" color="#b468ff"></v-radio>
+                    <v-radio label="총 영상수" value="totalVideoCount" color="#b468ff"></v-radio>
                     <v-radio label="영향력" value="influence" color="#b468ff"></v-radio>
                     <v-radio label="활동력" value="activity" color="#b468ff"></v-radio>
                     <v-radio label="호감도" value="charm" color="#b468ff"></v-radio>
@@ -138,7 +138,7 @@
                       <table style="text-align: center; width: 100%; margin-top: 15px;">
                         <tr id="th">
                           <td>구독자수</td>
-                          <td>누적조회</td>
+                          <td>누적조회수</td>
                           <td>총 영상수</td>
                           <td>영향력</td>
                           <td>활동력</td>
@@ -293,13 +293,13 @@ export default {
     },
     changeKoreanWord(word) {
       if (word == "subscriber") {
-        return "구독자";
+        return "구독자수";
       } else if (word == "grade") {
         return "등급";
       } else if (word == "totalViewCount") {
-        return "누적 조회";
+        return "누적 조회수";
       } else if (word == "totalVideoCount") {
-        return "총 영상";
+        return "총 영상수";
       } else if (word == "influence") {
         return "영향력";
       } else if (word == "activity") {
