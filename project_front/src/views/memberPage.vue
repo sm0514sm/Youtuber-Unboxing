@@ -379,6 +379,7 @@ import tc from 'thousands-counter';
       cat: [],
       loader: null,
       loading: false,
+      search: ""
     }),
     watch: {
       loader () {
