@@ -78,7 +78,7 @@
             <v-row>
               <v-col cols="12">
                 데이터 요청중입니다 ... [ 남은 예상 시간 :
-                {{ Math.round(35 - value / 2.86) }}초 ]
+                {{ Math.round(30 - value / 3.33) }}초 ]
               </v-col>
             </v-row>
             <v-row>
@@ -92,7 +92,7 @@
                   color="teal"
                 >
                   <h2>
-                    <b>{{ Math.round(value)==0?"Loading...":Math.round(value) }}</b>
+                    <b>{{ Math.round(value)==0?"Loading":Math.round(value) }}</b>
                   </h2>
                 </v-progress-circular>
               </v-col>
@@ -302,10 +302,10 @@ export default {
         ) {
           if (this.value < 65 && this.value > 0) {
             this.$store.state.value = this.value + 1;
-          } else if (this.value < 83 && this.value > 64) {
-            this.$store.state.value = this.value + 0.8;
-          } else if (this.value < 90 && this.value > 82) {
-            this.$store.state.value = this.value + 0.15;
+          } else if (this.value < 73 && this.value > 64) {
+            this.$store.state.value = this.value + 0.5;
+          } else if (this.value < 83 && this.value > 82) {
+            this.$store.state.value = this.value + 0.3;
           }
           // this.$store.state.value =
           //   this.value + Math.round(Math.random() * 3.5);
