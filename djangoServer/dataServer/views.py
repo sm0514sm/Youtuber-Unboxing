@@ -167,7 +167,7 @@ def make_new_youtuber(request, url):
     timer.append(timeit.default_timer())
     print('%2d. [%5.2f / %5.2f s] Locate and import the yno of the created user from the DB'
           % (len(timer) - 1, timer[len(timer) - 1] - timer[len(timer) - 2], timer[len(timer) - 1] - timer[0]))
-    youtuber.status = 12
+    youtuber.status = 1
     youtuber.save()
 
     # 6. Video 테이블 수집
@@ -228,14 +228,18 @@ def make_new_youtuber(request, url):
                 trend_list[i]['pointView'] = 0
                 break
             else:
-                trend_list[i+1]['pointSubscriber'] = int(trend_list[i]['pointSubscriber']) - int(trend_list[i+1]['difSubscriber'])
-                trend_list[i]['difSubscriber'] = int(trend_list[i+1]['difSubscriber'])
-                trend_list[i+1]['pointView'] = int(trend_list[i]['pointView']) - int(trend_list[i+1]['difView'])
+                trend_list[i+1]['pointSubscriber'] = int(
+                    trend_list[i]['pointSubscriber']) - int(trend_list[i+1]['difSubscriber'])
+                trend_list[i]['difSubscriber'] = int(
+                    trend_list[i+1]['difSubscriber'])
+                trend_list[i+1]['pointView'] = int(
+                    trend_list[i]['pointView']) - int(trend_list[i+1]['difView'])
                 trend_list[i]['difView'] = int(trend_list[i+1]['difView'])
             if i == 0:
                 today_trend = Trend(
                     yno=youtuber,
-                    recorddate=datetime.datetime.strptime(trend_item['recordDate'], "%Y-%m-%d"),
+                    recorddate=datetime.datetime.strptime(
+                        trend_item['recordDate'], "%Y-%m-%d"),
                     pointsubscriber=trend_item['pointSubscriber'],
                     difsubscriber=trend_item['difSubscriber'],
                     pointview=trend_item['pointView'],
@@ -245,7 +249,8 @@ def make_new_youtuber(request, url):
             else:
                 Trend.objects.create(
                     yno=youtuber,
-                    recorddate=datetime.datetime.strptime(trend_item['recordDate'], "%Y-%m-%d"),
+                    recorddate=datetime.datetime.strptime(
+                        trend_item['recordDate'], "%Y-%m-%d"),
                     pointsubscriber=trend_item['pointSubscriber'],
                     difsubscriber=trend_item['difSubscriber'],
                     pointview=trend_item['pointView'],
