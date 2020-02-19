@@ -31,7 +31,7 @@
                       cardinfo.name
                       }}
                     </span>
-                    <v-btn rounded color="blue" justify="center" class="ml-2" dark>
+                    <v-btn rounded color="#ff68b4" justify="center" class="ml-2" dark>
                       <b>{{ cardinfo.position }}</b>
                     </v-btn>
                   </v-col>
@@ -131,7 +131,7 @@ export default {
   beforecreated() {},
   created() {},
   mounted() {
-    this.$vuetify.goTo(0)
+    this.$vuetify.goTo(0);
   },
   methods: {
     blogLink(link) {
@@ -179,7 +179,7 @@ export default {
           // gitlab: "taemin",
           insta: "merona_mango",
           stacks: ["vue", "vuetify"],
-          feat: ["VUE MASTER", ]
+          feat: ["VUE MASTER"]
         },
         {
           name: "박진홍",
