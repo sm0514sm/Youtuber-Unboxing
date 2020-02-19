@@ -112,6 +112,8 @@ def make_new_youtuber(request, url):
     for (i, site) in enumerate(get_channel_other_sites(url)):
         other_links[i] = site
     channel_info = get_channel_info(channel_id)
+    print('구독자 수 :', int(config('MIN_SUBSCRIBER')),
+          int(channel_info['subscriberCount']))
     if int(channel_info['subscriberCount']) < int(config('MIN_SUBSCRIBER')):
         print('유튜버 channel info 수집 후 DB 추가 중 에러')
         res['code'] = -3
