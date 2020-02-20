@@ -185,6 +185,11 @@ export default {
   },
   methods: {
     gotoPage(address) {
+      if(address == '/categoryPage'){
+        var tmp = localStorage.getItem("compareYoutuber")
+        if(tmp == null)
+          localStorage.setItem("currentCategory",0);
+      }
       this.$router.push(address);
     },
     login() {
