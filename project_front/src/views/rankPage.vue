@@ -391,6 +391,7 @@ export default {
 .circle {
   border-radius: 50%;
 }
+
 td {
   border: 1px solid lightgray;
 }
