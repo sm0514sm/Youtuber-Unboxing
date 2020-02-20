@@ -434,11 +434,14 @@ export default {
   },
   mounted() {
     this.$vuetify.goTo(0);
-    console.log("#########################");
-    console.log(encodeURI(this.$route.query.word));
+    var keyword = this.$route.query.word
+    var keywordIndex = keyword.indexOf('/')
+    if(keywordIndex != -1){
+      keyword = keyword.substring(0,keywordIndex)
+    }
     const youtuberSearch = new Promise((resolve, reject) => {
       http
-        .get("/youtuber/search/" + encodeURI(this.$route.query.word))
+        .get("/youtuber/search/" + encodeURIComponent(keyword))
         .then(response => {
           resolve(response);
         })
@@ -449,7 +452,7 @@ export default {
 
     const newsSearch = new Promise((resolve, reject) => {
       http
-        .get("/news/search/" + encodeURI(this.$route.query.word))
+        .get("/news/search/" + encodeURIComponent(keyword))
         .then(response => {
           resolve(response);
         })
@@ -460,7 +463,7 @@ export default {
 
     const videoSearch = new Promise((resolve, reject) => {
       http
-        .get("/video/search/" + encodeURI(this.$route.query.word))
+        .get("/video/search/" + encodeURIComponent(keyword))
         .then(response => {
           resolve(response);
         })
@@ -480,7 +483,6 @@ export default {
         }
         for (let index = 0; index < responses.length; index++) {
           if (responses[index].data.state != "ok") {
-            console.log("fail");
             if (this.$route.query.word.split(" ").join("") != "") {
               this.failCallback();
               return;
@@ -518,9 +520,6 @@ export default {
         }
         this.displayvideo = this.searchedvideo.slice(0, 3);
 
-        console.log(this.searchedyoutuber);
-        console.log(this.searchednews);
-        console.log(this.searchedvideo);
       })
     );
   },
