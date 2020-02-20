@@ -39,7 +39,7 @@
           dark
           class="pl-2 pr-3 mt-2"
         >
-          <v-icon large>mdi-account-circle</v-icon>유튜브 추가하기
+          <v-icon large>mdi-youtube</v-icon>유튜브 추가하기
         </v-btn>
       </template>
       <v-card class="pa-5">
@@ -78,7 +78,7 @@
             <v-row>
               <v-col cols="12">
                 데이터 요청중입니다 ... [ 남은 예상 시간 :
-                {{ Math.round(35 - value / 2.86) }}초 ]
+                {{ Math.round(30 - value / 3.33) }}초 ]
               </v-col>
             </v-row>
             <v-row>
@@ -92,7 +92,7 @@
                   color="teal"
                 >
                   <h2>
-                    <b>{{ Math.round(value)==0?"Loading...":Math.round(value) }}</b>
+                    <b>{{ Math.round(value)==0?"Loading":Math.round(value) }}</b>
                   </h2>
                 </v-progress-circular>
               </v-col>
@@ -164,7 +164,7 @@
           :value="value"
           stream
         />
-        <v-icon large dark @click="snackbar = false">clear</v-icon>
+        <v-icon large dark @click="snackbar = false">mdi-close</v-icon>
       </v-snackbar>
     </div>
   </v-col>
@@ -225,7 +225,7 @@ export default {
           // 너무 인기 없는 유튜버라 지원 안함.
           this.completeTitle = "구독자가 적은 유튜버는 지원하지 않습니다!";
           this.completeSmallTitle =
-            "구독자 10만명이하인 유튜버는 [유튜브추가]를 지원 하지 않습니다.";
+            "구독자 1000명이하인 유튜버는 [유튜브추가]를 지원 하지 않습니다.";
         } else {
           // 서버문제로 지원 안 함.
           this.completeSmallTitle = "서버 에러";
@@ -302,10 +302,10 @@ export default {
         ) {
           if (this.value < 65 && this.value > 0) {
             this.$store.state.value = this.value + 1;
-          } else if (this.value < 83 && this.value > 64) {
-            this.$store.state.value = this.value + 0.8;
-          } else if (this.value < 90 && this.value > 82) {
-            this.$store.state.value = this.value + 0.15;
+          } else if (this.value < 73 && this.value > 64) {
+            this.$store.state.value = this.value + 0.5;
+          } else if (this.value < 83 && this.value > 82) {
+            this.$store.state.value = this.value + 0.3;
           }
           // this.$store.state.value =
           //   this.value + Math.round(Math.random() * 3.5);

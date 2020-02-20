@@ -51,21 +51,25 @@
                       >
                         <b>{{ category.name }}</b>
                       </v-btn>
-                      <v-btn rounded color="#FF9A9A" v-if="loginStatus" @click="manageFav">
+                      <v-btn
+                        rounded
+                        color="red"
+                        v-if="loginStatus"
+                        outlined
+                        style="border-width: medium"
+                        @click="manageFav()"
+                      >
                         <b>즐겨찾기</b>
-                        <v-icon color="red" v-if="flag" @click="deleteFav" x-large>mdi-heart</v-icon>
-                        <v-icon
-                          color="red"
-                          v-if="!flag"
-                          @click="insertFav"
-                          x-large
-                        >mdi-heart-outline</v-icon>
+                        <v-icon color="red" v-if="flag">mdi-heart</v-icon>
+                        <v-icon color="red" v-if="!flag">mdi-heart-outline</v-icon>
                       </v-btn>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
-                      <span class="font-weight-light ml-1 mr-4 mt-1">개설일 : {{ youtuber.publishedDate }}</span>
+                      <span
+                        class="font-weight-light ml-1 mr-4 mt-1"
+                      >개설일 : {{ youtuber.publishedDate }}</span>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -180,7 +184,7 @@
                         </span>
                       </v-tooltip>
                     </v-list-item-title>
-                    <v-divider class ="mb-0"></v-divider>
+                    <v-divider class="mb-0"></v-divider>
                   </v-col>
                 </v-row>
                 <apexchart
@@ -199,7 +203,7 @@
                 <v-row>
                   <v-col class="ma-5 pb-0 mb-0">
                     <v-list-item-title class="headline font-weight-black mb-1smd">
-                      <v-icon color="purple" class="mr-1">mdi-tag-multiple-outline</v-icon>각 능력치
+                      <v-icon color="black" class="mr-1">mdi-tag-multiple</v-icon>각 능력치
                     </v-list-item-title>
                   </v-col>
                 </v-row>
@@ -208,10 +212,10 @@
                     <v-container>
                       <v-tabs v-model="tab" background-color="gray" dark grow fixed>
                         <v-tab color="red">
-                          <v-icon class="mr-2" color="pink">mdi-earth</v-icon>영향력
+                          <v-icon class="mr-2" color="orange">mdi-earth</v-icon>영향력
                         </v-tab>
                         <v-tab>
-                          <v-icon class="mr-2" color="indigo">mdi-newspaper-variant-multiple-outline</v-icon>활동력
+                          <v-icon class="mr-2" color="#00cd00">mdi-newspaper-variant-multiple</v-icon>활동력
                         </v-tab>
                         <v-tab>
                           <v-icon class="mr-2" color="blue">mdi-chart-bar</v-icon>영상 조회수 누적 추이
@@ -220,7 +224,7 @@
                           <v-icon class="mr-2" color="cyan">mdi-chart-line</v-icon>구독자 증감 추이
                         </v-tab>
                         <v-tab>
-                          <v-icon class="mr-2" color="yellow">mdi-heart-multiple-outline</v-icon>호감도
+                          <v-icon class="mr-2" color="red">mdi-heart-multiple</v-icon>호감도
                         </v-tab>
                       </v-tabs>
 
@@ -229,12 +233,18 @@
                         <v-tab-item>
                           <v-container class="ma-5">
                             <v-chip color="white" text-color="black" outlined class="pa-0">
-                              <v-icon class="mr-1" color="pink">mdi-earth</v-icon>영향력:
+                              <v-icon class="mr-1" color="orange">mdi-earth</v-icon>영향력:
                               <b>'언급수 (커뮤니티 + 뉴스), 구독자수, 영상 총 조회수'</b>에
                               의해 결정됩니다.
                             </v-chip>
                             <br />
-                            <v-chip color="white" text-color="black" outlined class="my-2 mr-2 ml-5 pl-5" style="font-size: 1.2em;">
+                            <v-chip
+                              color="white"
+                              text-color="black"
+                              outlined
+                              class="my-2 mr-2 ml-5 pl-5"
+                              style="font-size: 1.2em;"
+                            >
                               <b>{{ youtuber.channelName }}</b>의 영향력은 상위 "
                               <b style="color:red; font-size: 1.1em">
                                 {{
@@ -292,11 +302,20 @@
                         <v-tab-item>
                           <v-container class="ma-5">
                             <v-chip color="white" text-color="black" outlined class="pa-0">
-                              <v-icon class="mr-1" color="indigo">mdi-newspaper-variant-multiple-outline</v-icon>활동력: 
+                              <v-icon
+                                class="mr-1"
+                                color="#00cd00"
+                              >mdi-newspaper-variant-multiple-outline</v-icon>활동력:
                               <b>'최근 영상 10개의 업로드 주기'</b>에 의해 결정됩니다.
                             </v-chip>
                             <br />
-                            <v-chip color="white" text-color="black" outlined class="my-2 mr-2 ml-5 pl-5" style="font-size: 1.2em;">
+                            <v-chip
+                              color="white"
+                              text-color="black"
+                              outlined
+                              class="my-2 mr-2 ml-5 pl-5"
+                              style="font-size: 1.2em;"
+                            >
                               <b>{{ youtuber.channelName }}</b>의 활동력은 상위 "
                               <b style="color:red; font-size: 1.1em">
                                 {{
@@ -340,7 +359,13 @@
                               결정됩니다.
                             </v-chip>
                             <br />
-                            <v-chip color="white" text-color="black" outlined class="my-2 mr-2 ml-5 pl-5" style="font-size: 1.2em;">
+                            <v-chip
+                              color="white"
+                              text-color="black"
+                              outlined
+                              class="my-2 mr-2 ml-5 pl-5"
+                              style="font-size: 1.2em;"
+                            >
                               <b>{{ youtuber.channelName }}</b>의 영상 조회수 누적 추이는
                               상위 "
                               <b style="color:red">
@@ -402,10 +427,18 @@
                               결정됩니다.
                             </v-chip>
                             <br />
-                            <v-chip color="white" text-color="black" outlined class="my-2 mr-2 ml-5 pl-5" style="font-size: 1.2em;">
+                            <v-chip
+                              color="white"
+                              text-color="black"
+                              outlined
+                              class="my-2 mr-2 ml-5 pl-5"
+                              style="font-size: 1.2em;"
+                            >
                               <b>{{ youtuber.channelName }}</b>의 구독자 증감 추이는
                               상위 "
-                              <b style="color:red; font-size: 1.1em">
+                              <b
+                                style="color:red; font-size: 1.1em"
+                              >
                                 {{
                                 100 - mainData[0]["data"][3]
                                 }}%
@@ -459,12 +492,18 @@
                         <v-tab-item>
                           <v-container class="ma-5">
                             <v-chip color="white" text-color="black" outlined class="pa-0">
-                              <v-icon class="mr-1" color="yellow">mdi-heart-multiple-outline</v-icon>호감도 :
+                              <v-icon class="mr-1" color="red">mdi-heart-multiple</v-icon>호감도 :
                               <b>최근 영상 10개의 좋아요, 싫어요 비율</b>에 의해
                               결정됩니다.
                             </v-chip>
                             <br />
-                            <v-chip color="white" text-color="black" outlined class="my-2 mr-2 ml-5 pl-5" style="font-size: 1.2em;">
+                            <v-chip
+                              color="white"
+                              text-color="black"
+                              outlined
+                              class="my-2 mr-2 ml-5 pl-5"
+                              style="font-size: 1.2em;"
+                            >
                               <b>{{ youtuber.channelName }}</b>의 호감도는 상위 "
                               <b style="color:red">
                                 {{
@@ -531,9 +570,11 @@
                                     <v-container>
                                       <v-list-item-content>
                                         <v-list-item-title class="pa-0 mb-2 text-truncate">
-                                          <b>{{
-                                          video.videoName
-                                          }}</b>
+                                          <b>
+                                            {{
+                                            video.videoName
+                                            }}
+                                          </b>
                                         </v-list-item-title>
                                         <v-list-item-subtitle align="right">
                                           게시일: {{
@@ -544,11 +585,10 @@
                                       <v-divider></v-divider>
 
                                       <v-row>
-                                        <v-col
-                                          class="pa-1"
-                                          cols="3"
-                                          style="text-align : center"
-                                        ><v-icon small color="blue" class="pb-1 pr-1">thumb_up</v-icon>{{ video.good }}</v-col>
+                                        <v-col class="pa-1" cols="3" style="text-align : center">
+                                          <v-icon small color="blue" class="pb-1 pr-1">thumb_up</v-icon>
+                                          {{ video.good }}
+                                        </v-col>
                                         <v-col class="pa-0">
                                           <v-progress-linear
                                             background-color="red"
@@ -565,11 +605,10 @@
                                             </template>
                                           </v-progress-linear>
                                         </v-col>
-                                        <v-col
-                                          class="pa-1"
-                                          cols="3"
-                                          style="text-align : center"
-                                        ><v-icon small color="red" class="pb-1 pr-1">thumb_down</v-icon>{{ video.bad }}</v-col>
+                                        <v-col class="pa-1" cols="3" style="text-align : center">
+                                          <v-icon small color="red" class="pb-1 pr-1">thumb_down</v-icon>
+                                          {{ video.bad }}
+                                        </v-col>
                                       </v-row>
                                     </v-container>
                                   </v-card>
@@ -671,17 +710,17 @@
                 </v-col>
               </v-row>
               <v-row style="padding:30px">
-              <transition appear name="fade">
-                <v-btn
-                  fab
-                  :color="setGradeColor(youtuber.grade)"
-                  style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 40%;"
-                >
-                  <p
-                    style="font-weight-black text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
-                  >{{ setGrade(youtuber.grade) }}</p>
-                </v-btn>
-              </transition>
+                <transition appear name="fade">
+                  <v-btn
+                    fab
+                    :color="setGradeColor(youtuber.grade)"
+                    style="width: 100%;height: 0;padding-bottom: 50%; padding-top: 40%;"
+                  >
+                    <p
+                      style="font-weight-black text-align: center;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;font-size: 150px;"
+                    >{{ setGrade(youtuber.grade) }}</p>
+                  </v-btn>
+                </transition>
               </v-row>
             </v-card>
 
@@ -690,7 +729,15 @@
               <v-row>
                 <v-col class="ma-2 ma-3 mx-0 mx-0">
                   <v-list-item-title class="headline font-weight-black mb-1">
-                    <v-icon color="pink lighten-3" class="mr-1">mdi-cloud-print-outline</v-icon>태그 클라우드
+                    <v-icon color="pink lighten-3" class="mr-1">mdi-cloud-print</v-icon>태그 클라우드
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <v-icon v-on="on" color="pink">mdi-information-outline</v-icon>
+                      </template>
+                      <span>
+                        단어를 클릭하면 더 다양한 정보를 얻을 수 있습니다.
+                      </span>
+                    </v-tooltip>
                   </v-list-item-title>
                   <v-divider></v-divider>
                 </v-col>
@@ -726,7 +773,7 @@
               <v-row>
                 <v-col class="ma-5 mx-0 mb-0 pb-0">
                   <v-list-item-title class="headline font-weight-black mb-1">
-                    <v-icon color="green" class="mr-1">mdi-newspaper-variant-outline</v-icon>최신뉴스
+                    <v-icon color="#00C853" class="mr-1">mdi-newspaper-variant-outline</v-icon>최신뉴스
                   </v-list-item-title>
                   <v-divider></v-divider>
                 </v-col>
@@ -815,22 +862,23 @@ export default {
     }
   },
   methods: {
+    manageFav() {
+      if (this.flag) {
+        this.deleteFav();
+      } else this.insertFav();
+    },
     wordClickHandler(name, value, vm) {
       console.log("wordClickHandler", name, value, vm);
       this.$router.push({ path: "searchPage", query: { word: name } });
     },
-    manageFav() {
-      this.flag ? (this.flag = false) : (this.flag = true);
-    },
     insertFav() {
       console.log("insert");
-      console.log(this.$session.get("token"));
-      console.log(this.youtuber.yno);
       let par = this.youtuber.yno + "&" + this.$session.get("token");
       http
         .get("/favorite/insert/" + par)
-        .then(function(response) {
+        .then(response => {
           console.log(response);
+          this.flag = true;
         })
         .catch(function(error) {
           console.log(error);
@@ -838,14 +886,13 @@ export default {
     },
     deleteFav() {
       console.log("delete");
-      console.log(this.$session.get("token"));
-      console.log(this.youtuber.yno);
       let par = this.youtuber.yno + "&" + this.$session.get("token");
       let deleteUrl = "/favorite/delete/" + par;
       http
         .delete(deleteUrl)
-        .then(function(response) {
+        .then(response => {
           console.log(response);
+          this.flag = false;
         })
         .catch(function(error) {
           console.log(error);
@@ -1193,7 +1240,7 @@ export default {
             show: false
           }
         },
-        colors: ["#3f51b5"],
+        colors: ["#00cd00"],
         dataLabels: {
           enabled: true
         },
@@ -1229,7 +1276,7 @@ export default {
         dataLabels: {
           enabled: true
         },
-        colors: ["#e91e63"],
+        colors: ["#FF9800"],
         stroke: {
           width: 3
           // curve: "smooth"
@@ -1265,7 +1312,7 @@ export default {
           width: 3
           // curve: "smooth"
         },
-        colors: ["#e91e63"],
+        colors: ["#FF9800"],
         title: {
           align: "center"
         },

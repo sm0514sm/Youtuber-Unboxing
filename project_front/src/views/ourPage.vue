@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-card-title class="justify-center py-6" style="background-color:#ff68b4 ; height : 300px">
+      <v-card-title class="justify-center py-6" style="background-color:#6688ff ; height : 300px">
         <v-icon size="70" class="mr-2" color="white">mdi-account-group</v-icon>
         <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white">ABOUT US</span>
       </v-card-title>
@@ -31,14 +31,14 @@
                       cardinfo.name
                       }}
                     </span>
-                    <v-btn rounded color="blue" justify="center" class="ml-2" dark>
+                    <v-btn rounded color="#6688ff" justify="center" class="ml-2" dark>
                       <b>{{ cardinfo.position }}</b>
                     </v-btn>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col class="ml-1 pt-0 pl-5">
-                    <span class="font-weight-light mr-4">탄신일 : {{ cardinfo.birth }}</span>
+                    <span class="font-weight-light mr-4">{{ cardinfo.birth }}</span>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -130,7 +130,9 @@ export default {
   components: {},
   beforecreated() {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.$vuetify.goTo(0);
+  },
   methods: {
     blogLink(link) {
       window.open(link);
@@ -177,7 +179,7 @@ export default {
           // gitlab: "taemin",
           insta: "merona_mango",
           stacks: ["vue", "vuetify"],
-          feat: ["VUE MASTER", "DATABASE"]
+          feat: ["VUE MASTER"]
         },
         {
           name: "박진홍",
@@ -213,7 +215,7 @@ export default {
           // gitlab: "airaider",
           insta: "hongki772",
           stacks: ["spring", "vue"],
-          feat: ["TEAM LEADER", "LOGIN"]
+          feat: ["TEAM LEADER", "LOGIN", "VUE"]
         }
       ]
     };
