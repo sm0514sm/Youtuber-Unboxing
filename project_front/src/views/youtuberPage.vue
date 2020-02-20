@@ -88,7 +88,7 @@
                     <v-col>
                       <span class="font-weight-bold">총 영상 수</span>
                       <br />
-                      {{ youtuber.totalVideoCount }}
+                      {{ comma(youtuber.totalVideoCount) }}
                     </v-col>
                     <v-divider vertical class="mx-3"></v-divider>
                     <v-col>
