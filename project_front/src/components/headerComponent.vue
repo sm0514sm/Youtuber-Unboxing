@@ -185,6 +185,10 @@ export default {
   },
   methods: {
     gotoPage(address) {
+      if(this.$route.path == address){
+        window.location.reload()
+        return ;
+      }
       if(address == '/categoryPage'){
         var tmp = localStorage.getItem("compareYoutuber")
         if(tmp == null)
