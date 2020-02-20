@@ -47,7 +47,7 @@ NECESSARY_WORD = [
 
 MONTH = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-UPDATE_CIRCLE = 3600
+UPDATE_CIRCLE = 1800
 
 # LAST_ALL_UPDATE = Youtuber.objects.all().order_by('-yno')[0].updateddate
 LAST_ALL_UPDATE = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=2)
@@ -71,8 +71,8 @@ class updateThread:
             # 하루가 지나면 업데이트 시행
             print("-------------------------- UPDATE IS STARTED!")
             START = datetime.datetime.now() # 시작 시간
-            youtubers = Youtuber.objects.all().order_by('yno')
-            # youtubers = Youtuber.objects.all().filter(yno=727)
+            # youtubers = Youtuber.objects.all().order_by('yno')
+            youtubers = Youtuber.objects.all().filter(yno=1036)
             print('Total Youtuber is {}'.format(len(youtubers)))
             left_google_api_keys = len(GOOGLE_KEY_LIST)
             for  youtuber in youtubers:
@@ -480,6 +480,7 @@ class updateThread:
                 ############## 태그 클라우드 추가하기
                 tag_videos = Video.objects.filter(yno=youtuber)
                 tagCloud = {}
+                all_tags = []
                 for video in tag_videos:
                     tags = (video.tags).split(',')
                     for tag in tags:
@@ -487,16 +488,30 @@ class updateThread:
                             tagCloud[tag] += 1
                         else:
                             tagCloud[tag] = 1
+                            all_tags.append(tag)
                             
                 if tagCloud.get(''):
                     del tagCloud['']
+                    all_tags.remove('')
                 
-                delete_words = [] # 1개 이하를 지운다.
+                Minimum = 3  # 태그의 출현 횟수가 3개 이하면 지운다.
+                delete_words = []
                 for word, count in tagCloud.items(): 
-                    if count <= 1:
+                    if count <= Minimum:
                         delete_words.append(word)
                 for delete_word in delete_words:
                     del tagCloud[delete_word]
+                    all_tags.remove(delete_word)
+                tag_byte_length = len((json.dumps(tagCloud, ensure_ascii=False) if tagCloud else '').encode())
+                while tag_byte_length > 7000:
+                    min_word = all_tags[0]
+                    for key, value in tagCloud.items():
+                        if tagCloud[min_word] > value:
+                            min_word = key
+                    del tagCloud[min_word]
+                    all_tags.remove(min_word)
+                    tag_byte_length = len((json.dumps(tagCloud, ensure_ascii=False) if tagCloud else '').encode())
+                
                 result = json.dumps(tagCloud, ensure_ascii=False) if tagCloud else ''
                 youtuber.tagcloud = result
                 youtuber.save()
@@ -512,7 +527,7 @@ class updateThread:
             LAST_ALL_UPDATE = Youtuber.objects.all().order_by('-yno')[0].updateddate
             threading.Timer(UPDATE_CIRCLE, self.threadOpen).start()
         else:
-            print('update not yet')
+            print('update not yet {}'.format(datetime.datetime.now(datetime.timezone.utc)))
             threading.Timer(UPDATE_CIRCLE, self.threadOpen).start()
 
 
@@ -520,3 +535,8 @@ def update_youtuber(request):
     updateStart = updateThread()
     threading.Timer(1, updateStart.threadOpen).start()
     return HttpResponse()
+
+
+
+di = {'a': 1, 'b': 2, 'c':3}
+print(di.keys())
