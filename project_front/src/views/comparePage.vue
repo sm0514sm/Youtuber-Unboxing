@@ -326,7 +326,7 @@
                   pill
                   text-color="black"
                 >
-                  <b>{{youtuber1.channelName | truncate(10,"..")}}</b>
+                  <b>{{youtuber1.channelName | truncate(8,"..")}}</b>
                 </v-chip>
               </v-col>
               <v-col class="py-0">
@@ -343,7 +343,7 @@
                   pill
                   text-color="black"
                 >
-                  <b>{{youtuber2.channelName | truncate(10,"..")}}</b>
+                  <b>{{youtuber2.channelName | truncate(8,"..")}}</b>
                 </v-chip>
               </v-col>
             </v-row>
