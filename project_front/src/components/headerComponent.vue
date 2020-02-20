@@ -11,26 +11,30 @@
         style="cursor:pointer"
       />
     </v-col>
-    <v-col cols="6">
+    <v-col cols="6" class="ml-3">
       <v-row>
-        <v-col cols="2" class="mr-5">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/categoryPage')">
-            <span style="text-shadow: 0 0 2px #000;">Category</span>
-          </v-btn>
-        </v-col>
-        <v-col cols="2" class="ml-3">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/rankPage')">
-            <span style="text-shadow: 0 0 2px #000;">RANK</span>
-          </v-btn>
-        </v-col>
-        <v-col cols="2" class="mr-0 ml-0">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/ourPage')">
-            <span style="text-shadow: 0 0 2px #000;">ABOUT US</span>
-          </v-btn>
-        </v-col>
-        <v-col cols="2" class="ml-5 my-0 py-0">
-          <input-component v-if="loginStatus != false" position="header"></input-component>
-        </v-col>
+        <v-btn
+          dark
+          text
+          class="headerMenu"
+          style="font-size: 20px;"
+          @click="gotoPage('/howToPage')"
+        >
+          <span style="text-shadow: 0 0 2px #000;">MANUAL</span>
+        </v-btn>
+        <v-btn
+          dark
+          text
+          class="headerMenu"
+          style="font-size: 20px;"
+          @click="gotoPage('/categoryPage')"
+        >
+          <span style="text-shadow: 0 0 2px #000;">CATEGORY</span>
+        </v-btn>
+        <v-btn dark text class="headerMenu" style="font-size: 20px;" @click="gotoPage('/rankPage')">
+          <span style="text-shadow: 0 0 2px #000;">RANK</span>
+        </v-btn>
+        <input-component v-if="$session.get('token') != undefined" position="header"></input-component>
       </v-row>
     </v-col>
 
@@ -53,7 +57,7 @@
             flat
             v-if="$route.path != '/'"
             align="center"
-            class="justify-center"
+            class="justify-center pr-2"
             dense
           >
             <template v-slot:no-data>
@@ -68,10 +72,15 @@
                 v-if="item.yno != -1"
                 color="red"
                 class="headline font-weight-light white--text"
+                @click="gotoYoutuberPage(item.yno)"
               >
                 <img :src="item.thumbnails" alt="John" />
               </v-list-item-avatar>
-              <v-list-item-content v-if="item.yno != -1" style="width: 100px">
+              <v-list-item-content
+                v-if="item.yno != -1"
+                style="width: 100px"
+                @click="gotoYoutuberPage(item.yno)"
+              >
                 <v-list-item-title v-text="item.channelName"></v-list-item-title>
                 <v-list-item-subtitle>구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle>
               </v-list-item-content>
@@ -176,6 +185,15 @@ export default {
   },
   methods: {
     gotoPage(address) {
+      if(this.$route.path == address){
+        window.location.reload()
+        return ;
+      }
+      if(address == '/categoryPage'){
+        var tmp = localStorage.getItem("compareYoutuber")
+        if(tmp == null)
+          localStorage.setItem("currentCategory",0);
+      }
       this.$router.push(address);
     },
     login() {
@@ -275,6 +293,9 @@ export default {
     // },
     tc(num) {
       return tc(num);
+    },
+    gotoYoutuberPage(yno) {
+      this.$router.push({ path: "youtuberPage", query: { yno: yno } });
     }
   },
   data() {
@@ -338,5 +359,10 @@ export default {
 .btnFont {
   font-size: 1em;
   font-family: "Noto Sans KR", sans-serif;
+}
+.headerMenu {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 20px;
 }
 </style>

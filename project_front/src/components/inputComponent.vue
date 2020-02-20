@@ -39,15 +39,15 @@
           dark
           class="pl-2 pr-3 mt-2"
         >
-          <v-icon large>mdi-account-circle</v-icon>유튜브 추가하기
+          <v-icon large>mdi-youtube</v-icon>유튜브 추가하기
         </v-btn>
       </template>
       <v-card class="pa-5">
         <v-card-title align="center" class="pa-0">
           <v-row>
             <v-col class="mx-1">
-              <p class="display-2 font-weight-black">
-                <v-icon color="red" size="40">mdi-youtube</v-icon>유튜버
+              <p class="display-1 font-weight-black">
+                <v-icon color="red" size="70" class="pb-1 pr-1">mdi-youtube</v-icon>유튜버
                 추가하기
               </p>
             </v-col>
@@ -62,7 +62,7 @@
                 원하는 유튜버의 채널 주소를 복사해주세요!
                 <br />
                 <a target="_blank" href="https://www.youtube.com/">
-                  <v-icon>mdi-youtube</v-icon>유튜브 페이지 이동
+                  <v-icon color="red" style="padding-bottom : 2px">mdi-youtube</v-icon>유튜브 페이지 이동
                 </a>
               </v-col>
               <v-col cols="12">
@@ -164,7 +164,7 @@
           :value="value"
           stream
         />
-        <v-icon large dark @click="snackbar = false">clear</v-icon>
+        <v-icon large dark @click="snackbar = false">mdi-close</v-icon>
       </v-snackbar>
     </div>
   </v-col>
@@ -225,7 +225,7 @@ export default {
           // 너무 인기 없는 유튜버라 지원 안함.
           this.completeTitle = "구독자가 적은 유튜버는 지원하지 않습니다!";
           this.completeSmallTitle =
-            "구독자 10만명이하인 유튜버는 [유튜브추가]를 지원 하지 않습니다.";
+            "구독자 1000명이하인 유튜버는 [유튜브추가]를 지원 하지 않습니다.";
         } else {
           // 서버문제로 지원 안 함.
           this.completeSmallTitle = "서버 에러";

@@ -5,11 +5,10 @@ import searchPage from "./views/searchPage.vue";
 import comparePage from "./views/comparePage.vue";
 import testPage from "./views/test.vue";
 import memberPage from "./views/memberPage.vue";
-import rankPage from "./views/rankPage.vue"
-import ourPage from "./views/ourPage.vue"
-import notFound from "./views/notFound.vue"
-
-
+import rankPage from "./views/rankPage.vue";
+import ourPage from "./views/ourPage.vue";
+import notFound from "./views/notFound.vue";
+import howTo from "./views/howTo.vue";
 
 export default [{
         path: "/",
@@ -57,11 +56,13 @@ export default [{
         component: ourPage
     },
     {
+        path: "/howToPage",
+        name: "howToPage",
+        component: howTo
+    },
+    {
         path: "*",
         name: "notFound",
         component: notFound
-    },
-
-
-
+    }
 ];

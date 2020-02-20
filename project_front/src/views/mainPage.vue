@@ -2,7 +2,7 @@
   <!-- vuetify를 참고하여 작성하기
                       https://vuetifyjs.com/ko/components/api-explorer
   -->
-  <div v-scroll="onScroll">
+  <div>
     <video
       :src="require('@/assets/bg' + bgNum + '.mp4')"
       class="bgvideo"
@@ -45,10 +45,15 @@
             v-if="item.yno != -1"
             color="red"
             class="headline font-weight-light white--text"
+            @click="gotoYoutuberPage(item.yno)"
           >
             <img :src="item.thumbnails" alt="John" />
           </v-list-item-avatar>
-          <v-list-item-content v-if="item.yno != -1" style="width: 100px">
+          <v-list-item-content
+            v-if="item.yno != -1"
+            style="width: 100px"
+            @click="gotoYoutuberPage(item.yno)"
+          >
             <v-list-item-title v-text="item.channelName"></v-list-item-title>
             <v-list-item-subtitle>구독자 : {{ tc(item.subscriber) }}</v-list-item-subtitle>
           </v-list-item-content>
@@ -57,11 +62,8 @@
       <br />
     </div>
     <div class="allCategory">
-      <div class="categorySet" @click="onCategoryButtonClicked(0)" style="cursor:pointer" >
-        <v-icon
-          class="material-icons"
-          color="red"
-        >mdi-widgets-outline</v-icon>
+      <div class="categorySet" @click="onCategoryButtonClicked(0)" style="cursor:pointer">
+        <v-icon class="material-icons" color="red">mdi-widgets-outline</v-icon>
         <div class="categoryName">전체</div>
       </div>
 
@@ -69,147 +71,23 @@
         class="categorySet"
         v-for="(item,index) in categories"
         :key="index+1"
-        @click="onCategoryButtonClicked(index+1)" 
+        @click="onCategoryButtonClicked(index+1)"
         style="cursor:pointer"
       >
-        <v-icon
-          class="material-icons"
-          :color="item.iconColor"
-        >{{item.icon}}</v-icon>
+        <v-icon class="material-icons" :color="item.iconColor">{{item.icon}}</v-icon>
         <div class="categoryName">{{item.iconName}}</div>
       </div>
     </div>
-    <br />
-    <br />
-    <br />
-
-    <div style="display: flex; width: 100%;">
-      <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 12%; font-weight: bold;">완벽한 분석 기능</h1>
-        <h3>
-          구독자 수, 조회수 같은 기본적인 정보부터
-          <br />커뮤니티, 뉴스 분석까지
-          <br />한 화면에서 모두 만나보세요.
-        </h3>
-      </div>
-
-      <div style="display: inline-block; margin: 0 auto;" width="45%;">
-        <video
-          :src="require('@/assets/detail.mp4')"
-          width="100%"
-          autoplay
-          loop="true"
-          muted
-          style="width: 500px;"
-          id="detail"
-        ></video>
-      </div>
-    </div>
-
-    <br />
-    <br />
-    <hr />
-    <br />
-    <br />
-
-    <div style="display: flex; width: 100%;">
-      <div style="display: inline-block; margin: 0 auto;" width="45%;">
-        <video
-          :src="require('@/assets/search.mp4')"
-          width="100%"
-          autoplay
-          loop="true"
-          muted
-          style="width: 500px;"
-          id="search"
-        ></video>
-      </div>
-      <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 5%; font-weight: bold;">간편한 검색 기능</h1>
-        <h3>
-          원하는 유튜버를 검색해 볼 수 있습니다.
-          <br />만약 내가 찾는 유튜버가 없다면?
-          <br />자유롭게 추가하세요.
-        </h3>
-        <input-component v-if="$session.get('token') != undefined" position="main"></input-component>
-      </div>
-    </div>
-
-    <br />
-    <br />
-    <hr />
-    <br />
-    <br />
-
-    <div style="display: flex; width: 100%;">
-      <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 13%; font-weight: bold;">완벽한 비교하기 기능</h1>
-        <h3>
-          번거롭게 하나하나 비교할 필요 없이
-          <br />한 화면에서 손쉽게 두 유튜버를
-          <br />비교해 보세요.
-          <!-- 마음에 드는 유튜버가 있다면
-          <br />클릭 한 번으로 추가하고
-          <br />언제든지 모아보세요-->
-        </h3>
-      </div>
-
-      <div style="display: inline-block; margin: 0 auto;" width="45%;">
-        <video
-          :src="require('@/assets/compare.mp4')"
-          width="100%"
-          autoplay
-          loop="true"
-          muted
-          style="width: 500px;"
-          id="compare"
-        ></video>
-      </div>
-    </div>
-
-    <br />
-    <br />
-    <hr />
-    <br />
-    <br />
-
-    <div style="display: flex; width: 100%;">
-      <div style="display: inline-block; margin: 0 auto;" width="45%;">
-        <video
-          :src="require('@/assets/user.mp4')"
-          width="100%"
-          autoplay
-          loop="true"
-          muted
-          style="width: 500px;"
-          id="user"
-        ></video>
-      </div>
-      <div style="display: inline-block; margin: 0 auto;" width="45%">
-        <h1 style="margin-top: 12%; font-weight: bold;">강력한 유튜버 추천 기능</h1>
-        <h3>
-          나와 관심항목이 같은 사람들이
-          <br />즐겨찾는 유튜버를 추천해 드립니다
-          <br />바로 확인해 보세요.
-        </h3>
-      </div>
-    </div>
-    <br />
   </div>
 </template>
 
 <script>
-// import banner from "../components/banner";
-import inputComponent from "../components/inputComponent";
 import http from "../vuex/http-common";
 import { mapGetters } from "vuex";
 import tc from "thousands-counter";
 
 export default {
-  components: {
-    inputComponent
-    // banner
-  },
+  components: {},
   name: "mainPage",
   methods: {
     search: function() {
@@ -249,41 +127,11 @@ export default {
         this.typo = lifeCopy.slice(0, idx);
       }, 300);
     },
-    onScroll() {
-      var scroll = window.pageYOffset;
-      var value = "#cdcdcd";
-      // console.log(scroll);
-      if (scroll < 500) {
-        document.getElementById("detail").pause();
-        document.getElementById("search").pause();
-        document.getElementById("compare").pause();
-        document.getElementById("user").pause();
-      } else if (scroll < 900) {
-        document.getElementById("detail").play();
-        document.getElementById("search").pause();
-        document.getElementById("compare").pause();
-        document.getElementById("user").pause();
-      } else if (scroll < 1300) {
-        document.getElementById("detail").pause();
-        document.getElementById("search").play();
-        document.getElementById("compare").pause();
-        document.getElementById("user").pause();
-      } else if (scroll < 1700) {
-        document.getElementById("detail").pause();
-        document.getElementById("search").pause();
-        document.getElementById("compare").play();
-        document.getElementById("user").pause();
-      } else {
-        document.getElementById("detail").pause();
-        document.getElementById("search").pause();
-        document.getElementById("compare").pause();
-        document.getElementById("user").play();
-      }
-
-      this.headerColor = value;
-    },
     tc(num) {
       return tc(num);
+    },
+    gotoYoutuberPage(yno) {
+      this.$router.push({ path: "youtuberPage", query: { yno: yno } });
     }
   },
   mounted() {
@@ -309,7 +157,7 @@ export default {
   created() {
     this.startTypo();
     this.startCursor();
-    this.bgNum = Math.floor(Math.random() * 13 + 1);
+    this.bgNum = Math.floor(Math.random() * 6 + 1);
   },
   watch: {
     inputKeyword() {
@@ -356,7 +204,7 @@ div {
 }
 .allCategory {
   position: absolute;
-  top: 20%;
+  top: 60%;
   left: 50%;
   transform: translateX(-50%);
   width: 780px;
@@ -388,7 +236,7 @@ div {
 }
 .websiteName {
   position: absolute;
-  top: 10.5%;
+  top: 32%;
   left: 32%;
   font-size: 56px;
   font-weight: 400;
@@ -397,7 +245,7 @@ div {
 }
 .searchForm {
   position: absolute;
-  top: 14%;
+  top: 42%;
   left: 50%;
   transform: translateX(-50%);
   width: 400px;
@@ -407,10 +255,5 @@ div {
 }
 .v-label {
   padding-left: 50px;
-}
-hr {
-  border: 0.6px solid lightgray;
-  margin-left: 30px;
-  margin-right: 30px;
 }
 </style>

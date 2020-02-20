@@ -325,7 +325,7 @@
         <v-hover v-slot:default="{ hover }" open-delay="100">
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-divider></v-divider>
-            <v-list-item-title class="headline font-weight-black mb-1">상호 수치 비교</v-list-item-title>
+            <v-list-item-title class="headline font-weight-black mb-1">분야별 수치 비교</v-list-item-title>
             <v-divider></v-divider>
             <v-row>
               <v-col class="py-0">
@@ -367,21 +367,39 @@
             <v-row>
               <v-col>
                 <v-row v-if="status.y1_sub">
-                  <v-chip class="ma-2" color="#26c3fb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#26c3fb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26c3fb">mdi-account-multiple</v-icon>
                     <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26c3fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_view">
-                  <v-chip class="ma-2" color="#26b1fb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#26b1fb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26b1fb">mdi-animation-play</v-icon>
                     <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26b1fb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_video">
-                  <v-chip class="ma-2" color="#269ffb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#269ffb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#269ffb">mdi-youtube-subscription</v-icon>
                     <b>영상수 {{ status.video_stat }}%</b>
                     <v-icon color="#269ffb">mdi-arrow-up-thick</v-icon>
@@ -389,21 +407,39 @@
                 </v-row>
 
                 <v-row v-if="status.y1_charm">
-                  <v-chip class="ma-2" color="#268dfb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#268dfb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#268dfb">mdi-heart-multiple</v-icon>
                     <b>호감도 {{ status.charm_stat }}%</b>
                     <v-icon color="#268dfb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_influence">
-                  <v-chip class="ma-2" color="#267cfb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#267cfb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#267cfb">mdi-earth</v-icon>
                     <b>영향력 {{ status.influence_stat }}%</b>
                     <v-icon color="#267cfb">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y1_activity">
-                  <v-chip class="ma-2" color="#266afb" outlined text-color="black">
+                  <v-chip
+                    class="ma-2"
+                    color="#266afb"
+                    outlined
+                    text-color="black"
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#266afb">mdi-newspaper-variant-multiple</v-icon>
                     <b>활동력 {{ status.activity_stat }}%</b>
                     <v-icon color="#266afb">mdi-arrow-up-thick</v-icon>
@@ -411,25 +447,43 @@
                 </v-row>
               </v-col>
 
-              <v-divider vertical></v-divider>
+              <v-divider vertical class="mr-5"></v-divider>
 
               <v-col>
                 <v-row v-if="status.y2_sub">
-                  <v-chip class="ma-2" color="#26e785" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e785"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e785">mdi-account-multiple</v-icon>
                     <b>조회수 증감률 {{ status.sub_stat }}%</b>
                     <v-icon color="#26e785">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_view">
-                  <v-chip class="ma-2" color="#26e795" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e795"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e795">mdi-animation-play</v-icon>
                     <b>구독자 증감률 {{ status.view_stat }}%</b>
                     <v-icon color="#26e795">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_video">
-                  <v-chip class="ma-2" color="#26e7a5" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e7a5"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e7a5">mdi-youtube-subscription</v-icon>
                     <b>영상수 {{ status.video_stat }}%</b>
                     <v-icon color="#26e7a5">mdi-arrow-up-thick</v-icon>
@@ -437,21 +491,39 @@
                 </v-row>
 
                 <v-row v-if="status.y2_charm">
-                  <v-chip class="ma-2" color="#26e7b5" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e7b5"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e7b5">mdi-heart-multiple</v-icon>
                     <b>호감도 {{ status.charm_stat }}%</b>
                     <v-icon color="#26e7b5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_influence">
-                  <v-chip class="ma-2" color="#26e7c5" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e7c5"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e7c5">mdi-earth</v-icon>
                     <b>영향력 {{ status.influence_stat }}%</b>
                     <v-icon color="#26e7c5">mdi-arrow-up-thick</v-icon>
                   </v-chip>
                 </v-row>
                 <v-row v-if="status.y2_activity">
-                  <v-chip class="ma-2" color="#26e7d5" text-color="black" outlined>
+                  <v-chip
+                    class="ma-2"
+                    color="#26e7d5"
+                    text-color="black"
+                    outlined
+                    style="border-width: medium"
+                  >
                     <v-icon left color="#26e7d5">mdi-newspaper-variant-multiple</v-icon>
                     <b>활동력 {{ status.activity_stat }}%</b>
                     <v-icon color="#26e7d5">mdi-arrow-up-thick</v-icon>
@@ -468,18 +540,32 @@
                   <div class="d-flex flex-no-wrap justify-space-between">
                     <div>
                       <v-card-title class="headline">
-                        <v-icon x-large color="yellow">mdi-crown</v-icon>
-                        <v-chip
-                          class="ma-2"
-                          color="yellow"
-                          outlined
-                          pill
-                          text-color="black"
-                        >{{ status.winner }}</v-chip>채널이 종합 수치
-                        <v-chip class="ma-2" color="indigo darken-3" outlined>
-                          <v-icon left>mdi-fire</v-icon>
-                          {{ status.stat }}%
-                        </v-chip>우위에 있습니다.
+                        <div>
+                          <v-chip
+                            class="ma-2 pa-1 pr-2"
+                            color="yellow"
+                            outlined
+                            pill
+                            text-color="black"
+                            style="border-width: medium"
+                          >
+                            <v-icon color="yellow">mdi-crown</v-icon>
+                            <b>{{ status.winner }}</b>
+                          </v-chip>채널이
+                        </div>
+                        <br />
+                        <div>
+                          총
+                          <v-chip
+                            class="ma-2"
+                            color="indigo darken-3"
+                            outlined
+                            style="border-width: medium"
+                          >
+                            <v-icon left>mdi-fire</v-icon>
+                            <b>{{ status.stat }}%</b>
+                          </v-chip>우위에 있습니다.
+                        </div>
                       </v-card-title>
                     </div>
 

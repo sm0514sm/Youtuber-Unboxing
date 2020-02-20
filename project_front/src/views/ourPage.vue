@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-card-title class="justify-center py-6" style="background-color:#ff68b4 ; height : 300px">
+      <v-card-title class="justify-center py-6" style="background-color:#6688ff ; height : 300px">
         <v-icon size="70" class="mr-2" color="white">mdi-account-group</v-icon>
         <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white">ABOUT US</span>
       </v-card-title>
@@ -31,14 +31,14 @@
                       cardinfo.name
                       }}
                     </span>
-                    <v-btn rounded color="blue" justify="center" class="ml-2" dark>
+                    <v-btn rounded color="#6688ff" justify="center" class="ml-2" dark>
                       <b>{{ cardinfo.position }}</b>
                     </v-btn>
                   </v-col>
                 </v-row>
                 <v-row>
                   <v-col class="ml-1 pt-0 pl-5">
-                    <span class="font-weight-light mr-4">탄신일 : {{ cardinfo.birth }}</span>
+                    <span class="font-weight-light mr-4">{{ cardinfo.birth }}</span>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -131,7 +131,7 @@ export default {
   beforecreated() {},
   created() {},
   mounted() {
-    this.$vuetify.goTo(0)
+    this.$vuetify.goTo(0);
   },
   methods: {
     blogLink(link) {
@@ -162,7 +162,7 @@ export default {
           name: "김주희",
           position: "BACK / DESIGN",
           image: "KJH",
-          birth: "1994-02-09",
+          birth: "yylcd99999@gmail.com",
           git: "juheekimm",
           // gitlab: "juheekim",
           // insta: "sally_0607",
@@ -174,18 +174,18 @@ export default {
           name: "김태민",
           position: "Front End",
           image: "KTM",
-          birth: "1996-11-15",
+          birth: "taeminkim23@gmail.com",
           git: "taemtaemKim",
           // gitlab: "taemin",
           insta: "merona_mango",
           stacks: ["vue", "vuetify"],
-          feat: ["VUE MASTER", "DATABASE"]
+          feat: ["VUE MASTER"]
         },
         {
           name: "박진홍",
           position: "Data Collect",
           image: "PJH",
-          birth: "1993-04-21",
+          birth: "mpcato37@gmail.com",
           git: "porciuscato",
           // gitlab: "mpcato",
           insta: "__jin__hong__",
@@ -197,7 +197,7 @@ export default {
           name: "이상민",
           position: "Data / Server",
           image: "LSM",
-          birth: "1995-05-14",
+          birth: "sm0514sm@gmail.com",
           git: "sm0514sm",
           // gitlab: "lifaon",
           insta: "lifaon_sm",
@@ -210,12 +210,12 @@ export default {
           name: "홍기환",
           position: "Back / Front",
           image: "HKH",
-          birth: "1994-11-02",
+          birth: "airaider77@gmail.com",
           git: "airaider",
           // gitlab: "airaider",
           insta: "hongki772",
           stacks: ["spring", "vue"],
-          feat: ["TEAM LEADER", "LOGIN"]
+          feat: ["TEAM LEADER", "LOGIN", "VUE"]
         }
       ]
     };
