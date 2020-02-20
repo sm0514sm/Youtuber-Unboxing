@@ -374,6 +374,9 @@
                                 }}%
                               </b>"입니다.
                             </v-chip>
+                            <v-chip class="pa-0 ml-9" color="white" text-color="grey" outlined>
+                              <v-icon>mdi-map-marker-alert</v-icon>유튜버가 영상 삭제시 누적 조회수가 감소할 수 있습니다
+                            </v-chip>
 
                             <v-card outlined flat class="mt-5 mr-10 my-3 pa-5">
                               <v-row class="pt-0 pl-3">
@@ -729,14 +732,12 @@
               <v-row>
                 <v-col class="ma-2 ma-3 mx-0 mx-0">
                   <v-list-item-title class="headline font-weight-black mb-1">
-                    <v-icon color="pink lighten-3" class="mr-1">mdi-cloud-print</v-icon>태그 클라우드
+                    <v-icon color="pink lighten-3" class="mr-1">mdi-cloud-print-outline</v-icon>태그 클라우드
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on }">
                         <v-icon v-on="on" color="pink">mdi-information-outline</v-icon>
                       </template>
-                      <span>
-                        단어를 클릭하면 더 다양한 정보를 얻을 수 있습니다.
-                      </span>
+                      <span>단어를 클릭하면 더 다양한 정보를 얻을 수 있습니다.</span>
                     </v-tooltip>
                   </v-list-item-title>
                   <v-divider></v-divider>

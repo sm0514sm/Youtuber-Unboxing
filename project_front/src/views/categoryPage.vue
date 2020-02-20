@@ -246,7 +246,7 @@ export default {
   },
   mounted() {
     this.$vuetify.goTo(0);
-    console.log("*taetae********" + localStorage.getItem("currentCategory"));
+    console.log(localStorage.getItem("currentCategory"));
     if (localStorage.getItem("currentCategory") == 0) {
       this.$store.dispatch(Constant.GET_ALLYOUTUBER, {
         failCallback: this.failCallback
