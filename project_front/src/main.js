@@ -54,7 +54,7 @@ new Vue({
 }).$mount("#app");
 
 var filter = function(text, length, clamp) {
-  clamp = clamp || "...";
+  clamp = clamp || "..";
   var node = document.createElement("div");
   node.innerHTML = text;
   var content = node.textContent;
