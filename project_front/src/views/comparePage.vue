@@ -908,10 +908,6 @@ export default {
 
       var chart = this.$refs.myDiv;
 
-      console.log("&&&&&&&&&&&&&&&&&&&")
-      console.log(subscriberView1)
-      console.log(subscriberView2)
-      console.log("&&&&&&&&&&&&&&&&&&&")
 
       chart.appendSeries({
         name: this.youtuber1.channelName,

@@ -85,15 +85,27 @@
                 </v-card>
               </template>
               <template v-slot:item.subscriber="{ item }">
-                {{
-                tc(item.subscriber)
-                }}
+                {{tc(item.subscriber)}}
+              </template>
+              <template v-slot:item.totalViewCount="{ item }">
+                {{tc(item.totalViewCount)}}
+              </template>
+              <template v-slot:item.influence="{ item }">
+                {{item.influence}}점
+              </template>
+              <template v-slot:item.activity="{ item }">
+                {{item.activity}}점
+              </template>
+              <template v-slot:item.charm="{ item }">
+                {{item.charm}}점
               </template>
               <template v-slot:item.grade="{ item }">
                 {{
                 setGrade(item.grade)
                 }}
               </template>
+
+              
             </v-data-table>
           </v-card>
         </v-tab-item>
@@ -193,7 +205,6 @@ export default {
   methods: {
     onCategoryButtonClicked(index) {
       localStorage.setItem("currentCategory", index);
-      console.log("*************" + index);
       if (index == 0) {
         this.$store.dispatch(Constant.GET_ALLYOUTUBER, {
           failCallback: this.failCallback
@@ -279,10 +290,9 @@ export default {
         { text: "", value: "", sortable: false, width: "1%" },
         { text: "", value: "channelName", sortable: false, width: "30%" },
         { text: "구독자수", value: "subscriber", align: "center" },
+        { text: "총조회수", value: "totalViewCount", align: "center" },
         { text: "영향력", value: "influence", align: "center" },
         { text: "활동력", value: "activity", align: "center" },
-        { text: "조회수력", value: "viewCountTrend", align: "center" },
-        { text: "구독자력", value: "subscriberCountTrend", align: "center" },
         { text: "호감도", value: "charm", align: "center" },
         { text: "등급", value: "grade", align: "center" },
         { text: "", value: "insertCompare", sortable: false, align: "center" }
