@@ -983,6 +983,7 @@ export default {
       ];
 
       //influece Comminuty Data 집어넣기
+      this.influenceCommunityData[0]["name"] = "";
       for (let index = 0; index < influencecommunity.length; index++) {
         this.influenceCommunityData[0]["data"].push(influencecommunity[index]);
         this.influenceCommunityOption["xaxis"]["categories"].push(
@@ -991,6 +992,7 @@ export default {
       }
 
       //influece new Data 집어넣기
+      this.influenceNewsData[0]["name"] = "";
       for (let index = 0; index < influencenews.length; index++) {
         this.influenceNewsData[0]["data"].push(influencenews[index]);
         this.influenceNewsOption["xaxis"]["categories"].push(
@@ -1015,6 +1017,9 @@ export default {
       }
       this.viewData[0]["name"] = "";
       this.subscriberData[0]["name"] = "";
+      this.viewDiffData[0]["name"] = "";
+      this.subscriberDiffData[0]["name"] = "";
+
 
       console.log("*************");
       console.log(this.subscriberData);
