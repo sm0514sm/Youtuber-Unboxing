@@ -15,18 +15,22 @@ import timeit
 import datetime
 
 
-GOOGLE_KEY_LIST = [config('GOOGLEAPIKEY5'), config('GOOGLEAPIKEY7'), config('GOOGLEAPIKEY6'), config('GOOGLEAPIKEY8'), config('GOOGLEAPIKEY1'), config('GOOGLEAPIKEY2'), config('GOOGLEAPIKEY3'), config('GOOGLEAPIKEY4'), config('GOOGLEAPIKEY9')]
+GOOGLE_KEY_LIST = [config('GOOGLEAPIKEY5'), config('GOOGLEAPIKEY7'), config('GOOGLEAPIKEY6'), config('GOOGLEAPIKEY8'), config(
+    'GOOGLEAPIKEY1'), config('GOOGLEAPIKEY2'), config('GOOGLEAPIKEY3'), config('GOOGLEAPIKEY4'), config('GOOGLEAPIKEY9')]
 GOOGLE_KEY_INDEX = 0
 
 DAUM_API_KEYS = [config('DAUM_API_KEY1'), config('DAUM_API_KEY2')]
 DAUM_API_INDEX = 0
 
 NAVER_ID_LIST = [config('X_NAVER_CLIENT_ID1'), config('X_NAVER_CLIENT_ID2')]
-NAVER_SECRET_LIST = [config('X_NAVER_CLIENT_SECRET1'), config('X_NAVER_CLIENT_SECRET2')]
+NAVER_SECRET_LIST = [config('X_NAVER_CLIENT_SECRET1'),
+                     config('X_NAVER_CLIENT_SECRET2')]
 NAVER_ID_INDEX = 0
 
-NAVER_DATA_ID = [config('NAVER_DATALAB_CLIENT_ID1'), config('NAVER_DATALAB_CLIENT_ID2')]
-NAVER_DATA_SECRET = [config('NAVER_DATALAB_CLIENT_SECRET1'), config('NAVER_DATALAB_CLIENT_SECRET2')]
+NAVER_DATA_ID = [config('NAVER_DATALAB_CLIENT_ID1'),
+                 config('NAVER_DATALAB_CLIENT_ID2')]
+NAVER_DATA_SECRET = [config('NAVER_DATALAB_CLIENT_SECRET1'), config(
+    'NAVER_DATALAB_CLIENT_SECRET2')]
 NAVER_DATA_ID_INDEX = 0
 
 
@@ -86,39 +90,51 @@ def get_channel_other_sites(input_url):
 
 def get_trend_list(channel_id):
     trends = []
-    str_date = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=9) + datetime.timedelta(days=-30)).strftime('%Y-%m-%d')
-    url = 'https://en.noxinfluencer.com/api/youtube/detail/dimension/?channelId=' + channel_id + '&&startDate=' + str_date
-    r = requests.get(url)
-    html = json.loads(r.text)['retData']['dom']
-    if json.loads(r.text)['errorNum'] != 0:
-        print('errer')
-        return trends
-    soup = bs(html, "html.parser", from_encoding='utf-8')
-    ul_list = soup.findAll('ul')
-    for idx in range(1, len(ul_list) - 2):
-        data = {}
-        li_list = ul_list[idx].findAll('li')
-        for (i, li) in enumerate(li_list):
-            if i == 0:
-                data['recordDate'] = li.text
-            elif i == 1:
-                span_list = li.findAll('span')
-                if len(span_list) == 1:
-                    data['pointSubscriber'] = get_real_value(span_list[0].text)
-                    data['difSubscriber'] = 0
-                else:
-                    data['pointSubscriber'] = get_real_value(span_list[0].text)
-                    data['difSubscriber'] = get_real_value(span_list[1].text)
-            elif i == 2:
-                span_list = li.findAll('span')
-                if len(span_list) == 1:
-                    data['pointView'] = get_real_value(span_list[0].text)
-                    data['difView'] = 0
-                else:
-                    data['pointView'] = get_real_value(span_list[0].text)
-                    data['difView'] = get_real_value(span_list[1].text)
-                break
-        trends.append(data)
+    str_date = (datetime.datetime.now(datetime.timezone.utc) +
+                datetime.timedelta(hours=9) + datetime.timedelta(days=-30)).strftime('%Y-%m-%d')
+    url = 'https://en.noxinfluencer.com/api/youtube/detail/dimension/?channelId=' + \
+        channel_id + '&startDate=' + str_date
+    try:
+        r = requests.get(url=url, timeout=15)
+        html = json.loads(r.text)['retData']['dom']
+        if json.loads(r.text)['errorNum'] != 0:
+            print('errer')
+            return trends
+        soup = bs(html, "html.parser", from_encoding='utf-8')
+        ul_list = soup.findAll('ul')
+        for idx in range(1, len(ul_list) - 2):
+            data = {}
+            li_list = ul_list[idx].findAll('li')
+            for (i, li) in enumerate(li_list):
+                if i == 0:
+                    data['recordDate'] = li.text
+                elif i == 1:
+                    span_list = li.findAll('span')
+                    if len(span_list) == 1:
+                        data['pointSubscriber'] = get_real_value(
+                            span_list[0].text)
+                        data['difSubscriber'] = 0
+                    else:
+                        data['pointSubscriber'] = get_real_value(
+                            span_list[0].text)
+                        data['difSubscriber'] = get_real_value(
+                            span_list[1].text)
+                elif i == 2:
+                    span_list = li.findAll('span')
+                    if len(span_list) == 1:
+                        data['pointView'] = get_real_value(span_list[0].text)
+                        data['difView'] = 0
+                    else:
+                        data['pointView'] = get_real_value(span_list[0].text)
+                        data['difView'] = get_real_value(span_list[1].text)
+                    break
+            trends.append(data)
+    except urllib.request.HTTPError:
+        print('HTTPERROR 입니당')
+    except TimeoutError:
+        print('시간 초과 되었습니다.')
+    except Exception:
+        print('무슨에런지 모르겠어요')
     return trends
 
 
@@ -173,8 +189,6 @@ def get_real_value(txt):
     elif txt[len(txt) - 1] == 'B':
         value = float(txt.strip()[:-1]) * 1000000000
     return round(value)
-
-
 
 
 def get_video_list(uploads_id):
@@ -295,7 +309,7 @@ def get_video_detail(video_id):
 
     statistics = res_dict.get('statistics')
     snippet = res_dict.get('snippet')
-    
+
     try:
         tags = ','.join(snippet.get('tags'))
     except:
@@ -325,7 +339,8 @@ def get_video_detail(video_id):
 
 def get_news_list(youtuber, category, last_updated_date):
 
-    MONTH = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    MONTH = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May',
+             'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     YOUTUBER = youtuber.channelname  # DB 에서 yno 에 해당하는 channelName or youtubeName 을 입력
     CATEGORY = category
 
@@ -359,7 +374,8 @@ def get_news_list(youtuber, category, last_updated_date):
             print(json.loads(response))
         for news in newses:
             is_correct = False
-            date = datetime.datetime(int(news["pubDate"][12:16]), MONTH.index(news["pubDate"][8:11]), int(news["pubDate"][5:7]))
+            date = datetime.datetime(int(news["pubDate"][12:16]), MONTH.index(
+                news["pubDate"][8:11]), int(news["pubDate"][5:7]))
 
             # 업데이트되어있는 기사는 추가하지 않음
             if (date - last_updated_date).days < 0:
@@ -416,15 +432,14 @@ def get_our_cano(ycano_list, video_detail_list):
                 for video_detail in video_detail_list:
                     if keyword in video_detail['videoName'].lower():
                         count_kids += 1
-            for keyword in ['mukbang', '먹방', '음식', 'food', '맛있']:
+            for keyword in ['mukbang', '먹방', '음식', 'food', '맛있', 'cook', 'baking', '베이킹']:
                 for video_detail in video_detail_list:
-                    print('keyword : %s, title : %s, result : %s' % (keyword, video_detail['videoName'].lower(), keyword in video_detail['videoName'].lower()))
                     if keyword in video_detail['videoName'].lower():
                         count_muk += 1
-            if count_kids >= len(video_detail_list) * 0.2:
+            if count_kids >= len(video_detail_list) * 0.13:
                 if 6 not in our_list:
                     our_list.append(6)
-            elif count_muk >= len(video_detail_list) * 0.2:
+            elif count_muk >= len(video_detail_list) * 0.13:
                 if 5 not in our_list:
                     our_list.append(5)
             else:
@@ -520,7 +535,8 @@ def insert_naver_data_lab(youtuber):
     client_id = config("NAVER_DATALAB_CLIENT_ID2")
     client_secret = config("NAVER_DATALAB_CLIENT_SECRET2")
     url = "https://openapi.naver.com/v1/datalab/search"
-    startDate = (datetime.datetime.now() + datetime.timedelta(days=-365)).strftime("%Y-%m-%d")
+    startDate = (datetime.datetime.now() +
+                 datetime.timedelta(days=-365)).strftime("%Y-%m-%d")
     endDate = datetime.datetime.utcnow().strftime("%Y-%m-%d")
     timeUnit = 'week'
     keyword = youtuber.channelname
