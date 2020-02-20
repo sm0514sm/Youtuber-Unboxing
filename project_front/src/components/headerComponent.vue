@@ -11,26 +11,30 @@
         style="cursor:pointer"
       />
     </v-col>
-    <v-col cols="6">
+    <v-col cols="6" class="ml-3">
       <v-row>
-        <v-col cols="2" class="mr-5">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/howToPage')">
-            <span style="text-shadow: 0 0 2px #000;">MANUAL</span>
-          </v-btn>
-        </v-col>
-        <v-col cols="2" class="ml-3">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/categoryPage')">
-            <span style="text-shadow: 0 0 2px #000;">CATEGORY</span>
-          </v-btn>
-        </v-col>
-        <v-col cols="2" class="mr-0 ml-0">
-          <v-btn dark text style="font-size: 20px;" @click="gotoPage('/rankPage')">
-            <span style="text-shadow: 0 0 2px #000;">RANK</span>
-          </v-btn>
-        </v-col>
-        <v-col cols="2" class="ml-5 my-0 py-0">
-          <input-component v-if="loginStatus != false" position="header"></input-component>
-        </v-col>
+        <v-btn
+          dark
+          text
+          class="headerMenu"
+          style="font-size: 20px;"
+          @click="gotoPage('/howToPage')"
+        >
+          <span style="text-shadow: 0 0 2px #000;">MANUAL</span>
+        </v-btn>
+        <v-btn
+          dark
+          text
+          class="headerMenu"
+          style="font-size: 20px;"
+          @click="gotoPage('/categoryPage')"
+        >
+          <span style="text-shadow: 0 0 2px #000;">CATEGORY</span>
+        </v-btn>
+        <v-btn dark text class="headerMenu" style="font-size: 20px;" @click="gotoPage('/rankPage')">
+          <span style="text-shadow: 0 0 2px #000;">RANK</span>
+        </v-btn>
+        <input-component position="header"></input-component>
       </v-row>
     </v-col>
 
@@ -346,5 +350,10 @@ export default {
 .btnFont {
   font-size: 1em;
   font-family: "Noto Sans KR", sans-serif;
+}
+.headerMenu {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 20px;
 }
 </style>

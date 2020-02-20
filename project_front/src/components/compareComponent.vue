@@ -17,7 +17,7 @@
         bottom
         right
         color="white"
-        class="elevation-15 pa-4"
+        class="elevation-15 px-4 py-0"
         border-radius="25%"
       >
         <v-icon color="green" left>mdi-login-variant</v-icon>유튜버 비교하기

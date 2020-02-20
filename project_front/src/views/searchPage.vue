@@ -114,20 +114,37 @@
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col cols="12" class="py-0">
-                      <p class="font-weight-light thin ma-0">
-                        구독자 수 :
-                        <b>{{tc(item.subscriber)}}</b> / 누적조회수 :
-                        <b>{{tc(item.totalViewCount)}}</b> / 총영상수 :
-                        <b>{{item.totalVideoCount}}</b>
-                      </p>
+                    <v-col class="px-1 pl-2 py-0">
+                      <table style="text-align: center; width: 80%; margin-top: 15px;">
+                        <tr id="th1">
+                          <td>구독자수</td>
+                          <td>총 조회수</td>
+                          <td>총 영상수</td>
+                        </tr>
+                        <tr>
+                          <td>{{ tc(item.subscriber) }}</td>
+                          <td>{{ tc(item.totalViewCount) }}</td>
+                          <td>{{ item.totalVideoCount }}</td>
+                        </tr>
+                      </table>
+                      <!-- <p id="subtitle" class="mt-1 mb-0"></p> -->
                     </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12" class="py-0">
-                      <p
-                        class="font-weight-light thin ma-0"
-                      >영향력 : {{item.influence}} / 활동력 : {{item.activity}} / 조회수력 : {{item.viewCountTrend}} / 구독자력 : {{item.subscriberCountTrend}} / 호감도 : {{item.charm}}</p>
+                    <v-col class="px-1 py-0">
+                      <table style="text-align: center; width: 80%; margin-top: 15px;">
+                        <tr id="th2">
+                          <td>영향력</td>
+                          <td>활동력</td>
+                          <!-- <td>조회수력</td>
+                          <td>구독자력</td>-->
+                          <td>호감도</td>
+                        </tr>
+                        <tr>
+                          <td>{{ item.influence }}점</td>
+                          <td>{{ item.activity }}점</td>
+                          <td>{{ item.charm }}점</td>
+                        </tr>
+                      </table>
+                      <p id="subtitle" class="mt-1 mb-2 mb-0 ml-1">*위 3개 수치는 100점 만점으로 환산한 점수입니다.</p>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -400,12 +417,12 @@ export default {
         },
         () => {}
       );
-    },
+    }
   },
   mounted() {
     this.$vuetify.goTo(0);
-    console.log("#########################")
-    console.log(encodeURI(this.$route.query.word))
+    console.log("#########################");
+    console.log(encodeURI(this.$route.query.word));
     const youtuberSearch = new Promise((resolve, reject) => {
       http
         .get("/youtuber/search/" + encodeURI(this.$route.query.word))
@@ -517,5 +534,16 @@ export default {
 <style scoped>
 .circle {
   border-radius: 50%;
+}
+td {
+  border: 1px solid lightgray;
+}
+#th1 {
+  background-color: #22a2a2a3;
+  color: white;
+}
+#th2 {
+  background-color: #349ed0a3;
+  color: white;
 }
 </style>

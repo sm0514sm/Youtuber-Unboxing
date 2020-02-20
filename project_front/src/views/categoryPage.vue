@@ -1,14 +1,9 @@
 <template>
   <div>
     <v-card>
-      <v-card-title
-        class="justify-center py-6"
-        style="background-color:#ffb468 ; height : 300px"
-      >
-        <v-icon size="70" color="white">mdi-widgets-outline</v-icon>
-        <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white"
-          >CATEGORY</span
-        >
+      <v-card-title class="justify-center py-6" style="background-color:#ffb468 ; height : 300px">
+        <v-icon size="70" color="white" class="mr-2">mdi-widgets-outline</v-icon>
+        <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white">CATEGORY</span>
       </v-card-title>
     </v-card>
     <v-container name="container" background-color="transparent" class="pa-1">
@@ -50,11 +45,7 @@
                 class="mr-5 mb-5"
               ></v-text-field>
             </v-card-title>
-            <v-data-table
-              :headers="headers"
-              :items="youtubersPerCategory"
-              :search="search"
-            >
+            <v-data-table :headers="headers" :items="youtubersPerCategory" :search="search">
               <template v-slot:item.insertCompare="{ item }">
                 <v-btn
                   @click="onClikcedinsertCompare(item.yno, item.channelName)"
@@ -85,9 +76,7 @@
                       <v-container fill-height>
                         <v-layout align-center>
                           <v-flex xs12 text-xs-center>
-                            <div class="font-weight-light">
-                              {{ item.channelName }}
-                            </div>
+                            <div class="font-weight-light">{{ item.channelName }}</div>
                           </v-flex>
                         </v-layout>
                       </v-container>
@@ -95,12 +84,16 @@
                   </v-row>
                 </v-card>
               </template>
-              <template v-slot:item.subscriber="{ item }">{{
+              <template v-slot:item.subscriber="{ item }">
+                {{
                 tc(item.subscriber)
-              }}</template>
-              <template v-slot:item.grade="{ item }">{{
+                }}
+              </template>
+              <template v-slot:item.grade="{ item }">
+                {{
                 setGrade(item.grade)
-              }}</template>
+                }}
+              </template>
             </v-data-table>
           </v-card>
         </v-tab-item>
@@ -133,6 +126,7 @@
                   @click="onClikcedinsertCompare(item.yno, item.channelName)"
                   text
                   color="green"
+                  :id="item.yno"
                   :disabled="disabledButtonFlag"
                 >
                   <v-icon dark>mdi-login-variant</v-icon>비교담기
@@ -158,9 +152,7 @@
                       <v-container fill-height>
                         <v-layout align-center>
                           <v-flex xs12 text-xs-center>
-                            <div>
-                              {{ item.channelName }}
-                            </div>
+                            <div>{{ item.channelName }}</div>
                           </v-flex>
                         </v-layout>
                       </v-container>
@@ -169,13 +161,17 @@
                 </v-card>
               </template>
 
-              <template v-slot:item.subscriber="{ item }">{{
+              <template v-slot:item.subscriber="{ item }">
+                {{
                 tc(item.subscriber)
-              }}</template>
+                }}
+              </template>
 
-              <template v-slot:item.grade="{ item }">{{
+              <template v-slot:item.grade="{ item }">
+                {{
                 setGrade(item.grade)
-              }}</template>
+                }}
+              </template>
             </v-data-table>
           </v-card>
         </v-tab-item>
@@ -282,14 +278,14 @@ export default {
       headers: [
         { text: "", value: "", sortable: false, width: "1%" },
         { text: "", value: "channelName", sortable: false, width: "30%" },
-        { text: "구독자수", value: "subscriber", align: 'center' },
-        { text: "영향력", value: "influence", align: 'center' },
-        { text: "활동력", value: "activity" , align: 'center'},
-        { text: "조회수력", value: "viewCountTrend" , align: 'center'},
-        { text: "구독자력", value: "subscriberCountTrend" , align: 'center' },
-        { text: "호감도", value: "charm", align: 'center'  },
-        { text: "등급", value: "grade" , align: 'center' },
-        { text: "", value: "insertCompare", sortable: false, align: 'center'  }
+        { text: "구독자수", value: "subscriber", align: "center" },
+        { text: "영향력", value: "influence", align: "center" },
+        { text: "활동력", value: "activity", align: "center" },
+        { text: "조회수력", value: "viewCountTrend", align: "center" },
+        { text: "구독자력", value: "subscriberCountTrend", align: "center" },
+        { text: "호감도", value: "charm", align: "center" },
+        { text: "등급", value: "grade", align: "center" },
+        { text: "", value: "insertCompare", sortable: false, align: "center" }
       ],
       search: "",
       disabledButtonFlag: true

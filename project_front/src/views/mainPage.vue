@@ -204,7 +204,7 @@ div {
 }
 .allCategory {
   position: absolute;
-  top: 55%;
+  top: 60%;
   left: 50%;
   transform: translateX(-50%);
   width: 780px;
@@ -236,7 +236,7 @@ div {
 }
 .websiteName {
   position: absolute;
-  top: 27%;
+  top: 32%;
   left: 32%;
   font-size: 56px;
   font-weight: 400;
@@ -245,7 +245,7 @@ div {
 }
 .searchForm {
   position: absolute;
-  top: 37%;
+  top: 42%;
   left: 50%;
   transform: translateX(-50%);
   width: 400px;

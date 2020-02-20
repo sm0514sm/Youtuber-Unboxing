@@ -325,7 +325,7 @@
         <v-hover v-slot:default="{ hover }" open-delay="100">
           <v-card :elevation="hover ? 7 : 1" class="px-10" shaped>
             <v-divider></v-divider>
-            <v-list-item-title class="headline font-weight-black mb-1">상호 수치 비교</v-list-item-title>
+            <v-list-item-title class="headline font-weight-black mb-1">분야별 수치 비교</v-list-item-title>
             <v-divider></v-divider>
             <v-row>
               <v-col class="py-0">
@@ -447,7 +447,7 @@
                 </v-row>
               </v-col>
 
-              <v-divider vertical></v-divider>
+              <v-divider vertical class="mr-5"></v-divider>
 
               <v-col>
                 <v-row v-if="status.y2_sub">
@@ -540,26 +540,32 @@
                   <div class="d-flex flex-no-wrap justify-space-between">
                     <div>
                       <v-card-title class="headline">
-                        <v-icon x-large color="yellow">mdi-crown</v-icon>
-                        <v-chip
-                          class="ma-2"
-                          color="yellow"
-                          outlined
-                          pill
-                          text-color="black"
-                          style="border-width: medium"
-                        >
-                          <b>{{ status.winner }}</b>
-                        </v-chip>채널이 종합 수치
-                        <v-chip
-                          class="ma-2"
-                          color="indigo darken-3"
-                          outlined
-                          style="border-width: medium"
-                        >
-                          <v-icon left>mdi-fire</v-icon>
-                          <b>{{ status.stat }}%</b>
-                        </v-chip>우위에 있습니다.
+                        <div>
+                          <v-chip
+                            class="ma-2 pa-1 pr-2"
+                            color="yellow"
+                            outlined
+                            pill
+                            text-color="black"
+                            style="border-width: medium"
+                          >
+                            <v-icon color="yellow">mdi-crown</v-icon>
+                            <b>{{ status.winner }}</b>
+                          </v-chip>채널이
+                        </div>
+                        <br />
+                        <div>
+                          총
+                          <v-chip
+                            class="ma-2"
+                            color="indigo darken-3"
+                            outlined
+                            style="border-width: medium"
+                          >
+                            <v-icon left>mdi-fire</v-icon>
+                            <b>{{ status.stat }}%</b>
+                          </v-chip>우위에 있습니다.
+                        </div>
                       </v-card-title>
                     </div>
 

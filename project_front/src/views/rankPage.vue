@@ -5,8 +5,11 @@
 
   <div>
     <v-card>
-      <v-card-title class="justify-center py-6" style="background-color:#b468ff; height : 300px">
-        <v-icon size="70" color="white">mdi-crown</v-icon>
+      <v-card-title
+        class="justify-center py-6"
+        style="background-color:rgba(180, 104, 255, 0.75); height : 300px"
+      >
+        <v-icon size="70" color="white" class="mr-2">mdi-crown</v-icon>
         <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white">RANK</span>
       </v-card-title>
     </v-card>
@@ -32,7 +35,7 @@
                     정렬 기준
                     <v-tooltip top>
                       <template v-slot:activator="{ on }">
-                        <v-icon v-on="on" color="#b468ff">mdi-information-outline</v-icon>
+                        <v-icon v-on="on" color="rgba(180, 104, 255, 0.75)">mdi-information-outline</v-icon>
                       </template>
                       <span>
                         <v-icon class="mr-2">mdi-star-outline</v-icon>등급 :
@@ -54,14 +57,23 @@
               </v-row>
               <v-row fluid>
                 <v-col class="py-0">
-                  <v-radio-group v-model="orderGroup" color="#b468ff">
-                    <v-radio label="구독자수" value="subscriber" checked color="#b468ff"></v-radio>
-                    <v-radio label="등급" value="grade" color="#b468ff"></v-radio>
-                    <v-radio label="누적조회수" value="totalViewCount" color="#b468ff"></v-radio>
-                    <v-radio label="총 영상수" value="totalVideoCount" color="#b468ff"></v-radio>
-                    <v-radio label="영향력" value="influence" color="#b468ff"></v-radio>
-                    <v-radio label="활동력" value="activity" color="#b468ff"></v-radio>
-                    <v-radio label="호감도" value="charm" color="#b468ff"></v-radio>
+                  <v-radio-group v-model="orderGroup" color="rgba(180, 104, 255, 0.75)">
+                    <v-radio
+                      label="구독자수"
+                      value="subscriber"
+                      checked
+                      color="rgba(180, 104, 255, 0.75)"
+                    ></v-radio>
+                    <v-radio label="등급" value="grade" color="rgba(180, 104, 255, 0.75)"></v-radio>
+                    <v-radio label="누적조회수" value="totalViewCount" color="rgba(180, 104, 255, 0.75)"></v-radio>
+                    <v-radio
+                      label="총 영상수"
+                      value="totalVideoCount"
+                      color="rgba(180, 104, 255, 0.75)"
+                    ></v-radio>
+                    <v-radio label="영향력" value="influence" color="rgba(180, 104, 255, 0.75)"></v-radio>
+                    <v-radio label="활동력" value="activity" color="rgba(180, 104, 255, 0.75)"></v-radio>
+                    <v-radio label="호감도" value="charm" color="rgba(180, 104, 255, 0.75)"></v-radio>
                   </v-radio-group>
                 </v-col>
               </v-row>
@@ -75,11 +87,11 @@
             <v-row class="pt-0 pl-3">
               <v-col>
                 <h2 class="font-weight-light mb-1">
-                  <v-icon color="#b468ff" size="30">mdi-crown</v-icon>RANK
+                  <v-icon color="rgba(180, 104, 255, 0.75)" size="30">mdi-crown</v-icon>RANK
                   <v-chip
                     class="mb-2 mt-1"
                     style="font-size : 20px"
-                    color="#b468ff"
+                    color="rgba(180, 104, 255, 0.75)"
                     text-color="white"
                   >{{changeKoreanWord(orderGroup)}}</v-chip>
                 </h2>
@@ -116,9 +128,9 @@
                         width="70px"
                       />
                     </v-col>
-                    <v-divider vertical class="px-0 ml-0 mr-3"></v-divider>
+                    <v-divider vertical class="pl-0 ml-0"></v-divider>
                     <!-- 유튜버 설명 -->
-                    <v-col cols="7" class="pa-1 pr-0 mr-0">
+                    <v-col cols="7" class="pl-1 pr-0 pt-1 pb-0 ml-5 mr-0 mt-3">
                       <v-row align="center">
                         <v-col cols="12" class="pt-0 pb-1">
                           <p
@@ -129,7 +141,7 @@
                       <v-row>
                         <v-col cols="12" class="pt-0 pb-0">
                           <p
-                            class="font-weight-light thin ma-0"
+                            class="font-weight-light thin ma-0 pa-0"
                             style="font-size:13px"
                           >개설일 : {{ item.publishedDate }}</p>
                         </v-col>
@@ -139,7 +151,7 @@
                           <table style="text-align: center; width: 100%; margin-top: 15px;">
                             <tr id="th1">
                               <td>구독자수</td>
-                              <td>누적조회</td>
+                              <td>총 조회수</td>
                               <td>총 영상수</td>
                             </tr>
                             <tr>
@@ -148,7 +160,7 @@
                               <td>{{ item.totalVideoCount }}</td>
                             </tr>
                           </table>
-                          <p id="subtitle" class="mt-1 mb-0"></p>
+                          <!-- <p id="subtitle" class="mt-1 mb-0"></p> -->
                         </v-col>
                         <v-col class="px-1 py-0">
                           <table style="text-align: center; width: 100%; margin-top: 15px;">
@@ -160,28 +172,31 @@
                               <td>호감도</td>
                             </tr>
                             <tr>
-                              <td>{{ item.influence }}</td>
-                              <td>{{ item.activity }}</td>
-                              <td>{{ item.charm }}</td>
+                              <td>{{ item.influence }}점</td>
+                              <td>{{ item.activity }}점</td>
+                              <td>{{ item.charm }}점</td>
                             </tr>
                           </table>
-                          <p id="subtitle"  class="mt-1 mb-0 ml-1">*위의 수치는 현재사이트기준 상대적 수치입니다.</p>
+                          <p
+                            id="subtitle"
+                            class="mt-1 mb-2 mb-0 ml-1"
+                          >*위 3개 수치는 100점 만점으로 환산한 점수입니다.</p>
                         </v-col>
                       </v-row>
                     </v-col>
-                    <v-divider vertical class="my-2 ml-5 mr-3 py-4 px-0"></v-divider>
+                    <v-divider vertical class="ml-5 mr-0 pl-2"></v-divider>
                     <!-- 등급 -->
-                    <v-col cols="2" style="text-align: center" class="ma-0">
+                    <v-col cols="2" style="text-align: center">
                       <v-row align="center" class="ma-0">
-                        <v-col class="py-1 px-0">
+                        <v-col class="px-0 pt-1 pb-0">
                           <p class="font-weight-bold">&nbsp;&nbsp;GRADE</p>
                         </v-col>
                       </v-row>
-                      <v-divider class="ma-0 pa-3"></v-divider>
+                      <v-divider class="ma-0 pa-0"></v-divider>
                       <v-row>
                         <v-col class>
                           <v-btn
-                            class="ma-0 pa-5"
+                            class="ma-0"
                             fab
                             dark
                             large
@@ -380,18 +395,17 @@ export default {
 td {
   border: 1px solid lightgray;
 }
-
 #th1 {
   background-color: #ae51b7a6;
   color: white;
 }
 #th2 {
-  background-color: #d9a2fa;
-  color: white
+  background-color: #9666b3;
+  color: white;
 }
 #subtitle {
-  color : gray;
-  font-size : 12px;
+  color: gray;
+  font-size: 12px;
 }
 
 /* #sortCard{position:absolute;top:100px;} */
