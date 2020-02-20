@@ -73,7 +73,7 @@ public class InterestRestController {
 		return handleSuccess(list);
 	}
 	
-	@ApiOperation("user 토큰, 관심분야 고유번호(,로 구분/최대 3개) | 관심분야에 기반한 유튜버 추천 목록을 검색 개수만큼 검색 | 같은 관심분야를 즐겨찾기에 추가한 사람이 많은 순서로 내림차순")
+	@ApiOperation("user 토큰, 관심분야 고유번호(,로 구분/최대 3개) | 관심분야에 기반한 유튜버 추천 목록을 검색 개수만큼 검색 | 같은 관심분야를 즐겨찾기에 추가한 사람이 많은 순서로 내림차순 | 추천동영상이 4개보다 적을 경우 영상총조회수가 많은 유튜버들로 나머지를 채움")
 	@GetMapping("/interest/search/recommend/{usToken}&{interestList}")
 	public ResponseEntity<Map<String, Object>> searchInterestRecommend(@PathVariable String usToken, @PathVariable String interestList){
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usToken);
