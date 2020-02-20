@@ -118,6 +118,8 @@ def get_trend_list(channel_id):
                         data['pointSubscriber'] = get_real_value(
                             span_list[0].text)
                         difSubscriber = get_real_value(span_list[1].text)
+                        print("span_list[1]['class'] : ",
+                              span_list[1]['class'])
                         if 'down' in span_list[1]['class']:
                             difSubscriber = -difSubscriber
                         data['difSubscriber'] = difSubscriber
@@ -130,6 +132,8 @@ def get_trend_list(channel_id):
                     else:
                         data['pointView'] = get_real_value(span_list[0].text)
                         difView = get_real_value(span_list[1].text)
+                        print("span_list[1]['class'] : ",
+                              span_list[1]['class'])
                         if 'down' in span_list[1]['class']:
                             difView = -difView
                         data['difView'] = difView
