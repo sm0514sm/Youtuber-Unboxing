@@ -34,7 +34,7 @@
         <v-btn dark text class="headerMenu" style="font-size: 20px;" @click="gotoPage('/rankPage')">
           <span style="text-shadow: 0 0 2px #000;">RANK</span>
         </v-btn>
-        <input-component position="header"></input-component>
+        <input-component v-if="$session.get('token') != undefined" position="header"></input-component>
       </v-row>
     </v-col>
 
@@ -57,7 +57,7 @@
             flat
             v-if="$route.path != '/'"
             align="center"
-            class="justify-center"
+            class="justify-center pr-2"
             dense
           >
             <template v-slot:no-data>
