@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-card-title class="justify-center py-6" style="background-color:#6688ff ; height : 300px">
+      <v-card-title class="justify-center py-6" style="background-color:#6E89E7 ; height : 300px">
         <v-icon size="70" class="mr-2" color="white">mdi-account-group</v-icon>
         <span style="text-shadow: 0 0 2px #000;font-size: 2.5em;color:white">CONTACT US</span>
       </v-card-title>
@@ -31,7 +31,7 @@
                       cardinfo.name
                       }}
                     </span>
-                    <v-btn rounded color="#6688ff" justify="center" class="ml-2" dark>
+                    <v-btn rounded color="#6E89E7" justify="center" class="ml-2" dark>
                       <b>{{ cardinfo.position }}</b>
                     </v-btn>
                   </v-col>
