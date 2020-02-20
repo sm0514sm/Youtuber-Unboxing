@@ -753,6 +753,7 @@ export default {
             100
         );
       }
+
       if (this.youtuber1.viewCountTrend > this.youtuber2.viewCountTrend) {
         this.status["y1_sub"] = true;
         this.status["y2_sub"] = false;
@@ -1008,7 +1009,7 @@ export default {
         this.videoPeriodOptions["xaxis"]["categories"].push(index + "주전");
       }
 
-      //구독자주기
+      //구독자 추이
       this.subscriberPeriodData = [
         {
           name: this.youtuber1.channelName,
@@ -1022,7 +1023,7 @@ export default {
 
       var max = Math.max(subscriberView1.length, subscriberView2.length);
       for (let index = 0; index < max; index++) {
-        console.log(subscriberView1[index]);
+        
         if (
           subscriberView1[index] != undefined &&
           !this.subscriberPeriodOptions["xaxis"]["categories"].includes(
@@ -1046,13 +1047,13 @@ export default {
         }
       }
 
-      console.log(this.subscriberPeriodOptions["xaxis"]["categories"]);
 
       this.subscriberPeriodOptions["xaxis"]["categories"].sort();
 
       var i = 0;
       for (let index = 0; index < max; index++) {
         if (
+          subscriberView1[i] != undefined && 
           this.subscriberPeriodOptions["xaxis"]["categories"][index] ==
           subscriberView1[i].recordDate
         ) {
@@ -1065,9 +1066,11 @@ export default {
         }
       }
 
+
       i = 0;
       for (let index = 0; index < max; index++) {
         if (
+          subscriberView2[i] != undefined && 
           this.subscriberPeriodOptions["xaxis"]["categories"][index] ==
           subscriberView2[i].recordDate
         ) {
@@ -1080,7 +1083,8 @@ export default {
         }
       }
 
-      //총영상수추이
+
+      //누적조회수추이
       this.totalViewPeriodData = [
         {
           name: this.youtuber1.channelName,
@@ -1092,8 +1096,8 @@ export default {
         }
       ];
 
+
       for (let index = 0; index < max; index++) {
-        console.log(subscriberView1[index]);
         if (
           subscriberView1[index] != undefined &&
           !this.totalViewPeriodOptions["xaxis"]["categories"].includes(
@@ -1121,7 +1125,9 @@ export default {
 
       i = 0;
       for (let index = 0; index < max; index++) {
+        
         if (
+          subscriberView1[i] != undefined && 
           this.totalViewPeriodOptions["xaxis"]["categories"][index] ==
           subscriberView1[i].recordDate
         ) {
@@ -1134,11 +1140,11 @@ export default {
         }
       }
 
-      console.log(this.totalViewPeriodData[0]["data"]);
 
       i = 0;
       for (let index = 0; index < max; index++) {
         if (
+          subscriberView2[i] != undefined && 
           this.totalViewPeriodOptions["xaxis"]["categories"][index] ==
           subscriberView2[i].recordDate
         ) {
@@ -1195,6 +1201,7 @@ export default {
       i = 0;
       for (let index = 0; index < max; index++) {
         if (
+          subscriberView1[i] != undefined && 
           this.totalViewDiffOptions["xaxis"]["categories"][index] ==
           subscriberView1[i].recordDate
         ) {
@@ -1208,6 +1215,7 @@ export default {
       i = 0;
       for (let index = 0; index < max; index++) {
         if (
+          subscriberView2[i] != undefined && 
           this.totalViewDiffOptions["xaxis"]["categories"][index] ==
           subscriberView2[i].recordDate
         ) {
@@ -1218,7 +1226,6 @@ export default {
         }
       }
 
-      console.log(this.totalViewDiffOptions["xaxis"]["categories"]);
 
       // for (let index = 0; index < subscriberView1.length; index++) {
       //   this.totalViewDiffData[0]["data"].push(subscriberView1[index].difView);
@@ -1230,7 +1237,6 @@ export default {
 
       //otherLink
       this.makeOtherLinkIcon();
-      console.log("6666");
 
       this.check();
     },
@@ -1388,7 +1394,6 @@ export default {
       }
     },
     makeOtherLinkIcon() {
-      console.log("sdfsdfsdf**************dfsdf**");
       var site = ["instagram", "twitter", "facebook", "tiktok"];
       var y1 = this.youtuber1;
       var link1 = [
