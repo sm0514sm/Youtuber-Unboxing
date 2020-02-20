@@ -387,11 +387,9 @@ export default {
 * {
   font-family: "Noto Sans KR", sans-serif;
 }
-
 .circle {
   border-radius: 50%;
 }
-
 td {
   border: 1px solid lightgray;
 }

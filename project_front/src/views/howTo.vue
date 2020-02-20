@@ -172,24 +172,20 @@ export default {
     },
     onScroll() {
       var scroll = window.pageYOffset;
-      var start = 0;
-      var range = 330;
+      var start = 200;
+      var range = 400;
+      console.log(scroll);
       if (scroll < start) {
-        document.getElementById("detail").pause();
-        document.getElementById("search").pause();
-        document.getElementById("compare").pause();
-        document.getElementById("user").pause();
-      } else if (scroll <= start + range) {
         document.getElementById("detail").play();
         document.getElementById("search").pause();
         document.getElementById("compare").pause();
         document.getElementById("user").pause();
-      } else if (scroll <= start + range * 2) {
+      } else if (scroll < start + range) {
         document.getElementById("detail").pause();
         document.getElementById("search").play();
         document.getElementById("compare").pause();
         document.getElementById("user").pause();
-      } else if (scroll <= start + range * 3) {
+      } else if (scroll < start + range * 2) {
         document.getElementById("detail").pause();
         document.getElementById("search").pause();
         document.getElementById("compare").play();
@@ -199,7 +195,7 @@ export default {
         document.getElementById("search").pause();
         document.getElementById("compare").pause();
         document.getElementById("user").play();
-      }
+      } 
     },
     tc(num) {
       return tc(num);

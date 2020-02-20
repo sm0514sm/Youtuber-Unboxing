@@ -34,7 +34,7 @@
         <v-btn dark text class="headerMenu" style="font-size: 20px;" @click="gotoPage('/rankPage')">
           <span style="text-shadow: 0 0 2px #000;">RANK</span>
         </v-btn>
-        <input-component position="header"></input-component>
+        <input-component v-if="loginStatus != false" position="header"></input-component>
       </v-row>
     </v-col>
 
