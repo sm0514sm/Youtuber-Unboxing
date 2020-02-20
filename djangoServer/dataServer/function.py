@@ -117,8 +117,11 @@ def get_trend_list(channel_id):
                     else:
                         data['pointSubscriber'] = get_real_value(
                             span_list[0].text)
-                        data['difSubscriber'] = get_real_value(
-                            span_list[1].text)
+                        difSubscriber = get_real_value(span_list[1].text)
+                        if 'down' in span_list[1]['class']:
+                            difSubscriber = -difSubscriber
+                        data['difSubscriber'] = difSubscriber
+
                 elif i == 2:
                     span_list = li.findAll('span')
                     if len(span_list) == 1:
@@ -126,7 +129,10 @@ def get_trend_list(channel_id):
                         data['difView'] = 0
                     else:
                         data['pointView'] = get_real_value(span_list[0].text)
-                        data['difView'] = get_real_value(span_list[1].text)
+                        difView = get_real_value(span_list[1].text)
+                        if 'down' in span_list[1]['class']:
+                            difView = -difView
+                        data['difView'] = difView
                     break
             trends.append(data)
     except urllib.request.HTTPError:

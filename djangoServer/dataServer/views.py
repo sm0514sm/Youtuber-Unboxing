@@ -227,7 +227,7 @@ def make_new_youtuber(request, url):
             print('trend_item :', trend_item)
             if i == len(trend_list) - 1:
                 trend_list[i]['difSubscriber'] = 0
-                trend_list[i]['pointView'] = 0
+                trend_list[i]['difView'] = 0
             else:
                 trend_list[i+1]['pointSubscriber'] = int(
                     trend_list[i]['pointSubscriber']) - int(trend_list[i+1]['difSubscriber'])
