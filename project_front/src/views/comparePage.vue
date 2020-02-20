@@ -80,15 +80,7 @@
                                 @click="openNewWindow(otherLinkIcon1[2])"
                                 style="cursor:pointer"
                               />
-                              <!-- tiktok -->
-                              <v-img
-                                width="32px"
-                                class="mx-1"
-                                v-if="otherLinkIcon1[3] != ''"
-                                src="../assets/tiktokIcon.png"
-                                @click="openNewWindow(otherLinkIcon1[3])"
-                                style="cursor:pointer"
-                              />
+                              
                             </v-row>
                           </v-col>
                           <v-col cols="5">
@@ -187,15 +179,7 @@
                                 @click="openNewWindow(otherLinkIcon2[2])"
                                 style="cursor:pointer"
                               />
-                              <!-- tiktok -->
-                              <v-img
-                                width="32px"
-                                class="mx-1"
-                                v-if="otherLinkIcon2[3] != ''"
-                                src="../assets/tiktokIcon.png"
-                                @click="openNewWindow(otherLinkIcon2[3])"
-                                style="cursor:pointer"
-                              />
+                              
                             </v-row>
                           </v-col>
                         </v-row>
@@ -924,6 +908,11 @@ export default {
 
       var chart = this.$refs.myDiv;
 
+      console.log("&&&&&&&&&&&&&&&&&&&")
+      console.log(subscriberView1)
+      console.log(subscriberView2)
+      console.log("&&&&&&&&&&&&&&&&&&&")
+
       chart.appendSeries({
         name: this.youtuber1.channelName,
         data: [
@@ -1052,6 +1041,7 @@ export default {
 
       var i = 0;
       for (let index = 0; index < max; index++) {
+        
         if (
           subscriberView1[i] != undefined && 
           this.subscriberPeriodOptions["xaxis"]["categories"][index] ==
@@ -1068,6 +1058,7 @@ export default {
 
 
       i = 0;
+      console.log(subscriberView2[i])
       for (let index = 0; index < max; index++) {
         if (
           subscriberView2[i] != undefined && 
@@ -1172,7 +1163,6 @@ export default {
       ];
 
       for (let index = 0; index < max; index++) {
-        console.log(subscriberView1[index]);
         if (
           subscriberView1[index] != undefined &&
           !this.totalViewDiffOptions["xaxis"]["categories"].includes(
@@ -1397,7 +1387,7 @@ export default {
       var site = ["instagram", "twitter", "facebook", "tiktok"];
       var y1 = this.youtuber1;
       var link1 = [
-        y1.otherLink1,
+        y1.otherLink1, 
         y1.otherLink2,
         y1.otherLink3,
         y1.otherLink4,
