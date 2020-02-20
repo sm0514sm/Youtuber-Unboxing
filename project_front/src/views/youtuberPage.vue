@@ -88,7 +88,7 @@
                     <v-col>
                       <span class="font-weight-bold">총 영상 수</span>
                       <br />
-                      {{ comma(youtuber.totalVideoCount) }}
+                      {{ youtuber.totalVideoCount }}
                     </v-col>
                     <v-divider vertical class="mx-3"></v-divider>
                     <v-col>
@@ -480,7 +480,7 @@
                               <v-row>
                                 <v-col>
                                   <apexchart
-                                    :options="subscriberViewOption"
+                                    :options="subscriberDiffOptions"
                                     :series="subscriberDiffData"
                                     style="width:100%"
                                     height="200px"
@@ -1009,9 +1009,15 @@ export default {
         this.subscriberDiffData[0]["data"].push(
           subscriberView[index]["difSubscriber"]
         );
+        if (this.subscriberDiffMin > subscriberView[index]["difSubscriber"]) {
+          this.subscriberDiffMin = subscriberView[index]["difSubscriber"];
+        }
         this.viewData[0]["data"].push(subscriberView[index]["pointView"]);
         this.viewDiffData[0]["data"].push(subscriberView[index]["difView"]);
         this.subscriberViewOption["xaxis"]["categories"].push(
+          subscriberView[index]["recordDate"]
+        );
+        this.subscriberDiffOptions["xaxis"]["categories"].push(
           subscriberView[index]["recordDate"]
         );
       }
@@ -1019,9 +1025,13 @@ export default {
       this.subscriberData[0]["name"] = "";
       this.viewDiffData[0]["name"] = "";
       this.subscriberDiffData[0]["name"] = "";
+      this.subscriberDiffOptions["yaxis"]["max"] = (max) => {
+        if(max == 0 && this.subscriberDiffMin != 0){
+          return this.subscriberDiffMin * -1 ;
+        }
+        return max;
+      };
 
-
-      console.log("*************");
       console.log(this.subscriberData);
 
       this.makeOtherLinkIcon();
@@ -1406,7 +1416,59 @@ export default {
       myColors: ["#1f77b4", "#629fc9", "#94bedb", "#c9e0ef"],
       tagCloud: [],
       rotate: { from: 0, to: 0, numOfOrientation: 5 },
-      fontsize: [10, 45]
+      fontsize: [10, 45],
+      subscriberDiffOptions: {
+        series: [],
+        chart: {
+          type: "line",
+          zoom: {
+            enabled: false
+          },
+          toolbar: {
+            show: false
+          }
+        },
+        colors: ["#2196F3"],
+        dataLabels: {
+          enabled: false,
+          formatter: function(x) {
+            return tc(x);
+          }
+        },
+        stroke: {
+          width: 3
+          // curve: "smooth"
+        },
+        title: {
+          align: "center"
+        },
+        grid: {
+          row: {
+            colors: ["#f3f3f3", "transparent"],
+            opacity: 0.5
+          }
+        },
+        xaxis: {
+          type: "datetime",
+          categories: []
+        },
+        tooltip: {
+          y: {
+            formatter: function(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+          }
+        },
+        yaxis: {
+          labels: {
+            show: true,
+            formatter: value => {
+              return tc(value);
+            }
+          }
+        }
+      },
+      subscriberDiffMin: 0
     };
   }
 };
