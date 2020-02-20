@@ -1025,9 +1025,13 @@ export default {
       this.subscriberData[0]["name"] = "";
       this.viewDiffData[0]["name"] = "";
       this.subscriberDiffData[0]["name"] = "";
+      console.log("%%%%%%%%%%%%%%%%%%%%%%%%%"+this.subscriberDiffMin)
       this.subscriberDiffOptions["yaxis"]["max"] = (max) => {
+        console.log("@##@@@@@@@@@@@@@"+max);
         if(max == 0 && this.subscriberDiffMin != 0){
           return this.subscriberDiffMin * -1 ;
+        }else if(max == 0 && this.subscriberDiffMin == 0){
+          return 100;
         }
         return max;
       };
@@ -1463,7 +1467,7 @@ export default {
           labels: {
             show: true,
             formatter: value => {
-              return tc(value);
+              return tc(parseInt(value) );
             }
           }
         }
