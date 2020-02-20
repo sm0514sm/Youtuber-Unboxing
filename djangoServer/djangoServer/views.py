@@ -491,9 +491,11 @@ class updateThread:
                 if tagCloud.get(''):
                     del tagCloud['']
                 
-                delete_words = [] # 1개 이하를 지운다.
+                
+                Minimum = 5  # 태그의 출현 횟수가 5개 이하면 지운다.
+                delete_words = [] 
                 for word, count in tagCloud.items(): 
-                    if count <= 1:
+                    if count <= Minimum:
                         delete_words.append(word)
                 for delete_word in delete_words:
                     del tagCloud[delete_word]
