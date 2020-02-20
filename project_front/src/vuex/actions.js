@@ -13,7 +13,6 @@ export default {
                 //error 코드
                 var failCallback = payload.failCallback;
                 if (response.data.state != 'ok') {
-                    console.log("너 여기 들어가니?")
                     failCallback();
                     return;
                 }
@@ -367,7 +366,6 @@ export default {
                 var code = response.data.code
                 var yno = response.data.yno
 
-                console.log("*****************" + code)
 
                 console.log(response);
 
