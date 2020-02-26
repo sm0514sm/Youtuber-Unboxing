@@ -15,11 +15,11 @@ public class Youtuber {
 	private int subscriber;
 	private long totalViewCount;
 	private int totalVideoCount;
-	private String grade;
+	private int grade;
 	private int influence;
 	private int activity;
-	private int growth;
-	private int basicStat;
+	private int viewCountTrend;
+	private int subscriberCountTrend;
 	private int charm;
 	private int clickCount;
 	private Date updatedDate;
@@ -29,6 +29,10 @@ public class Youtuber {
 	private String otherLink3;
 	private String otherLink4;
 	private String otherLink5;
+	private String uploadsID;
+	private String searchKeyword;
+	private int status;
+	private String tagCloud;
 	
 	public int getYno() {
 		return yno;
@@ -102,10 +106,10 @@ public class Youtuber {
 	public void setTotalVideoCount(int totalVideoCount) {
 		this.totalVideoCount = totalVideoCount;
 	}
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
 	public int getInfluence() {
@@ -120,17 +124,17 @@ public class Youtuber {
 	public void setActivity(int activity) {
 		this.activity = activity;
 	}
-	public int getGrowth() {
-		return growth;
+	public int getViewCountTrend() {
+		return viewCountTrend;
 	}
-	public void setGrowth(int growth) {
-		this.growth = growth;
+	public void setViewCountTrend(int viewCountTrend) {
+		this.viewCountTrend = viewCountTrend;
 	}
-	public int getBasicStat() {
-		return basicStat;
+	public int getSubscriberCountTrend() {
+		return subscriberCountTrend;
 	}
-	public void setBasicStat(int basicStat) {
-		this.basicStat = basicStat;
+	public void setSubscriberCountTrend(int subscriberCountTrend) {
+		this.subscriberCountTrend = subscriberCountTrend;
 	}
 	public int getCharm() {
 		return charm;
@@ -185,5 +189,29 @@ public class Youtuber {
 	}
 	public void setOtherLink5(String otherLink5) {
 		this.otherLink5 = otherLink5;
+	}
+	public String getUploadsID() {
+		return uploadsID;
+	}
+	public void setUploadsID(String uploadsID) {
+		this.uploadsID = uploadsID;
+	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getTagCloud() {
+		return tagCloud;
+	}
+	public void setTagCloud(String tagCloud) {
+		this.tagCloud = tagCloud;
 	}
 }

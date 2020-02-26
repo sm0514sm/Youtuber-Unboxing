@@ -3,16 +3,14 @@
 
 <mapper namespace="com.ssafy.model.dao.NewsDao">
 
-	<!-- 여러개가 나오더라도 resultType에는 리스트 형으로 쓰지 않는다 -->
-
-	<!-- news 고유번호로 뉴스 정보 검색 -->
+	<!-- news 고유번호 | 해당 news 정보 검색 -->
 	<select id="search" parameterType="int" resultType="news">
 		select *
 		from news
 		where nno=#{nno}
 	</select>
 
-	<!-- 키워드로 news 정보 검색 / 최신 뉴스 순으로 -->
+	<!-- keyword | news 제목,설명,언론사 이름에 keyword가 포함된 경우 검색 | 기사 날짜 기준 내림차순 -->
 	<select id="searchKeyword" parameterType="String" resultType="news">
 		select *
 		from news
@@ -22,14 +20,15 @@
 		order by newsDate desc;
 	</select>
 	
-	<!-- 전체 news 조회	 / 최신 뉴스 순으로 -->
+	<!-- 전체 news 목록 조회 | 기사 날짜 기준 내림차순 -->
 	<select id="searchAll" resultType="news">
 		select *
 		from news
 		order by newsDate desc
 	</select>
 	
-	<!-- 정렬 조건에 따른 news 랭킹 조회. num이 가져올 개수 -->
+	<!-- 검색 조건, 검색 개수 | 검색 조건(clickCount, newsDate)으로 정렬 후 검색 개수만큼 가져옴 | 정렬 기준으로 내림차순 -->
+	<!-- 정렬 조건이 잘못 입력된 경우 아무것도 반환하지 않음 -->
 	<select id="searchRanking" parameterType="java.util.Map" resultType="news">
 		select *
 		from news

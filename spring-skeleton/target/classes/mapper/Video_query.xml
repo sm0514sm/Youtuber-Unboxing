@@ -5,15 +5,14 @@
 
 	<!-- 여러개가 나오더라도 resultType에는 리스트 형으로 쓰지 않는다 -->
 
-	<!-- video 고유번호로 영상 정보 검색 -->
+	<!-- video 고유번호 | video 정보 검색 -->
 	<select id="search" parameterType="int" resultType="video">
 		select *
-		from video v inner join youtube_category yc
-		using (ycano)
+		from video v
 		where v.vno=#{vno}
 	</select>
 	
-		<!-- 키워드로 video 정보 검색 / 조회수 순으로 -->
+	<!-- keyword | video 이름,설명,태그 키워드로 video 목록 검색 | 영상조회수 기준 내림차순 -->
 	<select id="searchKeyword" parameterType="String" resultType="video">
 		select *
 		from video v inner join youtube_category yc
@@ -24,7 +23,7 @@
 		order by videoViewCount desc
 	</select>
 	
-	<!-- 전체 video 조회 / 조회수 순으로 -->
+	<!-- 전체 video 목록 조회 | 영상조회수 기준 내림차순 -->
 	<select id="searchAll" resultType="video">
 		select *
 		from video v inner join youtube_category yc
@@ -32,7 +31,8 @@
 		order by v.videoViewCount desc
 	</select>
 	
-	<!-- 정렬 조건에 따른 video 랭킹 조회. searchCondition이 정렬 조건, num이 가져올 개수 -->
+	<!-- 정렬 조건, 검색 개수 | 정렬 조건(videoViewCount, videoCommentCount, good, bad, regDate)으로 정렬 후 검색 개수만큼 가져옴 | 정렬 기준으로 내림차순 -->
+	<!-- 정렬 조건이 잘못 입력된 경우 아무것도 반환하지 않음 -->
 	<select id="searchRanking" parameterType="java.util.Map" resultType="video">
 		select *
 		from video v inner join youtube_category yc
