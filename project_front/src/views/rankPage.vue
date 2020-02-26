@@ -284,12 +284,14 @@ export default {
       return tc(num);
     },
     callback(list) {
+      console.log("callback start")
       this.youtubers = list;
       this.youtubers = orderBy(
         this.youtubers,
         [v => v["subscriber"]],
         ["desc"]
       );
+      console.log("callback middle")
       this.list = this.youtubers.slice(0, this.range);
     },
     infiniteHandler($state) {
@@ -298,7 +300,7 @@ export default {
           this.page * this.range,
           this.page * this.range + this.range
         );
-        if (tmplist.length > 0) {
+        if (tmplist.length >= 0) {
           this.page += 1;
           this.list.push(...tmplist);
           $state.loaded();
@@ -338,6 +340,7 @@ export default {
     }
   },
   mounted() {
+    console.log("mounted")
     this.$vuetify.goTo(0);
   },
   created() {
@@ -365,6 +368,7 @@ export default {
         [v => v[this.orderGroup]],
         ["desc"]
       );
+      console.log("watch")
       this.list = this.youtubers.slice(0, this.range * this.page);
     }
   },
@@ -387,11 +391,9 @@ export default {
 * {
   font-family: "Noto Sans KR", sans-serif;
 }
-
 .circle {
   border-radius: 50%;
 }
-
 td {
   border: 1px solid lightgray;
 }

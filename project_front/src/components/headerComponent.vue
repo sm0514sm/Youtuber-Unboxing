@@ -313,7 +313,6 @@ export default {
   },
   watch: {
     inputKeyword() {
-      console.log("*****@#$#$^#$%@#$@#$@#$***");
       // Items have already been loaded
       if (this.searchItems.length > 10) return;
 

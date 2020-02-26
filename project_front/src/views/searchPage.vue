@@ -7,7 +7,7 @@
     <v-card>
       <v-list-item-content
         class="justify-center py-6"
-        style="background-color:teal ; height : 300px"
+        style="background-color: #16cccc; height : 300px"
       >
         <v-list-item-title class="font-weight-black display-3 font-italic" align="center"></v-list-item-title>
         <v-list-item-title
@@ -85,94 +85,100 @@
               shaped
             >
               <v-row align="center">
-                <!-- thumbnail -->
-                <v-col class="ml-3 pr-0" cols="1" align="center">
-                  <v-img
-                    class="circle"
-                    :src="item.thumbnails"
-                    flat
-                    :aspect-ratio="1/1"
-                    width="200px"
-                  />
-                </v-col>
-                <v-divider vertical class="mx-3"></v-divider>
-                <!-- 유튜버 설명 -->
-                <v-col cols="9" class="pa-1">
-                  <v-row align="center">
-                    <v-col cols="12" class="py-1">
-                      <p
-                        class="font-weight-black thin display-1 ma-0 text-truncate"
-                      >{{item.channelName}}</p>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12" class="py-0">
-                      <p
-                        class="font-weight-light thin ma-0"
-                        style="font-size:13px"
-                      >개설일 : {{item.publishedDate}}</p>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col class="px-1 pl-2 py-0">
-                      <table style="text-align: center; width: 80%; margin-top: 15px;">
-                        <tr id="th1">
-                          <td>구독자수</td>
-                          <td>총 조회수</td>
-                          <td>총 영상수</td>
-                        </tr>
-                        <tr>
-                          <td>{{ tc(item.subscriber) }}</td>
-                          <td>{{ tc(item.totalViewCount) }}</td>
-                          <td>{{ item.totalVideoCount }}</td>
-                        </tr>
-                      </table>
-                      <!-- <p id="subtitle" class="mt-1 mb-0"></p> -->
-                    </v-col>
-                    <v-col class="px-1 py-0">
-                      <table style="text-align: center; width: 80%; margin-top: 15px;">
-                        <tr id="th2">
-                          <td>영향력</td>
-                          <td>활동력</td>
-                          <!-- <td>조회수력</td>
-                          <td>구독자력</td>-->
-                          <td>호감도</td>
-                        </tr>
-                        <tr>
-                          <td>{{ item.influence }}점</td>
-                          <td>{{ item.activity }}점</td>
-                          <td>{{ item.charm }}점</td>
-                        </tr>
-                      </table>
-                      <p id="subtitle" class="mt-1 mb-2 mb-0 ml-1">*위 3개 수치는 100점 만점으로 환산한 점수입니다.</p>
-                    </v-col>
-                  </v-row>
-                </v-col>
-                <v-divider vertical class="pl"></v-divider>
-                <!-- 등급 -->
-                <v-col>
-                  <v-row align="center">
-                    <v-col class="py-1">
-                      <p class="font-weight-bold ma-0">&nbsp;&nbsp;GRADE</p>
-                    </v-col>
-                  </v-row>
-                  <v-divider class="mr-10 mt-0 mb-0"></v-divider>
-                  <v-row>
-                    <v-col class="py-2">
-                      <v-btn
-                        class="mx-0"
-                        fab
-                        dark
-                        large
-                        :color="setGradeColor(item.grade)"
-                        height="80px"
-                        width="80px"
-                      >
-                        <v-icon dark>{{setGrade(item.grade)}}</v-icon>
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-col>
+                  <!-- thumbnail -->
+                  <v-col class="ma-0 py-5 pr-0" cols="2" align="center">
+                    <!-- <p class="title">{{ i + 1 }}위</p> -->
+                    <!-- </v-col>
+                    <v-col class="pr-0" cols="1" align="center">-->
+                    <v-img
+                      class="circle"
+                      :src="item.thumbnails"
+                      flat
+                      :aspect-ratio="1 / 1"
+                      width="110px"
+                    />
+                  </v-col>
+                  <v-divider vertical class="pl-0 mr-2"></v-divider>
+                  <!-- 유튜버 설명 -->
+                  <v-col cols="7" class="pl-1 pr-0 pt-1 pb-0 ml-5 mr-0 mt-5">
+                    <v-row align="center">
+                      <v-col cols="12" class="pt-0 pb-1 pl-1">
+                        <p
+                          class="font-weight-black thin display-1 ma-0 text-truncate"
+                        >{{ item.channelName }}</p>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12" class="pt-0 pb-0 pl-1">
+                        <p
+                          class="font-weight-light thin ma-0 pa-0"
+                          style="font-size:13px"
+                        >개설일 : {{ item.publishedDate }}</p>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col class="px-2 pl-1 py-0">
+                        <table style="text-align: center; width: 100%; margin-top: 15px;">
+                          <tr id="th1">
+                            <td>구독자수</td>
+                            <td>총 조회수</td>
+                            <td>총 영상수</td>
+                          </tr>
+                          <tr>
+                            <td>{{ tc(item.subscriber) }}</td>
+                            <td>{{ tc(item.totalViewCount) }}</td>
+                            <td>{{ item.totalVideoCount }}</td>
+                          </tr>
+                        </table>
+                        <!-- <p id="subtitle" class="mt-1 mb-0"></p> -->
+                      </v-col>
+                      <v-col class="px-2 py-0">
+                        <table style="text-align: center; width: 100%; margin-top: 15px;">
+                          <tr id="th2">
+                            <td>영향력</td>
+                            <td>활동력</td>
+                            <!-- <td>조회수력</td>
+                            <td>구독자력</td>-->
+                            <td>호감도</td>
+                          </tr>
+                          <tr>
+                            <td>{{ item.influence }}점</td>
+                            <td>{{ item.activity }}점</td>
+                            <td>{{ item.charm }}점</td>
+                          </tr>
+                        </table>
+                        <p
+                          id="subtitle"
+                          class="mt-1 mb-2 mb-0 ml-1"
+                        >*위 3개 수치는 100점 만점으로 환산한 점수입니다.</p>
+                      </v-col>
+                    </v-row>
+                  </v-col>
+                  <v-divider vertical class="pl-5 ml-3 mr-0 pl-2"></v-divider>
+                  <!-- 등급 -->
+                  <v-col cols="2" style="text-align: center">
+                    <v-row align="center" class="ma-0 px-2">
+                      <v-col class="px-0 pt-1 pb-0">
+                        <p class="font-weight-bold">&nbsp;&nbsp;GRADE</p>
+                      </v-col>
+                    </v-row>
+                    <v-divider class="ma-0 pa-0"></v-divider>
+                    <v-row>
+                      <v-col class>
+                        <v-btn
+                          class="ma-0"
+                          fab
+                          dark
+                          large
+                          :color="setGradeColor(item.grade)"
+                          height="90px"
+                          width="90px"
+                        >
+                          <v-icon large dark>{{ setGrade(item.grade) }}</v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-col>
               </v-row>
             </v-card>
           </v-hover>
@@ -203,7 +209,7 @@
             :key="i"
           >
             <v-col cols="4" class="px-1">
-              <v-card height="510px">
+              <v-card height="480px">
                 <v-container class="pa-2">
                   <v-row>
                     <v-col>
@@ -219,14 +225,21 @@
                   </v-row>
                   <v-row>
                     <v-col class="pt-0">
-                      <p class="text-truncate title mb-0">{{item.videoName}}</p>
+                      <p class="text-truncate title mb-0 pl-1"><b>{{item.videoName}}</b></p>
+                      <!-- <v-row class="pa-0 ma-0"> -->
                       <p
-                        style="font-size: 13px"
-                      >게시일 : {{item.regDate}} / 조회수 : {{tc(item.videoViewCount)}} 회</p>
+                        style="font-size: 13px; float:left" class="mt-1 mb-5 pl-1"
+                      >게시일 : {{item.regDate}} </p>
+                      <p style="font-size: 13px; float:right" class="mt-1 mb-5 pl-1">조회수 : {{tc(item.videoViewCount)}} 회</p>
+                      <!-- </v-row> -->
+                      
+                      <br>
+                      <hr class="mb-3 px-2">
                       <p
                         v-html="item.videoDescription.substring(0,120).concat('...')"
-                        class="font-weight-light"
-                      ></p>
+                        class="font-weight-light pl-1 mb-0" style="font-size: 0.9em"
+                      >
+                      </p>
                     </v-col>
                   </v-row>
                   <v-row>
@@ -235,9 +248,9 @@
                         v-for="(tag,index) in item.tags"
                         :key="index"
                         rounded
-                        color="#6EE3F7"
+                        color="#5edaef"
                         dark
-                        class="ml-1 mb-1"
+                        class="ma-1"
                         @click="search(tag)"
                       >{{tag}}</v-btn>
                     </v-col>
@@ -421,11 +434,14 @@ export default {
   },
   mounted() {
     this.$vuetify.goTo(0);
-    console.log("#########################");
-    console.log(encodeURI(this.$route.query.word));
+    var keyword = this.$route.query.word
+    var keywordIndex = keyword.indexOf('/')
+    if(keywordIndex != -1){
+      keyword = keyword.substring(0,keywordIndex)
+    }
     const youtuberSearch = new Promise((resolve, reject) => {
       http
-        .get("/youtuber/search/" + encodeURI(this.$route.query.word))
+        .get("/youtuber/search/" + encodeURIComponent(keyword))
         .then(response => {
           resolve(response);
         })
@@ -436,7 +452,7 @@ export default {
 
     const newsSearch = new Promise((resolve, reject) => {
       http
-        .get("/news/search/" + encodeURI(this.$route.query.word))
+        .get("/news/search/" + encodeURIComponent(keyword))
         .then(response => {
           resolve(response);
         })
@@ -447,7 +463,7 @@ export default {
 
     const videoSearch = new Promise((resolve, reject) => {
       http
-        .get("/video/search/" + encodeURI(this.$route.query.word))
+        .get("/video/search/" + encodeURIComponent(keyword))
         .then(response => {
           resolve(response);
         })
@@ -467,7 +483,6 @@ export default {
         }
         for (let index = 0; index < responses.length; index++) {
           if (responses[index].data.state != "ok") {
-            console.log("fail");
             if (this.$route.query.word.split(" ").join("") != "") {
               this.failCallback();
               return;
@@ -505,9 +520,6 @@ export default {
         }
         this.displayvideo = this.searchedvideo.slice(0, 3);
 
-        console.log(this.searchedyoutuber);
-        console.log(this.searchednews);
-        console.log(this.searchedvideo);
       })
     );
   },
@@ -532,6 +544,15 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css?family=Do+Hyeon|Nanum+Gothic|Noto+Sans+KR&display=swap");
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+#subtitle {
+  float: right;
+  color: gray;
+  font-size: 12px;
+}
 .circle {
   border-radius: 50%;
 }
@@ -539,11 +560,11 @@ td {
   border: 1px solid lightgray;
 }
 #th1 {
-  background-color: #22a2a2a3;
+  background-color: #0d9090a3;
   color: white;
 }
 #th2 {
-  background-color: #349ed0a3;
+  background-color: #239494;
   color: white;
 }
 </style>
