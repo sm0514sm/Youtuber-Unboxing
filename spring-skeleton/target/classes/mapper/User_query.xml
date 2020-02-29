@@ -30,8 +30,9 @@
 	
 	<!-- userID | 해당 userID의 회원 가입 여부 조회 | 있으면 1 없으면 0 -->
 	<select id="searchUserExist" parameterType="String" resultType="int">
-		select count(*) userNum
-		from user
-		where userID=#{userID}
+		select exists(
+			select * from user where userID=#{userID}
+		)
+		as success
 	</select>
 </mapper>

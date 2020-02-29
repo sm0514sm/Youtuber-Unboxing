@@ -46,7 +46,8 @@ public class KakaoController {
     	
 		String userID = element.getAsJsonObject().get("id").getAsString();
 		//디비에서 id 검사
-		if(userService.searchUserExist(userID)==0) {
+		int check = userService.searchUserExist(userID);
+		if(check==0) {
 			User user = new User();
 			if(element.getAsJsonObject().has("email")) {
 				String userEmail = element.getAsJsonObject().get("email").getAsString();
@@ -57,7 +58,7 @@ public class KakaoController {
 			user.setUserName(userName);
 			userService.insertUser(user);
 		}
-        return "redirect:http://15.165.77.1:3000/?access_Token="+access_Token;
+        return "redirect:http://i02a108.p.ssafy.io/?access_Token="+access_Token;
     }
 	
 }
