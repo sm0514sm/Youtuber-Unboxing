@@ -87,7 +87,7 @@
       <v-card-text>
         <v-container fluid>
           <v-toolbar-title>
-            <h4>추천 항목</h4>
+            <h4>관심 항목</h4>
             <v-chip class="ma-2" color="white" text-color="black" outlined>
               <v-icon class="mr-1">mdi-cursor-default-click</v-icon>나와 관심 항목이 일치하는 유저들이 즐겨찾기한 유튜버들을 추천해 드립니다
             </v-chip>
@@ -330,6 +330,9 @@
      <template v-slot:item.totalViewCount="{ item }">
       {{tc(item.totalViewCount)}}
     </template>
+    <template v-slot:item.grade="{ item }">
+      {{setGrade(item.grade)}}
+    </template>
 
     <template v-slot:item.action="{ item }">
       <v-icon small @click="deleteItem(item)" color="red">
@@ -338,11 +341,11 @@
     </template>
 
     <template v-slot:item.channelName="{item}">
-      <div @click="goTo(item.yno)">{{item.channelName}}</div>
+      <div style="cursor: pointer" @click="goTo(item.yno)">{{item.channelName}}</div>
     </template>
 
     <template v-slot:item.thumbnail="{ item }">
-      <v-avatar @click="goTo(item.yno)">
+      <v-avatar style="cursor: pointer" @click="goTo(item.yno)">
       <img
         :src="item.thumbnails"
         alt="John"
@@ -408,6 +411,21 @@ import tc from 'thousands-counter';
     methods: {
       tc(num) {
       return tc(num)
+    },
+    setGrade(num) {
+      if (num >= 95) {
+        return "SS";
+      } else if (num >= 90) {
+        return "S";
+      } else if (num >= 80) {
+        return "A";
+      } else if (num >= 50) {
+        return "B";
+      } else if (num >= 20) {
+        return "C";
+      } else {
+        return "D";
+      }
     },
       flag(yno){
         let found = false
