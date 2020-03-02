@@ -43,10 +43,28 @@ public class FavoriteRestController {
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
+	private HashMap<String, Object> userExist(String access_Token) {
+		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+		String userID = userInfo.get("id").toString();
+		int check = userService.searchUserExist(userID);
+		if(check==0) {
+			User user = new User();
+			if(userInfo.containsKey("email")) {
+				String userEmail = userInfo.get("email").toString();
+				user.setUserEmail(userEmail);
+			}
+			String userName = userInfo.get("nickname").toString();
+			user.setUserID(userID);
+			user.setUserName(userName);
+			userService.insertUser(user);
+		}
+		return userInfo;
+	}
+	
 	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 youtuber를 해당 user의 즐겨찾기에 추가")
 	@GetMapping("/favorite/insert/{yno}&{usno}")
 	public ResponseEntity<Map<String, Object>> insertFavorite(@PathVariable String yno, @PathVariable String usno){
-    	HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
+		HashMap<String, Object> userInfo = userExist(usno);
     	User user = userService.search(userInfo.get("id").toString());
 		
     	Favorite favorite = new Favorite();
@@ -60,7 +78,7 @@ public class FavoriteRestController {
 	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 youtuber를 해당 user의 즐겨찾기에서 삭제")
 	@DeleteMapping("/favorite/delete/{yno}&{usno}")
 	public ResponseEntity<Map<String, Object>> searchKeyword(@PathVariable String yno,  @PathVariable String usno){
-		HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
+		HashMap<String, Object> userInfo = userExist(usno);
     	User user = userService.search(userInfo.get("id").toString());
 		
 		Map<String, Integer> map = new HashMap<>();
@@ -73,7 +91,7 @@ public class FavoriteRestController {
 	@ApiOperation("youtuber 고유번호, user 고유번호 | 해당 user의 즐겨찾기에 해당 youtuber가 있는지 조회 (있으면 1, 없으면 0)")
 	@GetMapping("/favorite/select/{yno}&{usno}")
 	public ResponseEntity<Map<String, Object>> searchFavorite(@PathVariable String yno, @PathVariable String usno){
-		HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
+		HashMap<String, Object> userInfo = userExist(usno);
     	User user = userService.search(userInfo.get("id").toString());
 		
 		Map<String, Integer> map = new HashMap<>();
@@ -86,7 +104,7 @@ public class FavoriteRestController {
 	@ApiOperation("user 고유번호 | 해당 user가 즐겨찾기 한  youtuber 목록 검색 | 즐겨찾기 추가 날짜 기준 내림차순")
 	@GetMapping("/favorite/user/{usno}")
 	public ResponseEntity<Map<String, Object>> searchUserFavoriteYoutuber(@PathVariable String usno){
-		HashMap<String, Object> userInfo = kakao.getUserInfo(usno.toString());
+		HashMap<String, Object> userInfo = userExist(usno);
     	User user = userService.search(userInfo.get("id").toString());
 		List<Youtuber> list = favoriteService.searchUserFavoriteYoutuber(user.getUsno()); 
 		return handleSuccess(list);

@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.ssafy.model.dto.User;
 import com.ssafy.model.dto.Youtuber;
 import com.ssafy.model.service.KakaoAPI;
@@ -34,21 +37,28 @@ public class UserRestController {
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-//	@ApiOperation("userID, userName, userEmail | 회원 등록")
-//	@PostMapping("/user/insert/{userID}&{userName}&{userEmail}")
-//	public ResponseEntity<Map<String, Object>> insertUser(@PathVariable String userID, @PathVariable String userName, @PathVariable String userEmail){
-//		User user = new User();
-//		user.setUserID(userID);
-//		user.setUserName(userName);
-//		user.setUserEmail(userEmail);
-//		userService.insertUser(user); 
-//		return handleSuccess("회원 등록 성공");
-//	}
+	private HashMap<String, Object> userExist(String access_Token) {
+		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+		String userID = userInfo.get("id").toString();
+		int check = userService.searchUserExist(userID);
+		if(check==0) {
+			User user = new User();
+			if(userInfo.containsKey("email")) {
+				String userEmail = userInfo.get("email").toString();
+				user.setUserEmail(userEmail);
+			}
+			String userName = userInfo.get("nickname").toString();
+			user.setUserID(userID);
+			user.setUserName(userName);
+			userService.insertUser(user);
+		}
+		return userInfo;
+	}
 	
 	@ApiOperation("usToken | usToken을 이용한 회원정보 조회")
 	@GetMapping("/user/search/{usToken}")
 	public ResponseEntity<Map<String, Object>> search(@PathVariable String usToken){
-		HashMap<String, Object> userInfo = kakao.getUserInfo(usToken.toString());
+		HashMap<String, Object> userInfo = userExist(usToken);
     	User user = userService.search(userInfo.get("id").toString());
 		return handleSuccess(user);
 	}
