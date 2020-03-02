@@ -37,34 +37,28 @@ public class UserRestController {
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-	private void userExist(String access_Token) {
+	private HashMap<String, Object> userExist(String access_Token) {
 		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-    	System.out.println("login Controller : " + userInfo);
-    	Gson gson = new Gson(); 
-    	String json = gson.toJson(userInfo); 
-    	JsonParser parser = new JsonParser();
-    	JsonElement element = parser.parse(json);
-    	System.out.println("element: "+element);
-		String userID = element.getAsJsonObject().get("id").getAsString();
+		String userID = userInfo.get("id").toString();
 		int check = userService.searchUserExist(userID);
 		if(check==0) {
 			User user = new User();
-			if(element.getAsJsonObject().has("email")) {
-				String userEmail = element.getAsJsonObject().get("email").getAsString();
+			if(userInfo.containsKey("email")) {
+				String userEmail = userInfo.get("email").toString();
 				user.setUserEmail(userEmail);
 			}
-			String userName = element.getAsJsonObject().get("nickname").getAsString();
+			String userName = userInfo.get("nickname").toString();
 			user.setUserID(userID);
 			user.setUserName(userName);
 			userService.insertUser(user);
 		}
+		return userInfo;
 	}
 	
 	@ApiOperation("usToken | usToken을 이용한 회원정보 조회")
 	@GetMapping("/user/search/{usToken}")
 	public ResponseEntity<Map<String, Object>> search(@PathVariable String usToken){
-		userExist(usToken);
-		HashMap<String, Object> userInfo = kakao.getUserInfo(usToken.toString());
+		HashMap<String, Object> userInfo = userExist(usToken);
     	User user = userService.search(userInfo.get("id").toString());
 		return handleSuccess(user);
 	}
