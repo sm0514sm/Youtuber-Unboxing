@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.ssafy.model.dto.User;
 import com.ssafy.model.dto.Youtuber;
 import com.ssafy.model.service.KakaoAPI;
@@ -34,20 +37,33 @@ public class UserRestController {
 		return handleFail(e.getMessage(), HttpStatus.OK);
 	}
 	
-//	@ApiOperation("userID, userName, userEmail | 회원 등록")
-//	@PostMapping("/user/insert/{userID}&{userName}&{userEmail}")
-//	public ResponseEntity<Map<String, Object>> insertUser(@PathVariable String userID, @PathVariable String userName, @PathVariable String userEmail){
-//		User user = new User();
-//		user.setUserID(userID);
-//		user.setUserName(userName);
-//		user.setUserEmail(userEmail);
-//		userService.insertUser(user); 
-//		return handleSuccess("회원 등록 성공");
-//	}
+	private void userExist(String access_Token) {
+		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+    	System.out.println("login Controller : " + userInfo);
+    	Gson gson = new Gson(); 
+    	String json = gson.toJson(userInfo); 
+    	JsonParser parser = new JsonParser();
+    	JsonElement element = parser.parse(json);
+    	System.out.println("element: "+element);
+		String userID = element.getAsJsonObject().get("id").getAsString();
+		int check = userService.searchUserExist(userID);
+		if(check==0) {
+			User user = new User();
+			if(element.getAsJsonObject().has("email")) {
+				String userEmail = element.getAsJsonObject().get("email").getAsString();
+				user.setUserEmail(userEmail);
+			}
+			String userName = element.getAsJsonObject().get("nickname").getAsString();
+			user.setUserID(userID);
+			user.setUserName(userName);
+			userService.insertUser(user);
+		}
+	}
 	
 	@ApiOperation("usToken | usToken을 이용한 회원정보 조회")
 	@GetMapping("/user/search/{usToken}")
 	public ResponseEntity<Map<String, Object>> search(@PathVariable String usToken){
+		userExist(usToken);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usToken.toString());
     	User user = userService.search(userInfo.get("id").toString());
 		return handleSuccess(user);

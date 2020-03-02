@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.ssafy.model.dto.Interest;
 import com.ssafy.model.dto.User;
 import com.ssafy.model.dto.Youtuber;
@@ -43,6 +46,7 @@ public class InterestRestController {
 	@ApiOperation("user 토큰, 관심분야 고유번호(,로 구분/최대 3개) | user의 관심항목 추가 또는 업데이트")
 	@GetMapping("/interest/insert/{usToken}&{interestList}")
 	public ResponseEntity<Map<String, Object>> insertInterest(@PathVariable String usToken, @PathVariable String interestList){
+		userExist(usToken);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usToken);
     	User user = userService.search(userInfo.get("id").toString());
     	int usno = user.getUsno();
@@ -65,6 +69,7 @@ public class InterestRestController {
 	@ApiOperation("user 토큰 | user의 관심항목 조회")
 	@GetMapping("/interest/search/{usToken}")
 	public ResponseEntity<Map<String, Object>> searchInterest(@PathVariable String usToken){
+		userExist(usToken);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usToken);
     	User user = userService.search(userInfo.get("id").toString());
     	int usno = user.getUsno();
@@ -76,6 +81,7 @@ public class InterestRestController {
 	@ApiOperation("user 토큰, 관심분야 고유번호(,로 구분/최대 3개) | 관심분야에 기반한 유튜버 추천 목록을 검색 개수만큼 검색 | 같은 관심분야를 즐겨찾기에 추가한 사람이 많은 순서로 내림차순 | 추천동영상이 4개보다 적을 경우 영상총조회수가 많은 유튜버들로 나머지를 채움")
 	@GetMapping("/interest/search/recommend/{usToken}&{interestList}")
 	public ResponseEntity<Map<String, Object>> searchInterestRecommend(@PathVariable String usToken, @PathVariable String interestList){
+		userExist(usToken);
 		HashMap<String, Object> userInfo = kakao.getUserInfo(usToken);
     	User user = userService.search(userInfo.get("id").toString());
     	List<Youtuber> list;
@@ -110,6 +116,29 @@ public class InterestRestController {
     		}
     	}
 		return handleSuccess(list);
+	}
+	
+	private void userExist(String access_Token) {
+		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+    	System.out.println("login Controller : " + userInfo);
+    	Gson gson = new Gson(); 
+    	String json = gson.toJson(userInfo); 
+    	JsonParser parser = new JsonParser();
+    	JsonElement element = parser.parse(json);
+    	System.out.println("element: "+element);
+		String userID = element.getAsJsonObject().get("id").getAsString();
+		int check = userService.searchUserExist(userID);
+		if(check==0) {
+			User user = new User();
+			if(element.getAsJsonObject().has("email")) {
+				String userEmail = element.getAsJsonObject().get("email").getAsString();
+				user.setUserEmail(userEmail);
+			}
+			String userName = element.getAsJsonObject().get("nickname").getAsString();
+			user.setUserID(userID);
+			user.setUserName(userName);
+			userService.insertUser(user);
+		}
 	}
 
 	// Exception Handle
