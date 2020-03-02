@@ -34,30 +34,8 @@ public class KakaoController {
     public String login(@RequestParam("code") String code) {
         System.out.println("code:"+code);
     	String access_Token = kakao.getAccessToken(code);
-    	HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-    	System.out.println("login Controller : " + userInfo);
-    	
-    	Gson gson = new Gson(); 
-    	String json = gson.toJson(userInfo); 
-    	JsonParser parser = new JsonParser();
-    	JsonElement element = parser.parse(json);
-    	
-    	System.out.println("element: "+element);
-    	
-		String userID = element.getAsJsonObject().get("id").getAsString();
-		//디비에서 id 검사
-		if(userService.searchUserExist(userID)==0) {
-			User user = new User();
-			if(element.getAsJsonObject().has("email")) {
-				String userEmail = element.getAsJsonObject().get("email").getAsString();
-				user.setUserEmail(userEmail);
-			}
-			String userName = element.getAsJsonObject().get("nickname").getAsString();
-			user.setUserID(userID);
-			user.setUserName(userName);
-			userService.insertUser(user);
-		}
-        return "redirect:http://15.165.77.1:3000/?access_Token="+access_Token;
+    	System.out.println(access_Token);
+    	return "redirect:http://i02a108.p.ssafy.io/?access_Token="+access_Token;
     }
 	
 }
