@@ -9,3 +9,4 @@ public interface CategoryService {
 	public List<Youtuber> search(int cano);
 	public List<Category> searchAll();
 }
+// for push
