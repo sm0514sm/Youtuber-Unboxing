@@ -141,6 +141,6 @@ dmypy.json
 spring-skeleton/target/classes
 spring-skeleton/target/m2e-wtp
 spring-skeleton/target/maven-status
-spring-skeleton/target/Skeleton_SpringBoot-0.0.1-SNAPSHOT
+spring-skeleton/target/Skeleton_SpringBoot-0.0.1-SNAPSHOT/
 spring-skeleton/target/surefire-reports
 spring-skeleton/target/test-classes
