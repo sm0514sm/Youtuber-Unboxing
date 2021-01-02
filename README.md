@@ -1,42 +1,89 @@
-<strong>SSAFY 2기 1반 8조 프로젝트</strong>
+# Youtube Unboxing : 유튜버 분석 서비스
+1. [시연 영상](#시연-영상)
+1. [기술 스택](#기술-스택)
+1. [기획 의도](#기획-의도)
+1. [개발 일정](#개발-일정-및-팀원-구성)
+1. [맡은 역할](#맡은-역할)
+1. [각 페이지 소개](#각-페이지-소개)
 
+# 시연 영상
 
+<h2>완벽한 분석 기능</h2>
+<img src="README_img/detail.gif" width=80% />
+<!-- ![비디오](img/detail.gif) -->
+<h4 style="margin-bottom: 10%">
+    구독자 수, 조회수 같은 기본적인 정보부터
+    <br />커뮤니티, 뉴스 분석까지
+    <br />한 화면에서 모두 만나보세요.
+</h4>
+<hr width="80%">
+<h2>간편한 검색 기능</h2>
+<img src="README_img/search.gif" width=80% />
+<h4 style="margin-bottom: 10%">
+    원하는 유튜버를 검색해 볼 수 있습니다.
+    <br />만약 내가 찾는 유튜버가 없다면?
+    <br />자유롭게 추가하세요.
+</h4>
+<hr width="80%">
+<h2>손쉬운 비교하기 기능</h2>
+<img src="README_img/compare.gif" width=80% />
+<h4 style="margin-bottom: 10%">
+     번거롭게 하나하나 비교할 필요 없이
+    <br />한 화면에서 손쉽게 두 유튜버를
+    <br />비교해 보세요.
+</h4>
+<hr width="80%">
+<h2>강력한 유튜버 추천 기능</h2>
+<img src="README_img/user.gif" width=80% />
+<h4 style="margin-bottom: 10%">
+    나와 관심항목이 같은 사람들이
+    <br />즐겨찾는 유튜버를 추천해 드립니다
+    <br />바로 확인해 보세요.
+</h4>
+<hr style="margin-bottom: 15%;">
 
-# 유튜버 분석 서비스
+# 기술 스택
 
-:star: 페이지는 여기서 확인하세요! ​-> ​[:link:](http://15.165.77.1:3000/)
+<img src="README_img/technology-stack.png" width="70%" style="margin-top: 3%; margin-bottom: 7%">
+<hr width="70%" />
+<img src="README_img/system-architecture.png" width="70%" style="margin-top: 3%;"><br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;저희 서비스는 유튜버의 화제성을 분석하여 마케팅에 활용할 수 있도록 정보를 제공합니다. 유튜버가 다루는 토픽과 주제 뿐 아니라 여러 커뮤니티의 반응 및 기사들을 종합하여 유튜버에게 등급을 매깁니다. 기존에도 유튜버 분석 사이트는 존재했었습니다. 이들은 구독자수, 영상 조회수 등 만을 이용하여 높은 관심을 받는 유튜버를 보여줄 뿐입니다. 하지만 저희 사이트는 유튜버가 다루는 이슈와 사람들의 반응 등까지 복합적으로 다루며 유튜버의 색깔을 타 사이트보다 명확하게 보여줍니다. 이를 통해, 자신의 상품을 홍보하고 싶어 유튜버에게 광고를 의뢰하는 마케터는 유튜버에 대한 이해를 높일 수가 있게 되어 적절한 채널을 선택하는데 도움을 얻을 수 있습니다.
+- `FrontEnd`는 `Vue`를 이용해 구현했고, `Vuetify`를 이용해 UI를 디자인했습니다.
 
+- `BaekEnd`는 `Spring`과 `Django` 2개의 서버를 두었습니다.
+  두 서버는 서로 다른 역할을 수행합니다.
 
+- `Spring 서버`는 `REST API`를 이용해 사용자로부터 온 요청에 응답하여
+  DB에서 필요한 정보를 조회해 Front단에서 요청한 정보를 보냅니다.
 
+- `Django 서버`는 유튜버 데이터에 관한 업무를 담당합니다.
+  저희 DB에 없는 유튜버를 사용자가 추가할 경우, 장고 서버가 해당 유튜버의 정보를 수집합니다.
+  또한, 수집된 정보들을 주기적으로 업데이트하는 역할도 수행합니다. 관련 데이터는 `Naver, Daum, Youtube API`를 통해 가져옵니다.
 
+- 데이터베이스는 `mariaDB`를 사용했고, 로그인은 `Kakao 로그인`을 사용했습니다.
+<hr />
 
-# 기술 아키텍쳐
+# 기획 의도
 
-<center><img src="img/architecture.jpg" width="90%"></center><br>
+<img src="README_img/introduce1.png" width="70%" style="margin-top: 3%;">
+<hr width="70%"/>
+<img src="README_img/introduce2.png" width="70%" style="margin-top: 3%;">
+<hr width="70%" />
+<img src="README_img/introduce3.png" width="70%" style="margin-top: 3%;">
+<hr width="70%" />
+<img src="README_img/introduce4.png" width="70%">
 
-&nbsp;&nbsp;&nbsp;&nbsp;저희 사이트는 2개의 서버를 운용합니다. 스프링과 장고가 그것입니다. 스프링은 뷰에서 사용자의 요청이 들어오면 이에 대해 응답을 보냅니다. 장고는 데이터를 업데이트하는 서버입니다. 사용자와 직접 통신하지는 않지만 자동화 알고리즘을 통해 DB를 항상 최신으로 유지합니다. 장고는 네이버와 유튜브의 API를 사용하여 정보를 갱신합니다.
+<hr />
 
+# 개발 일정 및 팀원 구성
 
+<img src="README_img/schedule.png" width="70%"><br>
 
-# 개발 진행 사항
+<hr width="80%">
 
-현재 브렌칭 상황입니다.
+<img src="README_img/team.png" width="70%">
 
-<center><img src="img/gitFlow.jpg" width="90%"></center><br>
-
-- `master` : 프로젝트의 최종 결과물 및 관련 문서들을 정리하였습니다.
-- `develop` : 현재 개발 단계에 있어 master로 merge하기 전에 검토하는 브렌치입니다.
-- `frontDev` : Vue의 개발 진행을 총괄하는 브렌치입니다. 세부 기능별 개발 브렌치를 가지고 있습니다.
-- `backDev` : Spring의 개발 진행을 총괄하는 브렌치입니다. 세부 기능별 개발 브렌치를 가지고 있습니다.
-- `dataDev` : django 서버 및 데이터 수집을 총괄하는 브렌치입니다. 세부 기능별 개발 브렌치를 가지고 있습니다.
-
-
-
-### 조원
-
-:sunglasses: 김주희
+<!-- :sunglasses: 김주희
 
 :cat: 김태민
 
@@ -44,5 +91,54 @@
 
 :cloud: 이상민
 
-:zzz: 홍기환
+:zzz: 홍기환 -->
+
+<hr />
+
+# 각 페이지 소개
+
+<img src="README_img/detail1.png" width="80%"><br>
+
+<img src="README_img/detail2.png" width="80%"><br>
+
+<img src="README_img/detail3.png" width="80%"><br>
+
+<img src="README_img/detail4.png" width="80%"><br>
+
+<img src="README_img/detail5.png" width="80%"><br>
+
+<img src="README_img/detail7.png" width="80%"><br>
+
+<img src="README_img/detail8.png" width="80%"><br>
+
+<img src="README_img/detail9.png" width="80%"><br>
+
+<img src="README_img/detail10.png" width="80%"><br>
+
+<img src="README_img/detail11.png" width="80%"><br>
+
+<img src="README_img/detail12.png" width="80%"><br>
+
+<img src="README_img/detail13.png" width="80%"><br>
+
+<img src="README_img/detail14.png" width="80%"><br>
+
+<img src="README_img/detail15.png" width="80%"><br>
+
+<hr />
+
+<!--
+# Git branch 현황
+
+img src="README_img/gitFlow.jpg" width="70%"
+br
+
+- `master` : 프로젝트의 최종 결과물 및 관련 문서들을 정리하였습니다.
+- `develop` : 현재 개발 단계에 있어 master로 merge하기 전에 검토하는 브렌치입니다.
+- `frontDev` : Vue의 개발 진행을 총괄하는 브렌치입니다. 세부 기능별 개발 브렌치를 가지고 있습니다.
+- `backDev` : Spring의 개발 진행을 총괄하는 브렌치입니다. 세부 기능별 개발 브렌치를 가지고 있습니다.
+- `dataDev` : django 서버 및 데이터 수집을 총괄하는 브렌치입니다. 세부 기능별 개발 브렌치를 가지고 있습니다.
+div style="margin-bottom: 15%;"/
+
+-->
 

@@ -46,7 +46,8 @@ def update_stat_all(request):
                                    youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm)
         youtuber.save()
         print('| %9d | %9d | %9d | %9d | %9d | %9d |' % (youtuber.yno, youtuber.influence,
-                                                         youtuber.activity, youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm))
+                                                         youtuber.activity, youtuber.subscribercounttrend,
+                                                         youtuber.viewcounttrend, youtuber.charm))
     return HttpResponse('stat을 업데이트 하였습니다. update V1.0')
 
 
@@ -83,7 +84,9 @@ def make_new_youtuber(request, url):
         return HttpResponse(json.dumps(res))
     timer.append(timeit.default_timer())
     print('%2d. [%5.2f / %5.2f s] Determine the correct YouTube channel URL' % (len(timer) -
-                                                                                1, timer[len(timer) - 1] - timer[len(timer) - 2], timer[len(timer) - 1] - timer[0]))
+                                                                                1, timer[len(timer) - 1] - timer[
+                                                                                    len(timer) - 2],
+                                                                                timer[len(timer) - 1] - timer[0]))
 
     # 2. URL로부터 channel ID 얻기
     try:
@@ -229,13 +232,13 @@ def make_new_youtuber(request, url):
                 trend_list[i]['difSubscriber'] = 0
                 trend_list[i]['difView'] = 0
             else:
-                trend_list[i+1]['pointSubscriber'] = int(
-                    trend_list[i]['pointSubscriber']) - int(trend_list[i+1]['difSubscriber'])
+                trend_list[i + 1]['pointSubscriber'] = int(
+                    trend_list[i]['pointSubscriber']) - int(trend_list[i + 1]['difSubscriber'])
                 trend_list[i]['difSubscriber'] = int(
-                    trend_list[i+1]['difSubscriber'])
-                trend_list[i+1]['pointView'] = int(
-                    trend_list[i]['pointView']) - int(trend_list[i+1]['difView'])
-                trend_list[i]['difView'] = int(trend_list[i+1]['difView'])
+                    trend_list[i + 1]['difSubscriber'])
+                trend_list[i + 1]['pointView'] = int(
+                    trend_list[i]['pointView']) - int(trend_list[i + 1]['difView'])
+                trend_list[i]['difView'] = int(trend_list[i + 1]['difView'])
             if i == 0:
                 today_trend = Trend(
                     yno=youtuber,
@@ -264,7 +267,8 @@ def make_new_youtuber(request, url):
         return HttpResponse(json.dumps(res))
     timer.append(timeit.default_timer())
     print('%2d. [%5.2f / %5.2f s] trend 테이블 수집' % (len(timer) - 1,
-                                                   timer[len(timer) - 1] - timer[len(timer) - 2], timer[len(timer) - 1] - timer[0]))
+                                                   timer[len(timer) - 1] - timer[len(timer) - 2],
+                                                   timer[len(timer) - 1] - timer[0]))
     youtuber.status = 73
     youtuber.save()
 
@@ -337,7 +341,7 @@ def make_new_youtuber(request, url):
     # 12.  community 테이블 수집 후 DB 추가
     try:
         get_daumCafe_search_result(
-            youtuber, our_cano_list,  datetime.datetime(2010, 1, 1))
+            youtuber, our_cano_list, datetime.datetime(2010, 1, 1))
     except Exception as e:
         print('*ERROR (10) : ', e)
         youtuber.delete()
@@ -455,9 +459,11 @@ def make_new_youtuber(request, url):
         res['code'] = -12
         return HttpResponse(json.dumps(res))
     return HttpResponse(json.dumps(res))
-    #-------------------------------------------------------------------------------------------------------------------------#
-#*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*#
-#-------------------------------------------------------------------------------------------------------------------------#
+    # -------------------------------------------------------------------------------------------------------------------------#
+
+
+# *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*#
+# -------------------------------------------------------------------------------------------------------------------------#
 
 
 def yno_from_url(request, url):
@@ -515,4 +521,5 @@ def update_stat_without_request():
                                    youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm)
         youtuber.save()
         print('| %9d | %9d | %9d | %9d | %9d | %9d |' % (youtuber.yno, youtuber.influence,
-                                                         youtuber.activity, youtuber.subscribercounttrend, youtuber.viewcounttrend, youtuber.charm))
+                                                         youtuber.activity, youtuber.subscribercounttrend,
+                                                         youtuber.viewcounttrend, youtuber.charm))

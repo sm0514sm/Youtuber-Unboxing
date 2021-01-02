@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>[#S02P12A108-27] AWS에 Vue 배포 과정</title>
+    <meta http-equiv="Content-Type" Content="application/vnd.ms-word; charset=UTF-8">
+        <style type="text/css">
+
+.tableBorder, .grid
+{
+    background-color: #fff;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableBorder td, .grid td
+{
+    vertical-align: top;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+.noPadding
+{
+    padding: 0 !important;
+}
+
+h3 .subText
+{
+    font-size: 60%;
+    font-weight: normal;
+}
+
+.tabLabel
+{
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-bottom:none;
+    padding: 2px;
+    display: inline;
+}
+
+td.blank
+{
+    padding: 0;
+    margin: 0;
+}
+
+.blank td
+{
+    border: none;
+}
+
+#descriptionArea
+{
+    margin: 0;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+hr
+{
+    border-top:1px solid #aaa;
+}
+
+hr.fullcontent
+{
+  height: 15px;
+  padding: 10px 0;
+  background: #fff url('https://jira.ssafy.com/images/icons/hr.gif') no-repeat scroll center;
+}
+
+</style>
+
+</head>
+<body>
+
+<table class="tableBorder" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" width="100%" colspan="2" valign="top">
+                            <h3 class="formtitle">
+                        [S02P12A108-27]&nbsp;<a href="https://jira.ssafy.com/browse/S02P12A108-27">AWS에 Vue 배포 과정</a>
+            <span class="subText">
+               생성일: 22/1월/20                   &nbsp;변경일: 31/1월/20
+
+                                                    &nbsp;해결일: 23/1월/20
+                            </span>
+            </h3>
+        </td>
+    </tr>
+    <tr>
+        <td width="20%"><b>상태:</b></td>
+        <td width="80%">완료</td>
+    </tr>
+    <tr>
+        <td width="20%"><b>프로젝트:</b></td>
+        <td width="80%"><a href="https://jira.ssafy.com/secure/BrowseProject.jspa?id=12248">S02P12A108</a></td>
+    </tr>
+
+        <tr>
+            <td><b>구성 요소:</b></td>
+            <td>
+                            없음
+                </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>영향 받는 버전:</b></td>
+            <td>
+                            없음
+                </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>수정 버전:</b></td>
+            <td>
+                            없음
+                </td>
+    </tr>
+    
+    </table>
+
+<br />
+<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" valign="top" width="20%">
+            <b>유형:</b>
+        </td>
+        <td bgcolor="#ffffff" valign="top"  width="30%" >
+            이야기
+        </td>
+
+                    <td bgcolor="#f0f0f0">
+                <b>우선순위:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap>
+                Medium
+            </td>
+            </tr>
+    <tr>
+                        <td bgcolor="#f0f0f0" valign="top" width="20%">
+                <b>보고자:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top"  width="30%" >
+                                            <a class="user-hover" rel="sm0514sm" id="word_reporter_sm0514sm" href="https://jira.ssafy.com/secure/ViewProfile.jspa?name=sm0514sm">이상민</a>
+                            </td>
+        
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>담당자:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap  width="30%" >
+                                            <a class="user-hover" rel="taeminkim23" id="word_assignee_taeminkim23" href="https://jira.ssafy.com/secure/ViewProfile.jspa?name=taeminkim23">김태민</a>
+                            </td>
+            </tr>
+    	<tr>
+		<td bgcolor="#f0f0f0" width="20%">
+			<b>해결책:</b>
+		</td>
+		<td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+                            완료
+                    </td>
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>투표:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+                0
+            </td>
+        
+    </tr>
+    
+        <tr>
+        <td bgcolor="#f0f0f0" width="20%">
+            <b>레이블:</b>
+        </td>
+        <td id="labels-59967-value" class="value" bgcolor="#ffffff" valign="top" colspan="3" nowrap>
+                            없음
+                    </td>
+    </tr>
+    
+    	<tr>
+        		<td bgcolor="#f0f0f0" width="20%"><b>남은 시간 예상:</b></td>
+        <td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            지정되지 않음
+            		</td>
+    </tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>작업한 시간:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            지정되지 않음
+            		</td>
+	</tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>최초 예상:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            지정되지 않음
+            		</td>
+    </tr>
+    
+    </table>
+
+
+
+    <br />
+
+    	<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+            
+
+        
+            <tr>
+            <td bgcolor="#f0f0f0" width="20%" valign="top">
+                <b>이슈 연결:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" class="noPadding">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="blank">
+                                            <tr>
+                            <td colspan="4" bgcolor="#f0f0f0">
+                                <b>Relates</b><br/>
+                            </td>
+                        </tr>
+                                                                <tr>
+            <td>
+                relates to
+            </td>
+            <td>
+                <a href="https://jira.ssafy.com/browse/S02P12A108-20">
+                     <strike>S02P12A108-20</strike>                 </a>
+            </td>
+            <td>
+                Docker를 통한 Spring-boot 배포 과정
+            </td>
+            <td>
+                완료
+            </td>
+        </tr>
+            <tr>
+            <td>
+                relates to
+            </td>
+            <td>
+                <a href="https://jira.ssafy.com/browse/S02P12A108-25">
+                     <strike>S02P12A108-25</strike>                 </a>
+            </td>
+            <td>
+                SpringBoot AWS 서버에 build하기
+            </td>
+            <td>
+                완료
+            </td>
+        </tr>
+                                        </table>
+            </td>
+        </tr>
+    
+
+
+
+                        <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Epic Link:</b></td>
+                <td id="customfield_10101-59967-value" class="value" bgcolor="#ffffff" width="80%">
+    <a class="aui-label ghx-label-13" href="https://jira.ssafy.com/browse/S02P12A108-26">
+        System
+    </a>
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Sprint:</b></td>
+                <td id="customfield_10100-59967-value" class="value" bgcolor="#ffffff" width="80%">기본 골격 스프린트 [01.20~01.24]</td>
+            </tr>
+            </table>
+
+    <br/>
+
+    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+    <tr>
+        <td bgcolor="#bbbbbb" width="1%" nowrap align="center">
+            &nbsp;<font color="#ffffff"><b>설명</b></font>&nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td id="descriptionArea">
+            <blockquote>
+<h3><a name="%2Fetc%2Fnginx%2Fconf.d%2Fvuejs.conf%2C%C2%A0%2Fetc%2Fnginx%2Fsitesavailable%2Fdefault%EB%93%B1%EC%9D%98%EC%84%A4%EC%A0%95%EC%9D%80%ED%95%B4%EB%86%94%EC%84%9C%EC%95%84%EB%9E%98%EA%B3%BC%EC%A0%95%EB%A7%8C%EB%94%B0%EB%9D%BC%ED%95%98%EB%A9%B4%EB%8C%90"></a>/etc/nginx/conf.d/vuejs.conf, /etc/nginx/sites-available/default 등의 설정은 해놔서 아래과정만 따라하면 댐</h3></blockquote>
+<h3><a name="1.%EB%8B%A4%EC%9D%8C%EB%AA%85%EB%A0%B9%EC%96%B4%EB%A5%BC%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9Cbuild"></a>1. 다음 명령어를 사용해서 build</h3>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+npm run build</pre>
+</div></div>
+<h3><a name="2.%EB%A7%8C%EB%93%A4%EC%96%B4%EC%A7%84dist%ED%8F%B4%EB%8D%94%EB%A5%BC%EC%96%B4%EB%96%BB%EA%B2%8C%EB%93%A0AWS%EC%97%90%EC%98%AC%EB%A6%B0%EB%8B%A4."></a>2. 만들어진 dist폴더를 어떻게든 AWS에 올린다.</h3>
+
+<p>ftp or git clone등등</p>
+<h3><a name="3.AWS%EC%97%90%EC%84%9C%EB%8B%A4%EC%9D%8C%EB%AA%85%EB%A0%B9%EC%96%B4%EB%A5%BC%EC%82%AC%EC%9A%A9%ED%95%B4dist%ED%8F%B4%EB%8D%94%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8"></a>3. AWS에서 다음 명령어를 사용해 dist 폴더 업데이트</h3>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+sudo rm -rf /data/front/dist                           <span class="code-comment">// 기존 dist 폴더 삭제
+</span>sudo cp -r [새로운 dist폴더 위치] /data/front          <span class="code-comment">// 새로운 dist 폴더 옮기기</span></pre>
+</div></div>
+<h3><a name="4.%EB%8B%A4%EC%9D%8C%EB%AA%85%EB%A0%B9%EC%96%B4%EB%A5%BC%EC%82%AC%EC%9A%A9%ED%95%B4nginx%EC%9E%AC%EC%8B%A4%ED%96%89"></a>4. 다음 명령어를 사용해 nginx 재실행</h3>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+sudo service nginx restart</pre>
+</div></div>
+<h3><a name="5.%EC%9D%B8%ED%84%B0%EB%84%B7%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80%EB%A1%9C%EC%A0%91%EC%86%8D%C2%A03000%ED%8F%AC%ED%8A%B8%EB%A1%9C%EC%9E%A1%EC%95%98%EB%8A%94%EB%8D%B015.165.77.1%3A3000%2F%23%2F%EB%8F%84%EB%90%98%EA%B3%A015.165.77.1%2F%23%2F%28%EA%B8%B0%EB%B3%B880%ED%8F%AC%ED%8A%B8%29%EB%8F%84%EB%90%A8"></a>5. 인터넷 브라우저로 접속 <sub><del>3000포트로 잡았는데 15.165.77.1:3000/#/도 되고 15.165.77.1/#/ (기본 80포트) 도 됨</del></sub></h3>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+http:<span class="code-comment">//15.165.77.1/#/</span></pre>
+</div></div>
+<p> </p>
+<hr />
+<p><b>참고링크</b></p>
+<ul>
+	<li><a href="https://twpower.github.io/39-install-nginx-on-ubuntu-by-using-apt-get-and-brief-explanation" class="external-link" rel="nofollow">https://twpower.github.io/39-install-nginx-on-ubuntu-by-using-apt-get-and-brief-explanation</a></li>
+	<li><a href="https://hplayground.tistory.com/105" class="external-link" rel="nofollow">https://hplayground.tistory.com/105</a></li>
+</ul>
+
+            <br/>
+        </td>
+    </tr>
+    </table>
+
+Jira 8.2.1#802001-sha1:8875eca5f07af11c7cb5069d6914b23e91407e11(을)를 사용하여 이상민에 의해 Fri Sep 25 01:01:42 KST 2020에서 생성됨.
+
+</body>
+</html>

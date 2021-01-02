@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>[#S02P12A108-25] SpringBoot AWS 서버에 build하기</title>
+    <meta http-equiv="Content-Type" Content="application/vnd.ms-word; charset=UTF-8">
+        <style type="text/css">
+
+.tableBorder, .grid
+{
+    background-color: #fff;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableBorder td, .grid td
+{
+    vertical-align: top;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+.noPadding
+{
+    padding: 0 !important;
+}
+
+h3 .subText
+{
+    font-size: 60%;
+    font-weight: normal;
+}
+
+.tabLabel
+{
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-bottom:none;
+    padding: 2px;
+    display: inline;
+}
+
+td.blank
+{
+    padding: 0;
+    margin: 0;
+}
+
+.blank td
+{
+    border: none;
+}
+
+#descriptionArea
+{
+    margin: 0;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+
+hr
+{
+    border-top:1px solid #aaa;
+}
+
+hr.fullcontent
+{
+  height: 15px;
+  padding: 10px 0;
+  background: #fff url('https://jira.ssafy.com/images/icons/hr.gif') no-repeat scroll center;
+}
+
+</style>
+
+</head>
+<body>
+
+<table class="tableBorder" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" width="100%" colspan="2" valign="top">
+                            <h3 class="formtitle">
+                        [S02P12A108-25]&nbsp;<a href="https://jira.ssafy.com/browse/S02P12A108-25">SpringBoot AWS 서버에 build하기</a>
+            <span class="subText">
+               생성일: 22/1월/20                   &nbsp;변경일: 31/1월/20
+
+                                                    &nbsp;해결일: 22/1월/20
+                            </span>
+            </h3>
+        </td>
+    </tr>
+    <tr>
+        <td width="20%"><b>상태:</b></td>
+        <td width="80%">완료</td>
+    </tr>
+    <tr>
+        <td width="20%"><b>프로젝트:</b></td>
+        <td width="80%"><a href="https://jira.ssafy.com/secure/BrowseProject.jspa?id=12248">S02P12A108</a></td>
+    </tr>
+
+        <tr>
+            <td><b>구성 요소:</b></td>
+            <td>
+                            없음
+                </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>영향 받는 버전:</b></td>
+            <td>
+                            없음
+                </td>
+    </tr>
+    
+
+        <tr>
+            <td><b>수정 버전:</b></td>
+            <td>
+                            없음
+                </td>
+    </tr>
+    
+    </table>
+
+<br />
+<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td bgcolor="#f0f0f0" valign="top" width="20%">
+            <b>유형:</b>
+        </td>
+        <td bgcolor="#ffffff" valign="top"  width="30%" >
+            이야기
+        </td>
+
+                    <td bgcolor="#f0f0f0">
+                <b>우선순위:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap>
+                Medium
+            </td>
+            </tr>
+    <tr>
+                        <td bgcolor="#f0f0f0" valign="top" width="20%">
+                <b>보고자:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top"  width="30%" >
+                                            <a class="user-hover" rel="sm0514sm" id="word_reporter_sm0514sm" href="https://jira.ssafy.com/secure/ViewProfile.jspa?name=sm0514sm">이상민</a>
+                            </td>
+        
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>담당자:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" nowrap  width="30%" >
+                                            <a class="user-hover" rel="sm0514sm" id="word_assignee_sm0514sm" href="https://jira.ssafy.com/secure/ViewProfile.jspa?name=sm0514sm">이상민</a>
+                            </td>
+            </tr>
+    	<tr>
+		<td bgcolor="#f0f0f0" width="20%">
+			<b>해결책:</b>
+		</td>
+		<td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+                            완료
+                    </td>
+                    <td bgcolor="#f0f0f0" width="20%">
+                <b>투표:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" width="30%" nowrap>
+                0
+            </td>
+        
+    </tr>
+    
+        <tr>
+        <td bgcolor="#f0f0f0" width="20%">
+            <b>레이블:</b>
+        </td>
+        <td id="labels-59871-value" class="value" bgcolor="#ffffff" valign="top" colspan="3" nowrap>
+                            없음
+                    </td>
+    </tr>
+    
+    	<tr>
+        		<td bgcolor="#f0f0f0" width="20%"><b>남은 시간 예상:</b></td>
+        <td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            지정되지 않음
+            		</td>
+    </tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>작업한 시간:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            지정되지 않음
+            		</td>
+	</tr>
+    <tr>
+                <td bgcolor="#f0f0f0" width="20%"><b>최초 예상:</b></td>
+		<td bgcolor="#ffffff" valign="top" nowrap width="80%" colspan="3">
+                            지정되지 않음
+            		</td>
+    </tr>
+    
+    </table>
+
+
+
+    <br />
+
+    	<table class="grid" cellpadding="0" cellspacing="0" border="0" width="100%">
+            
+
+        
+            <tr>
+            <td bgcolor="#f0f0f0" width="20%" valign="top">
+                <b>이슈 연결:</b>
+            </td>
+            <td bgcolor="#ffffff" valign="top" class="noPadding">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" class="blank">
+                                            <tr>
+                            <td colspan="4" bgcolor="#f0f0f0">
+                                <b>Blocks</b><br/>
+                            </td>
+                        </tr>
+                                    <tr>
+            <td>
+                blocks
+            </td>
+            <td>
+                <a href="https://jira.ssafy.com/browse/S02P12A108-20">
+                     <strike>S02P12A108-20</strike>                 </a>
+            </td>
+            <td>
+                Docker를 통한 Spring-boot 배포 과정
+            </td>
+            <td>
+                완료
+            </td>
+        </tr>
+                                                                            <tr>
+                            <td colspan="4" bgcolor="#f0f0f0">
+                                <b>Relates</b><br/>
+                            </td>
+                        </tr>
+                                    <tr>
+            <td>
+                relates to
+            </td>
+            <td>
+                <a href="https://jira.ssafy.com/browse/S02P12A108-27">
+                     <strike>S02P12A108-27</strike>                 </a>
+            </td>
+            <td>
+                AWS에 Vue 배포 과정
+            </td>
+            <td>
+                완료
+            </td>
+        </tr>
+                                                                    </table>
+            </td>
+        </tr>
+    
+
+
+
+                        <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Epic Link:</b></td>
+                <td id="customfield_10101-59871-value" class="value" bgcolor="#ffffff" width="80%">
+    <a class="aui-label ghx-label-13" href="https://jira.ssafy.com/browse/S02P12A108-26">
+        System
+    </a>
+</td>
+            </tr>
+                                <tr>
+                <td bgcolor="#f0f0f0" width="20%" valign="top"><b>Sprint:</b></td>
+                <td id="customfield_10100-59871-value" class="value" bgcolor="#ffffff" width="80%">기본 골격 스프린트 [01.20~01.24]</td>
+            </tr>
+            </table>
+
+    <br/>
+
+    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+    <tr>
+        <td bgcolor="#bbbbbb" width="1%" nowrap align="center">
+            &nbsp;<font color="#ffffff"><b>설명</b></font>&nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+    <tr>
+        <td id="descriptionArea">
+            <div class="panel" style="border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;"><b>maven test &amp; build </b></div><div class="panelContent">
+<p>Spring project 폴더 내부 mvnw.cmd 파일이 존재하는 곳에서 아래 명령어들 수행</p>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+./mvnw compile          <span class="code-comment">// target 폴더 생성
+</span>./mvnw test             <span class="code-comment">// 작동 test
+</span>./mvnw <span class="code-keyword">package</span>          <span class="code-comment">// war 파일 생성</span></pre>
+</div></div>
+</div></div>
+<div class="panel" style="border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;"><b>AWS에서 Apache Tomcat 설치 (한번만 수행하면 됨)</b></div><div class="panelContent">
+<p>리눅스에 들어가서 아래 명령어들 수행</p>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+apt-get update 
+apt-get install tomcat8</pre>
+</div></div>
+</div></div>
+<div class="panel" style="border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;"><b>WAR 파일 배포</b></div><div class="panelContent">
+<p>만들어진 .war파일을 어떻게든 리눅스에 올린 다음</p>
+
+<p>해당 파일을 다음과 같은 위치로 복사</p>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+sudo cp Skeleton_SpringBoot.war /<span class="code-keyword">var</span>/lib/tomcat8/webapps/</pre>
+</div></div>
+<p>tomcat이 정상적으로 실행중이면 /var/lib/tomcat8/webapps/Skeleton_SpringBoot 라는 폴더가 생김</p>
+</div></div>
+<div class="panel" style="border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;"><b>접속</b></div><div class="panelContent">
+<p>tomcat 서버 작동 확인</p>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+http:<span class="code-comment">//15.165.77.1:8080/
+</span>or
+ps -ef | grep tomcat
+</pre>
+</div></div>
+<p><font color="#808080">만약 tomcat이 안떠있다 싶으면</font></p>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+sudo shutdown -r now
+<span class="code-comment">// 재부팅하는 명령어
+</span><span class="code-comment">// 재부팅하면 tomcat 자동 실행됨</span></pre>
+</div></div>
+<p>프로젝트 접속(스웨거)</p>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">
+http:<span class="code-comment">//15.165.77.1:8080/SpringBoot/swagger-ui.html</span></pre>
+</div></div>
+</div></div>
+<p>[참고링크|<a href="http://blog.naver.com/PostView.nhn?blogId=loverman85&amp;logNo=221073024524&amp;categoryNo=35&amp;parentCategoryNo=0&amp;viewDate=&amp;currentPage=1&amp;postListTopCurrentPage=1&amp;from=postView" class="external-link" rel="nofollow">http://blog.naver.com/PostView.nhn?blogId=loverman85&amp;logNo=221073024524&amp;categoryNo=35&amp;parentCategoryNo=0&amp;viewDate=&amp;currentPage=1&amp;postListTopCurrentPage=1&amp;from=postView</a>]</p>
+
+<p> </p>
+
+<p> </p>
+
+<p> </p>
+            <br/>
+        </td>
+    </tr>
+    </table>
+
+    <br/>
+
+    <table cellpadding="2" cellspacing="0" border="0" width="100%" align="center">
+    <tr>
+        <td bgcolor="#bbbbbb" width="1%" nowrap align="center">
+            &nbsp;<font color="#ffffff"><b>댓글</b></font>&nbsp;
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="grid" style="margin: 0;">
+                <tr id="comment-header-19701"><td bgcolor="#f0f0f0">
+             의 댓글
+                                                        <a class="user-hover" rel="sm0514sm" id="word_commented_sm0514sm" href="https://jira.ssafy.com/secure/ViewProfile.jspa?name=sm0514sm">이상민</a>
+                                        <font size="-2">
+            [
+                <font color="#336699">22/1월/20</font>
+
+                            ]
+            </font>
+
+        </td></tr>
+        <tr id="comment-body-19701"><td bgcolor="#ffffff">
+            <p>해당 이슈는 <a href="https://jira.ssafy.com/browse/S02P12A108-20" title="Docker를 통한 Spring-boot 배포 과정" class="issue-link" data-issue-key="S02P12A108-20"><del>S02P12A108-20</del></a>에 의해 대체되었습니다.</p>
+        </td></tr>
+            </table>
+Jira 8.2.1#802001-sha1:8875eca5f07af11c7cb5069d6914b23e91407e11(을)를 사용하여 이상민에 의해 Fri Sep 25 01:00:49 KST 2020에서 생성됨.
+
+</body>
+</html>
