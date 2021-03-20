@@ -10,7 +10,7 @@ DateTime==4.3
 decorator==4.4.1
 Django==2.2.9
 django-cors-headers==3.2.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 emoji==0.5.4
 idna==2.8
 ipython==7.9.0
