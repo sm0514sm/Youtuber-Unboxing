@@ -37,7 +37,7 @@ soupsieve==1.9.5
 sqlparse==0.3.0
 traitlets==4.3.3
 typed-ast==1.4.1
-urllib3==1.25.8
+urllib3==1.26.18
 wcwidth==0.1.8
 win-unicode-console==0.5
 wrapt==1.11.2
