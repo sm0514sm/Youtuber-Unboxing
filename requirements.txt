@@ -26,7 +26,7 @@ pickleshare==0.7.5
 pprint==0.1
 prompt-toolkit==2.0.10
 pycodestyle==2.5.0
-Pygments==2.5.2
+Pygments==2.15.0
 pylint==2.4.4
 python-decouple==3.3
 pytz==2019.3
